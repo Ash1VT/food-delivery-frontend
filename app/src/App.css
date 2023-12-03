@@ -1,0 +1,14 @@
+* {
+  font-family: 'Source Sans Pro';
+  margin: 0;  
+}
+
+body {
+  background-color: aqua;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";   /*Can be any text*/
+  src: local("SourceSansPro-Semibold"),
+    url("./fonts/SourceSansPro-Semibold.otf") format("truetype");
+}
