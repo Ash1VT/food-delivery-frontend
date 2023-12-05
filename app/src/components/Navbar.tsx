@@ -4,6 +4,11 @@ import PlaceIcon from '@mui/icons-material/Place';
 import "../styles/navbar.css"
 
 const Navbar = () => {
+    
+    const onClick = () => {
+        console.log('Click!');
+    }
+
     return (
         <div className="navbar__wrapper">
             <div className="navbar__logo">
@@ -20,7 +25,10 @@ const Navbar = () => {
                     <SearchIcon className='navbar__search__logo'/>
                     <p className='navbar__search__text'>Search Food</p>
                 </div>
-                <div className="navbar__login">
+                <div onClick={onClick} 
+                     role="button" 
+                     className="navbar__login"
+                     tabIndex={0}>
                     <PersonIcon className="navbar__login__logo"/>
                     <p className="navbar__login__text">Login</p>
                 </div> 
