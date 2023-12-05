@@ -45,5 +45,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
+  "resolutions": {
+    "react-scripts/eslint-webpack-plugin": "2.3.0"
   }
 }
