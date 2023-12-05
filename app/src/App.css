@@ -3,6 +3,10 @@
   margin: 0;  
 }
 
+::placeholder {
+  color: var(--theme-gray-500, #9E9E9E);
+}
+
 body {
   background-color: aqua;
 }
@@ -11,4 +15,10 @@ body {
   font-family: "Source Sans Pro";   /*Can be any text*/
   src: local("SourceSansPro-Semibold"),
     url("./fonts/SourceSansPro-Semibold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Open Sans";   /*Can be any text*/
+  src: local("OpenSans-Light"),
+    url("./fonts/OpenSans-Light.ttf") format("truetype");
 }
