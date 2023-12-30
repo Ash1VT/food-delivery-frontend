@@ -1,0 +1,23 @@
+.featured__restaurants__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.featured__restaurants__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 88px;
+}
+
+.featured__restaurants__list {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 16px;
+    row-gap: 64px;
+    flex-wrap: wrap;
+
+    /* max-width: 1481px; */
+}
