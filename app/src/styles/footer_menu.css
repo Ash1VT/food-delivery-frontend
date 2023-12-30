@@ -1,0 +1,7 @@
+.footer__menu__container {
+    display: flex;
+    /* min-width: 607px; */
+    gap: 100px;
+    justify-content: space-between;
+    align-items: flex-start;
+}

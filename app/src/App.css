@@ -1,0 +1,123 @@
+* {
+  font-family: 'Source Sans Pro';
+  margin: 0;  
+}
+
+::placeholder {
+  color: var(--theme-gray-500, #9E9E9E);
+}
+
+body {
+  background-color: #ffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  min-width: 1000px;
+}
+
+/* .section__container {
+  max-width: 1481px;
+} */
+
+.section__title {
+  text-align: center;
+  font-family: Source Sans Pro;
+  font-size: 43px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 112%;
+}
+
+.section__wrapper {
+  min-width: 1480px;
+  max-width: 1800px;
+}
+
+.section__list {
+  max-width: 1481px;
+}
+
+@media (max-width: 1480px) {
+  .section__wrapper {
+      min-width: 730px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .section__list {
+      max-width: 730px;
+  }
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("SourceSansPro-Bold"), url("./fonts/SourceSansPro-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("SourceSansPro-Semibold"), url("./fonts/SourceSansPro-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("SourceSansPro-Regular"), url("./fonts/SourceSansPro-Regular.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: local("SourceSansPro-Light"), url("./fonts/SourceSansPro-Light.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: local("OpenSans-Bold"), url("./fonts/OpenSans-Bold.ttf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: local("OpenSans-SemiBold"), url("./fonts/OpenSans-SemiBold.ttf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: local("OpenSans-Regular"), url("./fonts/OpenSans-Regular.ttf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: local("OpenSans-Light"), url("./fonts/OpenSans-Light.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  src: local("FontAwesome5Free-Regular"), url("./fonts/fa-regular-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  src: local("FontAwesome5Free-Solid"), url("./fonts/fa-solid-900.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}

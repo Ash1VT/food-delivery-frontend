@@ -1,0 +1,65 @@
+.food__categories__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 82px 222px 55px 223px;
+    background: #FEFAF1;
+}
+
+.food__categories__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 88px;
+}
+
+.food__categories__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+
+.food__categories__title {
+    color: var(--Theme-Gray-900, #212121);
+    text-align: center;
+    font-family: Source Sans Pro;
+    font-size: 43px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 112%;
+}
+
+.food__categories__buttons__wrapper {
+    display: flex;
+    padding-right: 18px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 26.5px;
+}
+
+.food__categories__sliders {
+    display: flex;
+    padding-right: 18px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 26.5px;
+}
+
+.food__categories__list {
+    display: flex;
+    flex-direction: row;
+    /* align-content: flex-start; */
+    justify-content: space-around;
+    /* align-items: flex-start; */
+    align-self: stretch;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 30px;
+    /* gap: 30px; */
+}
+
+/* .food__categories__list > * {
+    flex: 1 0 0;
+} */

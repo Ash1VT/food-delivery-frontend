@@ -1,0 +1,37 @@
+.promotions__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promotions__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+
+.promotions__title {
+    color: var(--theme-gray-900, #212121);
+}
+
+.promotions__list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 50px;
+}
+
+
+/* @media (max-width: 1100px) {
+
+    .promotions__list {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+
+} */

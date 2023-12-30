@@ -1,0 +1,114 @@
+.featured__restaurant__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.featured__restaurant__wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.featured__restaurant__food__image__wrapper {
+    border-radius: 16px;
+    background-color: lightgray;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 357px;
+    height: 301px;
+}
+
+.featured__restaurant__information {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.featured__restaurant__logo {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    background-color: lightgray;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.featured__restaurant__details {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+
+.featured__restaurant__name {
+    color: var(--theme-gray-800, #424242);
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.featured__restaurant__rating__wrapper {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.featured__restaurant__rating__image {
+    color: var(--theme-primary, #FFB30E);
+    font-family: Font Awesome 5 Free;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 106%;
+}
+
+.featured__restaurant__rating__value {
+    color: var(--theme-primary, #FFB30E);
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 105%;
+}
+
+.featured__restaurant__open__information {
+    display: flex;
+    padding: 8px 16px;
+    /* align-items: flex-start; */
+    /* justify-content: center; */
+    gap: 10px;
+    border-radius: 16px;
+}
+
+.featured__restaurant__opened {
+    background: rgba(121, 185, 60, 0.20);
+    color: var(--Theme-Success, #79B93C);
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+
+.featured__restaurant__closed {
+    background: rgba(241, 114, 40, 0.40);
+    color: var(--Theme-Warning, #F17228);
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
