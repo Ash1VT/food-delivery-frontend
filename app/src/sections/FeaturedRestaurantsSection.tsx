@@ -1,4 +1,4 @@
-import FeaturedRestaurant from '../components/FeauturedRestaurant'
+import FeaturedRestaurant from '../components/FeaturedRestaurant'
 import { FeaturedRestaurantsSectionProps } from '../types/restaurant.type'
 import ViewRestaurantsButton from '../components/buttons/ViewRestaurantsButton'
 
