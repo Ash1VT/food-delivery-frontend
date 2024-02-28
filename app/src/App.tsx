@@ -17,8 +17,8 @@ import { FoodCategoryProps } from './types/food_category.type';
 import FeaturesSection from './sections/FeaturesSection';
 import BestDealsSection from './sections/BestDealsSection';
 import { BestDealImageLocation, BestDealProps } from './types/best_deal.type';
-import FooterSection from './sections/FooterSection';
-import { FooterMenuColumnProps } from './types/footer.type';
+import FooterSection from './components/footer';
+import { FooterMenuColumnProps } from './components/footer/footer.types';
 import MainPage from './pages/MainPage';
 
 const App = () => {
