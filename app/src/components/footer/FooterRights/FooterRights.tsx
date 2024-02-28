@@ -1,7 +1,7 @@
 import CopyrightRoundedIcon from '@mui/icons-material/CopyrightRounded'
-import { FooterRightsProps } from '../../types/footer.type'
+import { FooterRightsProps } from '../footer.types'
 
-import '../../styles/footer_rights.css'
+import './footer_rights.css'
 
 
 const FooterRights = ({text, company, year} : FooterRightsProps) => {

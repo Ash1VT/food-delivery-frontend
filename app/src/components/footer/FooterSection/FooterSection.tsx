@@ -1,18 +1,14 @@
-import { FooterMenuColumnProps, FooterProps } from '../types/footer.type'
-import Divider from '../components/Divider'
-import FooterCitiesColumn from '../components/footer/FooterCitiesColumn'
-import FooterMenuColumn from '../components/footer/FooterMenuColumn'
-import FooterFollow from '../components/footer/FooterFollow'
+import { FooterProps } from '../footer.types'
+import Divider from '../../Divider'
+import FooterFollow from '../FooterFollow/FooterFollow'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TwitterIcon from '@mui/icons-material/Twitter'
-import CopyrightRoundedIcon from '@mui/icons-material/CopyrightRounded'
-import FooterSubscription from '../components/footer/FooterSubscription'
-
-import '../styles/sections/footer_section.css'
-import FooterRights from '../components/footer/FooterRights'
-import FooterCities from '../components/footer/FooterCities'
-import FooterMenu from '../components/footer/FooterMenu'
+import FooterSubscription from '../FooterSubscription/FooterSubscription'
+import FooterRights from '../FooterRights/FooterRights'
+import FooterCities from '../FooterCities/FooterCities'
+import FooterMenu from '../FooterMenu/FooterMenu'
+import './footer_section.css'
 
 
 const FooterSection = ({cities, cities_per_column, menu_columns} : FooterProps) => {

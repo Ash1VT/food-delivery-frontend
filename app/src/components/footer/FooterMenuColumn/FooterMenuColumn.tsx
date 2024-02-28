@@ -1,5 +1,5 @@
-import '../../styles/footer_menu_column.css'
-import { FooterMenuColumnProps } from '../../types/footer.type'
+import './footer_menu_column.css'
+import { FooterMenuColumnProps } from '../footer.types'
 
 const FooterMenuColumn = ({title, items} : FooterMenuColumnProps) => {
     return (

@@ -1,5 +1,5 @@
-import { FooterCitiesColumnProps } from '../../types/footer.type'
-import '../../styles/footer_cities_column.css'
+import { FooterCitiesColumnProps } from '../footer.types'
+import './footer_cities_column.css'
 
 const FooterCitiesColumn = ({cities} : FooterCitiesColumnProps) => {
     return (

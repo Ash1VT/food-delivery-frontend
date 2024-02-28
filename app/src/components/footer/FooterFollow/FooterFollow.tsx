@@ -1,5 +1,5 @@
-import { FooterFollowProps } from '../../types/footer.type'
-import '../../styles/footer_follow.css'
+import { FooterFollowProps } from '../footer.types'
+import './footer_follow.css'
 
 const FooterFollow = ({title, icons} : FooterFollowProps) => {
     return (
