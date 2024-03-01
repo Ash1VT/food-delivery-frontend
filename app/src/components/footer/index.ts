@@ -1,3 +1,3 @@
-import FooterSection from "./FooterSection/FooterSection";
+import Footer from "./Footer";
 
-export default FooterSection;
+export default Footer;
