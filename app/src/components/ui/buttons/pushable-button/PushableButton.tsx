@@ -1,4 +1,4 @@
-import { PushableButtonProps } from '../../../../types/button.types'
+import { PushableButtonProps } from '../../../../types/buttons.types'
 
 import './pushable_button.css'
 

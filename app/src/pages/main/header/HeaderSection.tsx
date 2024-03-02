@@ -10,7 +10,9 @@ const HeaderSection = () => {
     }
 
     return (
-        <div className="header__container">
+        <div className="header__container" style={
+            {backgroundImage: `url(images/background.png)`}
+            }>
             <div className="header__wrapper section__wrapper">
                 <div className="header__details__wrapper">
                     <p className="header__title">Are you starving?</p>
@@ -23,7 +25,7 @@ const HeaderSection = () => {
                     </div>
                 </div>
                 <div className="header__image__wrapper">
-                    <img src='food.png' className="header__image"></img>
+                    <img src='images/food.png' className="header__image"></img>
                 </div>
             </div>
         </div>

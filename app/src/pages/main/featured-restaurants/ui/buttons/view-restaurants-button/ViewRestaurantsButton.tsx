@@ -1,5 +1,4 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
 import './view_restaurants_button.css'
 
 

@@ -1,7 +1,7 @@
 import PopularItem from './popular-item/PopularItem'
 import { PopularItemsSectionProps } from './popular_items.types'
-import { ArrowDirection } from '../../../components/ui/arrow-slider/arrow_slider.types' 
-import ArrowSlider from '../../../components/ui/arrow-slider/ArrowSlider'
+import { ArrowDirection } from 'src/components/ui/arrow-slider/arrow_slider.types' 
+import ArrowSlider from 'src/components/ui/arrow-slider/ArrowSlider'
 import './popular_items_section.css'
 import 'src/App.css'
 

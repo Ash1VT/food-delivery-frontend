@@ -1,5 +1,5 @@
 import PlaceIcon from "@mui/icons-material/Place"
-import { AddressInputProps } from "../../../../../../types/input.type"
+import { AddressInputProps } from "src/types/inputs.type"
 
 import './address_input.css'
 

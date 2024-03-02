@@ -1,4 +1,4 @@
-import { BaseIcon } from '../../../../../types/icon.type'
+import { BaseIcon } from '../../../../../types/icons.type'
 
 const DeliveryAddressIcon : BaseIcon = () => {
     return (

@@ -1,5 +1,5 @@
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import { EmailInputProps } from '../../../../types/input.type';
+import { EmailInputProps } from '../../../../types/inputs.type';
 import './email_input.css'
 
 const EmailInput = ({placeholder, className} : EmailInputProps) => {

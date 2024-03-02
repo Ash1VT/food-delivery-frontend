@@ -1,4 +1,4 @@
-import { LoginButtonProps } from '../../../../../types/button.types'
+import { LoginButtonProps } from '../../../../../types/buttons.types'
 import PushableButton from '../../../../ui/buttons/pushable-button/PushableButton'
 import PersonIcon from '@mui/icons-material/Person'
 

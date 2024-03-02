@@ -1,4 +1,4 @@
-import { BaseIcon } from '../../../../../types/icon.type'
+import { BaseIcon } from 'src/types/icons.type'
 
 const FeatureDiscountIcon : BaseIcon = () => {
     return (

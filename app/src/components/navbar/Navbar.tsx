@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="navbar__container">
             <div className="navbar__wrapper">
                 <div className="navbar__logo">
-                    <img src="logo.svg" alt="Logo"/> 
+                    <img src="images/logo.svg" alt="Logo"/> 
                 </div>
                 <div className="navbar__address">
                     <p className="navbar__address__delivery__text">Deliver to:</p>

@@ -1,8 +1,8 @@
-import ArrowSlider from "../../../components/ui/arrow-slider/ArrowSlider"
+import ArrowSlider from "src/components/ui/arrow-slider/ArrowSlider"
 import FoodCategory from "./food-category/FoodCategory"
 import ViewAllFoodButton from "./ui/buttons/view-all-food-button/ViewAllFoodButton"
 import { FoodCategoriesSectionProps } from "./food_category.types"
-import { ArrowDirection } from "../../../components/ui/arrow-slider/arrow_slider.types"
+import { ArrowDirection } from "src/components/ui/arrow-slider/arrow_slider.types"
 import './food_categories_section.css'
 import 'src/App.css'
 

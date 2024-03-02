@@ -1,4 +1,4 @@
-import { FeatureProps } from './feature.types'
+import { FeatureProps } from '../features.types'
 import './feature.css'
 
 const Feature = ({Icon, title} : FeatureProps) => {

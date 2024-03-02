@@ -1,9 +1,8 @@
-import React from 'react'
 import Feature from './feature/Feature'
 import FeatureDiscountIcon from './ui/icons/FeatureDiscountIcon'
 import FeatureAddressIcon from './ui/icons/FeatureAddressIcon'
 import FeatureClockIcon from './ui/icons/FeatureClockIcon'
-import Divider from '../../../components/ui/divider/Divider'
+import Divider from 'src/components/ui/divider/Divider'
 import './features_section.css'
 import 'src/App.css'
 

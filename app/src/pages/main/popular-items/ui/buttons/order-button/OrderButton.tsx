@@ -1,5 +1,4 @@
-import { OrderButtonProps } from 'src/types/button.types'
-
+import { OrderButtonProps } from 'src/types/buttons.types'
 import './order_button.css'
 
 
