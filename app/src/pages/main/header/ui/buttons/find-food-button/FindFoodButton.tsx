@@ -1,4 +1,4 @@
-import { FindFoodButtonProps } from '../button.types'
+import { FindFoodButtonProps } from '../../../../../../types/button.types'
 import SearchIcon from '@mui/icons-material/Search'
 
 import './find_food_button.css'

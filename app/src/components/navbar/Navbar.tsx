@@ -1,8 +1,8 @@
 import SearchIcon from '@mui/icons-material/Search';
 import PlaceIcon from '@mui/icons-material/Place';
-import LoginButton from '../ui/buttons/LoginButton/LoginButton';
-import "../styles/sections/navbar_section.css";
-import '../App.css'
+import LoginButton from './ui/buttons/login-button/LoginButton';
+import "./navbar.css";
+import "@src/App.css";
 
 const Navbar = () => {
     

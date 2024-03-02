@@ -1,5 +1,5 @@
-import { LoginButtonProps } from '../button.types'
-import PushableButton from '../PushableButton/PushableButton'
+import { LoginButtonProps } from '../../../../../types/button.types'
+import PushableButton from '../../../../ui/buttons/pushable-button/PushableButton'
 import PersonIcon from '@mui/icons-material/Person'
 
 const LoginButton = ({onClick}: LoginButtonProps) => {

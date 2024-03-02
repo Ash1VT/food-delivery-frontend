@@ -5,15 +5,15 @@ import FeaturedRestaurantsSection from './featured-restaurants/FeaturedRestauran
 import FoodCategoriesSection from './food-categories/FoodCategoriesSection';
 import FeaturesSection from './features/FeaturesSection';
 import BestDealsSection from './best-deals/BestDealsSection';
-import { BestDealImageLocation, BestDealProps } from '../../types/best_deal.type';
-import { PromotionElementProps } from '../../types/promotion.type';
-import { PopularItemProps } from '../../types/item.type';
-import { FeaturedRestaurantProps } from '../../types/restaurant.type';
-import { FoodCategoryProps } from '../../types/food_category.type';
+import { BestDealImageLocation, BestDealProps } from './best-deals/best_deals.types';
+import { PromotionRestaurantProps } from './promotions/promotions.types';
+import { PopularItemProps } from './popular-items/popular_items.types';
+import { FeaturedRestaurantProps } from './featured-restaurants/featured_restaurants.types';
+import { FoodCategoryProps } from './food-categories/food_category.types';
 
 
 const MainPage = () => {
-    const restaurant_promotions: PromotionElementProps[] = [
+    const restaurant_promotions: PromotionRestaurantProps[] = [
         {
           image_url: 'food1.png',
           discount_amount: 15,

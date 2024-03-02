@@ -1,5 +1,5 @@
-import { DeliveryActionProps } from '../../../../types/delivery.type'
-import './styles/delivery_action.css'
+import { DeliveryActionProps } from '../delivery_process.types'
+import './delivery_action.css'
 
 const DeliveryAction = ({Icon, title, description}: DeliveryActionProps) => {
     return (

@@ -1,4 +1,4 @@
-import { DividerProps } from '../../../types/divider.type'
+import { DividerProps } from './divider.type'
 import "./divider.css"
 
 const Divider = ({width, height, color, className} : DividerProps) => {

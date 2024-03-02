@@ -1,8 +1,8 @@
-import { PromotionElementProps } from '../../../../types/promotion.type';
+import { PromotionRestaurantProps } from '../promotions.types';
 import './promotion_restaurant.css'
 
 
-const PromotionRestaurant = (restaurant_promotion: PromotionElementProps) => {
+const PromotionRestaurant = (restaurant_promotion: PromotionRestaurantProps) => {
     return (
         <div className="promotion__container">
             <div style={{

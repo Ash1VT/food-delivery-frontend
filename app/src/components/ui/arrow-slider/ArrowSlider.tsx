@@ -1,6 +1,6 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { ArrowDirection, ArrowSliderProps } from '../../../../types/slider.type';
-import '../styles/arrow_slider.css'
+import { ArrowDirection, ArrowSliderProps } from './arrow_slider.types';
+import './arrow_slider.css'
 
 const ArrowSlider = ({arrow_direction} : ArrowSliderProps) => {
 

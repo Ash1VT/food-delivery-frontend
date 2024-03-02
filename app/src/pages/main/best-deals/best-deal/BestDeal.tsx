@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react'
-import BestDealOrderButton from '../../../../components/ui/buttons/BestDealOrderButton/BestDealOrderButton'
-import { BestDealImageLocation, BestDealProps } from '../../../../types/best_deal.type'
+import BestDealOrderButton from '../ui/buttons/best-deal-order-button/BestDealOrderButton'
+import { BestDealImageLocation, BestDealProps } from '../best_deals.types'
 
 import './best_deal.css'
 

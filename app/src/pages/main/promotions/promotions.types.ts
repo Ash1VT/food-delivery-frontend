@@ -1,4 +1,4 @@
-export type PromotionElementProps = {
+export type PromotionRestaurantProps = {
     image_url: string
     discount_amount: number
     restaurant_name: string
@@ -6,5 +6,5 @@ export type PromotionElementProps = {
 }
 
 export type PromotionsSectionProps = {
-    promotions: PromotionElementProps[]
+    promotions: PromotionRestaurantProps[]
 }

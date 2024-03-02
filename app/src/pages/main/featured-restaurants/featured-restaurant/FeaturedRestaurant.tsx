@@ -1,5 +1,5 @@
 import StarIcon from '@mui/icons-material/Star';
-import { FeaturedRestaurantProps } from '../../../../types/restaurant.type';
+import { FeaturedRestaurantProps } from '../featured_restaurants.types';
 import './featured_restaurant.css'
 
 

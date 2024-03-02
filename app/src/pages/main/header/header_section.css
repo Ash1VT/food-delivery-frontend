@@ -1,7 +1,7 @@
 .header__container {
     display: flex;
     justify-content: center;
-    background-image: url(../../../public/background.png);
+    background-image: url(@public/background.png);
     background-size: cover;
     background-repeat: no-repeat;
 

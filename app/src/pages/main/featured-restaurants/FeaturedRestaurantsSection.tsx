@@ -1,8 +1,8 @@
 import FeaturedRestaurant from './featured-restaurant/FeaturedRestaurant'
-import { FeaturedRestaurantsSectionProps } from '../../../types/restaurant.type'
-import ViewRestaurantsButton from '../../../components/ui/buttons/ViewRestaurantsButton/ViewRestaurantsButton'
+import { FeaturedRestaurantsSectionProps } from './featured_restaurants.types'
+import ViewRestaurantsButton from './ui/buttons/view-restaurants-button/ViewRestaurantsButton'
 import './featured_restaurants_section.css'
-import '../App.css'
+import '@src/App.css'
 
 const FeaturedRestaurantsSection = ({restaurants} : FeaturedRestaurantsSectionProps) => {
     return (

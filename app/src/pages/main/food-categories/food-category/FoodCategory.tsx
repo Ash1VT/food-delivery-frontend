@@ -1,4 +1,4 @@
-import { FoodCategoryProps } from '../../../../types/food_category.type'
+import { FoodCategoryProps } from '../food_category.types'
 import './food_category.css'
 
 const FoodCategory = ({image_url, name} : FoodCategoryProps) => {

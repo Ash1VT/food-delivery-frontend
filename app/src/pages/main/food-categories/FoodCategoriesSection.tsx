@@ -1,11 +1,10 @@
-import ArrowSlider from "../../../components/ui/sliders/arrow-slider/ArrowSlider"
+import ArrowSlider from "../../../components/ui/arrow-slider/ArrowSlider"
 import FoodCategory from "./food-category/FoodCategory"
-import ViewAllFoodButton from "../../../components/ui/buttons/ViewAllFoodButton/ViewAllFoodButton"
-import { FoodCategoriesSectionProps } from "../../../types/food_category.type"
-import { ArrowDirection } from "../../../types/slider.type"
-
+import ViewAllFoodButton from "./ui/buttons/view-all-food-button/ViewAllFoodButton"
+import { FoodCategoriesSectionProps } from "./food_category.types"
+import { ArrowDirection } from "../../../components/ui/arrow-slider/arrow_slider.types"
 import './food_categories_section.css'
-import '../App.css'
+import '@src/App.css'
 
 const FoodCategoriesSection = ({categories} : FoodCategoriesSectionProps) => {
 

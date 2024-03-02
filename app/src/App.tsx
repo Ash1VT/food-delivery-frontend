@@ -4,19 +4,19 @@ import DeliveryProcessSection from './pages/main/delivery-process/DeliveryProces
 import HeaderSection from './pages/main/header/HeaderSection'
 import Navbar from './components/navbar/Navbar';
 import PromotionsSection from './pages/main/promotions/PromotionsSection';
-import { PromotionElementProps } from './types/promotion.type';
-import PushableButton from './components/ui/buttons/PushableButton/PushableButton';
+import { PromotionRestaurantProps } from './pages/main/promotions/promotions.types';
+import PushableButton from './components/ui/buttons/pushable-button/PushableButton';
 import { MouseEvent } from 'react';
 import PersonIcon from '@mui/icons-material/Person';
 import PopularItemsSection from './pages/main/popular-items/PopularItemsSection';
-import { PopularItemProps } from './types/item.type';
+import { PopularItemProps } from './pages/main/popular-items/popular_items.types';
 import FeaturedRestaurantsSection from './pages/main/featured-restaurants/FeaturedRestaurantsSection';
-import { FeaturedRestaurantProps } from './types/restaurant.type';
+import { FeaturedRestaurantProps } from './pages/main/featured-restaurants/featured_restaurants.types';
 import FoodCategoriesSection from './pages/main/food-categories/FoodCategoriesSection';
-import { FoodCategoryProps } from './types/food_category.type';
+import { FoodCategoryProps } from './pages/main/food-categories/food_category.types';
 import FeaturesSection from './pages/main/features/FeaturesSection';
 import BestDealsSection from './pages/main/best-deals/BestDealsSection';
-import { BestDealImageLocation, BestDealProps } from './types/best_deal.type';
+import { BestDealImageLocation, BestDealProps } from './pages/main/best-deals/best_deals.types';
 import Footer from './components/footer';
 import { FooterMenuColumnProps } from './components/footer/footer.types';
 import MainPage from './pages/main/MainPage';

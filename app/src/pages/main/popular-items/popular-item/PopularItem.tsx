@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react'
 import PlaceIcon from '@mui/icons-material/Place'
-import OrderButton from '../../../../components/ui/buttons/OrderButton/OrderButton'
-import { PopularItemProps } from '../../../../types/item.type'
+import OrderButton from '../ui/buttons/order-button/OrderButton'
+import { PopularItemProps } from '../popular_items.types'
 import './popular_item.css'
 
 const PopularItem = ({image_url, name, restaurant_name, price}: PopularItemProps) => {

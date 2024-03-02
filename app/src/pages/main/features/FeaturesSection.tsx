@@ -3,10 +3,9 @@ import Feature from './feature/Feature'
 import FeatureDiscountIcon from './ui/icons/FeatureDiscountIcon'
 import FeatureAddressIcon from './ui/icons/FeatureAddressIcon'
 import FeatureClockIcon from './ui/icons/FeatureClockIcon'
-
-import './features_section.css'
-import '../App.css'
 import Divider from '../../../components/ui/divider/Divider'
+import './features_section.css'
+import '@src/App.css'
 
 const FeaturesSection = () => {
     return (

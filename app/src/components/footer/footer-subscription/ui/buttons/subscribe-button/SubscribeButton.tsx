@@ -1,4 +1,4 @@
-import { SubscribeButtonProps } from "../button.types"
+import { SubscribeButtonProps } from "../../../../../../types/button.types"
 
 import './subscribe_button.css'
 

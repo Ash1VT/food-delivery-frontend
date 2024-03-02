@@ -1,10 +1,9 @@
 import PopularItem from './popular-item/PopularItem'
-import { PopularItemsSectionProps } from '../../../types/item.type'
-import { ArrowDirection } from '../../../types/slider.type' 
-import ArrowSlider from '../../../components/ui/sliders/arrow-slider/ArrowSlider'
-
+import { PopularItemsSectionProps } from './popular_items.types'
+import { ArrowDirection } from '../../../components/ui/arrow-slider/arrow_slider.types' 
+import ArrowSlider from '../../../components/ui/arrow-slider/ArrowSlider'
 import './popular_items_section.css'
-import '../App.css'
+import '@src/App.css'
 
 const PopularItemsSection = ({items}: PopularItemsSectionProps) => {
 

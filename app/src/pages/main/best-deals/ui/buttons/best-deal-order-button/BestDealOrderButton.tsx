@@ -1,4 +1,4 @@
-import { BestDealOrderButtonProps } from "../button.types"
+import { BestDealOrderButtonProps } from "@src/types/button.types"
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import './best_deal_order_button.css'

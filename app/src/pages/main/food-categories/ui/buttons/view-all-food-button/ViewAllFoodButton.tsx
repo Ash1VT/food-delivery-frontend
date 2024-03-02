@@ -1,5 +1,5 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
-import { ViewAllFoodButtonProps } from "../button.types"
+import { ViewAllFoodButtonProps } from "../../../../../../types/button.types"
 
 import './view_all_food_button.css'
 

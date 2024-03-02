@@ -1,4 +1,4 @@
-import { BaseIcon } from "./icon.type"
+import { BaseIcon } from "../../../types/icon.type"
 
 export type DeliveryActionProps = {
     Icon: BaseIcon,

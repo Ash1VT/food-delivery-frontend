@@ -1,7 +1,7 @@
-import FindFoodButton from '../../../components/ui/buttons/FindFoodButton/FindFoodButton';
-import AddressInput from '../../../components/ui/inputs/AdressInput/AddressInput';
+import FindFoodButton from './ui/buttons/find-food-button/FindFoodButton';
+import AddressInput from './ui/inputs/address-input/AddressInput';
 import './header_section.css';
-import '../App.css'
+import '@src/App.css'
 
 
 const HeaderSection = () => {
