@@ -1,25 +1,11 @@
-import './App.css';
-import DeliveryAction from './pages/main/delivery-process/delivery-action/DeliveryAction';
-import DeliveryProcessSection from './pages/main/delivery-process/DeliveryProcessSection';
 import HeaderSection from './pages/main/header/HeaderSection'
 import Navbar from './components/navbar/Navbar';
-import PromotionsSection from './pages/main/promotions/PromotionsSection';
-import { PromotionRestaurantProps } from './pages/main/promotions/promotions.types';
-import PushableButton from './components/ui/buttons/pushable-button/PushableButton';
 import { MouseEvent } from 'react';
-import PersonIcon from '@mui/icons-material/Person';
-import PopularItemsSection from './pages/main/popular-items/PopularItemsSection';
-import { PopularItemProps } from './pages/main/popular-items/popular_items.types';
-import FeaturedRestaurantsSection from './pages/main/featured-restaurants/FeaturedRestaurantsSection';
-import { FeaturedRestaurantProps } from './pages/main/featured-restaurants/featured_restaurants.types';
-import FoodCategoriesSection from './pages/main/food-categories/FoodCategoriesSection';
-import { FoodCategoryProps } from './pages/main/food-categories/food_category.types';
-import FeaturesSection from './pages/main/features/FeaturesSection';
-import BestDealsSection from './pages/main/best-deals/BestDealsSection';
-import { BestDealImageLocation, BestDealProps } from './pages/main/best-deals/best_deals.types';
 import Footer from './components/footer';
 import { FooterMenuColumnProps } from './components/footer/footer.types';
 import MainPage from './pages/main/MainPage';
+import './styles/App.css';
+import './styles/buttons.css'
 
 const App = () => {
 

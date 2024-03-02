@@ -1,8 +1,7 @@
 import { MouseEvent } from 'react'
-import EmailInput from '../ui/inputs/EmailInput/EmailInput'
-import SubscribeButton from './ui/buttons/subscribe-button/SubscribeButton'
+import EmailInput from '../ui/inputs/email-input/EmailInput'
+import SubscribeButton from '../ui/buttons/subscribe-button/SubscribeButton'
 import { FooterSubscriptionProps } from '../footer.types'
-
 import './footer_subscription.css'
 
 const FooterSubscription = ({title} : FooterSubscriptionProps) => {

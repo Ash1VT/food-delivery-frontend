@@ -1,5 +1,4 @@
-import { SubscribeButtonProps } from "../../../../../../types/buttons.types"
-
+import { SubscribeButtonProps } from "src/types/buttons.types"
 import './subscribe_button.css'
 
 const SubscribeButton = ({onClick, className} : SubscribeButtonProps) => {
@@ -9,8 +8,8 @@ const SubscribeButton = ({onClick, className} : SubscribeButtonProps) => {
     return (
         <div onClick={onClick} 
                 role="button" 
-                className={`subscribe__button__wrapper ${className}`}>
-                <p className="subscribe__button__text">Subscribe</p>
+                className={`button__wrapper subscribe__button__wrapper ${className}`}>
+                <p className="button_text subscribe__button__text">Subscribe</p>
         </div>
     )
 }

@@ -1,44 +1,21 @@
 .view__restaurants__button__wrapper {
-    display: flex;
     padding: 21px 48px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    cursor: pointer;
-    user-select: none;
 
     border-radius: 14px;
     background: linear-gradient(98deg, #FFBA26 -8.95%, #FF9A0E 109.24%);
     box-shadow: 0px 20px 40px 0px rgba(255, 174, 0, 0.29), 0px 5px 10px 0px rgba(255, 174, 0, 0.26);
 }
 
-.view__restaurants__button__wrapper:hover {
-    filter: brightness(110%);
-}
-
-.view__restaurants__button__wrapper:active {
-    filter: brightness(130%);
-}
-
 .view__restaurants__button__text {
     color: var(--Theme-White, #FFF);
-    text-align: center;
-    font-family: Source Sans Pro;
     font-size: 18px;
-    font-style: normal;
     font-weight: 700;
-    line-height: 100%;
 }
 
 .view__restaurants__button__icon {
     color: var(--Theme-White, #FFF);
-    text-align: center;
-    font-family: "Font Awesome 5 Free";
     font-size: 14px;
-    font-style: normal;
     font-weight: 900;
-    line-height: 100%;
 
     width: 9px !important;
     height: 14px !important;
