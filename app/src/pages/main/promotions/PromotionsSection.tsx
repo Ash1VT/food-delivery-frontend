@@ -1,7 +1,7 @@
 import { PromotionsSectionProps } from './promotions.types'
 import PromotionRestaurant from './promotion-restaurant/PromotionRestaurant'
 import './promotions_section.css'
-import '@src/App.css'
+import 'src/App.css'
 
 
 const PromotionsSection = ({promotions} : PromotionsSectionProps) => {

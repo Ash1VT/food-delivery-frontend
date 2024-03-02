@@ -4,7 +4,7 @@ import ViewAllFoodButton from "./ui/buttons/view-all-food-button/ViewAllFoodButt
 import { FoodCategoriesSectionProps } from "./food_category.types"
 import { ArrowDirection } from "../../../components/ui/arrow-slider/arrow_slider.types"
 import './food_categories_section.css'
-import '@src/App.css'
+import 'src/App.css'
 
 const FoodCategoriesSection = ({categories} : FoodCategoriesSectionProps) => {
 

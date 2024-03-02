@@ -4,7 +4,7 @@ import DeliveryOrderIcon from './ui/icons/DeliveryOrderIcon'
 import DeliveryBillIcon from './ui/icons/DeliveryBillIcon'
 import DeliveryMealIcon from './ui/icons/DeliveryMealIcon'
 import './delivery_process_section.css'
-import '@src/App.css'
+import 'src/App.css'
 
 const DeliveryProcessSection = () => {
     return (

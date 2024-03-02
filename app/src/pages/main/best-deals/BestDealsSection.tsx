@@ -1,7 +1,7 @@
 import BestDeal from './best-deal/BestDeal'
 import { BestDealImageLocation, BestDealsSectionProps } from './best_deals.types'
 import './best_deals_section.css'
-import '@src/App.css'
+import 'src/App.css'
 
 
 const BestDealsSection = ({best_deals, first_deal_image_location} : BestDealsSectionProps) => {

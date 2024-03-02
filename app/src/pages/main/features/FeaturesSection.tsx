@@ -5,7 +5,7 @@ import FeatureAddressIcon from './ui/icons/FeatureAddressIcon'
 import FeatureClockIcon from './ui/icons/FeatureClockIcon'
 import Divider from '../../../components/ui/divider/Divider'
 import './features_section.css'
-import '@src/App.css'
+import 'src/App.css'
 
 const FeaturesSection = () => {
     return (

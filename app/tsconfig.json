@@ -21,12 +21,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-      "@src/*": ["src/*"],
-      "@public/*": ["public/*"],
-    },
   },
   "include": [
-    "src"
+    "src",
+    "public"
   ]
 }
