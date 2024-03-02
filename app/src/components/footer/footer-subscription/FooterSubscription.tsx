@@ -1,5 +1,5 @@
 import { MouseEvent } from 'react'
-import EmailInput from '../../ui/inputs/EmailInput/EmailInput'
+import EmailInput from '../ui/inputs/EmailInput/EmailInput'
 import SubscribeButton from './ui/buttons/subscribe-button/SubscribeButton'
 import { FooterSubscriptionProps } from '../footer.types'
 
