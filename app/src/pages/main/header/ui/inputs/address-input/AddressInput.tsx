@@ -8,7 +8,7 @@ const AddressInput = ({placeholder, className} : AddressInputProps) => {
         className = ''
 
     return (
-        <div className="address__input__wrapper">
+        <div className={`address__input__wrapper ${className}`}>
             <PlaceIcon className="address__input__icon"/>
             <input className="address__input" placeholder={placeholder}/>
         </div>

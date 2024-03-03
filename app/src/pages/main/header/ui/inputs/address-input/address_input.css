@@ -1,7 +1,7 @@
 .address__input__wrapper {
     display: flex;
     align-items: center;
-    min-width: 593px;
+    /* min-width: 593px; */
     gap: 8px;
     padding: 7px 16px 8px 16px;
     border-radius: 8px;
@@ -18,13 +18,18 @@
 }
 
 .address__input {
-    color: var(--theme-gray-500, #9E9E9E);
+    color: var(--theme-gray-500, #3d3a3a);
     flex: 1;
     font-family: "Open Sans";
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
     /* line-height: 140%; */
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     background: transparent;
     border: none;
     outline: none;
