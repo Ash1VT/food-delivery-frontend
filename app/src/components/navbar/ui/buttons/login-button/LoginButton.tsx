@@ -1,18 +1,17 @@
-import { LoginButtonProps } from '../../../../../types/buttons.types'
-import PushableButton from '../../../../ui/buttons/pushable-button/PushableButton'
+import { LoginButtonProps } from 'src/types/buttons.types'
 import PersonIcon from '@mui/icons-material/Person'
+import './login_button.css'
 
 const LoginButton = ({onClick}: LoginButtonProps) => {
     return (
-        <PushableButton onClick={onClick} 
-                            text='Login'
-                            edje_color='linear-gradient(93deg, #FFB800 -47.72%, #FF8A00 136.81%)'
-                            content_color='#c29934'
-                            background_color='#ffff'
-                            font_family='Source Sans Pro'
-                            font_size={18}
-                            font_weight={700}
-                            left_side_elements={[PersonIcon]}/>
+        <button className="login__button__wrapper" role="button" onClick={onClick}>
+            <span className="login__button__shadow"/>
+            <span className="login__button__edge"/>
+            <span className="login__button__front">
+                <PersonIcon className="login__button__icon"/>
+                <p className="login__button__text">Login</p>
+            </span>
+        </button>
     )
 }
 
