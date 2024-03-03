@@ -10,6 +10,11 @@ import { PromotionRestaurantProps } from './promotions/promotions.types';
 import { PopularItemProps } from './popular-items/popular_items.types';
 import { FeaturedRestaurantProps } from './featured-restaurants/featured_restaurants.types';
 import { FoodCategoryProps } from './food-categories/food_category.types';
+import Footer from 'src/components/footer';
+import { FooterMenuColumnProps } from 'src/components/footer/footer.types';
+import Navbar from 'src/components/navbar';
+import HeaderSection from './header';
+import "./main_page.css"
 
 
 const MainPage = () => {
@@ -71,49 +76,49 @@ const MainPage = () => {
     const featured_restaurants: FeaturedRestaurantProps[] = [
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food3.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: true
       },
       {
         restaurant_image_url: 'images/food2.png',
-        restaurant_logo_url: 'restaurant_logo1.png',
+        restaurant_logo_url: 'images/restaurant_logo1.png',
         restaurant_name: 'Burger Arena',
         rating_value: 44,
         is_opened: false
@@ -167,18 +172,58 @@ const MainPage = () => {
         image_url: 'images/pizza1.png',
       },
     ] 
+
+    const cities: string[] = [
+      'San Francisco',
+      'Miami',
+      'San Diego',
+      'East Bay',
+      'Long Beach',
+      'Los Angeles',
+      'San Francisco',
+      'Miami',
+      'San Diego',
+      'East Bay',
+      'Long Beach',
+      'Los Angeles',
+      'San Francisco',
+      'Miami',
+      'San Diego',
+      'East Bay',
+      'Long Beach',
+      'Los Angeles',
+      'San Francisco',
+      'Miami',
+    ]
+
+    const menu_columns: FooterMenuColumnProps[] = [
+        {
+          title: 'Company',
+          items: ['About us', 'Team', 'Careers', 'Blog']
+        },
+        {
+          title: 'Contact',
+          items: ['Help & Support', 'Partner with us', 'Ride with us']
+        },
+    ]
+
     return (
-        <>
+        <div className="main__container">
+            <div>
+                <Navbar/>
+                <HeaderSection/>
+            </div>
             <PromotionsSection promotions={restaurant_promotions}/>
             <DeliveryProcessSection/>
-            <PopularItemsSection items={popular_items}/>
-            <FeaturedRestaurantsSection restaurants={featured_restaurants}/>
+            {/* <PopularItemsSection items={popular_items}/> */}
+            {/* <FeaturedRestaurantsSection restaurants={featured_restaurants}/> */}
             <div>
-            <FoodCategoriesSection categories={food_categories}/>
-            <FeaturesSection/>
+              {/* <FoodCategoriesSection categories={food_categories}/> */}
+              {/* <FeaturesSection/> */}
             </div>
-            <BestDealsSection best_deals={best_deals} first_deal_image_location={BestDealImageLocation.Left}/>
-        </>
+            {/* <BestDealsSection best_deals={best_deals} first_deal_image_location={BestDealImageLocation.Left}/> */}
+            {/* <Footer cities={cities} cities_per_column={5} menu_columns={menu_columns}/> */}
+        </div>
     )
 }
 
