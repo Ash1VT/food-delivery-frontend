@@ -207,7 +207,7 @@ const MainPage = () => {
         },
     ]
     return (
-        <div className="main__container">
+        <div className="container main__container">
             <div>
                 <Navbar/>
                 <HeaderSection/>
