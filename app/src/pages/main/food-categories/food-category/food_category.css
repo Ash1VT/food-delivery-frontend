@@ -5,16 +5,18 @@
     gap: 26px;
 }
 
-.food__category__image__wrapper {
-    border-radius: 50%;
+.food__category__image__wrapper{
     background-color: lightgray;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 218px;
-    height: 218px;
     flex-shrink: 0;
+    border-radius: 50%;
+    max-width: 218px;
 }
 
+.food__category__image__wrapper img {
+    max-width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
 .food__category__name {
     color: var(--Theme-Gray-800, #424242);
     font-family: Source Sans Pro;

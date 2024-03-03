@@ -11,17 +11,18 @@ const PopularItemsSection = ({items}: PopularItemsSectionProps) => {
             <div className="popular__items__wrapper section__wrapper">
                 <div className="section__title popular__items__title">Popular items</div>
                     <div className="popular__items__list__wrapper">
-                        <ArrowSlider arrow_direction={ArrowDirection.Left}/>
+                        
                         <div className="popular__items__list section__list">
                             {items.map((item) =>{
                                 return <PopularItem image_url={item.image_url} name={item.name} restaurant_name={item.restaurant_name} price={item.price}/>
                             })}
                         </div>
-                        <ArrowSlider arrow_direction={ArrowDirection.Right}/>
+                        
                     </div>
             </div>
         </div>
     )
 }
-
+//<ArrowSlider arrow_direction={ArrowDirection.Left}/>
+//<ArrowSlider arrow_direction={ArrowDirection.Right}/>
 export default PopularItemsSection

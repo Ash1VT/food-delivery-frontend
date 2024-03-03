@@ -28,7 +28,9 @@ const BestDeal = ({image_url, image_location=BestDealImageLocation.Left, title, 
                 </div>
                 <BestDealOrderButton onClick={onClick}/>
             </div>
-            <div style={{background: `url(${image_url})`}} className="best__deal__image__wrapper"/>
+            <div  className="best__deal__image__wrapper">
+                <img src={image_url} alt="image" />
+            </div>
         </div>
     )
 }

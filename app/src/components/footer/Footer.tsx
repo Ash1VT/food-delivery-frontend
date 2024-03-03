@@ -36,4 +36,6 @@ const Footer = ({cities, cities_per_column, menu_columns} : FooterProps) => {
     )
 }
 
+
+
 export default Footer

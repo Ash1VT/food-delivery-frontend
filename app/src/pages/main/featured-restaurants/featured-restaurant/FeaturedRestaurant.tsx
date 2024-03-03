@@ -6,9 +6,8 @@ import './featured_restaurant.css'
 const FeaturedRestaurant = ({restaurant_image_url, restaurant_logo_url, restaurant_name, rating_value, is_opened} : FeaturedRestaurantProps) => {
     return (
         <div className="featured__restaurant__container">
-            <div style={{
-                backgroundImage: `url(${restaurant_image_url})`,
-            }} className="featured__restaurant__food__image__wrapper">
+            <div className="featured__restaurant__food__image">
+                <img src={restaurant_image_url} alt="image" />
             </div>
             <div className="featured__restaurant__wrapper">
                 <div className="featured__restaurant__information">
@@ -32,5 +31,7 @@ const FeaturedRestaurant = ({restaurant_image_url, restaurant_logo_url, restaura
         </div>
     )
 }
-
+//style={{
+    //backgroundImage: `url(${restaurant_image_url})`,
+//}}
 export default FeaturedRestaurant

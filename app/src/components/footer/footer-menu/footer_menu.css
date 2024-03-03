@@ -1,7 +1,13 @@
 .footer__menu__container {
     display: flex;
     /* min-width: 607px; */
-    gap: 100px;
+    column-gap: 100px;
+    row-gap: 35px;
     justify-content: space-between;
     align-items: flex-start;
+}
+@media(max-width:991.98px){
+    .footer__menu__container {
+        flex-direction: column;
+    }
 }

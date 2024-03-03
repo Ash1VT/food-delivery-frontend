@@ -22,3 +22,8 @@
     align-self: stretch;
     gap: 30px;
 }
+@media(max-width:767.98px){
+    .footer__cities__list {
+        flex-direction: column;
+    }
+}
