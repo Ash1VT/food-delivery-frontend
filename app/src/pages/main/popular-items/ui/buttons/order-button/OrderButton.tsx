@@ -1,5 +1,4 @@
 import { OrderButtonProps } from 'src/types/buttons.types'
-import 'src/styles/buttons.css'
 import './order_button.css'
 
 const OrderButton = ({onClick}: OrderButtonProps) => {
