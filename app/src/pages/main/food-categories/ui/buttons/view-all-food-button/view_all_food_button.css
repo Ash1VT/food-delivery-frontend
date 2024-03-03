@@ -1,0 +1,21 @@
+.view__all__food__button__wrapper {
+    padding: 21px 0px;
+    align-self: stretch;
+    border-radius: 56px;
+}
+
+
+.view__all__food__button__text {
+    color: var(--Theme-Primary, #FFB30E);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.view__all__food__button__icon {
+    color: var(--Theme-Primary, #FFB30E);
+    font-size: 16px;
+    font-weight: 900;
+
+    width: 10px !important;
+    height: 16px !important;
+}
