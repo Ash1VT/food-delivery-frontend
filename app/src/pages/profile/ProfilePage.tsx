@@ -81,6 +81,7 @@ const ProfilePage = () => {
         // }
     ]
 
+
     return (
         <div className="profile__container" onClick={(e) => onCloseInput(e)}>
             <Navbar/>
