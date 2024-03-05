@@ -10,12 +10,13 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
     const {editMode, setEditMode} = useContext(Context)
 
     const [text, setText] = useState<string>(value)
-    const [editingText, setEditingText] = useState<string>(value)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
     const closeEditMode = () => {
-        setEditingText(text)
+        if (!inputRef.current) return
+
+        inputRef.current.value = text
         setEditMode(false)
     }
     
@@ -33,9 +34,6 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
         inputRef?.current?.focus()
     }, [editMode])
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEditingText(event.target.value);
-    };
 
     return (
         <div className="textfield__wrapper">
@@ -43,12 +41,12 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
                 <label htmlFor={id}>{label}</label>
                 { editMode ? (
                     <div className="textfield__header__actions">
-                        <CloseIcon className="textfield__header__action edit" onClick={closeEditMode}/>
-                        <CheckIcon  className="textfield__header__action edit" onClick={onEditHandler}/>
+                        <CloseIcon className="textfield__header__action" onMouseDown = {(e) => e.preventDefault()} onClick={closeEditMode}/>
+                        <CheckIcon className="textfield__header__action" onMouseDown = {(e) => e.preventDefault()} onClick={onEditHandler}/>
                     </div>) 
                     : 
                     (
-                    <EditIcon className="textfield__header__action edit" fontSize='medium' onClick={openEditMode}/>
+                    <EditIcon className="textfield__header__action" fontSize='medium' onMouseDown = {(e) => e.preventDefault()} onClick={openEditMode}/>
                     )
                 }
             </div>
@@ -56,12 +54,11 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
 
                    readOnly={!editMode} 
                    disabled={!editMode} 
-                   ref={inputRef} 
-                   value={editingText}
-                   onChange={handleInputChange}
+                   ref={inputRef}
+                   defaultValue={text}
                    className="textfield__input edit" />
         </div>
     )
 }
 
-export default EditableTextField
+export default EditableTextField;
