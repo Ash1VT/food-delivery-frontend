@@ -6,6 +6,7 @@ import { FooterMenuColumnProps } from './components/footer/footer.types';
 import MainPage from './pages/main/MainPage';
 import './styles/App.css';
 import './styles/buttons.css'
+import ProfilePage from './pages/profile';
 
 const App = () => {
 
@@ -50,14 +51,7 @@ const App = () => {
     }
 
     return (
-        <div className="container">
-            <div>
-                <Navbar/>
-                <HeaderSection/>
-            </div>
-            <MainPage/>
-            <Footer cities={cities} cities_per_column={5} menu_columns={menu_columns}/>
-        </div>
+        <ProfilePage/>
     );
 }
 
