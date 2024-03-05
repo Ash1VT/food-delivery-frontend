@@ -2,11 +2,12 @@ import { EditableTextFieldProps } from './editable_text_field.types'
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import './editable_text_field.css'
+import { Context } from 'src/context/MyContext';
 
 const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProps) => {
-    const [editMode, setEditMode] = useState<boolean>(false)
+    const {editMode, setEditMode} = useContext(Context)
 
     const [text, setText] = useState<string>(value)
     const [editingText, setEditingText] = useState<string>(value)
@@ -29,7 +30,6 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
 
     useEffect(() => {
         if (!editMode) return
-    
         inputRef?.current?.focus()
     }, [editMode])
 
@@ -37,29 +37,29 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
         setEditingText(event.target.value);
     };
 
-
     return (
         <div className="textfield__wrapper">
             <div className="textfield__header">
                 <label htmlFor={id}>{label}</label>
                 { editMode ? (
                     <div className="textfield__header__actions">
-                        <CloseIcon className="textfield__header__action" onClick={closeEditMode}/>
-                        <CheckIcon className="textfield__header__action" onClick={onEditHandler}/>
+                        <CloseIcon className="textfield__header__action edit" onClick={closeEditMode}/>
+                        <CheckIcon  className="textfield__header__action edit" onClick={onEditHandler}/>
                     </div>) 
                     : 
                     (
-                    <EditIcon className="textfield__header__action" fontSize='medium' onClick={openEditMode}/>
+                    <EditIcon className="textfield__header__action edit" fontSize='medium' onClick={openEditMode}/>
                     )
                 }
             </div>
-            <input id={id} {...props} 
+            <input  id={id} {...props}
+
                    readOnly={!editMode} 
                    disabled={!editMode} 
                    ref={inputRef} 
                    value={editingText}
                    onChange={handleInputChange}
-                   className="textfield__input" />
+                   className="textfield__input edit" />
         </div>
     )
 }

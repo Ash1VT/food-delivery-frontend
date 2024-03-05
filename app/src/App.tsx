@@ -9,7 +9,6 @@ import './styles/buttons.css'
 import ProfilePage from './pages/profile';
 
 const App = () => {
-
     const cities: string[] = [
         'San Francisco',
         'Miami',
@@ -46,12 +45,12 @@ const App = () => {
           // title: 'Legal'
         // }
     ]
-    const onClick = (event: MouseEvent<HTMLButtonElement>) => {
-        console.log('Hello!')
-    }
+    //const onClick = (event: MouseEvent<HTMLButtonElement>) => {
+    //    console.log('Hello!')
+    //}
 
     return (
-        <ProfilePage/>
+        <ProfilePage />
     );
 }
 

@@ -6,12 +6,20 @@ import './profile_page.css'
 import EditableTextField from "src/components/ui/editable-text-field/EditableTextField"
 import Footer from "src/components/footer"
 import { FooterMenuColumnProps } from "src/components/footer/footer.types"
+import { useContext } from "react"
+import { Context } from "src/context/MyContext"
+
 
 const ProfilePage = () => {
+    const {onCloseInput} = useContext(Context);
+
+
+
     const profileCategoryClicksContext: ProfileCategoryClicksContextProps = {
         profileCategoryClicks: [],
         activeCategoryId: undefined
     }
+
 
     const profileCategories: ProfileCategoryProps[] = [
         {
@@ -74,7 +82,7 @@ const ProfilePage = () => {
     ]
 
     return (
-        <div className="profile__container">
+        <div className="profile__container" onClick={(e) => onCloseInput(e)}>
             <Navbar/>
             <div className="profile__wrapper" style={{backgroundImage: `url(images/background.png)`}}>
                 <div className="profile__card">
