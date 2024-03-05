@@ -2,13 +2,11 @@ import { EditableTextFieldProps } from './editable_text_field.types'
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './editable_text_field.css'
-import { Context } from 'src/context/MyContext';
 
 const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProps) => {
-    const {editMode, setEditMode} = useContext(Context)
-
+    const [editMode, setEditMode] = useState<boolean>(false)
     const [text, setText] = useState<string>(value)
 
     const inputRef = useRef<HTMLInputElement>(null)
@@ -35,28 +33,38 @@ const EditableTextField = ({ id, label, value, ...props }: EditableTextFieldProp
     }, [editMode])
 
 
+    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        closeEditMode()
+    }
+
     return (
         <div className="textfield__wrapper">
             <div className="textfield__header">
                 <label htmlFor={id}>{label}</label>
                 { editMode ? (
                     <div className="textfield__header__actions">
-                        <CloseIcon className="textfield__header__action" onMouseDown = {(e) => e.preventDefault()} onClick={closeEditMode}/>
-                        <CheckIcon className="textfield__header__action" onMouseDown = {(e) => e.preventDefault()} onClick={onEditHandler}/>
+                        <button className="textfield__header__action" onClick={closeEditMode}>
+                            <CloseIcon onMouseDown = {(e) => e.preventDefault()}/>
+                        </button>
+                        <button className="textfield__header__action" onClick={onEditHandler}>
+                            <CheckIcon onMouseDown = {(e) => e.preventDefault()}/>
+                        </button>
                     </div>) 
                     : 
                     (
-                    <EditIcon className="textfield__header__action" fontSize='medium' onMouseDown = {(e) => e.preventDefault()} onClick={openEditMode}/>
+                    <button className="textfield__header__action" onClick={openEditMode}>
+                        <EditIcon fontSize='medium' onMouseDown = {(e) => e.preventDefault()}/>
+                    </button>
                     )
                 }
             </div>
             <input  id={id} {...props}
-
                    readOnly={!editMode} 
                    disabled={!editMode} 
                    ref={inputRef}
                    defaultValue={text}
-                   className="textfield__input edit" />
+                   onBlur={handleBlur}
+                   className="textfield__input" />
         </div>
     )
 }
