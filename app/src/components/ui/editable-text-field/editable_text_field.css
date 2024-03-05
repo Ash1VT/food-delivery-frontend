@@ -1,0 +1,32 @@
+.textfield__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.textfield__header__actions {
+    display: flex;
+    align-items: center;
+}
+
+.textfield__header__action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+}
+
+.textfield__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.textfield__input {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+}
