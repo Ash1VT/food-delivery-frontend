@@ -2,17 +2,19 @@ import Navbar from "src/components/navbar"
 import ProfileCategory from "./profile-category/ProfileCategory"
 import ProfileCategoryClicksContext from "./contexts/ProfileCategoryClicksContext"
 import { ProfileCategoryClicksContextProps, ProfileCategoryProps } from "./profile.types"
-import EditableTextField from "src/components/ui/editable-text-field/EditableTextField"
+import ControlledTextInput from "src/components/ui/controlled-text-input/ControlledTextInput"
+import ControlledDateInput from "src/components/ui/controlled-date-input/ControlledDateInput"
 import Footer from "src/components/footer"
 import { FooterMenuColumnProps } from "src/components/footer/footer.types"
 import './profile_page.css'
+import PersonalInformation from "./personal-information/PersonalInformation"
 
 
 const ProfilePage = () => {
 
     const profileCategoryClicksContext: ProfileCategoryClicksContextProps = {
         profileCategoryClicks: [],
-        activeCategoryId: undefined
+        activeCategoryId: 0
     }
 
     const profileCategories: ProfileCategoryProps[] = [
@@ -75,15 +77,8 @@ const ProfilePage = () => {
         // }
     ]
 
-    // const onCloseInput = (event: any) => {
-        
-    //     if(!e.target.classList.contains("edit")) {
-    //         console.log("click")
-    //     }
-    // }
-
     return (
-        <div className="profile__container">
+        <div className="container profile__container">
             <Navbar/>
             <div className="profile__wrapper" style={{backgroundImage: `url(images/background.png)`}}>
                 <div className="profile__card">
@@ -95,7 +90,7 @@ const ProfilePage = () => {
                         </ProfileCategoryClicksContext.Provider>
                     </div>
                     <div className="profile__category__content" onClick={test}>
-                        <EditableTextField id="1" label="Name" value={"John Doe"}/>
+                         <PersonalInformation/>
                     </div>
                 </div>
             </div>
