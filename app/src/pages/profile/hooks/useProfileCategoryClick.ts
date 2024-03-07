@@ -21,12 +21,10 @@ const useProfileCategoryClick = (id: number) => {
             item.setIsClicked(false)
         })
 
-        if (isClicked)
-            profileCategoryClicksContext.activeCategoryId = undefined
-        else
+        if (!isClicked)
             profileCategoryClicksContext.activeCategoryId = id
 
-        setIsClicked(!isClicked)
+        setIsClicked(true)
     }
 
     return { isClicked, onClick }
