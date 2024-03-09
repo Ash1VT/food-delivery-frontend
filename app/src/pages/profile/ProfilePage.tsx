@@ -1,45 +1,49 @@
+import { useState } from "react"
 import Navbar from "src/components/navbar"
 import ProfileCategory from "./profile-category/ProfileCategory"
 import ProfileCategoryClicksContext from "./contexts/ProfileCategoryClicksContext"
 import { ProfileCategoryClicksContextProps, ProfileCategoryProps } from "./profile.types"
-import ControlledTextInput from "src/components/ui/controlled-text-input/ControlledTextInput"
-import ControlledDateInput from "src/components/ui/controlled-date-input/ControlledDateInput"
 import Footer from "src/components/footer"
 import { FooterMenuColumnProps } from "src/components/footer/footer.types"
-import './profile_page.css'
 import PersonalInformation from "./personal-information/PersonalInformation"
+import DeliveryAddresses from "./delivery-addresses/DeliveryAddresses"
+import PaymentInformation from "./payment-information/PaymentInformation"
+import Orders from "./orders/Orders"
+import './profile_page.css'
 
 
 const ProfilePage = () => {
+    const [activeCategoryId, setActiveCategoryId] = useState<number>(0)
 
     const profileCategoryClicksContext: ProfileCategoryClicksContextProps = {
         profileCategoryClicks: [],
-        activeCategoryId: 0
+        activeCategoryId,
+        setActiveCategoryId
     }
 
-    const profileCategories: ProfileCategoryProps[] = [
+    const profileCategories = [
         {
             id: 0,
-            name: "Personal Information"
+            name: "Personal Information",
+            component: PersonalInformation
         },
         {
             id: 1,
-            name: "Delivery Addresses"
+            name: "Delivery Addresses",
+            component: DeliveryAddresses
         },
         {
             id: 2,
-            name: "Payment Information"
+            name: "Payment Information",
+            component: PaymentInformation
         },
         {
             id: 3,
-            name: "My Orders"
+            name: "My Orders",
+            component: Orders
         }
     ]
     
-    const test = () => {
-        console.log(profileCategoryClicksContext)
-    }
-
     const cities: string[] = [
         'San Francisco',
         'Miami',
@@ -72,10 +76,9 @@ const ProfilePage = () => {
           title: 'Contact',
           items: ['Help & Support', 'Partner with us', 'Ride with us']
         },
-        // {
-          // title: 'Legal'
-        // }
     ]
+    
+    const activeCategory = profileCategories.find(category => category.id === activeCategoryId);
 
     return (
         <div className="container profile__container">
@@ -89,8 +92,8 @@ const ProfilePage = () => {
                             ))}
                         </ProfileCategoryClicksContext.Provider>
                     </div>
-                    <div className="profile__category__content" onClick={test}>
-                         <PersonalInformation/>
+                    <div className="profile__category__content">
+                        {activeCategory?.component && <activeCategory.component/>}
                     </div>
                 </div>
             </div>
