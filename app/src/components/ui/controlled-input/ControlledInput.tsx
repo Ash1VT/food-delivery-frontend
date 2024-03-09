@@ -1,30 +1,34 @@
+import React from 'react';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { ControlledInputProps } from './conrolled_input.types'
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import './controlled_input.css'
-import React from 'react';
 
-const ControlledInput = <T,>({label, value, setValue, editingValue, setEditingValue, onValueSave, children} : ControlledInputProps<T>) => {
+const ControlledInput = <T,>({label, value, error, setValue, parseValue, convertToString, onSave, children} : ControlledInputProps<T>) => {
     const [editMode, setEditMode] = useState<boolean>(false)
+    const [cachedValue, setCachedValue] = useState<T>(value)
+
     const inputRef = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        if (!editMode) {
-            inputRef?.current?.blur()
-            return
-        }
-        inputRef?.current?.focus()
-    }, [editMode])
+    // useEffect(() => {
+    //     if (!editMode) {
+    //         inputRef?.current?.blur()
+    //         return
+    //     }
+    //     inputRef?.current?.focus()
+    // }, [editMode])
     
     const closeEditMode = () => {
-        setEditingValue(value)
+        setValue(cachedValue)
         setEditMode(false)
+        inputRef?.current?.blur()
     }
 
     const openEditMode = () => {
         setEditMode(true)
+        inputRef?.current?.focus()
     }
 
     const handleCancelClick  = () => {
@@ -36,13 +40,20 @@ const ControlledInput = <T,>({label, value, setValue, editingValue, setEditingVa
     }
     
     const handleSaveClick = async () => {
-        setValue(editingValue)
-        await onValueSave(editingValue)
-        setEditMode(false)
+        await onSave(value)
+
+        if (!error) {
+            setCachedValue(value)
+            setEditMode(false)
+        }
     }
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         closeEditMode()
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(parseValue(event.target.value))
     }
 
     return (
@@ -68,9 +79,13 @@ const ControlledInput = <T,>({label, value, setValue, editingValue, setEditingVa
             </div>
             <div className="controlled__input" onBlur={handleBlur}>
                 {React.cloneElement(children as ReactElement, {
+                    ...children.props,
                     ref: inputRef,
-                    readOnly: !editMode
+                    onChange: handleChange,
+                    readOnly: !editMode,
+                    value: convertToString(value),
                 })}
+
             </div>
         </div>
     )

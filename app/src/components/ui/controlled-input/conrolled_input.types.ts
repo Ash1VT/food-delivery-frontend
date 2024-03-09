@@ -4,8 +4,9 @@ export type ControlledInputProps<T> = {
     label: string
     children: ReactElement<HTMLInputElement>
     value: T
-    editingValue: T
+    error: string | undefined | null
+    parseValue: (value: string) => T
+    convertToString: (value: T) => string
     setValue: (value: T) => void
-    setEditingValue: (editingValue: T) => void
-    onValueSave: (value: T) => Promise<void>
+    onSave: (value: T) => Promise<void>
 }
