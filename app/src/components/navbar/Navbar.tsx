@@ -12,9 +12,10 @@ const Navbar = () => {
     return (
         <div className="navbar__container">
             <div className="navbar__wrapper">
-                <div className="navbar__logo">
-                    <img src="images/logo.svg" alt="Logo"/> 
-                </div>
+                <picture>
+                    <img src="images/logo.svg" className="navbar__logo" alt="Logo"/> 
+                </picture>
+
                 <div className="navbar__address">
                     <p className="navbar__address__delivery__text">Deliver to:</p>
                     <PlaceIcon className="navbar__address__icon"/>
@@ -28,6 +29,7 @@ const Navbar = () => {
                     </div>
                     <LoginButton onClick={onClick}/>
                 </div>
+
             </div>
         </div>
     )

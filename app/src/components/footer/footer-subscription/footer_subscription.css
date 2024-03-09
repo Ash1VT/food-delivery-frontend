@@ -5,7 +5,11 @@
     gap: 40px;
     align-self: stretch;
 }
-
+@media(max-width:991.98px){
+    .footer__subscription__container {
+        width: 100%;
+    }
+}
 .footer__subscription__title {
     color: #BBB;
     font-family: "Open Sans";
@@ -20,7 +24,16 @@
     gap: 16px;
     align-self: stretch;
 }
-
+@media(max-width:991.98px){
+    .footer__subscription__wrapper  {
+        min-width: 100%;
+    }
+}
+@media(max-width:767.98px){
+    .footer__subscription__wrapper  {
+     flex-direction: column;
+    }
+}
 .footer__subscription__email__input {
     flex: 1 0 0;
 }

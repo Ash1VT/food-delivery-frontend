@@ -4,7 +4,11 @@
     align-items: flex-start;
     gap: 40px;
 }
-
+@media(max-width:991.98px){
+    .footer__menu__column__container  {
+        gap: 20px;
+    }
+}
 .footer__menu__column__title {
     color: #FFF;
     font-family: "Source Sans Pro";
@@ -20,7 +24,11 @@
     align-items: flex-start;
     gap: 16px;
 }
-
+@media(max-width:991.98px){
+    .footer__menu__column__items {
+        flex-direction: row;
+    }
+}
 .footer__menu__column__item {
     color: var(--Theme-Gray-100, #F5F5F5);
     font-family: "Source Sans Pro";

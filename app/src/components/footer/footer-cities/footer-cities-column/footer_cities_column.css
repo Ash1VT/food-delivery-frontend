@@ -4,7 +4,13 @@
     align-items: flex-start;
     gap: 16px;
 }
-
+@media(max-width:767.98px){
+    .footer__cities__column__container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+}
 .footer__city {
     color: var(--Theme-Gray-100, #F5F5F5);
     font-family: Source Sans Pro;

@@ -26,12 +26,24 @@
 }
 
 
-/* @media (max-width: 1100px) {
+@media (max-width: 380px) {
 
-    .promotions__list {
-        flex-direction: column;
-        gap: 60px;
+    .promotion__image__wrapper {
+        width: 220px;
+        height: 185px;
+        /* height: max-content; */
     }
 
+    .promotion__discount__amount {
+        font-size: 40px;
+    }
 
-} */
+    .promotion__discount__percent {
+        font-size: 18px;
+    }
+
+    .promotion__discount__text {
+        font-size: 16px;
+    }
+
+}

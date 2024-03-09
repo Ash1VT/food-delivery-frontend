@@ -51,9 +51,13 @@
     display: flex;
     padding: 24px;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     gap: 10px;
     align-self: stretch;
+}
+
+.header__address__input {
+    flex: 1;
 }
 
 .header__image__wrapper {
@@ -97,4 +101,38 @@
         justify-content: center;
     }
 
+}
+
+@media (max-width: 735px) {
+    .header__container {
+        min-height: 400px;
+    }
+
+    .header__details__wrapper {
+        margin: 0 20px;
+    }
+
+    .header__title {
+        display: none;
+    }
+
+    .header__details {
+        font-size: 20px;
+    }
+
+    .header__address__wrapper {
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 360px) {
+    .header__details__wrapper {
+        max-width: 200px;
+    }
+
+    .find__food__button__wrapper {
+        min-width: auto;
+        padding: 18px 11px;
+    }
 }

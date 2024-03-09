@@ -18,7 +18,7 @@ const HeaderSection = () => {
                     <p className="header__details">Within a few clicks, find meals that are accessible near you</p>
                     <div className="header__order__card">
                         <div className="header__address__wrapper">
-                            <AddressInput placeholder='Enter Your Address'/>
+                            <AddressInput className="header__address__input" placeholder='Enter Your Address'/>
                             <FindFoodButton onClick={onClick}/>
                         </div>
                     </div>
