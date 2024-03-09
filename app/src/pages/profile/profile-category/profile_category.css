@@ -20,6 +20,11 @@
     font-size: 20px;
 }
 
+.profile__category__content, .profile__category__content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 @media (hover: hover) {
     .profile__category:hover {
