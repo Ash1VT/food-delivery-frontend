@@ -3,7 +3,8 @@ import { ProfileCategoryClicksContextProps } from "../profile.types";
 
 const ProfileCategoryClicksContext = React.createContext<ProfileCategoryClicksContextProps>({
     profileCategoryClicks: [],
-    activeCategoryId: undefined
+    activeCategoryId: 0,
+    setActiveCategoryId: () => {}
 })
 
 export default ProfileCategoryClicksContext;

@@ -1,3 +1,5 @@
+import { ReactElement, ReactNode } from "react"
+
 export type ProfileCategoryProps = {
     id: number
     name: string
@@ -9,6 +11,7 @@ export type ProfileCategoryClick = {
 }
 
 export type ProfileCategoryClicksContextProps = {
-    profileCategoryClicks: ProfileCategoryClick[],
-    activeCategoryId: number | undefined
+    profileCategoryClicks: ProfileCategoryClick[]
+    activeCategoryId: number
+    setActiveCategoryId: (id: number) => void
 }

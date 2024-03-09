@@ -3,26 +3,26 @@ import ProfileCategoryClicksContext from "../contexts/ProfileCategoryClicksConte
 
 const useProfileCategoryClick = (id: number) => {
     const [isClicked, setIsClicked] = useState<boolean>(false)
-    const profileCategoryClicksContext = useContext(ProfileCategoryClicksContext)
+    const { profileCategoryClicks, activeCategoryId, setActiveCategoryId } = useContext(ProfileCategoryClicksContext)
 
     useEffect(() => {
-        profileCategoryClicksContext.profileCategoryClicks.push({
+        profileCategoryClicks.push({
             id,
             setIsClicked
         })
 
-        if (profileCategoryClicksContext.activeCategoryId === id)
+        if (activeCategoryId === id)
             setIsClicked(true)
 
-    }, [])
+    }, [activeCategoryId])
     
     const onClick = () => {
-        profileCategoryClicksContext.profileCategoryClicks.forEach(item => {
+        profileCategoryClicks.forEach(item => {
             item.setIsClicked(false)
         })
 
         if (!isClicked)
-            profileCategoryClicksContext.activeCategoryId = id
+            setActiveCategoryId(id)
 
         setIsClicked(true)
     }
