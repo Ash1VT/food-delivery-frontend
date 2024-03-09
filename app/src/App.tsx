@@ -5,7 +5,8 @@ import './styles/buttons.css'
 
 const App = () => {
     return (
-        <MainPage/>
+        <ProfilePage/>
+    )
 }
 
 export default App;
