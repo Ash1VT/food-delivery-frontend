@@ -1,0 +1,61 @@
+.controlled__input__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.controlled__input__header__actions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.controlled__input__header__action {
+    border: none;
+    border-radius: 10px;
+}
+
+.controlled__input__header__action {
+    border: none;
+    border-radius: 10px;
+}
+
+.controlled__input__header__action > * {
+    padding: 2px 0;
+}
+
+.controlled__input__header__action:hover {
+    background: linear-gradient(to right, rgba(255, 255, 0, 0.8), rgba(255, 165, 0, 0.8));
+    filter: none;
+}
+
+.controlled__input__header__action:active {
+    background: linear-gradient(to right, #FFD700, #FFA500);
+    filter: none;
+}
+
+.controlled__input__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controlled__input {
+    display: flex;
+    border-radius: 5px;
+}
+
+.controlled__input input {
+    flex: 1;
+    max-width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Source Sans Pro";
+    border: none;
+}
+
+.controlled__input__header__action, .controlled__input > * {
+    background: #eadcdc;
+}
