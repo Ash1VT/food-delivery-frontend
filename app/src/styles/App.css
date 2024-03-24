@@ -1,6 +1,7 @@
 * {
   font-family: 'Source Sans Pro';
   margin: 0;
+  box-sizing: border-box;
 }
 
 ::placeholder {
@@ -9,17 +10,13 @@
 
 body {
   background-color: #ffff;
-  width: 100%; 
-  height: 100%;
 }
 
-html {
+
+body, html, #root,.container {
+  min-width: 320px;
   width: 100%; 
   height: 100%; 
-}
-
-body, html, .container {
-  min-width: 320px;
 }
 
 /* .section__container {
