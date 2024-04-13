@@ -1,6 +1,12 @@
 import { Rating, Star } from '@smastrom/react-rating'
-import './menu_item.css'
 import { MenuItemProps } from '../menu_page.types'
+import AddToCartButton from '../ui/buttons/add-to-cart-button/AddToCartButton'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { addOrderCartItem, removeOrderCartItem } from 'src/components/order-cart/redux/reducers/orderCartReducer'
+import { useSelector } from 'react-redux'
+import { getIfOrderItemInCart } from 'src/components/order-cart/redux/selectors'
+import RemoveFromCartButton from '../ui/buttons/remove-from-cart-button/RemoveFromCartButton'
+import './menu_item.css'
 
 const ratingStyles = {
     itemShapes: Star,
@@ -8,7 +14,28 @@ const ratingStyles = {
     inactiveFillColor: '#f0e385'
 }
 
-const MenuItem = ({imageUrl, name, description, ratingValue, reviewsCount, price}: MenuItemProps) => {
+const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuItemProps) => {
+    const dispatch = useAppDispatch()
+    const inCart = useSelector(state => getIfOrderItemInCart(state, id))
+
+    const handleAddToCart = () => {
+        dispatch(addOrderCartItem({id, quantity: 1}))
+    }
+
+    const handleRemoveFromCart = () => {
+        dispatch(removeOrderCartItem(id))
+    }
+
+
+    const Button = () => {
+        return (
+            inCart ? 
+                <RemoveFromCartButton onRemovedFromCart={handleRemoveFromCart}/> 
+                : 
+                <AddToCartButton onAddedToCart={handleAddToCart}/>
+        )
+    }
+
     return (
         <div className="menu__category__item__container">
             <div className="menu__category__item__image__wrapper">
@@ -16,7 +43,6 @@ const MenuItem = ({imageUrl, name, description, ratingValue, reviewsCount, price
             </div>
             <div className="menu__category__item__wrapper">
                 <div className="menu__category__item__name">{name}</div>
-                <div className="menu__category__item__description">{description}</div>
 
                 <div className="menu__category__item__rating__reviews__wrapper">
 
@@ -29,7 +55,8 @@ const MenuItem = ({imageUrl, name, description, ratingValue, reviewsCount, price
                     </div>
                 </div>
                 <div className="menu__category__item__price">{price}$</div>
-            </div>         
+            </div>
+            <Button/>
         </div>
     )
 }
