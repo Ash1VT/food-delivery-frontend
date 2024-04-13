@@ -4,7 +4,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Popup from 'reactjs-popup'
 import './restaurant.css'
 
-const Restaurant = ({name, description, imageUrl, ratingValue} : RestaurantProps) => {
+const Restaurant = ({id, name, description, imageUrl, ratingValue} : RestaurantProps) => {
     return (
         <div className="restaurant__container">
             <div className="restaurant__image">
