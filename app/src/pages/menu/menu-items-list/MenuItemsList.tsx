@@ -2,12 +2,13 @@ import MenuItem from '../menu-item/MenuItem'
 import { MenuItemsListProps } from '../menu_page.types'
 import './menu_items_list.css'
 
-const MenuItemsList = ({menuItems} : MenuItemsListProps) => {
+const MenuItemsList = ({items} : MenuItemsListProps) => {
     return (
         <div className="menu__category__items__list">
-            {menuItems.map((menuItem) => (
+            {items.map((item) => (
                     <MenuItem
-                        {...menuItem}
+                        key={item.id}
+                        {...item}
                     />
                 )
             )}
