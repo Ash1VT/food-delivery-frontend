@@ -1,10 +1,12 @@
 .order__cart__container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     border-radius: 20px;
     background-color: rgb(227, 225, 225);
     min-width: 600px;
     height: calc(100vh - 180px);
+    max-height: calc(100vh - 180px);
 }
 
 .order__cart__wrapper {
@@ -26,10 +28,11 @@
 
 .order__cart__content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    row-gap: 50px;
     flex-grow: 1;
+    height: 80%;
 }
-
 
 .order__cart__empty {
     font-family: Source Sans Pro;
@@ -38,5 +41,14 @@
     font-size: 30px;
     line-height: 44px;
     text-align: center;
-    align-self: center;
+
+    margin: auto 0;
+}
+
+.order__cart__button {
+    margin-top: auto;
+}
+
+.order__cart__button__wrapper {
+    width: 100%;
 }

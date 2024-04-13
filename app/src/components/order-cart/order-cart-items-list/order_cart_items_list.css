@@ -5,5 +5,5 @@
     row-gap: 50px;
     overflow-y: scroll;
     scrollbar-width: none;
-    -ms-overflow-style: none;  /* IE and Edge */
+    -ms-overflow-style: none;
 }
