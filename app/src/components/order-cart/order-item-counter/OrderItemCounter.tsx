@@ -2,17 +2,15 @@ import { OrderItemCounterProps } from '../order_cart.types'
 import './order_item_counter.css'
 
 
-const OrderItemCounter = ({ quantity, setQuantity, onQuantityChanged } : OrderItemCounterProps) => {
+const OrderItemCounter = ({ quantity, onQuantityChanged } : OrderItemCounterProps) => {
     
     const decreaseQuantity = () => {
-        // if (quantity > 1) {
-            console.log(quantity)
+        if (quantity > 1) {
             onQuantityChanged(quantity - 1)
-        // }
+        }
     }
 
     const increaseQuantity = () => {
-        console.log(quantity)
         onQuantityChanged(quantity + 1)
     }
 

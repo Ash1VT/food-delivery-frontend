@@ -4,6 +4,7 @@
     column-gap: 10px;
     background-color: #f1e9e9;
     border-radius: 10px;
+
 }
 
 .order__item__counter__button {
@@ -31,6 +32,8 @@
 
 .order__item__counter__value {
     padding: 8px 5px;
+    min-width: 50px;
+    max-width: 100px;
 }
 
 .order__item__counter__button__text {
