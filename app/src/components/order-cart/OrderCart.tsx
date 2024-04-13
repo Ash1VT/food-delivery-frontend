@@ -1,39 +1,36 @@
-import { useState } from 'react';
-import OrderCartItem from './order-cart-item/OrderCartItem'
 import OrderCartItemsList from './order-cart-items-list/OrderCartItemsList';
+import { useAppSelector } from 'src/hooks/redux/useAppSelector';
+import { getOrderCartItems, getOrderCartTotalPrice } from './redux/selectors';
+import OrderCartButton from './ui/buttons/order-cart-button/OrderCartButton';
+import { useEffect } from 'react';
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
+import { fetchOrderCartItemsFromLocalStorage } from './redux/reducers/orderCartReducer';
 import './order_cart.css'
-import { OrderCartItemProps, OrderCartProps } from './order_cart.types';
-import { OrderCartTotalPriceContext } from './contexts/OrderCartTotalPriceContext';
 
-const calculateTotalPrice = (items: OrderCartItemProps[]) => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0)
-}
+const OrderCart = () => {
+    const orderCartItems = useAppSelector(state => getOrderCartItems(state))
+    const dispatch = useAppDispatch()
+    const totalPrice = useAppSelector(state => getOrderCartTotalPrice(state))
+    const itemsCount = orderCartItems.length
 
-const OrderCart = ({items} : OrderCartProps) => {
-    const [totalPrice, setTotalPrice] = useState(calculateTotalPrice(items))
-    
-    const orderCartTotalPriceContext = {
-        totalPrice,
-        setTotalPrice
-    }
-    
-    const itemsCount = items.length
+    useEffect(() => {
+        dispatch(fetchOrderCartItemsFromLocalStorage())
+    }, [])
 
     const OrderCartWithItems = () => {
         return (
-            <OrderCartTotalPriceContext.Provider value={orderCartTotalPriceContext}>
+            <>
                 <OrderCartItemsList items={
-                    items.map((item) => {
+                    orderCartItems.map((item) => {
                         return {
-                            ...item,
-                            setTotalPrice
+                            ...item
                         }
                     }
-                )}/> 
-                <div className="order__cart__total">
-                    {totalPrice}$
+                )}/>
+                <div className="order__cart__button">
+                    <OrderCartButton totalPrice={totalPrice} onOrdered={() => {}}/>
                 </div>
-            </OrderCartTotalPriceContext.Provider>
+            </>
         )
     }
 
