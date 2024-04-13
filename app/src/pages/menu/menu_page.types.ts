@@ -1,23 +1,22 @@
 export type MenuItemProps = {
-    id: bigint
+    id: string
     imageUrl: string
     name: string
     description: string
     ratingValue: number
     reviewsCount: number
     price: number
-    categoryId: bigint
 }
 
 export type MenuItemsListProps = {
-    menuItems: MenuItemProps[]
+    items: MenuItemProps[]
 }
 
 
 export type MenuCategoryProps = {
-    id: bigint
+    id: string
     name: string
-    menuItems: MenuItemProps[]
+    items: MenuItemProps[]
 }
 
 export type MenuCategoriesListProps = {
@@ -25,7 +24,7 @@ export type MenuCategoriesListProps = {
 }
 
 export type MenuCategoryNameProps = {
-    id: bigint
+    id: string
     name: string
     imageUrl: string
     isActive: boolean
@@ -37,13 +36,21 @@ export type MenuCategoriesNamesProps = {
 
 
 export type MenuCategoryRef = {
-    id: bigint
+    id: string
     ref: React.RefObject<HTMLDivElement>
 }
 
 export type MenuCategoriesRefsContextProps = {
-    categories: MenuCategoryRef[]
-    setCategories: (callback: (prevCategories: MenuCategoryRef[]) => MenuCategoryRef[]) => void
+    categoriesRefs: MenuCategoryRef[]
+    setCategoriesRefs: (callback: (prevCategories: MenuCategoryRef[]) => MenuCategoryRef[]) => void
+}
+
+export type AddToCartButtonProps = {
+    onAddedToCart: () => void
+}
+
+export type RemoveFromCartButtonProps = {
+    onRemovedFromCart: () => void
 }
 
 // export type MenuCategoryClickProps = {
