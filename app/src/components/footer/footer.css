@@ -1,6 +1,7 @@
 .footer__container {
     
     background: var(--Theme-Gray-900, #212121);
+    flex-grow: 1;
 }
 
 .footer__wrapper {
