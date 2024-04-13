@@ -1,33 +1,41 @@
-import { useContext, useState } from 'react'
 import { OrderCartItemProps } from '../order_cart.types'
-import './order_cart_item.css'
 import OrderItemCounter from '../order-item-counter/OrderItemCounter'
-import { OrderCartTotalPriceContext } from '../contexts/OrderCartTotalPriceContext'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { removeOrderCartItem, setOrderCartItemQuantity } from '../redux/reducers/orderCartReducer'
+import { getOrderCartItemPrice } from '../redux/selectors'
+import { useAppSelector } from 'src/hooks/redux/useAppSelector'
+import RemoveItemButton from '../ui/buttons/remove-item-button/RemoveItemButton'
+import './order_cart_item.css'
 
-const OrderCartItem = ({id, imageUrl, categoryName, name, quantity, price} : OrderCartItemProps) => {
-    const [quantityValue, setQuantityValue] = useState(quantity)
-    const { setTotalPrice } = useContext(OrderCartTotalPriceContext)
+const OrderCartItem = ({id, imageUrl, categoryName, name, quantity} : OrderCartItemProps) => {
+    const orderCartItemPrice = useAppSelector(state => getOrderCartItemPrice(state, id))
+    
+    const dispatch = useAppDispatch()
 
     const onQuantityChange = (newQuantity: number) => {
-        setQuantityValue((prevQuantity) => {
-            setTotalPrice((prevTotalPrice) => prevTotalPrice + (newQuantity - prevQuantity) * price);
-            return newQuantity;
-        })
+        dispatch(setOrderCartItemQuantity({id, quantity: newQuantity}))        
+    }
+
+    const handleRemove = () => {
+        dispatch(removeOrderCartItem(id))
     }
 
     return (
         <div className="order__cart__item__container">
-            <div className="order__cart__item__image__wrapper">
-                <img src={imageUrl} alt="image" width={150} height={150}/>
-            </div>
-            <div className="order__cart__item__details"> 
-                <div className="order__cart__item__name__wrapper">
-                    <div className="order__cart__item__category__name">{categoryName}</div>
-                    <div className="order__cart__item__name">{name}</div>
+            <div className="order__cart__item__content">
+                <div className="order__cart__item__image__wrapper">
+                    <img src={imageUrl} alt="image" width={150} height={150}/>
                 </div>
-                <OrderItemCounter quantity={quantityValue} setQuantity={setQuantityValue} onQuantityChanged={onQuantityChange}/>
-                <div className="order__cart__item__price">{price}$</div>
+                <div className="order__cart__item__details"> 
+                    <div className="order__cart__item__name__wrapper">
+                        <div className="order__cart__item__category__name">{categoryName}</div>
+                        <div className="order__cart__item__name">{name}</div>
+                    </div>
+                    <OrderItemCounter quantity={quantity} onQuantityChanged={onQuantityChange}/>
+                    <div className="order__cart__item__price">{orderCartItemPrice}$</div>
+                </div>
             </div>
+            <RemoveItemButton onItemRemoved={handleRemove}/>
         </div>
     )
 }
