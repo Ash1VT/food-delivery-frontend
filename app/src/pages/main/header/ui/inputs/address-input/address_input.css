@@ -1,0 +1,36 @@
+.address__input__wrapper {
+    display: flex;
+    align-items: center;
+    /* min-width: 593px; */
+    gap: 8px;
+    padding: 7px 16px 8px 16px;
+    border-radius: 8px;
+    background: var(--theme-gray-100, #f3f0f0);
+}
+
+.address__input__icon {
+    color: #FF7474;
+    font-family: "Font Awesome 5 Free";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 140%; 
+}
+
+.address__input {
+    color: var(--theme-gray-500, #3d3a3a);
+    flex: 1;
+    font-family: "Open Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 140%; */
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    background: transparent;
+    border: none;
+    outline: none;
+}

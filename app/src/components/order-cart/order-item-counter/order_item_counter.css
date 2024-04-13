@@ -1,0 +1,41 @@
+.order__item__counter__container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    background-color: #f1e9e9;
+    border-radius: 10px;
+
+}
+
+.order__item__counter__button {
+    border: none;
+    background-color: rgb(244, 223, 36);
+}
+
+.order__item__counter__button__text, .order__item__counter__value {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 25px;
+    text-align: center;
+    color: var(--theme-gray-800, #424242);
+}
+
+.order__item__counter__button__left {
+    border-radius: 10px 0 0 10px;
+}
+
+.order__item__counter__button__right {
+    border-radius: 0 10px 10px 0;
+}
+
+.order__item__counter__value {
+    padding: 8px 5px;
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.order__item__counter__button__text {
+    padding: 0 15px;
+}

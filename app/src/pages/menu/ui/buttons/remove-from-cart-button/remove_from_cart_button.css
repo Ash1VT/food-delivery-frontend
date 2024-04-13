@@ -1,0 +1,11 @@
+.remove__from__cart__button__wrapper {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(211, 210, 205);
+}
+
+.remove__from__cart__button__text {
+    font-size: 18px;
+    font-weight: 500;
+}
