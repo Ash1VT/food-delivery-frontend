@@ -1,0 +1,101 @@
+.restaurant__reference__container {
+    position: relative;
+    min-width: 860px;
+}
+
+.restaurant__reference__image__wrapper {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 36px;
+    min-height: 360px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.restaurant__reference__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.66;
+    background: linear-gradient(231.36deg, rgba(26, 0, 0, 0) 35.77%, #1A0000 90.7%);
+    border-radius: 36px;
+}
+
+.restaurant__reference__details {
+    position: relative;
+    z-index: 1;
+    padding: 50px;
+    max-width: 400px;
+}
+
+.restaurant__reference__name {
+    color: #ffff;
+    font-family: Source Sans Pro;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+/* 
+.restaurant__reference__description {
+    color: #ffff;
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: break-spaces;
+} */
+
+.restaurant__reference__buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+    margin-top: 20px;
+}
+
+.restaurant__reference__information__wrapper {
+    background-color: #fff;
+    margin-top: 10px;
+    padding: 30px;
+
+    max-width: 400px;
+    border-radius: 20px;
+}
+
+.restaurant__reference__information__name {
+    color: #21201F;
+    font-size: 24px;
+    font-family: Open Sans;
+    line-height: 27px;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.restaurant__reference__information__description {
+    color: #21201F !important;
+    margin-bottom: 4px;
+}
+
+.restaurant__reference__information__field {
+    color: #9E9B98;
+    padding: 20px 0;
+    font-size: 16px;
+    font-family: Open Sans;
+    line-height: 19px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+}
+
+.restaurant__reference__information__field + .restaurant__reference__information__field {
+    border-top: 0.5px solid rgba(138,135,132,0.4);
+}
