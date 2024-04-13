@@ -1,0 +1,116 @@
+.login__button__wrapper {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    cursor: pointer;
+    user-select: none;
+    
+    outline-offset: 4px;
+    transition: filter 250ms;
+    text-align: center;
+    min-width: 120px;   
+    min-height: 40px;
+}
+
+.login__button__shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: hsla(46, 68%, 55%, 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+    /* box-shadow: 0px 20px 40px 0px rgba(255, 174, 0, 0.29),
+      0px 5px 10px 0px rgba(255, 174, 0, 0.26); */
+}
+
+.login__button__edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(93deg, #FFB800 -47.72%, #FF8A00 136.81%);
+    border-radius: 12px;
+}
+
+.login__button__front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* padding: 12px 42px; */
+    border-radius: 12px;
+
+    margin: 0;
+
+    background: hsl(0deg 0% 95%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+    border: rgba(128, 124, 124, 0.7);
+    border-style: solid;
+    border-width: 1.5px 0.1px 0px 0.1px;
+
+    color: #c29934;
+    background: #ffff;
+}
+
+.login__button__icon {
+    font-family: Font Awesome 5;
+}
+
+.login__button__text {
+    font-family: Source Sans Pro;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.login__button__wrapper:hover {
+    filter: brightness(110%);
+}
+
+.login__button__wrapper:hover .login__button__front {
+    transform: translateY(-6px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.login__button__wrapper:active .login__button__front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+
+.login__button__wrapper:hover .login__button__shadow {
+    transform: translateY(4px);
+    transition:
+      transform
+      250ms
+      cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.login__button__wrapper:active .login__button__shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+
+.login__button__wrapper:focus:not(:focus-visible) {
+    outline: none;
+}
+

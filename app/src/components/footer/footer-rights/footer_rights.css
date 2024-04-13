@@ -1,0 +1,36 @@
+.footer__rights__container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+    align-self: stretch;
+}
+
+.footer__rights__text {
+    color: var(--Theme-Gray-100, #F5F5F5);
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.footer__rights__icon {
+    width: 16px;
+    height: 18px;
+    color: var(--Theme-Gray-100, #F5F5F5);
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.footer__rights__company {
+    color: var(--Theme-Gray-100, #F5F5F5);
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}

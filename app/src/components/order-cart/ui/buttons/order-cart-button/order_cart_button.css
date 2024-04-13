@@ -1,0 +1,30 @@
+.order__cart__button__wrapper {
+    display: flex;
+    justify-content: space-between !important;
+    border: none;
+    padding: 15px 60px;
+    background-color: rgb(244, 223, 36);
+    border-radius: 5px;
+
+}
+
+.order__cart__button__text {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.order__cart__total {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 44px;
+    text-align: center;
+}
+
+.order__cart__button__labels {
+    display: flex;
+    column-gap: 10px;
+}
