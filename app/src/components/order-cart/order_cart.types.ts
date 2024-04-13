@@ -1,5 +1,5 @@
 export type OrderCartItemProps = {
-    id: bigint
+    id: string
     imageUrl: string
     categoryName: string
     name: string
@@ -17,11 +17,14 @@ export type OrderCartProps = {
 
 export type OrderItemCounterProps = {
     quantity: number
-    setQuantity: (callback: (prevQuantity: number) => number) => void
     onQuantityChanged: (newQuantity: number) => void
 }
 
-export type OrderCartTotalPriceContextProps = {
+export type OrderCartRemoveItemButtonProps = {
+    onItemRemoved: () => void
+}
+
+export type OrderCartButtonProps = {
     totalPrice: number
-    setTotalPrice: (callback: (prevTotalPrice: number) => number) => void,
+    onOrdered: () => void
 }
