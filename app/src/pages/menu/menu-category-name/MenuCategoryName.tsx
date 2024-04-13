@@ -1,42 +1,34 @@
 import Divider from 'src/components/ui/divider/Divider'
 import { MenuCategoryNameProps } from '../menu_page.types'
-import './menu_category_name.css'
-import useActiveClick from 'src/hooks/useActiveClick'
-import MenuCategoriesNamesClicksContext from '../contexts/MenuCategoriesNamesClicksContext'
 import { useContext } from 'react'
 import MenuCategoriesRefsContext from '../contexts/MenuCategoriesRefsContext'
+import scrollToCategory from '../utils/scrollToCategory'
+import { menuSlice, setActiveCategory } from '../redux/reducers/menuReducer'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { useAppSelector } from 'src/hooks/redux/useAppSelector'
+import { getMenuCategory } from '../redux/selectors'
+import './menu_category_name.css'
 
-const navbarHeight = 120;
 
 const MenuCategoryName = ({id, name, imageUrl}: MenuCategoryNameProps) => {
-    const { isClicked, setActive } = useActiveClick(id, MenuCategoriesNamesClicksContext)
-    const { categories } = useContext(MenuCategoriesRefsContext)
+    const { isActive } = useAppSelector(state => getMenuCategory(state, id))
+    const dispatch = useAppDispatch()
+
+    const { categoriesRefs } = useContext(MenuCategoriesRefsContext)
 
     const onClick = () => {
-        const category = categories.find((category) => category.id === id)
-        const categoryComponent = category?.ref.current;
-
-        const scrollToComponent = (component: HTMLElement) => {
-            window.scrollTo({
-                top: component.offsetTop - navbarHeight,
-                behavior: 'smooth'
-            })
-        }
-
-        if (categoryComponent) 
-            scrollToComponent(categoryComponent)
-        
-        setActive()
+        scrollToCategory(id, categoriesRefs)
+        dispatch(setActiveCategory(id))
     }
 
     return (
         <div className="menu__category__name__container">
-            <div className={`menu__category__image__wrapper ${isClicked ? 'menu__category__image__active' : 'menu__category__image__not__active'}`} style={{ backgroundImage: `url(${imageUrl})` }} onClick={onClick}>
+            <div className={`menu__category__image__wrapper ${isActive ? 'menu__category__image__active' : 'menu__category__image__not__active'}`} style={{ backgroundImage: `url(${imageUrl})` }} onClick={onClick}>
                 <div className="menu__category__name__text">
                     {name}{id.toString()}
                 </div>
             </div>
-            {isClicked &&
+            {isActive &&
                 <Divider width='50px' height='2px' color='#ffb700'/>
             }
         </div>
