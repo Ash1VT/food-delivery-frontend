@@ -2,16 +2,19 @@ import Navbar from 'src/components/navbar';
 import { FooterMenuColumnProps } from 'src/components/footer/footer.types';
 import Footer from 'src/components/footer';
 import RestaurantsList from './restaurants-list/RestaurantsList';
-import { RestaurantProps } from './restaurants_page.types';
 import { SortComponentProps } from 'src/components/ui/sort-component/sort_component.types';
 import { SearchComponentProps } from 'src/components/ui/search-component/search_component.types';
 import SearchComponent from 'src/components/ui/search-component/SearchComponent';
 import SortComponent from 'src/components/ui/sort-component/SortComponent';
-import './restaurants_page.css'
 import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
+import { useAppSelector } from 'src/hooks/redux/useAppSelector';
+import { getRestaurants } from './redux/selectors';
+import './restaurants_page.css'
 
 const RestaurantsPage = () => {
+
+    const restaurants = useAppSelector(getRestaurants)
 
     const mb = useMediaQuery('(max-width: 450px)');
     const vs = useMediaQuery('(max-width: 360px)');
@@ -51,171 +54,6 @@ const RestaurantsPage = () => {
         },
     ]
     
-    const restaurants: RestaurantProps[] = [
-        {
-            name: 'McDonalds', 
-            description: 'TestTestTes tTestTestTes tTestTestTest TestTestTestT estTestTestTestTestTe stTestTes tTestTestTestTe stTestTestT estTestTest',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5.00
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds', 
-            description: 'TestTestTes tTestTestTes tTestTestTest TestTestTestT estTestTestTestTestTe stTestTes tTestTestTestTe stTestTestT estTestTest',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5.00
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds', 
-            description: 'TestTestTes tTestTestTes tTestTestTest TestTestTestT estTestTestTestTestTe stTestTes tTestTestTestTe stTestTestT estTestTest',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5.00
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-        {
-            name: 'McDonalds',
-            description: 'Test',
-            imageUrl: 'images/food1.png',
-            ratingValue: 5
-        },
-    ]
-
     const options = [
         {
             label: 'Popularity',
