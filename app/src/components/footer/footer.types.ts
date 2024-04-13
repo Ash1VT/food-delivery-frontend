@@ -27,15 +27,15 @@ export type FooterRightsProps = {
 export type FooterCitiesProps = {
     title: string
     cities: string[]
-    cities_per_column: number
+    citiesPerColumn: number
 }
 
 export type FooterMenuProps = {
-    menu_columns: FooterMenuColumnProps[]
+    menuColumns: FooterMenuColumnProps[]
 }
 
-export type FooterProps = {
-    cities: string[]
-    cities_per_column: number
-    menu_columns: FooterMenuColumnProps[]
-}
+// export type FooterProps = {
+//     cities: string[]
+//     citiesPerColumn: number
+//     menuColumns: FooterMenuColumnProps[]
+// }

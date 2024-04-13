@@ -44,40 +44,6 @@ const ProfilePage = () => {
         }
     ]
     
-    const cities: string[] = [
-        'San Francisco',
-        'Miami',
-        'San Diego',
-        'East Bay',
-        'Long Beach',
-        'Los Angeles',
-        'San Francisco',
-        'Miami',
-        'San Diego',
-        'East Bay',
-        'Long Beach',
-        'Los Angeles',
-        'San Francisco',
-        'Miami',
-        'San Diego',
-        'East Bay',
-        'Long Beach',
-        'Los Angeles',
-        'San Francisco',
-        'Miami',
-    ]
-
-    const menu_columns: FooterMenuColumnProps[] = [
-        {
-          title: 'Company',
-          items: ['About us', 'Team', 'Careers', 'Blog']
-        },
-        {
-          title: 'Contact',
-          items: ['Help & Support', 'Partner with us', 'Ride with us']
-        },
-    ]
-    
     const activeCategory = profileCategories.find(category => category.id === activeCategoryId);
 
     return (
@@ -97,7 +63,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
-            <Footer cities={cities} cities_per_column={5} menu_columns={menu_columns}/>
+            <Footer/>
         </div>
     )
 }

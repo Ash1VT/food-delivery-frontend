@@ -2,7 +2,7 @@ import { FooterCitiesProps } from '../footer.types'
 import FooterCitiesColumn from './footer-cities-column/FooterCitiesColumn'
 import './footer_cities.css'
 
-const FooterCities = ({title, cities, cities_per_column} : FooterCitiesProps) => {
+const FooterCities = ({title, cities, citiesPerColumn} : FooterCitiesProps) => {
 
     const parse_array = (array: Array<any>, chunks_count: number) => {
         return array.reduce((resultArray, item, index) => { 
@@ -18,7 +18,7 @@ const FooterCities = ({title, cities, cities_per_column} : FooterCitiesProps) =>
         }, [])
     }
 
-    const parsed_cities = parse_array(cities, cities_per_column)
+    const parsed_cities = parse_array(cities, citiesPerColumn)
 
     return (
         <div className="footer__cities__container">

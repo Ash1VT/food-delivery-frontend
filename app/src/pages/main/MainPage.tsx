@@ -173,39 +173,6 @@ const MainPage = () => {
       },
     ] 
 
-    const cities: string[] = [
-      'San Francisco',
-      'Miami',
-      'San Diego',
-      'East Bay',
-      'Long Beach',
-      'Los Angeles',
-      'San Francisco',
-      'Miami',
-      'San Diego',
-      'East Bay',
-      'Long Beach',
-      'Los Angeles',
-      'San Francisco',
-      'Miami',
-      'San Diego',
-      'East Bay',
-      'Long Beach',
-      'Los Angeles',
-      'San Francisco',
-      'Miami',
-    ]
-
-    const menu_columns: FooterMenuColumnProps[] = [
-        {
-          title: 'Company',
-          items: ['About us', 'Team', 'Careers', 'Blog']
-        },
-        {
-          title: 'Contact',
-          items: ['Help & Support', 'Partner with us', 'Ride with us']
-        },
-    ]
     return (
         <div className="container main__container">
             <div>
@@ -214,14 +181,14 @@ const MainPage = () => {
             </div>
             <PromotionsSection promotions={restaurant_promotions}/>
             <DeliveryProcessSection/>
-            { <PopularItemsSection items={popular_items}/> }
-            { <FeaturedRestaurantsSection restaurants={featured_restaurants}/> }
+            <PopularItemsSection items={popular_items}/>
+            <FeaturedRestaurantsSection restaurants={featured_restaurants}/>
             <div>
-              { <FoodCategoriesSection categories={food_categories}/> }
-              {<FeaturesSection/> }
+              <FoodCategoriesSection categories={food_categories}/>
+              <FeaturesSection/>
             </div>
-            {<BestDealsSection best_deals={best_deals} first_deal_image_location={BestDealImageLocation.Left}/> }
-            {<Footer cities={cities} cities_per_column={5} menu_columns={menu_columns}/> }
+            <BestDealsSection best_deals={best_deals} first_deal_image_location={BestDealImageLocation.Left}/>
+            <Footer/>
         </div>
     )
 }

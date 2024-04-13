@@ -1,4 +1,4 @@
-import { FooterProps } from './footer.types'
+import { FooterMenuColumnProps } from './footer.types'
 import Divider from '../ui/divider/Divider'
 import FooterFollow from './footer-follow/FooterFollow'
 import FacebookIcon from '@mui/icons-material/Facebook'
@@ -11,16 +11,52 @@ import FooterMenu from './footer-menu/FooterMenu'
 import './footer.css'
 
 
-const Footer = ({cities, cities_per_column, menu_columns} : FooterProps) => {
+const Footer = () => {
+
+    const cities: string[] = [
+        'San Francisco',
+        'Miami',
+        'San Diego',
+        'East Bay',
+        'Long Beach',
+        'Los Angeles',
+        'San Francisco',
+        'Miami',
+        'San Diego',
+        'East Bay',
+        'Long Beach',
+        'Los Angeles',
+        'San Francisco',
+        'Miami',
+        'San Diego',
+        'East Bay',
+        'Long Beach',
+        'Los Angeles',
+        'San Francisco',
+        'Miami',
+    ]
+
+    const menuColumns: FooterMenuColumnProps[] = [
+        {
+          title: 'Company',
+          items: ['About us', 'Team', 'Careers', 'Blog']
+        },
+        {
+          title: 'Contact',
+          items: ['Help & Support', 'Partner with us', 'Ride with us']
+        },
+    ]
+
+    const citiesPerColumn = 5;
 
     return (
         <div className="footer__container">
             <div className="footer__wrapper">
-                <FooterCities title='Our top cities' cities={cities} cities_per_column={cities_per_column}/>
+                <FooterCities title='Our top cities' cities={cities} citiesPerColumn={citiesPerColumn}/>
                 <div className="footer__company__wrapper">
                     <Divider width='100%' height='2px' color='#424242'/>
                     <div className="footer__center__wrapper">
-                        <FooterMenu menu_columns={menu_columns}/>
+                        <FooterMenu menuColumns={menuColumns}/>
                         <div className="footer__right__wrapper">
                             <FooterFollow title='follow us' icons={[FacebookIcon, InstagramIcon, TwitterIcon]}/>
                             <FooterSubscription title='Receive exclusive offers in your mailbox'/>
