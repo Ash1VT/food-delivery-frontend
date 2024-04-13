@@ -9,9 +9,8 @@ const MenuCategoriesList = ({menuCategories} : MenuCategoriesListProps) => {
         <div className="menu__categories__list">
             {menuCategories.map((menuCategory) => (
                 <MenuCategory
-                    id={menuCategory.id}
-                    name={menuCategory.name}
-                    menuItems={menuCategory.menuItems}
+                    key={menuCategory.id}
+                    {...menuCategory}
                 />
             ))}
         </div>

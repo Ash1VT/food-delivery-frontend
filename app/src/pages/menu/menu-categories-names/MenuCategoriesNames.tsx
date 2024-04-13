@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import MenuCategoryName from '../menu-category-name/MenuCategoryName';
 import { MenuCategoriesNamesProps } from '../menu_page.types';
-import MenuCategoriesNamesClicksContext from '../contexts/MenuCategoriesNamesClicksContext';
-import { ClicksContextProps } from 'src/hooks/useActiveClick';
 import './menu_categories_names.css'
 
 const MenuCategoriesNames = ({categoryNames} : MenuCategoriesNamesProps) => {
@@ -14,7 +12,7 @@ const MenuCategoriesNames = ({categoryNames} : MenuCategoriesNamesProps) => {
             </div>
             <div className="menu__categories__names__list">
                     {categoryNames.map((categoryName) => (
-                        <MenuCategoryName {...categoryName}/>
+                        <MenuCategoryName key={categoryName.id} {...categoryName}/>
                     ))}
             </div>
         </div>
