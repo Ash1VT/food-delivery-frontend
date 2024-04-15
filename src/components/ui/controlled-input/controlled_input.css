@@ -15,11 +15,6 @@
     border-radius: 10px;
 }
 
-.controlled__input__header__action {
-    border: none;
-    border-radius: 10px;
-}
-
 .controlled__input__header__action > * {
     padding: 2px 0;
 }
