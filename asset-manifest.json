@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.7b809ec4.css",
-    "main.js": "/static/js/main.39bd9819.js",
+    "main.css": "/static/css/main.83bc2e5d.css",
+    "main.js": "/static/js/main.a95eb203.js",
     "static/media/SourceSansPro-Bold.otf": "/static/media/SourceSansPro-Bold.c29ac85595e7dfdec62a.otf",
     "static/media/SourceSansPro-Semibold.otf": "/static/media/SourceSansPro-Semibold.e0743229b06b84f5ac5a.otf",
     "static/media/SourceSansPro-Regular.otf": "/static/media/SourceSansPro-Regular.8adb1d0c21d13a90f613.otf",
@@ -13,11 +13,11 @@
     "static/media/OpenSans-SemiBold.ttf": "/static/media/OpenSans-SemiBold.dcf2e322dbaa037ca821.ttf",
     "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
     "index.html": "/index.html",
-    "main.7b809ec4.css.map": "/static/css/main.7b809ec4.css.map",
-    "main.39bd9819.js.map": "/static/js/main.39bd9819.js.map"
+    "main.83bc2e5d.css.map": "/static/css/main.83bc2e5d.css.map",
+    "main.a95eb203.js.map": "/static/js/main.a95eb203.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b809ec4.css",
-    "static/js/main.39bd9819.js"
+    "static/css/main.83bc2e5d.css",
+    "static/js/main.a95eb203.js"
   ]
 }
