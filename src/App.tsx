@@ -10,7 +10,7 @@ import '@smastrom/react-rating/style.css';
 
 const App = () => {
     return (
-        <RestaurantReviewsPage/>
+        <MenuPage/>
     )
 }
 
