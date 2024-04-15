@@ -6,13 +6,8 @@ import { addOrderCartItem, removeOrderCartItem } from 'src/components/order-cart
 import { useSelector } from 'react-redux'
 import { getIfOrderItemInCart } from 'src/components/order-cart/redux/selectors'
 import RemoveFromCartButton from '../ui/buttons/remove-from-cart-button/RemoveFromCartButton'
+import CustomRating from 'src/components/custom-rating/CustomRating'
 import './menu_item.css'
-
-const ratingStyles = {
-    itemShapes: Star,
-    activeFillColor: '#ffb700',
-    inactiveFillColor: '#f0e385'
-}
 
 const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuItemProps) => {
     const dispatch = useAppDispatch()
@@ -48,7 +43,7 @@ const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuIt
 
                     <div className="menu__category__item__rating__wrapper">
                         <div className="menu__category__item__rating__value">{ratingValue}</div>
-                        <Rating className="menu__category__item__rating__stars" style={{ maxWidth: 80 }} itemStyles={ratingStyles} readOnly={true} value={ratingValue}/>
+                        <CustomRating className="menu__category__item__rating__stars" style={{ maxWidth: 80 }} readOnly={true} value={ratingValue}/>
                     </div>
                     <div className="menu__category__item__reviews__wrapper">
                         <div className="menu__category__item__reviews__text">({reviewsCount} reviews)</div>
