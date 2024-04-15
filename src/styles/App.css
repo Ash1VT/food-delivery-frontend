@@ -76,70 +76,70 @@ body, html, #root, .container {
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Bold"), url("fonts/SourceSansPro-Bold.otf") format("opentype");
+  src: local("SourceSansPro-Bold"), url("/fonts/SourceSansPro-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Semibold"), url("fonts/SourceSansPro-Semibold.otf") format("opentype");
+  src: local("SourceSansPro-Semibold"), url("/fonts/SourceSansPro-Semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Regular"), url("fonts/SourceSansPro-Regular.otf") format("opentype");
+  src: local("SourceSansPro-Regular"), url("/fonts/SourceSansPro-Regular.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Source Sans Pro";
-  src: local("SourceSansPro-Light"), url("fonts/SourceSansPro-Light.otf") format("opentype");
+  src: local("SourceSansPro-Light"), url("/fonts/SourceSansPro-Light.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: local("OpenSans-Bold"), url("fonts/OpenSans-Bold.ttf") format("opentype");
+  src: local("OpenSans-Bold"), url("/fonts/OpenSans-Bold.ttf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: local("OpenSans-SemiBold"), url("fonts/OpenSans-SemiBold.ttf") format("opentype");
+  src: local("OpenSans-SemiBold"), url("/fonts/OpenSans-SemiBold.ttf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: local("OpenSans-Regular"), url("fonts/OpenSans-Regular.ttf") format("opentype");
+  src: local("OpenSans-Regular"), url("/fonts/OpenSans-Regular.ttf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: local("OpenSans-Light"), url("fonts/OpenSans-Light.ttf") format("truetype");
+  src: local("OpenSans-Light"), url("/fonts/OpenSans-Light.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Font Awesome 5 Free";
-  src: local("FontAwesome5Free-Regular"), url("fonts/fa-regular-400.ttf") format("truetype");
+  src: local("FontAwesome5Free-Regular"), url("/fonts/fa-regular-400.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Font Awesome 5 Free";
-  src: local("FontAwesome5Free-Solid"), url("fonts/fa-solid-900.ttf") format("truetype");
+  src: local("FontAwesome5Free-Solid"), url("/fonts/fa-solid-900.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
