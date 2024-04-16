@@ -1,10 +1,11 @@
-import { OrderCartItemProps } from "../order_cart.types"
+import { OrderCartItem, OrderCartItemProps } from "../order_cart.types"
 
-const calculateOrderCartItemPrice = (item: OrderCartItemProps) => {
-    return item.price * item.quantity
+const calculateOrderCartItemPrice = (item: OrderCartItem) => {
+    return 1
+    // return item.price * item.quantity
 }
 
-const calculateOrderCartTotalPrice = (items: OrderCartItemProps[]) => {
+const calculateOrderCartTotalPrice = (items: OrderCartItem[]) => {
     return items.reduce((total, item) => total + calculateOrderCartItemPrice(item), 0)
 }
 

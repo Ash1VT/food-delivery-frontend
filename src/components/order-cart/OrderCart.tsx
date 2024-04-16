@@ -9,26 +9,20 @@ import './order_cart.css'
 
 const OrderCart = () => {
     const orderCartItems = useAppSelector(state => getOrderCartItems(state))
-    const dispatch = useAppDispatch()
-    const totalPrice = useAppSelector(state => getOrderCartTotalPrice(state))
-    const itemsCount = orderCartItems.length
+    // const totalPrice = useAppSelector(state => getOrderCartTotalPrice(state))
+    // const dispatch = useAppDispatch()
+    // const itemsCount = orderCartItems.length
 
-    useEffect(() => {
-        dispatch(fetchOrderCartItemsFromLocalStorage())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(fetchOrderCartItemsFromLocalStorage())
+    // }, [])
 
     const OrderCartWithItems = () => {
         return (
             <>
-                <OrderCartItemsList items={
-                    orderCartItems.map((item) => {
-                        return {
-                            ...item
-                        }
-                    }
-                )}/>
+                <OrderCartItemsList items={orderCartItems}/>
                 <div className="order__cart__button">
-                    <OrderCartButton totalPrice={totalPrice} onOrdered={() => {}}/>
+                    {/* <OrderCartButton totalPrice={totalPrice} onOrdered={() => {}}/> */}
                 </div>
             </>
         )
@@ -50,11 +44,7 @@ const OrderCart = () => {
                     Cart
                 </div>
                 <div className="order__cart__content">
-                    {itemsCount ? 
-                        <OrderCartWithItems/>
-                        : 
-                        <OrderCartEmpty/>
-                    }
+                    <OrderCartWithItems/>
                 </div>
             </div>
         </div>

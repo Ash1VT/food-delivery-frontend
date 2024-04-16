@@ -1,14 +1,16 @@
-export type OrderCartItemProps = {
+export type OrderCartItem = {
     id: string
-    imageUrl: string
-    categoryName: string
-    name: string
-    price: number
+    // imageUrl: string
+    // categoryName: string
+    // name: string
+    // price: number
     quantity: number
 }
 
+export type OrderCartItemProps = OrderCartItem
+
 export type OrderCartItemsListProps = {
-    items: OrderCartItemProps[]
+    items: OrderCartItem[]
 }
 
 export type OrderCartProps = {
