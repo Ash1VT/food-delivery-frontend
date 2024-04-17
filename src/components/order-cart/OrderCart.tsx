@@ -1,6 +1,6 @@
 import OrderCartItemsList from './order-cart-items-list/OrderCartItemsList';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getOrderCartItems, getOrderCartTotalPrice } from './redux/selectors';
+import { getOrderCartItems } from './redux/selectors';
 import OrderCartButton from './ui/buttons/order-cart-button/OrderCartButton';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';

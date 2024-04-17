@@ -32,21 +32,6 @@ export const getOrderCartItems = createSelector(
     }
 )
 
-export const getOrderCartItemPrice = createSelector(
-    [getOrderCartItems, (_, orderCartItemId: string) => orderCartItemId],
-    (orderCartItems, orderCartItemId) => {
-        return calculateOrderCartItemPrice(orderCartItems.find(item => item.id === orderCartItemId) as OrderCartItem)
-    }
-)
-
-
-export const getOrderCartTotalPrice = createSelector(
-    [getOrderCartItems],
-    (orderCartItems) => {
-        return calculateOrderCartTotalPrice(orderCartItems)
-    }
-)
-
 export const getIfOrderItemInCart = createSelector(
     [getOrderCartItems, (_, orderCartItemId: string) => orderCartItemId],
     (orderCartItems, orderCartItemId) => {

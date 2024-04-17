@@ -22,15 +22,6 @@ const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuIt
     }
 
 
-    const Button = () => {
-        return (
-            inCart ? 
-                <RemoveFromCartButton onRemovedFromCart={handleRemoveFromCart}/> 
-                : 
-                <AddToCartButton onAddedToCart={handleAddToCart}/>
-        )
-    }
-
     return (
         <div className="menu__category__item__container">
             <div className="menu__category__item__image__wrapper">
@@ -51,7 +42,11 @@ const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuIt
                 </div>
                 <div className="menu__category__item__price">{price}$</div>
             </div>
-            <Button/>
+            {inCart ? 
+                <RemoveFromCartButton onRemovedFromCart={handleRemoveFromCart}/> 
+                : 
+                <AddToCartButton onAddedToCart={handleAddToCart}/>
+            }
         </div>
     )
 }
