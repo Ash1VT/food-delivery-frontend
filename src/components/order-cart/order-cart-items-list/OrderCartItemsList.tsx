@@ -10,12 +10,7 @@ const OrderCartItemsList = ({items} : OrderCartItemsListProps) => {
             {items.map((item) => (
                     <OrderCartItem
                         key={item.id}
-                        id={item.id}
-                        // imageUrl={item.imageUrl}
-                        // categoryName={item.categoryName}
-                        // name={item.name}
-                        // price={item.price}
-                        quantity={item.quantity}
+                        item={item}
                     />
                 ))
             }

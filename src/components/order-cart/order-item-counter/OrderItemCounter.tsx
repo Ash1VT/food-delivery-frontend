@@ -5,15 +5,15 @@ import './order_item_counter.css'
 
 const OrderItemCounter = ({ quantity, onQuantityChanged } : OrderItemCounterProps) => {
     
-    const decreaseQuantity = useCallback(() => {
+    const decreaseQuantity = () => {
         if (quantity > 1) {
             onQuantityChanged(quantity - 1)
         }
-    }, [])
+    }
 
-    const increaseQuantity = useCallback(() => {
+    const increaseQuantity = () => {
         onQuantityChanged(quantity + 1)
-    }, [])
+    }
 
     return (
         <div className="order__item__counter__container">
@@ -24,9 +24,4 @@ const OrderItemCounter = ({ quantity, onQuantityChanged } : OrderItemCounterProp
     )
 }
 
-export default React.memo(OrderItemCounter, (prev, cur) =>
-    {
-        console.log('not working')
-        return prev.quantity === cur.quantity
-    }
-)
+export default OrderItemCounter
