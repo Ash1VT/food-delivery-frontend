@@ -20,6 +20,13 @@ export const getMenuItems = createSelector(
 export const getMenuCategory = createSelector(
     [getMenuCategories, (_, id: string) => id],
     (menuCategories, id) => {
-      return menuCategories.find((menuCategory) => menuCategory.id === id) as IMenuCategory
+        return menuCategories.find((menuCategory) => menuCategory.id === id) as IMenuCategory
+    }
+)
+
+export const getMenuItem = createSelector(
+    [getMenuItems, (_, id: string) => id],
+    (menuItems, id) => {
+        return menuItems.find((menuItem) => menuItem.id === id) as IMenuItem
     }
 )
