@@ -12,15 +12,18 @@ import { ReviewCreateType, ReviewType, ReviewUpdateType } from "src/components/r
 import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
 import { addReview, deleteReview, updateReview } from "./redux/reducers/restaurantReviewsReducer"
 import './restaurant_reviews.css'
-import { useEffect } from "react"
+import MenuItemReference from "src/components/menu-item-reference/MenuItemReference"
+import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
+
 
 const RestaurantReviewsPage = () => {
 
     const restaurantId = '1'
 
-    const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
     const currentUser = useAppSelector((state) => getCurrentUser(state))
-    const currentUserReview = useAppSelector((state) => getRestaurantCurrentUserReview(state))
+    const currentUserRestaurantReview = useAppSelector((state) => getRestaurantCurrentUserReview(state))
+
+    const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
 
     const reviews = useAppSelector((state) => getRestaurantReviews(state))
 
@@ -39,26 +42,23 @@ const RestaurantReviewsPage = () => {
         dispatch(deleteReview(review))
     }
 
-
-    const CurrentUserReviewComponent = () => {
-        if (!currentUser)
-            return null
-
-        if (!currentUserReview)
-            return <ReviewCreateForm title="Leave your review about Restaurant" currentUser={currentUser} onReviewAdded={handleReviewAdded}/>
-        
-        return <ReviewEditForm title="Your review about Restaurant" currentUserReview={currentUserReview} onReviewUpdated={handleReviewUpdated} onReviewDeleted={handleReviewDeleted}/>
-    }
-
     return (
         <div className="container restaurant__reviews__container">
             <Navbar/>
             <div className="restaurant__reviews__wrapper">
                 <div className="restaurant__reviews__content">
                     <RestaurantReference {...restaurant}/>
-                    <div>
-                        <CurrentUserReviewComponent/>
-                    </div>
+                    {currentUser &&
+                        <div className="restaurant__reviews__current__user">
+                            <CurrentUserReview currentUser={currentUser} 
+                                               currentUserReview={currentUserRestaurantReview}
+                                               createTitle={`Leave your review about ${restaurant.name}`}
+                                               updateTitle={`Your review about ${restaurant.name}`}
+                                               onReviewAdded={handleReviewAdded}
+                                               onReviewUpdated={handleReviewUpdated}
+                                               onReviewDeleted={handleReviewDeleted}/>
+                        </div>
+                    }
                     <div className="restaurant__reviews__list__wrapper">
                         <h2 className="restaurant__reviews__title">Reviews</h2>
                         <ReviewsList reviews={reviews}/>
