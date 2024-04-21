@@ -1,4 +1,5 @@
 import MainPage from './pages/main/MainPage';
+import MenuItemReviewsPage from './pages/menu-item-reviews/MenuItemReviewsPage';
 import MenuPage from './pages/menu/MenuPage';
 import ProfilePage from './pages/profile';
 import RestaurantReviewsPage from './pages/restaurant-reviews/RestaurantReviewsPage';
@@ -10,7 +11,7 @@ import '@smastrom/react-rating/style.css';
 
 const App = () => {
     return (
-        <MenuPage/>
+        <RestaurantReviewsPage/>
     )
 }
 
