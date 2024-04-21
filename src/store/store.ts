@@ -1,5 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import orderCartReducer from "src/components/order-cart/redux/reducers/orderCartReducer";
+import menuItemsReviewsReducer from "src/pages/menu-item-reviews/redux/reducers/menuItemsReviewsReducer";
 import menuReducer from "src/pages/menu/redux/reducers/menuReducer";
 import restaurantReviewsReducer from "src/pages/restaurant-reviews/redux/reducers/restaurantReviewsReducer";
 import restaurantsReducer from "src/pages/restaurants/redux/reducers/restaurantsReducer";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     menuReducer,
     restaurantsReducer,
     restaurantReviewsReducer,
+    menuItemsReviewsReducer,
     currentUserReducer
 })
 
