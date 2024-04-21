@@ -1,0 +1,85 @@
+.menu__item__reference__container {
+    display: grid;
+}
+
+.menu__item__reference__wrapper {
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+}
+
+.menu__item__reference__image__wrapper {
+    max-width: 200px;
+}
+
+.menu__item__reference__image__wrapper img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 30px;
+}
+
+.menu__item__reference__details {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.menu__item__reference__name {
+    font-family: Source Sans Pro;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.menu__item__reference__description {
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.menu__item__reference__rating__price__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.menu__item__reference__rating__reviews__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.menu__item__reference__rating__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.menu__item__reference__rating__value {
+    font-family: Open Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.menu__item__reference__reviews__text {
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.menu__item__reference__price {
+    font-family: Open Sans;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 112%;
+    margin-right: 40px;
+}
