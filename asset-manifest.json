@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/food-delivery-frontend/static/css/main.86d5b3cc.css",
-    "main.js": "/food-delivery-frontend/static/js/main.21576400.js",
+    "main.js": "/food-delivery-frontend/static/js/main.9947ffcc.js",
     "static/media/SourceSansPro-Bold.otf": "/food-delivery-frontend/static/media/SourceSansPro-Bold.c29ac85595e7dfdec62a.otf",
     "static/media/SourceSansPro-Semibold.otf": "/food-delivery-frontend/static/media/SourceSansPro-Semibold.e0743229b06b84f5ac5a.otf",
     "static/media/SourceSansPro-Regular.otf": "/food-delivery-frontend/static/media/SourceSansPro-Regular.8adb1d0c21d13a90f613.otf",
@@ -14,10 +14,10 @@
     "static/media/fa-regular-400.ttf": "/food-delivery-frontend/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
     "index.html": "/food-delivery-frontend/index.html",
     "main.86d5b3cc.css.map": "/food-delivery-frontend/static/css/main.86d5b3cc.css.map",
-    "main.21576400.js.map": "/food-delivery-frontend/static/js/main.21576400.js.map"
+    "main.9947ffcc.js.map": "/food-delivery-frontend/static/js/main.9947ffcc.js.map"
   },
   "entrypoints": [
     "static/css/main.86d5b3cc.css",
-    "static/js/main.21576400.js"
+    "static/js/main.9947ffcc.js"
   ]
 }
