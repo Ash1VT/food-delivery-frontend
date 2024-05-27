@@ -4,7 +4,7 @@ import MenuCategoriesRefsContext from '../contexts/MenuCategoriesRefsContext';
 import { InView } from 'react-intersection-observer';
 import useCategoryRef from '../hooks/useCategoryRef';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
-import { setActiveCategory } from '../redux/reducers/menuReducer';
+import { setActiveCategory } from '../../../redux/reducers/menuReducer';
 import './menu_category.css'
 
 const MenuCategory = ({ id, name, items }: MenuCategoryProps) => {

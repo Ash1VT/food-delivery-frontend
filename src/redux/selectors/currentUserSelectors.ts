@@ -1,3 +1,3 @@
-import { RootState } from "src/store/store";
+import { RootState } from "../store";
 
 export const getCurrentUser = (state: RootState) => state.currentUserReducer.currentUser

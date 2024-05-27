@@ -1,13 +1,14 @@
 import OrderCartItemsList from './order-cart-items-list/OrderCartItemsList';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getOrderCartItems } from './redux/selectors';
+import { getOrderCartItems } from '../../redux/selectors/orderCartSelectors';
 import OrderCartButton from './ui/buttons/order-cart-button/OrderCartButton';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
-import { fetchOrderCartItemsFromLocalStorage } from './redux/reducers/orderCartReducer';
 import { OrderCartWithItemsProps } from './order_cart.types';
-import './order_cart.css'
 import { calculateOrderCartTotalPrice } from './utils/price';
+import { fetchOrderCartItemsFromLocalStorage } from 'src/redux/reducers/orderCartReducer';
+import './order_cart.css'
+
 
 const OrderCartWithItems = ({items} : OrderCartWithItemsProps) => {
     const totalPrice = calculateOrderCartTotalPrice(items)

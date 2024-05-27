@@ -1,4 +1,4 @@
-import IOrderCartItem from "../redux/models/IOrderCartItem"
+import IOrderCartItem from "../../../redux/models/IOrderCartItem"
 
 export const addOrderCartItemToLocalStorage = (orderCartItem: IOrderCartItem) => {
     const orderCartItems = getOrderCartItemsFromLocalStorage()

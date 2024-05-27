@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
-import { setupStore } from './store/store';
+import { setupStore } from './redux/store';
 import { Provider } from 'react-redux';
+import './index.css';
 
 declare global {
   interface BigInt {
