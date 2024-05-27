@@ -9,10 +9,10 @@ import MenuCategoriesRefsContext from './contexts/MenuCategoriesRefsContext'
 import { useState } from 'react'
 import OrderCart from 'src/components/order-cart/OrderCart'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { getMenuCategories, getMenu } from './redux/selectors'
-import IMenuCategory from './redux/models/IMenuCategory'
+import { getMenuCategories, getMenu } from '../../redux/selectors/menuSelectors'
+import IMenuCategory from '../../redux/models/IMenuCategory'
 import RestaurantReference from 'src/components/restaurant-reference/RestaurantReference'
-import { getRestaurant } from '../restaurants/redux/selectors'
+import { getRestaurant } from '../../redux/selectors/restaurantSelectors'
 import './menu_page.css'
 
 const MenuPage = () => {

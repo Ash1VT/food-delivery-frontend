@@ -9,7 +9,7 @@ import SortComponent from 'src/components/ui/sort-component/SortComponent';
 import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getRestaurants } from './redux/selectors';
+import { getRestaurants } from '../../redux/selectors/restaurantSelectors';
 import './restaurants_page.css'
 
 const RestaurantsPage = () => {

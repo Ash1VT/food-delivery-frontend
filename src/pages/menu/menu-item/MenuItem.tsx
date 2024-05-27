@@ -2,11 +2,11 @@ import { Rating, Star } from '@smastrom/react-rating'
 import { MenuItemProps } from '../menu_page.types'
 import AddToCartButton from '../ui/buttons/add-to-cart-button/AddToCartButton'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
-import { addOrderCartItem, removeOrderCartItem } from 'src/components/order-cart/redux/reducers/orderCartReducer'
 import { useSelector } from 'react-redux'
-import { getIfOrderItemInCart } from 'src/components/order-cart/redux/selectors'
 import RemoveFromCartButton from '../ui/buttons/remove-from-cart-button/RemoveFromCartButton'
 import CustomRating from 'src/components/custom-rating/CustomRating'
+import { addOrderCartItem, removeOrderCartItem } from 'src/redux/reducers/orderCartReducer'
+import { getIfOrderItemInCart } from 'src/redux/selectors/orderCartSelectors'
 import './menu_item.css'
 
 const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuItemProps) => {

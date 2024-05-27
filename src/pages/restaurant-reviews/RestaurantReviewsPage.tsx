@@ -1,19 +1,19 @@
 import Footer from "src/components/footer"
 import Navbar from "src/components/navbar"
 import { useAppSelector } from "src/hooks/redux/useAppSelector"
-import { getRestaurant } from "../restaurants/redux/selectors"
+import { getRestaurant } from "../../redux/selectors/restaurantSelectors"
 import RestaurantReference from "src/components/restaurant-reference/RestaurantReference"
 import ReviewsList from "src/components/reviews/reviews-list/ReviewsList"
 import ReviewCreateForm from "src/components/reviews/forms/review-create-form/ReviewCreateForm"
-import { getCurrentUser } from "src/redux/selectors"
-import { getRestaurantCurrentUserReview, getRestaurantReviews } from "./redux/selectors"
+import { getRestaurantCurrentUserReview, getRestaurantReviews } from "../../redux/selectors/restaurantReviewSelectors"
 import ReviewEditForm from "src/components/reviews/forms/review-edit-form/ReviewEditForm"
 import { ReviewCreateType, ReviewType, ReviewUpdateType } from "src/components/reviews/reviews.types"
 import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
-import { addReview, deleteReview, updateReview } from "./redux/reducers/restaurantReviewsReducer"
-import './restaurant_reviews.css'
+import { addReview, deleteReview, updateReview } from "../../redux/reducers/restaurantReviewsReducer"
 import MenuItemReference from "src/components/menu-item-reference/MenuItemReference"
 import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
+import { getCurrentUser } from "src/redux/selectors/currentUserSelectors"
+import './restaurant_reviews.css'
 
 
 const RestaurantReviewsPage = () => {

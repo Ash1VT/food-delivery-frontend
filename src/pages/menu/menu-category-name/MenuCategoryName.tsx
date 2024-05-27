@@ -3,10 +3,10 @@ import { MenuCategoryNameProps } from '../menu_page.types'
 import { useContext } from 'react'
 import MenuCategoriesRefsContext from '../contexts/MenuCategoriesRefsContext'
 import scrollToCategory from '../utils/scrollToCategory'
-import { menuSlice, setActiveCategory } from '../redux/reducers/menuReducer'
+import { menuSlice, setActiveCategory } from '../../../redux/reducers/menuReducer'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { getMenuCategory } from '../redux/selectors'
+import { getMenuCategory } from '../../../redux/selectors/menuSelectors'
 import './menu_category_name.css'
 
 

@@ -1,0 +1,11 @@
+.copyright__wrapper {
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+}
+
+.copyright__wrapper > * {
+    font-family: Poppins;
+    font-weight: 400;
+    color: #C7BFB6;
+}

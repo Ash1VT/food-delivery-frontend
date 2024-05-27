@@ -1,10 +1,10 @@
 import { OrderCartItemProps } from '../order_cart.types'
 import OrderItemCounter from '../order-item-counter/OrderItemCounter'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
-import { removeOrderCartItem, setOrderCartItemQuantity } from '../redux/reducers/orderCartReducer'
 import RemoveItemButton from '../ui/buttons/remove-item-button/RemoveItemButton'
 import React from 'react'
 import { calculateOrderCartItemPrice } from '../utils/price'
+import { removeOrderCartItem, setOrderCartItemQuantity } from 'src/redux/reducers/orderCartReducer'
 import './order_cart_item.css'
 
 

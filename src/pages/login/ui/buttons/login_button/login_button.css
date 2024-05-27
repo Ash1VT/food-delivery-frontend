@@ -1,0 +1,10 @@
+.login__button {
+    font-family: Poppins;
+    font-weight: 400;
+    color: #ffff;
+    background-color: #FF8A00;
+    border: none;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+}
