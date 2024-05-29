@@ -5,6 +5,9 @@ import menuReducer from "src/redux/reducers/menuReducer";
 import orderCartReducer from "src/redux/reducers/orderCartReducer";
 import restaurantReviewsReducer from "src/redux/reducers/restaurantReviewsReducer";
 import restaurantsReducer from "src/redux/reducers/restaurantsReducer";
+import orderReducer from "./reducers/orderReducer";
+import currentCustomerReducer from "./reducers/currentCustomerReducer";
+import currentCourierReducer from "./reducers/currentCourierReducer";
 
 const rootReducer = combineReducers({
     orderCartReducer,
@@ -12,7 +15,10 @@ const rootReducer = combineReducers({
     restaurantsReducer,
     restaurantReviewsReducer,
     menuItemsReviewsReducer,
-    currentUserReducer
+    currentUserReducer,
+    currentCustomerReducer,
+    currentCourierReducer,
+    orderReducer
 })
 
 export const setupStore = () => {

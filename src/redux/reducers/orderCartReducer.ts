@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import IOrderCartItem from "../models/IOrderCartItem";
+import IOrderItem from "../models/IOrderItem";
 import { addOrderCartItemToLocalStorage, getOrderCartItemsFromLocalStorage, removeOrderCartItemFromLocalStorage } from "src/components/order-cart/utils/localStorage";
 
 interface OrderCartState {
-    orderCartItems: IOrderCartItem[]
+    orderCartItems: IOrderItem[]
 }
 
 const initialState: OrderCartState = {
