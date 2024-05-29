@@ -1,0 +1,25 @@
+.order__items__list__wrapper {
+    /* display: flex;
+    flex-direction: column;
+    row-gap: 20px; */
+}
+
+.order__items__list__title {
+    font-family: Poppins;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.order__item__label {
+    font-family: Raleway;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.tr-top-divider {
+    height: 10px;
+}
+
+.tr-bottom-divider {
+    height: 10px;
+}

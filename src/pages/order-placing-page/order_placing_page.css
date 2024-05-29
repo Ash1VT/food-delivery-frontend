@@ -1,0 +1,53 @@
+.order__placing__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 0 40px 0;
+}
+
+.order__placing__title {
+    text-align: start;
+    grid-column: 1/3;
+
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 60px;
+}
+
+.order__placing__details {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto auto;
+    row-gap: 60px;
+    column-gap: 170px;
+}
+
+.order__placing__items__wrapper, .order__placing__address__wrapper, .order__placing__promocode__wrapper, .order__placing__price__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.order__placing__items__wrapper {
+    grid-row: 2;
+}
+
+.order__placing__address__wrapper {
+    grid-row: 3;
+}
+
+.order__placing__promocode__wrapper {
+    grid-row: 4;
+}
+
+.order__placing__price__wrapper {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.order__placing__section__title {
+    font-family: Poppins;
+    font-size: 40px;
+    font-weight: 500;
+}
