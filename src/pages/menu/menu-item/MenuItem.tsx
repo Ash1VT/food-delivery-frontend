@@ -9,12 +9,12 @@ import { addOrderCartItem, removeOrderCartItem } from 'src/redux/reducers/orderC
 import { getIfOrderItemInCart } from 'src/redux/selectors/orderCartSelectors'
 import './menu_item.css'
 
-const MenuItem = ({id, imageUrl, name, ratingValue, reviewsCount, price}: MenuItemProps) => {
+const MenuItem = ({id, imageUrl, name, categoryName, ratingValue, reviewsCount, price}: MenuItemProps) => {
     const dispatch = useAppDispatch()
     const inCart = useSelector(state => getIfOrderItemInCart(state, id))
 
     const handleAddToCart = () => {
-        dispatch(addOrderCartItem({id, quantity: 1}))
+        dispatch(addOrderCartItem({id, menuItemName: name, menuItemImageUrl: imageUrl, menuItemPrice: price, menuItemCategoryName: categoryName, quantity: 1}))
     }
 
     const handleRemoveFromCart = () => {

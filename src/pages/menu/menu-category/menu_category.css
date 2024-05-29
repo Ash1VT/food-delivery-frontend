@@ -14,3 +14,9 @@
     font-weight: 600;
     line-height: 120%;
 }
+
+.menu__category__view {
+    position: absolute;
+    width: 100px;
+    min-height: calc(100vh - 300px);
+}

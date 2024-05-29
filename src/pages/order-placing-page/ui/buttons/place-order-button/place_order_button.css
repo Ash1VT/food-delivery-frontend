@@ -1,0 +1,24 @@
+.place__order__button {
+    padding: 20px 20px;
+    font-size: 16px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 8px;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 26px;
+
+    height: 100%;
+    width: 100%;
+    
+}
+
+.place__order__button__disabled {
+    background-color: #d0d0d0;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: 0.3s;
+}

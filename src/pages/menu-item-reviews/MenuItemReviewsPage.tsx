@@ -23,7 +23,7 @@ const MenuItemReviewsPage = () => {
     const currentUserMenuItemReview = useAppSelector((state) => getMenuItemCurrentUserReview(state))
 
     const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
-    const menuItem = useAppSelector((state) => getMenuItem(state, menuItemId))
+    const menuItem = useAppSelector((state) => getMenuItem(state, restaurantId, menuItemId))
 
     const reviews = useAppSelector((state) => getMenuItemReviews(state))
     const dispatch = useAppDispatch()

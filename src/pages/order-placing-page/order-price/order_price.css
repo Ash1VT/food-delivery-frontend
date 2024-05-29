@@ -1,0 +1,27 @@
+.order__price__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.order__price__label {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: start;
+}
+
+.order__price__text {
+    margin-left: 40px;
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.order__price__divider {
+    height: 10px;
+}
+
+.order__total__price {
+    font-size: 40px;
+}

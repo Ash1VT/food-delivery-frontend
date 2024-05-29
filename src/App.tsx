@@ -7,6 +7,7 @@ import MenuPage from './pages/menu/MenuPage';
 import ProfilePage from './pages/profile';
 import RestaurantReviewsPage from './pages/restaurant-reviews/RestaurantReviewsPage';
 import RestaurantsPage from './pages/restaurants/RestaurantsPage';
+import OrderPlacingPage from './pages/order-placing-page/OrderPlacingPage';
 import './styles/App.css';
 import './styles/buttons.css';
 import './styles/popup.css';
@@ -19,7 +20,7 @@ const App = () => {
     return (
         <>
             <ReactNotifications/>
-            <RegistrationPage/>
+            <MenuPage/>
         </>
     )
 }

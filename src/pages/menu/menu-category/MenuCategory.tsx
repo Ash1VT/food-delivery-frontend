@@ -3,23 +3,24 @@ import { MenuCategoryProps } from '../menu_page.types';
 import MenuCategoriesRefsContext from '../contexts/MenuCategoriesRefsContext';
 import { InView } from 'react-intersection-observer';
 import useCategoryRef from '../hooks/useCategoryRef';
-import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
-import { setActiveCategory } from '../../../redux/reducers/menuReducer';
+import MenuCategoriesActiveContext from '../contexts/MenuCategoriesActiveContext';
+import { useContext } from 'react';
 import './menu_category.css'
 
 const MenuCategory = ({ id, name, items }: MenuCategoryProps) => {
-    const dispatch = useAppDispatch()
-
     const categoryRef = useCategoryRef(id, MenuCategoriesRefsContext)
+    const { setActiveCategoryId } = useContext(MenuCategoriesActiveContext)
 
     const onChange = (inView: boolean) => {
-        if (inView)
-            dispatch(setActiveCategory(id))
+        if (inView){
+            setActiveCategoryId(id)
+            console.log('setted active category id from view: ', id)
+        }
     }
 
     return (
         <div className="menu__category__container" ref={categoryRef}>
-            <InView onChange={onChange} threshold={1} style={{ position: 'absolute', width: 100, minHeight: window.screen.height - 300 }}></InView>
+            <InView onChange={onChange} threshold={1} className="menu__category__view"></InView>
             <div className="menu__category__name">
                 {name}{id.toString()}
             </div>
