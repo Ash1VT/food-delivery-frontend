@@ -3,6 +3,7 @@ export type MenuItemProps = {
     imageUrl: string
     name: string
     description: string
+    categoryName: string
     ratingValue: number
     reviewsCount: number
     price: number
@@ -27,7 +28,6 @@ export type MenuCategoryNameProps = {
     id: string
     name: string
     imageUrl: string
-    isActive: boolean
 }
 
 export type MenuCategoriesNamesProps = {
@@ -40,9 +40,19 @@ export type MenuCategoryRef = {
     ref: React.RefObject<HTMLDivElement>
 }
 
+export type MenuCategoryActive = {
+    id: string
+
+}
+
 export type MenuCategoriesRefsContextProps = {
     categoriesRefs: MenuCategoryRef[]
     setCategoriesRefs: (callback: (prevCategories: MenuCategoryRef[]) => MenuCategoryRef[]) => void
+}
+
+export type MenuCategoriesActiveContextProps = {
+    activeCategoryId: string
+    setActiveCategoryId: (id: string) => void
 }
 
 export type AddToCartButtonProps = {

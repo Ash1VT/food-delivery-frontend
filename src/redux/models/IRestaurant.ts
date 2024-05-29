@@ -1,3 +1,5 @@
+import IWorkingHours from "./IWorkingHours"
+
 export default interface IRestaurant {
     id: string
     name: string
@@ -6,4 +8,5 @@ export default interface IRestaurant {
     address: string
     ratingValue: number
     reviewsCount: number
+    workingHours: IWorkingHours[]
 }

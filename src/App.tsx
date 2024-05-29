@@ -20,7 +20,7 @@ const App = () => {
     return (
         <>
             <ReactNotifications/>
-            <OrderPlacingPage/>
+            <MenuPage/>
         </>
     )
 }

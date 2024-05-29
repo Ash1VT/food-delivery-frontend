@@ -49,7 +49,16 @@ const OrderCart = () => {
                 </div>
                 <div className="order__cart__content">
                     {itemsCount ? 
-                        <OrderCartWithItems items={orderCartItems}/> 
+                        <OrderCartWithItems items={orderCartItems.map(item => {
+                            return {
+                                id: item.id,
+                                name: item.menuItemName,
+                                categoryName: item.menuItemCategoryName,
+                                price: item.menuItemPrice,
+                                imageUrl: item.menuItemImageUrl,
+                                quantity: item.quantity
+                            }
+                        })}/> 
                         : 
                         <OrderCartEmpty/>}
                 </div>
