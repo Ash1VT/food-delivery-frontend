@@ -8,7 +8,7 @@ export const getMenus = (state: RootState) => state.menuReducer.currentRestauran
 
 
 export const getMenu = createSelector(
-    [getMenus, (_: RootState, restaurantId: string) => restaurantId],
+    [getMenus, (_: RootState, restaurantId: string | undefined) => restaurantId],
     (currentRestaurantsMenus, restaurantId) => {
         return currentRestaurantsMenus.find((menu) => menu.restaurantId === restaurantId)
     }

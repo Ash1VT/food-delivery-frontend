@@ -5,8 +5,11 @@ export default interface IRestaurant {
     name: string
     description: string
     imageUrl: string
+    email: string
     address: string
+    phone: string
     ratingValue: number
     reviewsCount: number
+    isActive: boolean
     workingHours: IWorkingHours[]
 }

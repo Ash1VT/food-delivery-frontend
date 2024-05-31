@@ -8,6 +8,7 @@ import restaurantsReducer from "src/redux/reducers/restaurantsReducer";
 import orderReducer from "./reducers/orderReducer";
 import currentCustomerReducer from "./reducers/currentCustomerReducer";
 import currentCourierReducer from "./reducers/currentCourierReducer";
+import currentRestaurantManagerReducer from "./reducers/currentRestaurantManagerReducer";
 
 const rootReducer = combineReducers({
     orderCartReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     currentUserReducer,
     currentCustomerReducer,
     currentCourierReducer,
+    currentRestaurantManagerReducer,
     orderReducer
 })
 

@@ -12,11 +12,20 @@ const initialState: RestaurantsState = {
             name: 'McDonalds', 
             description: 'TestTestTes tTestTestTes tTestTestTest TestTestTestT estTestTestTestTestTe stTestTes tTestTestTestTe stTestTestT estTestTest',
             imageUrl: 'images/food7.png',
+            phone: '123-456-7890',
+            email: "test@me.com",
             ratingValue: 5.00,
             reviewsCount: 200,
             address: '123 Main St',
+            isActive: true,
             workingHours: [
-                
+                {
+                    id: '1',
+                    dayOfWeek: 'Monday',
+                    openingTime: '10:00',
+                    closingTime: '22:00',
+                    restaurantId: '1'
+                }
             ]
         },
         // {
