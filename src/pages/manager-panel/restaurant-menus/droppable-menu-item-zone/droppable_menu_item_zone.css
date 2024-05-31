@@ -1,0 +1,27 @@
+.droppable__menu__item__zone__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 3px dashed #dbd4ca;
+    height: 100%;
+    padding: 40px 0;
+    border-radius: 16px;
+}
+
+.droppable__menu__item__zone__text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 21px;
+}
+
+.droppable__menu__item__zone__over {
+    border-color: blue; /* Change border color when dragging over */
+    background-color: rgba(0, 0, 255, 0.1); /* Add background color when dragging over */
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.droppable__menu__item__zone__over {
+}

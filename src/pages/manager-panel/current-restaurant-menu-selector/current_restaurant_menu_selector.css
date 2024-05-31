@@ -1,0 +1,44 @@
+.current__restaurant__menu__selector__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.current__restaurant__menu__selector__dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.current__restaurant__menu__selector__option {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.current__restaurant__menu__selector__option__no__current {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.current__restaurant__menu__selector__dropdown:focus {
+    outline: none;
+    border-color: #f1b23c;
+    box-shadow: 0 0 5px rgba(252, 179, 9, 0.7);
+}
+
+.current__restaurant__menu__selector__label {
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 500;
+    min-width: 300px;
+}

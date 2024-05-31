@@ -1,0 +1,20 @@
+.icon__button {
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 40px;
+}
+
+.icon__button:hover {
+    background: linear-gradient(to right, rgba(255, 255, 0, 0.8), rgba(255, 165, 0, 0.8));
+    filter: none;
+}
+
+.icon__button:active {
+    background: linear-gradient(to right, #FFD700, #FFA500);
+    filter: none;
+}
+
+.icon__button > * {
+    padding: 2px 0;
+}
