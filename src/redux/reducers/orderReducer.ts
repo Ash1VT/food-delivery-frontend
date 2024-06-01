@@ -47,6 +47,32 @@ const initialState: OrderState = {
                 deliveryPrice: 0,
                 decountedItemsPrice: 0,
                 totalPrice: 0
+            },
+            customer: {
+                id: '1',
+                role: 'customer',
+                imageUrl: 'images/food1.png',
+                firstName: 'John',
+                lastName: 'Doe',
+                fullName: 'Test User',
+                phone: '1234567890',
+                birthDate: new Date(),
+                isActive: true,
+                isEmailVerified: true,
+                email: 'john@gmail.com',
+            },
+            restaurant: {
+                id: '1',
+                description: 'Test Restaurant',
+                email: 'test',
+                phone: '1234567890',
+                ratingValue: 0,
+                reviewsCount: 0,
+                imageUrl: 'images/food1.png',
+                name: 'Test Restaurant',
+                address: 'test',
+                isActive: true,
+                workingHours: [],
             }
         }
     ]

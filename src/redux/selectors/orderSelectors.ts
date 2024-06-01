@@ -19,3 +19,31 @@ export const getOrderItems = createSelector(
         return orders.find((order) => order.id === orderId)?.items as IOrderItem[]
     }
 )
+
+export const getRestaurantOrders = createSelector(
+    [getOrders, (_, restaurantId: string) => restaurantId],
+    (orders, restaurantId) => {
+        return orders.filter((order) => order.restaurantId === restaurantId) as IOrder[]
+    }
+)
+
+export const getRestaurantPendingOrders = createSelector(
+    [getRestaurantOrders, (_, restaurantId: string) => restaurantId],
+    (orders, restaurantId) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'pending')
+    }
+)
+
+export const getRestaurantPreparingOrders = createSelector(
+    [getRestaurantOrders, (_, restaurantId: string) => restaurantId],
+    (orders, restaurantId) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'preparing')
+    }
+)
+
+export const getRestaurantFinishedOrders = createSelector(
+    [getRestaurantOrders, (_, restaurantId: string) => restaurantId],
+    (orders, restaurantId) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'finished')
+    }
+)

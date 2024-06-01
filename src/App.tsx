@@ -10,6 +10,7 @@ import RestaurantsPage from './pages/restaurants/RestaurantsPage';
 import OrderPlacingPage from './pages/order-placing-page/OrderPlacingPage';
 import ManagerPanelPage from './pages/manager-panel/ManagerPanelPage';
 import ModeratorPanelPage from './pages/moderator-panel/ModeratorPanelPage';
+import RestaurantOrdersPage from './pages/restaurant-orders/RestaurantOrdersPage';
 import './styles/App.css';
 import './styles/buttons.css';
 import './styles/popup.css';
@@ -22,7 +23,7 @@ const App = () => {
     return (
         <>
             <ReactNotifications/>
-            <ModeratorPanelPage/>
+            <RestaurantOrdersPage/>
         </>
     )
 }
