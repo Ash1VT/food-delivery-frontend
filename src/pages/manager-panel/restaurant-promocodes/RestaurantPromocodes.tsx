@@ -7,7 +7,7 @@ import { addSuccessNotification } from 'src/utils/notifications'
 import moment from 'moment'
 import './restaurant_promocodes.css'
 import IPromocode from 'src/redux/models/IPromocode';
-import EditIconButton from '../ui/buttons/edit-icon-button/EditIconButton';
+import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton';
 import OpenAddingPromocodeButton from '../ui/buttons/open-adding-promocode-button/OpenAddingPromocodeButton';
 
 interface FormValues {

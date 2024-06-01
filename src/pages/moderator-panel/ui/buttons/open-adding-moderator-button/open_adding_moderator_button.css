@@ -1,0 +1,15 @@
+.open__adding__moderator__button {
+    padding: 10px 20px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 18px;
+
+    margin-top: 20px;
+    width: 100%;
+}

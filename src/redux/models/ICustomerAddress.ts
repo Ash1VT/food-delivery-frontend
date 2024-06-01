@@ -1,3 +1,5 @@
+import IUser from "./IUser"
+
 export default interface ICustomerAddress {
     id: string
     country: string
@@ -5,4 +7,5 @@ export default interface ICustomerAddress {
     details: string
     approvalStatus: string
     customerId: string
+    customer?: IUser
 }

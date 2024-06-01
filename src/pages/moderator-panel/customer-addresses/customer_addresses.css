@@ -1,0 +1,50 @@
+.customer__addresses__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.customer__addresses__filters__wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.customer__address__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.customer__address__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+.customer__address__table {
+    width: 100%;
+}
+
+
+.customer__address__margin__left {
+    margin-left: 40px;
+}
+
+.customer__address__row {
+    height: 25px;
+}
+
+.customer__address__column {
+    height: 100%;
+}
+
+.customer__address__buttons__wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}

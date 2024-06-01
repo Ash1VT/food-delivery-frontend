@@ -1,0 +1,74 @@
+.users__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.user__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.user__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+.user__margin__left {
+    margin-left: 40px;
+}
+
+.user__tr {
+    height: 40px;
+}
+
+
+.users__table {
+    width: 100%;
+}
+
+#isUserActive, #isUserEmailVerified {
+    border: 1px solid #dbd4ca;
+    /* border-radius: 15px; */
+    background-color: #ffff;
+    width: 23px;
+    height: 23px;
+}
+
+.user__checkbox__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.user__checkbox {
+    background-color: white;
+    border-radius: 8px;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.user__checkbox:checked {
+    background-color: #FFB800 !important;
+    border: 1px solid #FFB800 !important;
+}
+
+.users__filters__wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.users__filters {
+    display: flex;
+    column-gap: 20px;
+}

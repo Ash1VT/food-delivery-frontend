@@ -9,6 +9,7 @@ import orderReducer from "./reducers/orderReducer";
 import currentCustomerReducer from "./reducers/currentCustomerReducer";
 import currentCourierReducer from "./reducers/currentCourierReducer";
 import currentRestaurantManagerReducer from "./reducers/currentRestaurantManagerReducer";
+import currentModeratorReducer from "./reducers/currentModeratorReducer";
 
 const rootReducer = combineReducers({
     orderCartReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     currentCustomerReducer,
     currentCourierReducer,
     currentRestaurantManagerReducer,
-    orderReducer
+    currentModeratorReducer,
+    orderReducer,
 })
 
 export const setupStore = () => {

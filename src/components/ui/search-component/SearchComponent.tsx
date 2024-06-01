@@ -3,7 +3,7 @@ import { SearchComponentProps } from "./search_component.types";
 import SearchIcon from "@mui/icons-material/Search";
 import './search_component.css'
 
-const SearchComponent = ({ onSearch } : SearchComponentProps) => {
+const SearchComponent = ({ searchPlaceholder, onSearch } : SearchComponentProps) => {
     const [query, setQuery] = useState('')
   
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ const SearchComponent = ({ onSearch } : SearchComponentProps) => {
             <input
             type="text"
             className="search__input"
-            placeholder="Search..."
+            placeholder={searchPlaceholder}
             value={query}
             onChange={handleInputChange}
             />
