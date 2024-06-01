@@ -1,7 +1,7 @@
 import React from 'react'
 import RemoveIcon from '@mui/icons-material/Remove';
 import { RemoveItemFromCategoryButtonProps } from 'src/pages/manager-panel/manager_panel.types'
-import IconButton from '../icon-button/IconButton'
+import IconButton from '../../../../../components/ui/buttons/icon-button/IconButton'
 
 const RemoveItemFromCategoryButton = ({onRemove} : RemoveItemFromCategoryButtonProps) => {
     return (

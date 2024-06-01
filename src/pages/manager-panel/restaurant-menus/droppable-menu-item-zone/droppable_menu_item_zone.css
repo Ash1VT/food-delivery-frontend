@@ -22,6 +22,3 @@
     background-color: rgba(0, 0, 255, 0.1); /* Add background color when dragging over */
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); 
 }
-
-.droppable__menu__item__zone__over {
-}

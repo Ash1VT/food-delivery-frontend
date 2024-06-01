@@ -6,8 +6,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IWorkingHours from 'src/redux/models/IWorkingHours'
-import DeleteIconButton from '../ui/buttons/delete-icon-button/DeleteIconButton';
-import EditIconButton from '../ui/buttons/edit-icon-button/EditIconButton';
+import DeleteIconButton from '../../../components/ui/buttons/delete-icon-button/DeleteIconButton';
+import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton';
 import './restaurant_working_hours.css'
 
 const getStringWorkingHours = (workingHours?: IWorkingHours) => {

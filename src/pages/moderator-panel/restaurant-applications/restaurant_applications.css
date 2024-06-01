@@ -1,0 +1,38 @@
+.restaurant__application__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.restaurant__application__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+
+.restaurant__applications__table {
+    width: 100%;
+}
+
+.restaurant__application__margin__left {
+    margin-left: 40px;
+}
+
+.restaurant__application__row {
+    height: 25px;
+}
+
+.restaurant__application__column {
+    height: 100%;
+}
+
+.restuarant__application__buttons__wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}

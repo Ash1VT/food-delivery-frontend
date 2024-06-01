@@ -2,15 +2,15 @@ import Navbar from 'src/components/navbar';
 import { FooterMenuColumnProps } from 'src/components/footer/footer.types';
 import Footer from 'src/components/footer';
 import RestaurantsList from './restaurants-list/RestaurantsList';
-import { SortComponentProps } from 'src/components/ui/sort-component/sort_component.types';
+import { SelectComponentProps } from 'src/components/ui/select-component/select_component.types';
 import { SearchComponentProps } from 'src/components/ui/search-component/search_component.types';
 import SearchComponent from 'src/components/ui/search-component/SearchComponent';
-import SortComponent from 'src/components/ui/sort-component/SortComponent';
 import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
 import { getRestaurants } from '../../redux/selectors/restaurantSelectors';
 import './restaurants_page.css'
+import SelectComponent from 'src/components/ui/select-component/SelectComponent';
 
 const RestaurantsPage = () => {
 
@@ -31,12 +31,16 @@ const RestaurantsPage = () => {
     ]
 
     const searchProps: SearchComponentProps = {
+        searchPlaceholder: 'Search restaurant',
         onSearch: async (query) => {console.log(query)}
     }
 
-    const sortProps: SortComponentProps = {
+    const selectProps: SelectComponentProps = {
         options,
-        onSort: async (sortOption) => {console.log(sortOption)}
+        openSelectButtonLabel: 'Sort by',
+        selectLabel: 'Sort by',
+        selectButtonLabel: 'Apply sort',
+        onSelect: async (sortOption) => {console.log(sortOption)}
     }
     
     const handlePageClick = ({selected} : {selected: number}) => {
@@ -66,8 +70,8 @@ const RestaurantsPage = () => {
                         <h1 className="restaurants__title">Restaurants</h1>
                     </div>
                     <div className="restaurants__filters">
-                        <SearchComponent onSearch={searchProps.onSearch}/>
-                        <SortComponent options={options} onSort={sortProps.onSort}/>
+                        <SearchComponent {...searchProps}/>
+                        <SelectComponent {...selectProps}/>
                     </div>
                     <RestaurantsList restaurants={restaurants}/>
                     <ReactPaginate breakLabel="..."

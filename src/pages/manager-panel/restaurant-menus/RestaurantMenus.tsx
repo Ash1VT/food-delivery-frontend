@@ -4,9 +4,9 @@ import RemoveItemFromCategoryButton from '../ui/buttons/remove-item-from-categor
 import { Scrollbar } from 'react-scrollbars-custom'
 import OpenAddingMenuCategoryButton from '../ui/buttons/open-adding-menu-category-button/OpenAddingMenuCategoryButton'
 import IMenuCategory from 'src/redux/models/IMenuCategory'
-import EditIconButton from '../ui/buttons/edit-icon-button/EditIconButton'
-import DeleteIconButton from '../ui/buttons/delete-icon-button/DeleteIconButton'
-import AddIconButton from '../ui/buttons/add-icon-button/AddIconButton'
+import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton'
+import DeleteIconButton from '../../../components/ui/buttons/delete-icon-button/DeleteIconButton'
+import AddIconButton from '../../../components/ui/buttons/add-icon-button/AddIconButton'
 import DroppableMenuItemZone from './droppable-menu-item-zone/DroppableMenuItemZone'
 import './restaurant_menus.css'
 

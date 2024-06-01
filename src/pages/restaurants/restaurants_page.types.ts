@@ -1,5 +1,5 @@
 import { SearchComponentProps } from "src/components/ui/search-component/search_component.types"
-import { SortComponentProps } from "src/components/ui/sort-component/sort_component.types"
+import { SelectComponentProps } from "src/components/ui/select-component/select_component.types"
 
 export type RestaurantProps = {
     id: string
@@ -15,6 +15,6 @@ export type RestaurantsListProps = {
 
 
 export type FiltersProps = {
-    sortProps: SortComponentProps
+    sortProps: SelectComponentProps
     searchProps: SearchComponentProps
 }
