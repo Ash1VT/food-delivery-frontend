@@ -1,20 +1,20 @@
 import React from 'react'
-import './restaurant_orders_page.css'
 import Navbar from 'src/components/navbar'
 import Footer from 'src/components/footer'
 import OrdersTable from 'src/components/orders-table/OrdersTable'
-import { getRestaurantFinishedOrders, getRestaurantPendingOrders, getRestaurantPreparingOrders } from 'src/redux/selectors/orderSelectors'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import IOrder from 'src/redux/models/IOrder'
 import { addSuccessNotification } from 'src/utils/notifications'
+import { getCurrentRestaurantFinishedOrders, getCurrentRestaurantPendingOrders, getCurrentRestaurantPreparingOrders } from 'src/redux/selectors/currentRestaurantManagerSelector'
+import './restaurant_orders_page.css'
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 
 const RestaurantOrdersPage = () => {
-    const restaurantId = '1'
+    const currentUser = useAppSelector(getCurrentUser)
 
-
-    const pendingOrders = useAppSelector((state) => getRestaurantPendingOrders(state, restaurantId))
-    const preparingOrders = useAppSelector((state) => getRestaurantPreparingOrders(state, restaurantId))
-    const finishedOrders = useAppSelector((state) => getRestaurantFinishedOrders(state, restaurantId))
+    const pendingOrders = useAppSelector(getCurrentRestaurantPendingOrders)
+    const preparingOrders = useAppSelector(getCurrentRestaurantPreparingOrders)
+    const finishedOrders = useAppSelector(getCurrentRestaurantFinishedOrders)
 
     const handleOrderConfirmed = async (order: IOrder) => {
         alert(`Order ${order.id} is confirmed`)
@@ -33,7 +33,7 @@ const RestaurantOrdersPage = () => {
 
     return (
         <div className="container restaurant__orders__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className='restaurant__orders__wrapper'>
                 <div className="restaurant__orders__sections__wrapper">
                     <div className='restaurant__orders__section restaurant__orders__pending'>

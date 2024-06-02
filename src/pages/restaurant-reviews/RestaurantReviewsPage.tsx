@@ -44,7 +44,7 @@ const RestaurantReviewsPage = () => {
 
     return (
         <div className="container restaurant__reviews__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="restaurant__reviews__wrapper">
                 <div className="restaurant__reviews__content">
                     <RestaurantReference {...restaurant}/>

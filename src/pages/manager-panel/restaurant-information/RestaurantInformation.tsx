@@ -4,14 +4,10 @@ import './restaurant_information.css'
 import EditRestaurantInformationButton from '../ui/buttons/edit-restaurant-information-button/EditRestaurantInformationButton'
 import UploadRestaurantImageForm from '../ui/forms/upload_restraurant_image_form/UploadRestaurantImageForm'
 
-const RestaurantInformation = ({restaurant, onOpenEditingRestaurantInformation, onRestaurantImageUploaded} : RestaurantInformationProps) => {
+const RestaurantInformation = ({restaurant, onOpenEditingRestaurantInformation} : RestaurantInformationProps) => {
 
     const handleOpenEditingRestaurantClick = async () => {
         await onOpenEditingRestaurantInformation(restaurant)
-    }
-
-    const handleUploadRestaurantImageClick = async (image: File) => {
-        await onRestaurantImageUploaded(restaurant.id, image)
     }
 
     return (
@@ -84,11 +80,7 @@ const RestaurantInformation = ({restaurant, onOpenEditingRestaurantInformation, 
                     </tr>
                 </table>
             </div>
-            <div className="restaurant__information__image__wrapper">
-                <img className="restaurant__information__image" src={restaurant.imageUrl} alt="image"></img>
-            </div>
             <EditRestaurantInformationButton onEdit={handleOpenEditingRestaurantClick}/>
-            <UploadRestaurantImageForm onRestaurantImageUploaded={handleUploadRestaurantImageClick}/>
         </div>
     )
 }

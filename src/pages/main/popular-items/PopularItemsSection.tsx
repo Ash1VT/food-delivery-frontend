@@ -9,7 +9,7 @@ const PopularItemsSection = ({items}: PopularItemsSectionProps) => {
     return (
         <div className="popular__items__container">
             <div className="popular__items__wrapper section__wrapper">
-                <div className="section__title popular__items__title">Popular items</div>
+                <div className="section__title popular__items__title">Popular Items</div>
                     <div className="popular__items__list__wrapper">
                         
                         <div className="popular__items__list section__list">

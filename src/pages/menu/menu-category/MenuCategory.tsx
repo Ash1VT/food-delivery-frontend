@@ -22,7 +22,7 @@ const MenuCategory = ({ id, name, items }: MenuCategoryProps) => {
         <div className="menu__category__container" ref={categoryRef}>
             <InView onChange={onChange} threshold={1} className="menu__category__view"></InView>
             <div className="menu__category__name">
-                {name}{id.toString()}
+                {name}
             </div>
             <MenuItemsList items={items} />
         </div>

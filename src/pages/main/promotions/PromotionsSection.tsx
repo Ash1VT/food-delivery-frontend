@@ -8,7 +8,7 @@ const PromotionsSection = ({promotions} : PromotionsSectionProps) => {
         <div className="promotions__container">
             <div className="promotions__wrapper section__wrapper">
                 <div className="section__title promotions__title">
-                    Promotions                
+                    Best Restaurants Promotions                
                 </div>
                 <div className="promotions__list section__list">
                     {promotions.map(

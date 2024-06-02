@@ -10,8 +10,10 @@ import IRestaurantApplication from 'src/redux/models/IRestaurantApplication'
 import CustomerAddresses from './customer-addresses/CustomerAddresses'
 import ICustomerAddress from 'src/redux/models/ICustomerAddress'
 import './moderator_panel_page.css'
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 
 const ModeratorPanelPage = () => {
+    const currentUser = useAppSelector(getCurrentUser)
 
     const users = useAppSelector(getUsers)
     const restaurantApplications = useAppSelector(getRestaurantApplications)
@@ -118,7 +120,7 @@ const ModeratorPanelPage = () => {
 
     return (
         <div className="container moderator__panel__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className='moderator__panel__wrapper'>
                 <div className="moderator__panel__sections__wrapper">
                     <div className='moderator__panel__section moderator__panel__users'>

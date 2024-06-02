@@ -19,12 +19,13 @@ const MenuCategoryName = ({id, name, imageUrl}: MenuCategoryNameProps) => {
         setActiveCategoryId(id)
         console.log('setted active category id from click: ', id)
     }
-
+    console.log(imageUrl)
     return (
         <div className="menu__category__name__container">
             <div className={`menu__category__image__wrapper ${isActive ? 'menu__category__image__active' : 'menu__category__image__not__active'}`} style={{ backgroundImage: `url(${imageUrl})` }} onClick={onClick}>
+                <div className="menu__category__name__gradient"/>
                 <div className="menu__category__name__text">
-                    {name}{id.toString()}
+                    {name}
                 </div>
             </div>
             {isActive &&

@@ -18,8 +18,11 @@
 }
 
 .order__item__text {
-    width: 100px;
     text-align: center;
+}
+
+.order__item__margin__left {
+    margin-left: 30px;
 }
 
 

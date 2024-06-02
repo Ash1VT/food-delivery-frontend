@@ -12,6 +12,12 @@ import IWorkingHours from "src/redux/models/IWorkingHours"
 export type RestaurantInformationProps = {
     restaurant: IRestaurant
     onOpenEditingRestaurantInformation: (restaurant: IRestaurant) => Promise<void>
+}
+
+// RESTAURANT IMAGE
+
+export type RestaurantImageProps = {
+    restaurant: IRestaurant
     onRestaurantImageUploaded: (id: string, image: File) => Promise<void>
 }
 

@@ -11,8 +11,10 @@ import { useAppSelector } from 'src/hooks/redux/useAppSelector';
 import { getRestaurants } from '../../redux/selectors/restaurantSelectors';
 import './restaurants_page.css'
 import SelectComponent from 'src/components/ui/select-component/SelectComponent';
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors';
 
 const RestaurantsPage = () => {
+    const currentUser = useAppSelector(getCurrentUser)
 
     const restaurants = useAppSelector(getRestaurants)
 
@@ -63,14 +65,16 @@ const RestaurantsPage = () => {
 
     return (
         <div className="container restaurants__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="restaurants__wrapper">
                 <div className="restaurants__content">
                     <div className="restaurants__header">
                         <h1 className="restaurants__title">Restaurants</h1>
                     </div>
                     <div className="restaurants__filters">
-                        <SearchComponent {...searchProps}/>
+                        <div className='restaurants__search'>
+                            <SearchComponent {...searchProps}/>
+                        </div>
                         <SelectComponent {...selectProps}/>
                     </div>
                     <RestaurantsList restaurants={restaurants}/>

@@ -2,8 +2,8 @@ import React from 'react'
 import { OrderRowProps } from '../orders_table.types'
 import moment from 'moment'
 import OrderActionButton from '../ui/buttons/order-action-button/OrderActionButton'
-import './order_row.css'
 import OpenDetailedInformationButton from '../ui/buttons/open-detailed-information-button/OpenDetailedInformationButton'
+import './order_row.css'
 
 const OrderRow = ({order, buttonLabel, onOpenDetailedInformation, onOrderButtonClick} : OrderRowProps) => {
 

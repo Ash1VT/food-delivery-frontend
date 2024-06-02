@@ -22,9 +22,12 @@ import IMenuItem from 'src/redux/models/IMenuItem'
 import { DndContext, DragEndEvent, DragOverlay, DragStartEvent } from '@dnd-kit/core'
 import DraggableMenuItem from './restaurant-menu-items/draggable-menu-item/DraggableMenuItem'
 import './manager_panel_page.css'
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
+import RestaurantImage from './restaurant-image/RestaurantImage'
 
 
 const ManagerPanelPage = () => {
+    const currentUser = useAppSelector(getCurrentUser)
 
     const restaurant = useAppSelector(getCurrentRestaurant)
     const restaurantPromocodes = useAppSelector(getCurrentRestaurantPromocodes)
@@ -144,15 +147,19 @@ const ManagerPanelPage = () => {
 
     return (
         <div className="container manager__panel__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="manager__panel__wrapper">
                 <div className="manager__panel__content">
                     <div className="manager__panel__section__wrapper manager__panel__restaurant__information__wrapper">
-                            <div className='manager__panel__section__title'>Restaurant Information</div>
-                            <RestaurantInformation 
-                                restaurant={restaurant} 
-                                onOpenEditingRestaurantInformation={handleOpenEditingRestaurantInformation}
-                                onRestaurantImageUploaded={handleRestaurantImageUploaded}/>
+                        <div className='manager__panel__section__title'>Restaurant Information</div>
+                        <RestaurantInformation 
+                            restaurant={restaurant} 
+                            onOpenEditingRestaurantInformation={handleOpenEditingRestaurantInformation}/>
+                    </div>
+                    <div className="manager__panel__section__wrapper manager__panel__restaurant__image__wrapper">
+                        <RestaurantImage
+                            restaurant={restaurant}
+                            onRestaurantImageUploaded={handleRestaurantImageUploaded}/>
                     </div>
                     <div className="manager__panel__activity__hours__section">
                         <div className="manager__panel__section__wrapper manager__panel__restaurant__activity__wrapper">
