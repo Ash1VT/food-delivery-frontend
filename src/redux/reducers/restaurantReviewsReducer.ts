@@ -8,30 +8,31 @@ interface RestaurantReviewsState {
 const initialState: RestaurantReviewsState = {
     restaurantReviews: [
         {
-            id: '1',
-            userFullName: 'Test User',
-            userImageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
-            userId: '1',
-            restaurantId: '1',
-            ratingValue: 5,
-            text: 'eqeqeqeqeqeqeqeqeqe qeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqeqe qeqeqeqeqeqeqeqeqeqeqeqeqeq eqeqeqeqeqeqeqeqeqeqeqeqe qeqeqeqeqeq eqeqeqeqeqeqeqeq'
+            "id": "1",
+            "userFullName": "Sarah Johnson",
+            "userImageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+            "userId": "1",
+            "restaurantId": "1",
+            "ratingValue": 4,
+            "text": "The food was delicious and the service was excellent. Will definitely come back!"
         },
         {
-            id: '2',
-            userFullName: 'John Doe',
-            userImageUrl: 'images/',
-            userId: '2',
-            restaurantId: '1',
-            ratingValue: 5,
+            "id": "2",
+            "userFullName": "David Smith",
+            "userImageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHVzZXJ8ZW58MHx8MHx8fDA%3D",
+            "userId": "2",
+            "restaurantId": "1",
+            "ratingValue": 5,
+            "text": "This restaurant exceeded my expectations! The ambiance, food quality, and service were outstanding."
         },
         {
-            id: '3',
-            userFullName: 'John Doe',
-            userImageUrl: 'images/',
-            restaurantId: '1',
-            userId: '3',
-            ratingValue: 5,
-            text: 'eqeq'
+            "id": "3",
+            "userFullName": "Emily Wilson",
+            "userImageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXJ8ZW58MHx8MHx8fDA%3D",
+            "userId": "3",
+            "restaurantId": "1",
+            "ratingValue": 5,
+            "text": "Had a wonderful dining experience here. The dishes were flavorful and the staff was friendly."
         }
     ]
 }

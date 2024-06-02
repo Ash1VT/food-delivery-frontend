@@ -21,3 +21,27 @@ export const getCurrentRestaurantMenuItems = createSelector(
         return currentRestaurantMenus.map((menu) => menu.menuCategories.map((menuCategory) => menuCategory.items)).flat().flat()
     }
 )
+
+
+export const getCurrentRestaurantOrders = (state: RootState) => currentRestaurantManagerSelector(state).restaurantOrders
+
+export const getCurrentRestaurantPendingOrders = createSelector(
+    [getCurrentRestaurantOrders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'pending')
+    }
+)
+
+export const getCurrentRestaurantPreparingOrders = createSelector(
+    [getCurrentRestaurantOrders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'preparing')
+    }
+)
+
+export const getCurrentRestaurantFinishedOrders = createSelector(
+    [getCurrentRestaurantOrders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'finished')
+    }
+)
