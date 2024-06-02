@@ -3,17 +3,23 @@ import Navbar from 'src/components/navbar'
 import Footer from 'src/components/footer'
 import OrderItemsList from './order-items-list/OrderItemsList'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { getOrder, getOrderItems } from 'src/redux/selectors/orderSelectors'
 import AddressSelector from './address-selector/AddressSelector'
-import { getCurrentCustomerApprovedAddresses } from 'src/redux/selectors/currentCustomerSelectors'
+import { getCurrentCustomerApprovedAddresses, getCurrentCustomerOrder } from 'src/redux/selectors/currentCustomerSelectors'
 import PromocodeInput from './promocode-input/PromocodeInput'
 import OrderPrice from './order-price/OrderPrice'
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 import './order_placing_page.css'
 
 const OrderPlacingPage = () => {
-    const items = useAppSelector((state) => getOrderItems(state, '1'));
+    const orderId = '1'
+    const currentUser = useAppSelector(getCurrentUser)
+
+    const order = useAppSelector((state) => getCurrentCustomerOrder(state, orderId));
     const customerAddresses = useAppSelector(getCurrentCustomerApprovedAddresses);
-    const order = useAppSelector((state) => getOrder(state, '1'));
+
+    if (!order) {
+        return null
+    }
 
     const handleAddressSelected = async (addressId: string) => {
         alert(`Selected address: ${addressId}`)
@@ -28,24 +34,22 @@ const OrderPlacingPage = () => {
         alert(`Order placed: ${orderId}`)
     }
 
+    const handleOrderItemQuantityChanged = async (itemId: string, newQuantity: number) => {
+        alert(`Order item quantity changed: ${itemId} to ${newQuantity}`)
+    }
+
+    const orderItems = order.items
+
     return (
         <div className="container order__placing__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="order__placing__wrapper">
                 <div className="order__placing__details">
                     <div className="order__placing__title">Order Placing</div>
 
                     <div className="order__placing__items__wrapper">
                         <div className="order__placing__section__title">Your Order</div>
-                        <OrderItemsList items={items.map((item) => {
-                            return {
-                                id: item.id,
-                                name: item.menuItemName,
-                                imageUrl: item.menuItemImageUrl,
-                                quantity: item.quantity,
-                                price: item.menuItemPrice
-                            }
-                        })}/>
+                        <OrderItemsList items={orderItems} onQuantityChanged={handleOrderItemQuantityChanged}/>
                     </div>
                     <div className="order__placing__address__wrapper">
                         <div className="order__placing__section__title">Select Address</div>

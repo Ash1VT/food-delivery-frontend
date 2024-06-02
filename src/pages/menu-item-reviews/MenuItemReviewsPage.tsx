@@ -43,7 +43,7 @@ const MenuItemReviewsPage = () => {
 
     return (
         <div className="container menu__item__reviews__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="menu__item__reviews__wrapper">
                 <div className="menu__item__reviews">
                     <div className="menu__item__reviews__references">

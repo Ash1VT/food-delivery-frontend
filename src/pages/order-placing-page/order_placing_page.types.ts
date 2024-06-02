@@ -1,17 +1,16 @@
 import ICustomerAddress from "src/redux/models/ICustomerAddress";
 import IOrder from "src/redux/models/IOrder";
+import IOrderItem from "src/redux/models/IOrderItem";
 import IPriceInformation from "src/redux/models/IPriceInformation";
 
 export type OrderItemProps = {
-    id: string
-    name: string;
-    imageUrl: string
-    quantity: number
-    price: number
+    item: IOrderItem
+    onQuantityChanged: (id: string, quantity: number) => Promise<void>
 }
 
 export type OrderItemsListProps = {
-    items: OrderItemProps[]
+    items: IOrderItem[]
+    onQuantityChanged: (id: string, quantity: number) => Promise<void>
 }
 
 export type SelectAddressProps = {

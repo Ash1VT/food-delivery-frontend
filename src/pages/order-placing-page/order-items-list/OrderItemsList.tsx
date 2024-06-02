@@ -3,20 +3,35 @@ import OrderItem from '../order-item/OrderItem'
 import Divider from 'src/components/ui/divider/Divider'
 import './order_items_list.css'
 
-const OrderItemsList = ({items}: OrderItemsListProps) => {
+const OrderItemsList = ({items, onQuantityChanged}: OrderItemsListProps) => {
     return (
         <div>
             <table>
                 <tr>
-                    <th className="order__item__label"></th>
-                    <th className="order__item__label"></th>
-                    <th className="order__item__label">Quantity</th>
-                    <th className="order__item__label">Price</th>
-                    <th className="order__item__label">Total</th>
+                    <th></th>
+                    <th>
+                        <div className='order__item__label order__item__margin__left'>
+                        </div>
+                    </th>
+                    <th>
+                        <div className='order__item__label order__item__margin__left'>
+                            Quantity
+                        </div>
+                    </th>
+                    <th>
+                        <div className='order__item__label order__item__margin__left'>
+                            Price
+                        </div>
+                    </th>
+                    <th>
+                        <div className='order__item__label order__item__margin__left'>
+                            Total
+                        </div>
+                    </th>
                 </tr>
                 {items.map((item, index) => (
                     <>
-                        <OrderItem key={item.id} {...item} />
+                        <OrderItem key={item.id} item={item} onQuantityChanged={onQuantityChanged} />
                         {index !== items.length - 1 && (
                             <>
                             <tr className='tr-top-divider'></tr>

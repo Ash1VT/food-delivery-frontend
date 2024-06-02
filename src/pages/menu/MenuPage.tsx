@@ -15,9 +15,11 @@ import { getRestaurant } from '../../redux/selectors/restaurantSelectors'
 import MenuCategoriesActiveContext from './contexts/MenuCategoriesActiveContext'
 import { getMenu } from 'src/redux/selectors/menuSelectors'
 import './menu_page.css'
+import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 
 const MenuPage = () => {
     const restaurantId = '1';
+    const currentUser = useAppSelector(getCurrentUser)
 
     const menu = useAppSelector(state => getMenu(state, restaurantId))
     
@@ -45,7 +47,7 @@ const MenuPage = () => {
 
     return (
         <div className="container menu__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="menu__wrapper">
                     <MenuCategoriesRefsContext.Provider value={menuCategoriesRefsContext}>
                         <MenuCategoriesActiveContext.Provider value={menuCategoriesActiveContext}>
@@ -64,9 +66,9 @@ const MenuPage = () => {
                                 <RestaurantReference {...restaurant}/>
                                 <MenuCategoriesList menuCategories={menuCategories}/>
                             </div>
-                            <div className="menu__order__cart">
+                            {/* <div className="menu__order__cart">
                                 <OrderCart/>
-                            </div>
+                            </div> */}
                         </MenuCategoriesActiveContext.Provider>
                     </MenuCategoriesRefsContext.Provider>
             </div>
