@@ -1,0 +1,27 @@
+.open__order__cart__button {
+    /* background-color: #FFA500; */
+    border: none;
+    background-color: #ffff;
+    /* color: white; */
+    /* padding: 10px 20px; */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 60px;
+    height: 60px;
+    align-self: center;
+}
+  
+
+.open__order__cart__button__icon {
+    width: 60px !important;
+    height: 60px !important;
+    color: #f3c52f;
+    transition: color 0.9s ease;
+}
+
+.open__order__cart__button__icon:hover {
+    color: #FF8C00;
+}
