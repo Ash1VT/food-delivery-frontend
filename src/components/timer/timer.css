@@ -1,0 +1,20 @@
+.timer__container {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.timer__container__progress {
+    background-color: #f9f9f9;
+}
+
+.timer__container__over {
+    background-color: #f07611;
+}
+
+.timer__text {
+    font-family: Poppins;
+    font-size: 32px;
+    font-weight: 600;
+}

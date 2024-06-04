@@ -26,7 +26,7 @@ const OrderRow = ({order, buttonLabel, onOpenDetailedInformation, onOrderButtonC
             </td>
             <td>
                 <div className="order__text order__margin__left">
-                    {order.customer.fullName}
+                    {order.customer?.fullName}
                 </div>
             </td>
             <td>

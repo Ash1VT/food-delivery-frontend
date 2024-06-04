@@ -1,67 +1,40 @@
-import { useState } from "react"
+import { useCallback } from "react"
 import Navbar from "src/components/navbar"
-import ProfileCategory from "./profile-category/ProfileCategory"
-import ProfileCategoryClicksContext from "./contexts/ProfileCategoryClicksContext"
-import { ProfileCategoryClicksContextProps, ProfileCategoryProps } from "./profile.types"
+import { UserUpdateProps } from "./profile.types"
 import Footer from "src/components/footer"
-import { FooterMenuColumnProps } from "src/components/footer/footer.types"
-import PersonalInformation from "./personal-information/PersonalInformation"
-import DeliveryAddresses from "./delivery-addresses/DeliveryAddresses"
-import PaymentInformation from "./payment-information/PaymentInformation"
-import Orders from "./orders/Orders"
+import { getCurrentUser } from "src/redux/selectors/currentUserSelectors"
+import { useAppSelector } from "src/hooks/redux/useAppSelector"
+import { addSuccessNotification } from "src/utils/notifications"
+import CustomerProfile from "./customer/CustomerProfile"
+import CourierProfile from "./courier/CourierProfile"
+import ModeratorProfile from "./moderator/ModeratorProfile"
+import RestaurantManagerProfile from "./restaurant-manager/RestaurantManagerProfile"
 import './profile_page.css'
 
 
 const ProfilePage = () => {
-    const [activeCategoryId, setActiveCategoryId] = useState<number>(0)
+    const currentUser = useAppSelector(getCurrentUser)
 
-    const profileCategoryClicksContext: ProfileCategoryClicksContextProps = {
-        profileCategoryClicks: [],
-        activeCategoryId,
-        setActiveCategoryId
+    const handlePersonalInformationUpdated = async (user: UserUpdateProps) => {
+        alert(JSON.stringify(user))
+        addSuccessNotification('Personal information successfully updated')
     }
 
-    const profileCategories = [
-        {
-            id: 0,
-            name: "Personal Information",
-            component: PersonalInformation
-        },
-        {
-            id: 1,
-            name: "Delivery Addresses",
-            component: DeliveryAddresses
-        },
-        {
-            id: 2,
-            name: "Payment Information",
-            component: PaymentInformation
-        },
-        {
-            id: 3,
-            name: "My Orders",
-            component: Orders
-        }
-    ]
-    
-    const activeCategory = profileCategories.find(category => category.id === activeCategoryId);
+    const renderProfile = useCallback(() => {
+        if (!currentUser) return null
+        if (currentUser.role === 'customer') return <CustomerProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'courier') return <CourierProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'restaurant_manager') return <RestaurantManagerProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'moderator') return <ModeratorProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+    }, [currentUser])
+
+    if (!currentUser) return null
 
     return (
         <div className="container profile__container">
-            <Navbar/>
+            <Navbar currentUser={currentUser}/>
             <div className="profile__wrapper" style={{backgroundImage: `url(images/background.png)`}}>
-                <div className="profile__card">
-                    <div className="profile__category__list">
-                        <ProfileCategoryClicksContext.Provider value={profileCategoryClicksContext}>
-                            {profileCategories.map((category) => (
-                                <ProfileCategory key={category.id} id={category.id} name={category.name}/>
-                            ))}
-                        </ProfileCategoryClicksContext.Provider>
-                    </div>
-                    <div className="profile__category__content">
-                        {activeCategory?.component && <activeCategory.component/>}
-                    </div>
-                </div>
+                {renderProfile()}
             </div>
             <Footer/>
         </div>

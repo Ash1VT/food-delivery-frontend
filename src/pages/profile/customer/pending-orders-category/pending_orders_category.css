@@ -1,0 +1,13 @@
+.pending__orders__category__container {
+    width: 100%;
+}
+
+.pending__orders__category__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 21px;
+    text-align: center;
+
+    margin-top: 20px;
+}

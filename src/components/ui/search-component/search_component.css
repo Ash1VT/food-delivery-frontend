@@ -11,13 +11,21 @@
     height: 48px;
 }
 
+.search__input__wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
 
 .search__input {
     padding: 8px;
-    font-size: 16px;
     border: 1px solid #ccc;
     margin-right: 10px;
     border: none;
+
+    font-family: Poppins;
+    font-size: 16px;
+    flex-grow: 1;
 }
 
 .search__input:focus {

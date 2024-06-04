@@ -1,7 +1,11 @@
 import * as Yup from 'yup';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
-import ControlledInput from 'src/components/ui/controlled-input/ControlledInput';
+import ControlledInput from 'src/pages/profile/ui/controlled-input/ControlledInput';
 import formatDate from 'src/utils/formatDate';
+import FormErrorNotification from 'src/components/form-error-notification/FormErrorNotification';
+import UploadUserImageForm from '../ui/forms/upload-user-image-form/UploadUserImageForm';
+import { PersonalInformationProps } from '../profile.types';
+import './personal_information.css'
 
 interface FormValues {
     firstName: string;
@@ -10,13 +14,13 @@ interface FormValues {
     phone: string;
 }
 
-const PersonalInformation = () => {
+const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUpdated} : PersonalInformationProps) => {
 
     const initialValues: FormValues = {
-        firstName: "John",
-        lastName: "Doe",
-        birthDate: new Date(),
-        phone: "+375298830141"
+        firstName: user.firstName,
+        lastName: user.lastName,
+        birthDate: user.birthDate,
+        phone: user.phone
     }
 
     const validationSchema: Yup.Schema<FormValues> = Yup.object().shape({
@@ -27,11 +31,20 @@ const PersonalInformation = () => {
     })
 
     const handleSubmit = async (values: FormValues, { setSubmitting } : FormikHelpers<FormValues>) => {
-        // Handle form submission here
-        // console.log('Form submitted with values:', values);
-        alert(JSON.stringify(values, null, 2))
         setSubmitting(false)
+        await onPersonalInformationUpdated({
+            id: user.id,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            birthDate: values.birthDate,
+            phone: values.phone
+        })
     }
+
+    const handleUploadUserImageClick = async (image: File) => {
+        await onUserImageUploaded(user.id, image)
+    }
+
     return (
         <Formik 
             initialValues={initialValues}
@@ -40,55 +53,74 @@ const PersonalInformation = () => {
         >
         {({ errors, values, setFieldValue, submitForm }) => {
             return (
-                <Form>
-                    <ControlledInput label='First Name' 
-                                    value={values.firstName}
-                                    error={errors.firstName}
-                                    setValue={firstName => { setFieldValue('firstName', firstName) }}
-                                    parseValue={value => value}
-                                    convertToString={value => value}
-                                    onSave={async () => await submitForm()}>
-                        <input type='text'/>   
-                    </ControlledInput>
- 
-                    <ErrorMessage name='firstName' component='div' />
+                <div className='personal__information__container'>
+                    <div className='user__image__container'>
+                        <div className="user__image__wrapper">
+                            <img className="user__image" src={user.imageUrl} alt="image"></img>
+                        </div>
+                        <UploadUserImageForm onUserImageUpload={handleUploadUserImageClick}/>
+                    </div>
+                    <Form>
+                        <FormErrorNotification/>
+                        <div className='personal__information__form__wrapper'>
+                            <table className='personal__information__table'>
+                                <ControlledInput label='First Name' 
+                                                value={values.firstName}
+                                                error={errors.firstName}
+                                                setValue={firstName => { setFieldValue('firstName', firstName) }}
+                                                parseValue={value => value}
+                                                convertToString={value => value}
+                                                onSave={async () => await submitForm()}>
+                                    <input type='text'/>   
+                                </ControlledInput>
+                                <ErrorMessage name='firstName' component='div' />
+                                <ControlledInput label='Last Name' 
+                                                value={values.lastName}
+                                                error={errors.lastName}
+                                                setValue={lastName => { setFieldValue('lastName', lastName) }}
+                                                parseValue={value => value}
+                                                convertToString={value => value}
+                                                onSave={async () => await submitForm()}>
+                                    <input type='text'/>   
+                                </ControlledInput>
+                                <ErrorMessage name='lastName' component='div' />
+                                <tr className='controlled__input__row'>
+                                    <td>
+                                        <div className='controlled__input__label__wrapper'>
+                                            <label className='label'>Email</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='value'>
+                                            {user.email}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <ControlledInput label='Birth Date' 
+                                                value={values.birthDate}
+                                                error={errors.birthDate ? String(errors.birthDate) : undefined}
+                                                setValue={birthDate => { console.log(birthDate); setFieldValue('birthDate', birthDate) }}
+                                                parseValue={value => new Date(value)}
+                                                convertToString={value => formatDate(value)}
+                                                onSave={async () => await submitForm()}>
+                                    <input type='date'/>
+                                </ControlledInput>
+                                <ErrorMessage name='birthDate' component='div' />
 
-                    <ControlledInput label='Last Name' 
-                                    value={values.lastName}
-                                    error={errors.lastName}
-                                    setValue={lastName => { setFieldValue('lastName', lastName) }}
-                                    parseValue={value => value}
-                                    convertToString={value => value}
-                                    onSave={async () => await submitForm()}>
-                        <input type='text'/>   
-                    </ControlledInput>
-                        
-                    <ErrorMessage name='lastName' component='div' />
-
-                    <ControlledInput label='Birth Date' 
-                                    value={values.birthDate}
-                                    error={errors.birthDate ? String(errors.birthDate) : undefined}
-                                    setValue={birthDate => { console.log(birthDate); setFieldValue('birthDate', birthDate) }}
-                                    parseValue={value => new Date(value)}
-                                    convertToString={value => formatDate(value)}
-                                    onSave={async () => await submitForm()}>
-                        <input type='date'/>
-                    </ControlledInput>
-
-                    <ErrorMessage name='birthDate' component='div' />
-
-                    <ControlledInput label='Phone' 
-                                    value={values.phone}
-                                    error={errors.phone}
-                                    setValue={phone => { setFieldValue('phone', phone) }}
-                                    parseValue={value => value}
-                                    convertToString={value => value}
-                                    onSave={async () => await submitForm()}>
-                        <input type='tel'/>   
-                    </ControlledInput>
-
-                    <ErrorMessage name='phone' component='div' />
-                </Form>
+                                <ControlledInput label='Phone' 
+                                                value={values.phone}
+                                                error={errors.phone}
+                                                setValue={phone => { setFieldValue('phone', phone) }}
+                                                parseValue={value => value}
+                                                convertToString={value => value}
+                                                onSave={async () => await submitForm()}>
+                                    <input type='tel'/>   
+                                </ControlledInput>
+                                <ErrorMessage name='phone' component='div' />
+                            </table>
+                        </div>
+                    </Form>
+                </div>
             )}}
         </Formik>
     )

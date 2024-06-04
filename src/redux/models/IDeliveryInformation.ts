@@ -6,7 +6,7 @@ export default interface IDeliveryInformation {
 
     originAddress: string;
     destinationAddress?: string;
-    destiantionAddressId?: string;
+    destinationAddressId?: string;
 
     deliveryAcceptedAt?: Date;
     actualDeliveryTime?: number;
