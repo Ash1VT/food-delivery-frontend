@@ -11,9 +11,12 @@ import OrderPlacingPage from './pages/order-placing-page/OrderPlacingPage';
 import ManagerPanelPage from './pages/manager-panel/ManagerPanelPage';
 import ModeratorPanelPage from './pages/moderator-panel/ModeratorPanelPage';
 import RestaurantOrdersPage from './pages/restaurant-orders/RestaurantOrdersPage';
+import AvailableOrdersPage from './pages/available-orders/AvailableOrdersPage';
 import './styles/App.css';
 import './styles/buttons.css';
 import './styles/popup.css';
+import './styles/values.css'
+import './styles/labels.css'
 import '@smastrom/react-rating/style.css';
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css/animate.compat.css'
@@ -23,7 +26,7 @@ const App = () => {
     return (
         <>
             <ReactNotifications/>
-            <RestaurantOrdersPage/>
+            <ProfilePage/>
         </>
     )
 }

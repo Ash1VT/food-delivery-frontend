@@ -1,0 +1,53 @@
+.upload__user__image__form {
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+}
+
+.upload__user__image__input {
+    width: 0.1px;
+	height: 0.1px;
+	 opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.upload__user__image__input__label {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.upload__user__image__input + .upload__user__image__input__label {
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    background-color: #f7ab09;
+    border-radius: 4px;
+    text-align: center;
+
+    font-family: Poppins;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.upload__user__image__chosen {
+    background-color: #3af12a !important;
+}
+
+.upload__user__image__button {
+    padding: 10px 20px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 18px;
+
+    margin-top: 20px;
+    flex-grow: 1;
+}

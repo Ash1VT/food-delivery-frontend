@@ -1,0 +1,44 @@
+.delivery__addresses__table {
+    width: 100%;
+    margin-right: 15px;
+}
+
+.delivery__addresses__row {
+    height: 40px;
+}
+
+.delivery__address__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: start;
+}
+
+.delivery__address__margin__left {
+    margin-left: 50px;
+    padding-right: 10px;
+}
+
+.delivery__address__scrollbar {
+    width: 100%;
+    min-height: 150px;
+}
+
+.delivery__address__icon__wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.delivery__address__approved__icon {
+    color: green;
+}
+
+.delivery__address__rejected__icon {
+    color: red;
+}
+
+.delivery__address__pending__icon {
+    color: orange;
+}

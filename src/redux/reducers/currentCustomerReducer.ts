@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import ICustomerAddress from "../models/ICustomerAddress";
 import IOrder from "../models/IOrder";
+import IOrderReview from "../models/IOrderReview";
 
 interface CurrentCustomerState {
     currentCustomerAddresses: ICustomerAddress[]
     currentCustomerOrders: IOrder[]
+    currentCustomerOrdersReviews: IOrderReview[]
 }
 
 const initialState: CurrentCustomerState = {
@@ -48,13 +50,74 @@ const initialState: CurrentCustomerState = {
             "details": "Approved for delivery with environmental compliance.",
             "approvalStatus": "approved",
             "customerId": "5"
+        },
+        {
+            "id": "6",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "rejected",
+            "customerId": "5"
+        },
+        {
+            "id": "7",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
+        },
+        
+        {
+            "id": "8",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
+        },
+        
+        {
+            "id": "9",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
+        },
+        
+        {
+            "id": "10",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
+        },
+        
+        {
+            "id": "11",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
+        },
+        
+        {
+            "id": "12",
+            "country": "Germany",
+            "region": "Bavaria",
+            "details": "Approved for delivery with environmental compliance.",
+            "approvalStatus": "pending",
+            "customerId": "5"
         }
     ],
     currentCustomerOrders: [{
         "id": "1",
         "customerId": "1",
         "restaurantId": "1",
-        "status": "ready",
+        "status": "delivered",
         "createdAt": new Date("2024-06-01T12:00:00Z"),
         "items": [
             {
@@ -68,7 +131,15 @@ const initialState: CurrentCustomerState = {
         ],
         "deliveryInformation": {
             "id": "1",
-            "originAddress": "123 Main St, Springfield, IL"
+            "originAddress": "123 Main St, Springfield, IL",
+            "destinationAddress": "456 Oak St, Springfield, IL",
+            "actualDeliveryTime": 220,
+            "deliveryAcceptedAt": new Date("2024-06-04 01:00:00+03:00"),
+            "deliveryFinishedAt": new Date("2024-06-04 04:00:00+03:00"),
+            "supposedDeliveryTime": 210,
+            "deliveryDistance": 5,
+            "deliveryType": "walking",
+
         },
         "priceInformation": {
             "id": "1",
@@ -78,19 +149,6 @@ const initialState: CurrentCustomerState = {
             "decountedItemsPrice": 10,
             "deliveryPrice": 5,
             "totalPrice": 15
-        },
-        "customer": {
-            "id": "1",
-            "imageUrl": "https://example.com/images/customers/john_doe.jpg",
-            "firstName": "John",
-            "lastName": "Doe",
-            "fullName": "John Doe",
-            "phone": "+11234567890",
-            "birthDate": new Date("1990-01-01"),
-            "isActive": true,
-            "isEmailVerified": true,
-            "email": "john.doe@example.com",
-            "role": "customer"
         },
         "restaurant":  {
             "id": "1",
@@ -154,8 +212,33 @@ const initialState: CurrentCustomerState = {
                     "restaurantId": "1"
                 }
             ]
+        },
+        "courier": {
+            "id": "1",
+            "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+            "firstName": "John",
+            "lastName": "Doe",
+            "fullName": "John Doe",
+            "phone": "+11234567890",
+            "birthDate": new Date("1990-01-01"),
+            "isActive": true,
+            "isEmailVerified": true,
+            "email": "john.doe@example.com",
+            "role": "courier"
+        },
+        "courierRating": 4.5,
+        "review": {
+            "id": "1",
+            "orderId": "1",
+            "userFullName": "John Doe",
+            "userId": "1",
+            "userImageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+            "rating": 4.5,
+            "text": "Great food!",
         }
-    }]
+    },
+    ],
+    currentCustomerOrdersReviews: []
 }
 
 const currentCustomerSlice = createSlice({

@@ -17,14 +17,16 @@ const SearchComponent = ({ searchPlaceholder, onSearch } : SearchComponentProps)
   
     return (
         <div className="search__container">
-            <SearchIcon className="search__icon"/>
-            <input
-            type="text"
-            className="search__input"
-            placeholder={searchPlaceholder}
-            value={query}
-            onChange={handleInputChange}
-            />
+            <div className="search__input__wrapper">
+                <SearchIcon className="search__icon"/>
+                <input
+                    type="text"
+                    className="search__input"
+                    placeholder={searchPlaceholder}
+                    value={query}
+                    onChange={handleInputChange}
+                />
+            </div>
             <button className="search__button button__wrapper button__text" onClick={handleSearchClick}>Search</button>
         </div>
     )

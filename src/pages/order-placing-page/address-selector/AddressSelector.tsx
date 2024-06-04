@@ -5,7 +5,7 @@ import ICustomerAddress from 'src/redux/models/ICustomerAddress';
 import './address_selector.css'
 
 const AddressSelector = ({order, addresses, onAddressSelected} : SelectAddressProps) => {
-    const [selectedAddressId, setSelectedAddressId] = useState<string | undefined | null>(order.deliveryInformation.destiantionAddressId);
+    const [selectedAddressId, setSelectedAddressId] = useState<string | undefined | null>(order.deliveryInformation.destinationAddressId);
 
     const handleSelect = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const addressId = event.target.value

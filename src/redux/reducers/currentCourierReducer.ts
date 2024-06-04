@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import IOrder from "../models/IOrder";
+import IOrderReview from "../models/IOrderReview";
 
 interface CurrentCourierState {
     availableOrders: IOrder[]
     currentCourierOrders: IOrder[]
+    currentCourierRating: number
+    currentCourierReviewsCount: number
+    currentCourierReviews: IOrderReview[]
+
 }
 
 const initialState: CurrentCourierState = {
+    currentCourierRating: 0,
+    currentCourierReviewsCount: 0,
+    currentCourierReviews: [],
     availableOrders: [
         {
             "id": "1",

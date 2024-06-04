@@ -119,7 +119,7 @@ const Navbar = ({currentUser} : NavbarProps) => {
                 return null;
           
         }
-      }, [currentUser?.role]);
+    }, [currentUser?.role]);
 
     return (
         <div className="navbar__container">
