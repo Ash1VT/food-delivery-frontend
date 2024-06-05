@@ -8,17 +8,19 @@ import { getCurrentCustomerApprovedAddresses, getCurrentCustomerOrder } from 'sr
 import PromocodeInput from './promocode-input/PromocodeInput'
 import OrderPrice from './order-price/OrderPrice'
 import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
+import { useParams } from 'react-router-dom'
+import NotFoundPage from '../not-found-page/NotFoundPage'
 import './order_placing_page.css'
 
 const OrderPlacingPage = () => {
-    const orderId = '1'
+    const {orderId} = useParams()
     const currentUser = useAppSelector(getCurrentUser)
 
     const order = useAppSelector((state) => getCurrentCustomerOrder(state, orderId));
     const customerAddresses = useAppSelector(getCurrentCustomerApprovedAddresses);
 
     if (!order) {
-        return null
+        return <NotFoundPage/>
     }
 
     const handleAddressSelected = async (addressId: string) => {

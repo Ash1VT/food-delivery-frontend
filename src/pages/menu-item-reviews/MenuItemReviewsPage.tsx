@@ -1,7 +1,7 @@
 import Footer from 'src/components/footer'
 import Navbar from 'src/components/navbar'
 import RestaurantReference from 'src/components/restaurant-reference/RestaurantReference'
-import { getRestaurant } from '../../redux/selectors/restaurantSelectors'
+import { getRestaurant, getRestaurantIsOpen } from '../../redux/selectors/restaurantSelectors'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import { getMenuItemCurrentUserReview, getMenuItemReviews,  } from '../../redux/selectors/menuItemReviewsSelectors'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
@@ -13,20 +13,28 @@ import MenuItemReference from 'src/components/menu-item-reference/MenuItemRefere
 import CurrentUserReview from 'src/components/reviews/current-user-review/CurrentUserReview'
 import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 import './menu_item_reviews.css'
+import { useParams } from 'react-router-dom'
+import NotFoundPage from '../not-found-page/NotFoundPage'
 
 const MenuItemReviewsPage = () => {
 
-    const restaurantId = '1'
-    const menuItemId = '1'
+    const { restaurantId, menuItemId } = useParams()
 
     const currentUser = useAppSelector((state) => getCurrentUser(state))
     const currentUserMenuItemReview = useAppSelector((state) => getMenuItemCurrentUserReview(state))
 
     const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
+    const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
+    
     const menuItem = useAppSelector((state) => getMenuItem(state, restaurantId, menuItemId))
 
     const reviews = useAppSelector((state) => getMenuItemReviews(state))
+
     const dispatch = useAppDispatch()
+
+    if(!menuItem || !restaurant) {
+        return <NotFoundPage/>
+    }
     
     const handleReviewAdded = async (review: ReviewCreateType) => {
         dispatch(addReview(review))
@@ -47,7 +55,7 @@ const MenuItemReviewsPage = () => {
             <div className="menu__item__reviews__wrapper">
                 <div className="menu__item__reviews">
                     <div className="menu__item__reviews__references">
-                        <RestaurantReference {...restaurant}/>
+                        <RestaurantReference isRestaurantOpen={isRestaurantOpen} restaurant={restaurant}/>
                         <MenuItemReference menuItem={menuItem}/>
                     </div>
                     <div className="menu__item__reviews__content">

@@ -17,7 +17,7 @@ const initialState: MenuState = {
                 {
                     "id": "1",
                     "name": "Pizzas",
-                    "imageUrl": "images/pizza1.png",
+                    "imageUrl": "/images/pizza1.png",
                     "items": [
                         {
                             "id": "1",

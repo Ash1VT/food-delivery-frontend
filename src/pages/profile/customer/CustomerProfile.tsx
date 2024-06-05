@@ -14,8 +14,10 @@ import PreparingOrdersCategory from './preparing-orders-category/PreparingOrders
 import ReadyOrdersCategory from './ready-orders-category/ReadyOrdersCategory';
 import DeliveringOrdersCategory from './delivering-orders-category/DeliveringOrdersCategory';
 import DeliveredOrdersCategory from './delivered-orders-category/DeliveredOrdersCategory';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerProfileProps) => {
+    const navigate = useNavigate()
     const approvedAddresses = useAppSelector(getCurrentCustomerApprovedAddresses)
     const pendingAddresses = useAppSelector(getCurrentCustomerPendingAddresses)
     const rejectedAddresses = useAppSelector(getCurrentCustomerRejectedAddresses)
@@ -45,8 +47,7 @@ const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerP
     }
 
     const handleOrderPlaced = async (orderId: string) => {
-        alert('Order placed')
-        addSuccessNotification('Order placed')
+        navigate(`/orders/${orderId}`)
     }
 
     const handleOpenAddingOrderReview = () => {

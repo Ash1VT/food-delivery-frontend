@@ -1,7 +1,7 @@
 import Footer from "src/components/footer"
 import Navbar from "src/components/navbar"
 import { useAppSelector } from "src/hooks/redux/useAppSelector"
-import { getRestaurant } from "../../redux/selectors/restaurantSelectors"
+import { getRestaurant, getRestaurantIsOpen } from "../../redux/selectors/restaurantSelectors"
 import RestaurantReference from "src/components/restaurant-reference/RestaurantReference"
 import ReviewsList from "src/components/reviews/reviews-list/ReviewsList"
 import ReviewCreateForm from "src/components/reviews/forms/review-create-form/ReviewCreateForm"
@@ -14,20 +14,25 @@ import MenuItemReference from "src/components/menu-item-reference/MenuItemRefere
 import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
 import { getCurrentUser } from "src/redux/selectors/currentUserSelectors"
 import './restaurant_reviews.css'
+import { useParams } from "react-router-dom"
+import NotFoundPage from "../not-found-page/NotFoundPage"
 
 
 const RestaurantReviewsPage = () => {
 
-    const restaurantId = '1'
+    const { restaurantId } = useParams()
 
     const currentUser = useAppSelector((state) => getCurrentUser(state))
     const currentUserRestaurantReview = useAppSelector((state) => getRestaurantCurrentUserReview(state))
 
     const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
-
+    const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
     const reviews = useAppSelector((state) => getRestaurantReviews(state))
 
     const dispatch = useAppDispatch()
+
+    if (!restaurant) 
+        return <NotFoundPage/>
 
     const handleReviewAdded = async (review: ReviewCreateType) => {
         dispatch(addReview(review))
@@ -47,7 +52,7 @@ const RestaurantReviewsPage = () => {
             <Navbar currentUser={currentUser}/>
             <div className="restaurant__reviews__wrapper">
                 <div className="restaurant__reviews__content">
-                    <RestaurantReference {...restaurant}/>
+                    <RestaurantReference isRestaurantOpen={isRestaurantOpen} restaurant={restaurant}/>
                     {currentUser &&
                         <div className="restaurant__reviews__current__user">
                             <CurrentUserReview currentUser={currentUser} 

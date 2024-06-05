@@ -1,8 +1,8 @@
 import StarIcon from '@mui/icons-material/Star'
 import './show_restaurant_rating_button.css'
-import { ShowRestaurantInfoRatingProps } from 'src/components/restaurant-reference/restaurant_reference.types'
+import { ShowRestaurantRatingButtonProps } from 'src/components/restaurant-reference/restaurant_reference.types'
 
-const ShowRestaurantRatingButton = ({ratingValue, reviewsCount, onShowRatingButtonClick} : ShowRestaurantInfoRatingProps) => {
+const ShowRestaurantRatingButton = ({ratingValue, reviewsCount, onShowRatingButtonClick} : ShowRestaurantRatingButtonProps) => {
     return (
         <button className="button__wrapper show__restaurant__rating__button__wrapper" onClick={onShowRatingButtonClick}>
             <StarIcon viewBox='8 2 8 20'/>

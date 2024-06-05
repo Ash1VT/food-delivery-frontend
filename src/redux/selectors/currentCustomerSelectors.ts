@@ -27,7 +27,7 @@ export const getCurrentCustomerRejectedAddresses = createSelector(
 )
 
 export const getCurrentCustomerOrder = createSelector(
-    [getCurrentCustomerOrders, (_, orderId: string) => orderId],
+    [getCurrentCustomerOrders, (_, orderId?: string) => orderId],
     (currentCustomerOrders, orderId) => {
         return currentCustomerOrders.find((order) => order.id === orderId)
     }

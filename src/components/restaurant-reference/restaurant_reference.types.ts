@@ -1,19 +1,22 @@
+import IRestaurant from "src/redux/models/IRestaurant"
+
 export type RestaurantReferenceProps = {
-    name: string
-    description: string
-    imageUrl: string
-    address: string
-    ratingValue: number
-    reviewsCount: number
+    restaurant: IRestaurant
+    isRestaurantOpen: boolean
 }
 
 export type ShowRestaurantInfoButtonProps = {
     onShowInfoButtonClick?: () => void
 }
 
-export type ShowRestaurantInfoRatingProps = {
+export type ShowRestaurantRatingButtonProps = {
     ratingValue: number
     reviewsCount: number
-    onShowRatingButtonClick?: () => void
+    onShowRatingButtonClick: () => void
     [key: string]: any
+}
+
+export type ShowRestaurantWorkingHoursButtonProps = {
+    isOpen: boolean
+    onShowWorkingHoursButtonClick?: () => void
 }

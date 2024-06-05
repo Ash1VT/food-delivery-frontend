@@ -1,5 +1,4 @@
 import Navbar from 'src/components/navbar';
-import { FooterMenuColumnProps } from 'src/components/footer/footer.types';
 import Footer from 'src/components/footer';
 import RestaurantsList from './restaurants-list/RestaurantsList';
 import { SelectComponentProps } from 'src/components/ui/select-component/select_component.types';
@@ -9,11 +8,13 @@ import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
 import { getRestaurants } from '../../redux/selectors/restaurantSelectors';
-import './restaurants_page.css'
 import SelectComponent from 'src/components/ui/select-component/SelectComponent';
 import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors';
+import { useNavigate } from 'react-router-dom';
+import './restaurants_page.css'
 
 const RestaurantsPage = () => {
+    const navigate = useNavigate()
     const currentUser = useAppSelector(getCurrentUser)
 
     const restaurants = useAppSelector(getRestaurants)
@@ -49,6 +50,10 @@ const RestaurantsPage = () => {
         console.log(selected)
     }
 
+    const handleRestaurantClick = (restaurantId: string) => {
+        navigate(`/restaurants/${restaurantId}/menu`)
+    }
+
     const getPageRangeDisplayed = () => {
         if (mb || vs)
             return 0
@@ -77,7 +82,7 @@ const RestaurantsPage = () => {
                         </div>
                         <SelectComponent {...selectProps}/>
                     </div>
-                    <RestaurantsList restaurants={restaurants}/>
+                    <RestaurantsList restaurants={restaurants} onRestaurantClick={handleRestaurantClick}/>
                     <ReactPaginate breakLabel="..."
                                 nextLabel=">"
                                 onPageChange={handlePageClick}
