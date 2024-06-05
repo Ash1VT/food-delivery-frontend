@@ -1,10 +1,11 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { ViewRestaurantsButtonProps } from '../../../featured_restaurants.types';
 import './view_restaurants_button.css'
 
 
-const ViewRestaurantsButton = () => {
+const ViewRestaurantsButton = ({onClick} : ViewRestaurantsButtonProps) => {
     return (
-        <div className="button__wrapper view__restaurants__button__wrapper" role="button">
+        <div className="button__wrapper view__restaurants__button__wrapper" role="button" onClick={onClick}>
             <div className="button__text view__restaurants__button__text">
                 View All
             </div>

@@ -6,8 +6,8 @@ import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import IOrder from 'src/redux/models/IOrder'
 import { addSuccessNotification } from 'src/utils/notifications'
 import { getCurrentRestaurantFinishedOrders, getCurrentRestaurantPendingOrders, getCurrentRestaurantPreparingOrders } from 'src/redux/selectors/currentRestaurantManagerSelector'
-import './restaurant_orders_page.css'
 import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
+import './restaurant_orders_page.css'
 
 const RestaurantOrdersPage = () => {
     const currentUser = useAppSelector(getCurrentUser)

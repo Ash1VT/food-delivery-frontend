@@ -15,6 +15,13 @@
 .menu__category__item__image__wrapper {
     grid-area: I;
     max-width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.menu__category__item__image__hovered {
+    transform: scale(1.05);  
 }
 
 .menu__category__item__image__wrapper img {
@@ -30,6 +37,7 @@
     flex-direction: column;
     margin: 5px 0 10px 0;
     max-width: 220px;
+    cursor: pointer;
 }
 
 .menu__category__item__name {

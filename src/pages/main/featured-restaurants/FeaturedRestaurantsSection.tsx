@@ -1,9 +1,16 @@
 import FeaturedRestaurant from './featured-restaurant/FeaturedRestaurant'
 import { FeaturedRestaurantsSectionProps } from './featured_restaurants.types'
 import ViewRestaurantsButton from './ui/buttons/view-restaurants-button/ViewRestaurantsButton'
+import { useNavigate } from 'react-router-dom'
 import './featured_restaurants_section.css'
 
 const FeaturedRestaurantsSection = ({restaurants} : FeaturedRestaurantsSectionProps) => {
+    const navigate = useNavigate()
+
+    const handleViewRestarantsClick = () => {
+        navigate('/restaurants')
+    }
+
     return (
         <div className="featured__restaurants__container">
             <div className="featured__restaurants__wrapper section__wrapper">
@@ -20,7 +27,7 @@ const FeaturedRestaurantsSection = ({restaurants} : FeaturedRestaurantsSectionPr
                     })}
                 </div>
                 <div className="featured__restaurants__buttons__wrapper">
-                    <ViewRestaurantsButton/>
+                    <ViewRestaurantsButton onClick={handleViewRestarantsClick}/>
                 </div>
             </div>
         </div>

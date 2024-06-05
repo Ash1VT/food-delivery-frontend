@@ -10,6 +10,7 @@ import { useCallback } from 'react';
 import LogoutButton from './ui/buttons/logout-button/LogoutButton';
 import Divider from '../ui/divider/Divider';
 import "./navbar.css";
+import { useNavigate } from 'react-router-dom';
 
 const CustomerNavbarButtons = ({currentUser, onOpenOrderCartButtonClick, onProfileButtonClick, onLogout} : CustomerNavbarButtonsProps) => {
     return (
@@ -92,28 +93,57 @@ const AnonymousNavbarButtons = ({onOpenOrderCartButtonClick, onLoginButtonClick}
 }
 
 const Navbar = ({currentUser} : NavbarProps) => {
-    
-    const onClick = async () => {
+    const navigate = useNavigate();
+
+    const handleOpenOrderCart = () => {
         console.log('Click!');
+    }
+
+    const handleOpenProfile = () => {
+        navigate('/profile');
+    }
+
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
+    const handleLogout = async () => {
+        console.log('Click!');
+    }
+
+    const handleOpenAvailableOrders = () => {
+        navigate('/orders/available');
+    }
+
+    const handleOpenRestaurantPanel = () => {
+        navigate('restaurants/panel');
+    }
+
+    const handleOpenRestaurantOrders = () => {
+        navigate('/restaurant/orders');
+    }
+
+    const handleOpenModeratorPanel = () => {
+        navigate('/moderator/panel');
     }
 
     const renderContent = useCallback(() => {
         if (!currentUser) {
-            return <AnonymousNavbarButtons onLoginButtonClick={onClick} onOpenOrderCartButtonClick={onClick}/>
+            return <AnonymousNavbarButtons onLoginButtonClick={handleLogin} onOpenOrderCartButtonClick={handleOpenOrderCart}/>
         }
 
         switch(currentUser.role) {
             case 'customer': 
-                return <CustomerNavbarButtons currentUser={currentUser} onOpenOrderCartButtonClick={onClick} onProfileButtonClick={onClick} onLogout={onClick}/>
+                return <CustomerNavbarButtons currentUser={currentUser} onOpenOrderCartButtonClick={handleOpenOrderCart} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
             
             case 'courier': 
-                return <CourierNavbarButtons currentUser={currentUser} onAvailableOrdersButtonClick={onClick} onProfileButtonClick={onClick} onLogout={onClick}/>
+                return <CourierNavbarButtons currentUser={currentUser} onAvailableOrdersButtonClick={handleOpenAvailableOrders} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
             
             case 'restaurant_manager': 
-                return <RestaurantManagerNavbarButtons currentUser={currentUser} onRestaurantPanelButtonClick={onClick} onRestaurantOrdersButtonClick={onClick} onProfileButtonClick={onClick} onLogout={onClick}/>
+                return <RestaurantManagerNavbarButtons currentUser={currentUser} onRestaurantPanelButtonClick={handleOpenRestaurantPanel} onRestaurantOrdersButtonClick={handleOpenRestaurantOrders} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
             
             case 'moderator': 
-                return <ModeratorNavbarButtons currentUser={currentUser} onModeratorPanelButtonClick={onClick} onProfileButtonClick={onClick} onLogout={onClick}/>
+                return <ModeratorNavbarButtons currentUser={currentUser} onModeratorPanelButtonClick={handleOpenModeratorPanel} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
                 
             default: 
                 return null;
@@ -125,7 +155,7 @@ const Navbar = ({currentUser} : NavbarProps) => {
         <div className="navbar__container">
             <div className="navbar__wrapper">
                 <picture>
-                    <img src="images/logo.svg" className="navbar__logo" alt="Logo"/> 
+                    <img src="/images/logo.svg" className="navbar__logo" alt="Logo"/> 
                 </picture>
                 {renderContent()}
             </div>

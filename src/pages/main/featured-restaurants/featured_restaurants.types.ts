@@ -9,3 +9,7 @@ export type FeaturedRestaurantProps = {
 export type FeaturedRestaurantsSectionProps = {
     restaurants: FeaturedRestaurantProps[]
 }
+
+export type ViewRestaurantsButtonProps = {
+    onClick: () => void
+}

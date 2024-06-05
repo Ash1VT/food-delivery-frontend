@@ -16,13 +16,13 @@ export type AnonymousNavbarProps = {
 export type CustomerNavbarButtonsProps = {
     currentUser: IUser
     onOpenOrderCartButtonClick: () => void
-    onProfileButtonClick: () => Promise<void>
+    onProfileButtonClick: () => void
     onLogout: () => Promise<void>
 }
 
 export type CourierNavbarButtonsProps = {
     currentUser: IUser
-    onProfileButtonClick: () => Promise<void>
+    onProfileButtonClick: () => void
     onLogout: () => Promise<void>
     onAvailableOrdersButtonClick: () => void
 }
@@ -31,14 +31,14 @@ export type RestaurantManagerNavbarButtonsProps = {
     currentUser: IUser
     onRestaurantPanelButtonClick: () => void
     onRestaurantOrdersButtonClick: () => void
-    onProfileButtonClick: () => Promise<void>
+    onProfileButtonClick: () => void
     onLogout: () => Promise<void>
 }
 
 export type ModeratorNavbarButtonsProps = {
     currentUser: IUser
     onModeratorPanelButtonClick: () => void
-    onProfileButtonClick: () => Promise<void>
+    onProfileButtonClick: () => void
     onLogout: () => Promise<void>
 }
 

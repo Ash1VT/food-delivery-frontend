@@ -1,27 +1,25 @@
+import IMenuCategory from "src/redux/models/IMenuCategory"
+import IMenuItem from "src/redux/models/IMenuItem"
+
 export type MenuItemProps = {
-    id: string
-    imageUrl: string
-    name: string
-    description: string
-    categoryName: string
-    ratingValue: number
-    reviewsCount: number
-    price: number
+    menuItem: IMenuItem
+    onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuItemsListProps = {
-    items: MenuItemProps[]
+    menuItems: IMenuItem[]
+    onMenuItemClick: (menuItemId: string) => void
 }
 
 
 export type MenuCategoryProps = {
-    id: string
-    name: string
-    items: MenuItemProps[]
+    menuCategory: IMenuCategory
+    onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuCategoriesListProps = {
-    menuCategories: MenuCategoryProps[]    
+    menuCategories: IMenuCategory[]
+    onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuCategoryNameProps = {

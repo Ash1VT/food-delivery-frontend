@@ -32,16 +32,16 @@ export const getMenuItems = createSelector(
 )
 
 export const getMenuCategory = createSelector(
-    [getMenuCategories, (_: RootState, restaurantId: string, menuCategoryId: string) => menuCategoryId],
+    [getMenuCategories, (_: RootState, restaurantId?: string, menuCategoryId?: string) => menuCategoryId],
     (menuCategories, id) => {
-        return menuCategories?.find((menuCategory) => menuCategory.id === id) as IMenuCategory
+        return menuCategories?.find((menuCategory) => menuCategory.id === id)
     }
 )
 
 export const getMenuItem = createSelector(
-    [getMenuItems, (_: RootState, restaurantId: string, menuItemid: string) => menuItemid],
+    [getMenuItems, (_: RootState, restaurantId?: string, menuItemid?: string) => menuItemid],
     (menuItems, id) => {
-        return menuItems?.find((menuItem) => menuItem.id === id) as IMenuItem
+        return menuItems?.find((menuItem) => menuItem.id === id)
     }
 )
 

@@ -11,26 +11,32 @@ import OrderCart from 'src/components/order-cart/OrderCart'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import IMenuCategory from '../../redux/models/IMenuCategory'
 import RestaurantReference from 'src/components/restaurant-reference/RestaurantReference'
-import { getRestaurant } from '../../redux/selectors/restaurantSelectors'
+import { getRestaurant, getRestaurantIsOpen } from '../../redux/selectors/restaurantSelectors'
 import MenuCategoriesActiveContext from './contexts/MenuCategoriesActiveContext'
 import { getMenu } from 'src/redux/selectors/menuSelectors'
-import './menu_page.css'
 import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
+import { useNavigate, useParams } from 'react-router-dom'
+import NotFoundPage from '../not-found-page/NotFoundPage'
+import './menu_page.css'
 
 const MenuPage = () => {
-    const restaurantId = '1';
+    const { restaurantId } = useParams()
+    const navigate = useNavigate()
     const currentUser = useAppSelector(getCurrentUser)
 
     const menu = useAppSelector(state => getMenu(state, restaurantId))
-    
-    
     const restaurant = useAppSelector(state => getRestaurant(state, restaurantId))
+    const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
 
     const [categoriesRefs, setCategoriesRefs] = useState<MenuCategoryRef[]>([])
     const [activeCategoryId, setActiveCategoryId] = useState<string>('1')
     
-    if (!menu) {
-        return <div>error</div>
+    if (!menu || !restaurant) {
+        return <NotFoundPage/>
+    }
+
+    const handleMenuItemClick = (menuItemId: string) => {
+        navigate(`/restaurants/${restaurantId}/items/${menuItemId}`)
     }
 
     const menuCategories = menu.menuCategories
@@ -63,8 +69,8 @@ const MenuPage = () => {
                                 {/* <div className="menu__restaurant__wrapper">
 
                                 </div> */}
-                                <RestaurantReference {...restaurant}/>
-                                <MenuCategoriesList menuCategories={menuCategories}/>
+                                <RestaurantReference isRestaurantOpen={isRestaurantOpen} restaurant={restaurant}/>
+                                <MenuCategoriesList menuCategories={menuCategories} onMenuItemClick={handleMenuItemClick}/>
                             </div>
                             {/* <div className="menu__order__cart">
                                 <OrderCart/>
