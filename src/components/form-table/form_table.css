@@ -1,0 +1,46 @@
+.form__table {
+    flex-grow: 1;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__table__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+.form__table__input__wrapper {
+    margin-left: 50px;
+}
+
+.form__table__input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.form__table__button {
+    padding: 10px 20px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 20px;
+
+    margin-top: 20px;
+    width: 100%;
+}

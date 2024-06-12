@@ -3,11 +3,15 @@ import { RestaurantMenuCategoryItemProps, RestaurantMenuCategoryProps, Restauran
 import RemoveItemFromCategoryButton from '../ui/buttons/remove-item-from-category-button/RemoveItemFromCategoryButton'
 import { Scrollbar } from 'react-scrollbars-custom'
 import OpenAddingMenuCategoryButton from '../ui/buttons/open-adding-menu-category-button/OpenAddingMenuCategoryButton'
-import IMenuCategory from 'src/redux/models/IMenuCategory'
 import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton'
 import DeleteIconButton from '../../../components/ui/buttons/delete-icon-button/DeleteIconButton'
 import AddIconButton from '../../../components/ui/buttons/add-icon-button/AddIconButton'
 import DroppableMenuItemZone from './droppable-menu-item-zone/DroppableMenuItemZone'
+import { MenuCategoryUpdate } from 'src/models/menuCategory.interfaces'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import EditRestaurantMenuCategoryModal from '../ui/modals/edit-restaurant-menu-category-modal/EditRestaurantMenuCategoryModal'
+import AddRestaurantMenuCategoryModal from '../ui/modals/add-restaurant-menu-category-modal/AddRestaurantMenuCategoryModal'
+import AddRestaurantMenuModal from '../ui/modals/add-restaurant-menu-modal/AddRestaurantMenuModal'
 import './restaurant_menus.css'
 
 
@@ -43,14 +47,14 @@ const RestaurantMenuCategoryItem = ({menuItem, menuCategoryId, onRemove} : Resta
     )
 }
 
-const RestaurantMenuCategory = ({menuCategory, onOpenEditingMenuCategory, onDeleteMenuCategory, onRemoveMenuItem} : RestaurantMenuCategoryProps) => {
+const RestaurantMenuCategory = ({menuCategory, onMenuCategoryUpdated, onMenuCategoryImageUploaded, onMenuCategoryDeleted, onMenuItemRemoved} : RestaurantMenuCategoryProps) => {
     
-    const handleOpenEditingMenuCategory = async () => {
-        await onOpenEditingMenuCategory(menuCategory)
+    const handleMenuCategoryUpdated = async (menuCategory: MenuCategoryUpdate) => {
+        await onMenuCategoryUpdated(menuCategory)
     }
 
-    const handleDeleteMenuCategory = async () => {
-        await onDeleteMenuCategory(menuCategory.id)
+    const handleMenuCategoryDeleted = async () => {
+        await onMenuCategoryDeleted(menuCategory.id)
     }
 
     return (
@@ -63,8 +67,10 @@ const RestaurantMenuCategory = ({menuCategory, onOpenEditingMenuCategory, onDele
                 </th>
                 <th>
                     <div className='restaurant__menu__category__buttons'>
-                        <EditIconButton className='open__editing__menu__category__button' onEdit={handleOpenEditingMenuCategory}/>
-                        <DeleteIconButton className='delete__menu__category__button' onDelete={handleDeleteMenuCategory}/>
+                        <ModalWindow button={EditIconButton({className: 'open__editing__menu__category__button'})}>
+                            <EditRestaurantMenuCategoryModal menuCategory={menuCategory} onMenuCategoryImageUploaded={onMenuCategoryImageUploaded} onMenuCategoryUpdated={handleMenuCategoryUpdated} />
+                        </ModalWindow>
+                        <DeleteIconButton className='delete__menu__category__button' onDelete={handleMenuCategoryDeleted}/>
                     </div>
                 </th>
             </tr>
@@ -75,7 +81,7 @@ const RestaurantMenuCategory = ({menuCategory, onOpenEditingMenuCategory, onDele
                         <RestaurantMenuCategoryItem
                             menuItem={menuItem}
                             menuCategoryId={menuCategory.id}
-                            onRemove={onRemoveMenuItem}
+                            onRemove={onMenuItemRemoved}
                         />
                         <tr className='restaurant__menu__category__bottom__tr'/>
                     </React.Fragment>
@@ -91,7 +97,7 @@ const RestaurantMenuCategory = ({menuCategory, onOpenEditingMenuCategory, onDele
     )
 }
 
-const RestaurantMenu = ({menu, onRemoveMenuItem, onDeleteMenuCategory, onOpenEditingMenuCategory, onOpenAddingMenuCategory} : RestaurantMenuProps ) => {
+const RestaurantMenu = ({menu, onMenuItemRemoved, onMenuCategoryCreated, onMenuCategoryUpdated, onMenuCategoryImageUploaded, onMenuCategoryDeleted} : RestaurantMenuProps ) => {
     const isMenuCategoriesEmpty = menu.menuCategories.length === 0
     
     return (
@@ -110,9 +116,10 @@ const RestaurantMenu = ({menu, onRemoveMenuItem, onDeleteMenuCategory, onOpenEdi
                                 <tr className='restaurant__menu__category__top__tr'/>
                                     <RestaurantMenuCategory
                                         menuCategory={menuCategory}
-                                        onOpenEditingMenuCategory={onOpenEditingMenuCategory}
-                                        onRemoveMenuItem={onRemoveMenuItem}
-                                        onDeleteMenuCategory={onDeleteMenuCategory}
+                                        onMenuCategoryUpdated={onMenuCategoryUpdated}
+                                        onMenuCategoryImageUploaded={onMenuCategoryImageUploaded}
+                                        onMenuCategoryDeleted={onMenuCategoryDeleted}
+                                        onMenuItemRemoved={onMenuItemRemoved}
                                         />
                                 </React.Fragment>
                             )
@@ -121,16 +128,19 @@ const RestaurantMenu = ({menu, onRemoveMenuItem, onDeleteMenuCategory, onOpenEdi
                 </Scrollbar>
 
             }
-            <OpenAddingMenuCategoryButton onOpen={onOpenAddingMenuCategory}/>
+            <ModalWindow button={OpenAddingMenuCategoryButton({})}>
+                <AddRestaurantMenuCategoryModal menuId={menu.id} onMenuCategoryCreated={onMenuCategoryCreated}/>
+            </ModalWindow>
         </div>
     )
 }
 
-const RestaurantMenusNames = ({activeMenuId, setActiveMenuId, menusNames, onOpenAddingMenu} : RestaurantMenusNamesProps) => {
+const RestaurantMenusNames = ({activeMenuId, setActiveMenuId, menusNames, restaurantId, onMenuCreated} : RestaurantMenusNamesProps) => {
 
     const onMenuNameClick = (menuId: string) => {
         setActiveMenuId(menuId)
     }
+
 
     return (
         <div className="restaurant__menus__names__container">
@@ -144,26 +154,29 @@ const RestaurantMenusNames = ({activeMenuId, setActiveMenuId, menusNames, onOpen
                         </div>
                     )
                 })}
-                <AddIconButton className='open__adding__menu__button' onAdd={onOpenAddingMenu}/>
+                <ModalWindow button={AddIconButton({className: 'open__adding__menu__button'})}>
+                    <AddRestaurantMenuModal restaurantId={restaurantId} onMenuCreated={onMenuCreated}/>
+                </ModalWindow>
             </Scrollbar>
         </div>
     )
 }
 
-const RestaurantMenus = ({menus, onRemoveMenuItem, onDeleteMenuCategory, onOpenAddingMenu, onOpenAddingMenuCategory, onOpenEditingMenuCategory} : RestaurantMenusProps) => {
+const RestaurantMenus = ({menus, restaurantId, onMenuItemRemoved, onMenuCategoryDeleted, onMenuCategoryCreated, onMenuCategoryUpdated, onMenuCategoryImageUploaded, onMenuCreated} : RestaurantMenusProps) => {
     const [activeMenuId, setActiveMenuId] = React.useState<string | null>(menus[0] ? menus[0].id : null)
     const activeMenu = menus.find((menu) => menu.id === activeMenuId)
 
     return (
         <div className="restaurant__menus__container">
-            <RestaurantMenusNames activeMenuId={activeMenuId} setActiveMenuId={setActiveMenuId} menusNames={menus} onOpenAddingMenu={onOpenAddingMenu}/>
+            <RestaurantMenusNames activeMenuId={activeMenuId} setActiveMenuId={setActiveMenuId} menusNames={menus} restaurantId={restaurantId} onMenuCreated={onMenuCreated}/>
             {activeMenu &&
                 <RestaurantMenu
                     menu={activeMenu} 
-                    onRemoveMenuItem={onRemoveMenuItem} 
-                    onOpenEditingMenuCategory={onOpenEditingMenuCategory} 
-                    onOpenAddingMenuCategory={onOpenAddingMenuCategory}
-                    onDeleteMenuCategory={onDeleteMenuCategory}/>
+                    onMenuItemRemoved={onMenuItemRemoved} 
+                    onMenuCategoryCreated={onMenuCategoryCreated}
+                    onMenuCategoryUpdated={onMenuCategoryUpdated}
+                    onMenuCategoryImageUploaded={onMenuCategoryImageUploaded}
+                    onMenuCategoryDeleted={onMenuCategoryDeleted}/>
             }
         </div>
     )

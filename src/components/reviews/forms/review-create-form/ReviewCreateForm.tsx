@@ -7,29 +7,29 @@ import './review_create_form.css'
 
 
 interface FormValues {
-    userFullName: string
-    userImageUrl?: string
-    userId: string
-    ratingValue: number
-    text?: string
+    customerFullName: string
+    customerImageUrl?: string
+    customerId: string
+    rating: number
+    comment?: string
 }
 
 const ReviewForm = ({ title, currentUser, onReviewAdded } : ReviewCreateFormProps) => {
 
     const initialValues: FormValues = {
-        userFullName: currentUser.fullName,
-        userImageUrl: currentUser.imageUrl,
-        userId: currentUser.id,
-        ratingValue: 5,
-        text: ''
+        customerFullName: currentUser.fullName,
+        customerImageUrl: currentUser.imageUrl,
+        customerId: currentUser.id,
+        rating: 5,
+        comment: ''
     }
 
     const validationSchema: Yup.Schema<FormValues> = Yup.object().shape({
-        userFullName: Yup.string().required(),
-        userImageUrl: Yup.string().required(),
-        userId: Yup.string().required(),
-        ratingValue: Yup.number().min(1).max(5).required('Provide a rating'),
-        text: Yup.string().optional(),
+        customerFullName: Yup.string().required(),
+        customerImageUrl: Yup.string().required(),
+        customerId: Yup.string().required(),
+        rating: Yup.number().min(1).max(5).required('Provide a rating'),
+        comment: Yup.string().optional(),
     })
 
     const handleSubmit = async (values: FormValues, { setSubmitting } : FormikHelpers<FormValues>)  => {
@@ -61,14 +61,14 @@ const ReviewForm = ({ title, currentUser, onReviewAdded } : ReviewCreateFormProp
                                         {currentUser.fullName}
                                     </div>
                                 </div>
-                                <CustomRating className="review__create__form__rating" style={{ maxWidth: 200 }} value={values.ratingValue} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
+                                <CustomRating className="review__create__form__rating" style={{ maxWidth: 200 }} value={values.rating} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
                             </div>
                             <Form className="review__create__form">
-                                <input type="hidden" name="userId" value={values.userId} />
-                                <input type="hidden" name="userFullName" value={values.userFullName} />
-                                <input type="hidden" name="userImageUrl" value={values.userImageUrl} />
-                                <input type="hidden" name="ratingValue" value={values.ratingValue} />
-                                <textarea name="text" className="review__create__form__input review__create__form__text" placeholder="Write your review..." value={values.text} onChange={handleChange} />
+                                <input type="hidden" name="customerId" value={values.customerId} />
+                                <input type="hidden" name="customerFullName" value={values.customerFullName} />
+                                <input type="hidden" name="customerImageUrl" value={values.customerImageUrl} />
+                                <input type="hidden" name="ratingValue" value={values.rating} />
+                                <textarea name="text" className="review__create__form__input review__create__form__text" placeholder="Write your review..." value={values.comment} onChange={handleChange} />
                                 <button type="submit" className="button__wrapper button__text review__create__form__button">Submit Your Review</button>
                             </Form>
                         </div>

@@ -1,39 +1,47 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import CustomTextInput from 'src/components/ui/custom-inputs/custom-text-input/CustomTextInput'
 import RememberMe from '../../components/ui/remember_me/RememberMe'
 import CopyrightRounded from '@mui/icons-material/CopyrightRounded'
 import { Formik, FormikHelpers } from 'formik';
-import { addSuccessNotification } from 'src/utils/notifications';
+import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications';
 import FormErrorNotification from 'src/components/form-error-notification/FormErrorNotification';
 import SignupButton from './ui/buttons/registration_button/SignupButton';
-import './registration_page.css'
 import Copyright from 'src/components/ui/copyright/Copyright';
 import formatDate from 'src/utils/formatDate';
 import PhoneInput from 'react-phone-input-2';
 import CustomDateInput from 'src/components/ui/custom-inputs/custom-date-input/CustomDateInput';
 import CustomPhoneInput from 'src/components/ui/custom-inputs/custom-phone-input/CustomPhoneInput';
+import { phoneRegExp } from 'src/constants/phone';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
+import { fetchCurrentUser, register } from 'src/redux/actions/user.actions';
+import { useAppSelector } from 'src/hooks/redux/useAppSelector';
+import './registration_page.css'
 
 interface FormValues {
     firstName: string
     lastName: string
     email: string
-    birthDate: Date
+    birthDate?: Date
     phone: string
     password: string
     confirmPassword: string
 }
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
-
 const RegistrationPage = () => {
+    const [queryParams] = useSearchParams()
+
+    const dispatch = useAppDispatch()
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector(state => state.currentUserReducer)
+
     const [isRememberMe, setIsRememberMe] = useState(false)
 
     const initialValues: FormValues = {
         firstName: '',
         lastName: '',
         email: '',
-        birthDate: new Date(),
+        birthDate: undefined,
         phone: '',
         password: '',
         confirmPassword: ''
@@ -50,9 +58,25 @@ const RegistrationPage = () => {
     })
 
     const handleSubmit = async (values: FormValues, { setSubmitting } : FormikHelpers<FormValues>) => {
-        alert(JSON.stringify(values, null, 2))
         setSubmitting(false)
-        addSuccessNotification('Registration successful. Email with activation link has been sent to your email address.')
+
+        const userCreateData = {
+            ...values,
+            role: queryParams.get('role') as string,
+            birthDate: values.birthDate as Date
+        }
+
+        dispatch(register(userCreateData)).then((result) => {
+            if (result.type === 'currentUser/register/fulfilled') {
+                dispatch(fetchCurrentUser())
+                addSuccessNotification('Registration successful. Email with activation link has been sent to your email address.')
+            }
+
+            if (result.type === 'currentUser/register/rejected') {
+                addErrorNotification(result.payload as string)
+            }
+        })
+
     }
 
 
@@ -61,6 +85,7 @@ const RegistrationPage = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
+            validateOnChange={false}
         >
         {({ errors, values, setFieldValue, submitForm }) => {
             
@@ -73,29 +98,29 @@ const RegistrationPage = () => {
                                 <div className="registration__title">Sign up</div>
                                 <div className="registration__signup__wrapper">
                                     <span className="registration__dont__have__account">Already have an account? </span>
-                                    <a className="registration__signup__link" href='#'>Log in</a>
+                                    <Link className="registration__signup__link" to='/login'>Log in</Link>
                                 </div>
                                 <div className="registration__inputs">
                                     <div className="registration__first__name__input">
-                                        <CustomTextInput label='First name' type='text' error={errors.firstName} value={values.firstName} setValue={(firstName: string) => setFieldValue('firstName', firstName)}/>
+                                        <CustomTextInput label='First name' type='text' placeholder='Enter your first name' error={errors.firstName} value={values.firstName} setValue={(firstName: string) => setFieldValue('firstName', firstName)}/>
                                     </div>
                                     <div className="registration__last__name__input">
-                                        <CustomTextInput label='Last name' type='text' error={errors.lastName} value={values.lastName} setValue={(lastName: string) => setFieldValue('lastName', lastName)}/>
+                                        <CustomTextInput label='Last name' type='text' placeholder='Enter your last name' error={errors.lastName} value={values.lastName} setValue={(lastName: string) => setFieldValue('lastName', lastName)}/>
                                     </div>
                                     <div className="registration__email__input">
-                                        <CustomTextInput label='Email address' type='email' error={errors.email} value={values.email} setValue={(email: string) => setFieldValue('email', email)}/>
+                                        <CustomTextInput label='Email address' type='email' placeholder='Enter your email address' error={errors.email} value={values.email} setValue={(email: string) => setFieldValue('email', email)}/>
                                     </div>
                                     <div className="registration__birth__date__input">
-                                        <CustomDateInput label='Birth date' error={errors.birthDate} value={values.birthDate} setValue={(birthDate: Date) => setFieldValue('birthDate', birthDate)}/>
+                                        <CustomDateInput label='Birth date' error={errors.birthDate} placeholder='Enter your birth date' value={values.birthDate} setValue={(birthDate: Date) => setFieldValue('birthDate', birthDate)}/>
                                     </div>
                                     <div className="registration__phone__input">
-                                        <CustomPhoneInput label='Phone number' country='by' error={errors.phone} value={values.phone} setValue={(phone: string) => setFieldValue('phone', phone)}/>
+                                        <CustomPhoneInput label='Phone number' country='by' placeholder='Enter your phone number' countryCodeEditable={true} error={errors.phone} value={values.phone} setValue={(phone: string) => setFieldValue('phone', phone)}/>
                                     </div>
                                     <div className="registration__password__input">
-                                        <CustomTextInput label='Password' type='password' error={errors.password} value={values.password} setValue={(password: string) => setFieldValue('password', password)}/>
+                                        <CustomTextInput label='Password' type='password' placeholder='Enter your password' error={errors.password} value={values.password} setValue={(password: string) => setFieldValue('password', password)}/>
                                     </div>
                                     <div className="registration__confirm__password__input">
-                                        <CustomTextInput label='Confirm password' type='password' error={errors.confirmPassword} value={values.confirmPassword} setValue={(password: string) => setFieldValue('confirmPassword', password)}/>
+                                        <CustomTextInput label='Confirm password' type='password' placeholder='Enter your password again' error={errors.confirmPassword} value={values.confirmPassword} setValue={(password: string) => setFieldValue('confirmPassword', password)}/>
                                     </div>
                                 </div>
                                 <div className="registration__remember__me__wrapper">

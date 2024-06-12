@@ -3,33 +3,33 @@ import Navbar from 'src/components/navbar'
 import Footer from 'src/components/footer'
 import OrdersTable from 'src/components/orders-table/OrdersTable'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import IOrder from 'src/redux/models/IOrder'
 import { addSuccessNotification } from 'src/utils/notifications'
-import { getCurrentRestaurantFinishedOrders, getCurrentRestaurantPendingOrders, getCurrentRestaurantPreparingOrders } from 'src/redux/selectors/currentRestaurantManagerSelector'
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
+import { getCurrentRestaurantDeliveredOrders, getCurrentRestaurantPendingOrders, getCurrentRestaurantPreparingOrders } from 'src/redux/selectors/currentManagerSelectors'
+import { Order } from 'src/models/order.interfaces'
 import './restaurant_orders_page.css'
 
 const RestaurantOrdersPage = () => {
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
+    const { isLoading: isCurrentManagerRestaurantOrdersLoading, error: currentManagerRestaurantOrdersError } = useAppSelector((state) => state.currentManagerRestaurantOrdersReducer)
 
     const pendingOrders = useAppSelector(getCurrentRestaurantPendingOrders)
     const preparingOrders = useAppSelector(getCurrentRestaurantPreparingOrders)
-    const finishedOrders = useAppSelector(getCurrentRestaurantFinishedOrders)
+    const deliveredOrders = useAppSelector(getCurrentRestaurantDeliveredOrders)
 
-    const handleOrderConfirmed = async (order: IOrder) => {
+
+    if (!currentUser) {
+        return <></>
+    }
+    
+    const handleOrderConfirmed = async (order: Order) => {
         alert(`Order ${order.id} is confirmed`)
         addSuccessNotification(`Order ${order.id} is confirmed`)
     }
 
-    const handleOrderPrepared = async (order: IOrder) => {
+    const handleOrderPrepared = async (order: Order) => {
         alert(`Order ${order.id} is prepared`)
         addSuccessNotification(`Order ${order.id} is prepared`)
     }
-
-    const handleOpenDetailedInformation = async (order: IOrder) => {
-        alert(`Open detailed information for order ${order.id}`)
-    }
-
 
     return (
         <div className="container restaurant__orders__container">
@@ -40,23 +40,23 @@ const RestaurantOrdersPage = () => {
                         <div className='restaurant__orders__section__title'>Pending Orders</div>
                         <OrdersTable
                             orders={pendingOrders}
+                            currentUser={currentUser}
                             buttonLabel='Confirm Order'
-                            onOrderButtonClick={handleOrderConfirmed}
-                            onOpenDetailedInformation={handleOpenDetailedInformation}/>
+                            onOrderButtonClick={handleOrderConfirmed}/>
                     </div>
                     <div className='restaurant__orders__section restaurant__orders__preparing'>
                         <div className='restaurant__orders__section__title'>Preparing Orders</div>
                         <OrdersTable
                             orders={preparingOrders}
+                            currentUser={currentUser}
                             buttonLabel='Prepare Order'
-                            onOrderButtonClick={handleOrderPrepared}
-                            onOpenDetailedInformation={handleOpenDetailedInformation}/>
+                            onOrderButtonClick={handleOrderPrepared}/>
                     </div>
                     <div className='restaurant__orders__section restaurant__orders__preparing'>
-                        <div className='restaurant__orders__section__title'>Finished Orders</div>
+                        <div className='restaurant__orders__section__title'>Delivered Orders</div>
                         <OrdersTable
-                            orders={finishedOrders}
-                            onOpenDetailedInformation={handleOpenDetailedInformation}/>
+                            currentUser={currentUser}
+                            orders={deliveredOrders}/>
                     </div>
                 </div>
             </div>

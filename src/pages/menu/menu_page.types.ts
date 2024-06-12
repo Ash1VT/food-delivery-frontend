@@ -1,24 +1,24 @@
-import IMenuCategory from "src/redux/models/IMenuCategory"
-import IMenuItem from "src/redux/models/IMenuItem"
+import { MenuCategory } from "src/models/menuCategory.interfaces"
+import { MenuItem } from "src/models/menuItem.interfaces"
 
 export type MenuItemProps = {
-    menuItem: IMenuItem
+    menuItem: MenuItem
     onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuItemsListProps = {
-    menuItems: IMenuItem[]
+    menuItems: MenuItem[]
     onMenuItemClick: (menuItemId: string) => void
 }
 
 
 export type MenuCategoryProps = {
-    menuCategory: IMenuCategory
+    menuCategory: MenuCategory
     onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuCategoriesListProps = {
-    menuCategories: IMenuCategory[]
+    menuCategories: MenuCategory[]
     onMenuItemClick: (menuItemId: string) => void
 }
 

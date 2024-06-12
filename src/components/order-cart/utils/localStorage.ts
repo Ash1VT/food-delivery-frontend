@@ -1,6 +1,6 @@
-import IOrderItem from "../../../redux/models/IOrderItem"
+import { OrderItem } from "src/models/orderItem.interfaces"
 
-export const addOrderCartItemToLocalStorage = (orderCartItem: IOrderItem) => {
+export const addOrderCartItemToLocalStorage = (orderCartItem: OrderItem) => {
     const orderCartItems = getOrderCartItemsFromLocalStorage()
     console.log(orderCartItems)
 
@@ -33,7 +33,7 @@ export const setOrderCartItemQuantityInLocalStorage = (id: string, quantity: num
 }
 
 
-export const getOrderCartItemsFromLocalStorage = (): IOrderItem[] => {
+export const getOrderCartItemsFromLocalStorage = (): OrderItem[] => {
     const orderCartItems = localStorage.getItem('orderCartItems')
     if (orderCartItems) {
         return JSON.parse(orderCartItems)

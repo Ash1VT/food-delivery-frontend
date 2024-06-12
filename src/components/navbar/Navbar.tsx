@@ -5,18 +5,31 @@ import { AnonymousNavbarProps, CourierNavbarButtonsProps, CustomerNavbarButtonsP
 import OpenOrderCartButton from './ui/buttons/order-cart-button/OpenOrderCartButton';
 import ProfileButton from './ui/buttons/profile-button/ProfileButton';
 import DropdownMenu from '../dropdown-menu/DropdownMenu';
-import InterfaceButton from './ui/buttons/interface-button/InterfaceButton';
-import { useCallback } from 'react';
+import CustomButton from '../ui/buttons/custom-button/CustomButton';
+import { useCallback, useEffect } from 'react';
 import LogoutButton from './ui/buttons/logout-button/LogoutButton';
 import Divider from '../ui/divider/Divider';
-import "./navbar.css";
 import { useNavigate } from 'react-router-dom';
+import ModalWindow from '../modal-window/ModalWindow';
+import OrderCart from '../order-cart/OrderCart';
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
+import { fetchOrderCartItemsFromLocalStorage } from 'src/redux/reducers/orderCartReducer';
+import { logout } from 'src/redux/actions/user.actions';
+import "./navbar.css";
 
-const CustomerNavbarButtons = ({currentUser, onOpenOrderCartButtonClick, onProfileButtonClick, onLogout} : CustomerNavbarButtonsProps) => {
+const CustomerNavbarButtons = ({currentUser, onProfileButtonClick, onLogout} : CustomerNavbarButtonsProps) => {
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchOrderCartItemsFromLocalStorage())
+    }, [])
+
     return (
         <>
             <div className='navbar__buttons__wrapper'>
-                <OpenOrderCartButton onClick={onOpenOrderCartButtonClick}/>
+                <ModalWindow button={OpenOrderCartButton({})}>
+                    <OrderCart/>
+                </ModalWindow>
                 <Divider width='8px' height='auto' color='#CFCFCF'/>
                 <ProfileButton imageUrl={currentUser.imageUrl} onClick={onProfileButtonClick}/>
                 <LogoutButton onClick={onLogout}/>
@@ -29,7 +42,7 @@ const CourierNavbarButtons = ({currentUser, onAvailableOrdersButtonClick, onProf
     return (
         <>
             <div className='navbar__buttons__wrapper'>
-                <InterfaceButton label='Available Orders' onClick={onAvailableOrdersButtonClick}/>
+                <CustomButton label='Available Orders' onClick={onAvailableOrdersButtonClick}/>
                 <Divider width='8px' height='auto' color='#CFCFCF'/>
                 <ProfileButton imageUrl={currentUser.imageUrl} onClick={onProfileButtonClick}/>
                 <LogoutButton onClick={onLogout}/>
@@ -42,8 +55,8 @@ const RestaurantManagerNavbarButtons = ({currentUser, onRestaurantPanelButtonCli
     return (
         <>
             <div className='navbar__buttons__wrapper'>
-                <InterfaceButton label='Restaurant Panel' onClick={onRestaurantPanelButtonClick}/>
-                <InterfaceButton label='Restaurant Orders' onClick={onRestaurantOrdersButtonClick}/>
+                <CustomButton label='Restaurant Panel' onClick={onRestaurantPanelButtonClick}/>
+                <CustomButton label='Restaurant Orders' onClick={onRestaurantOrdersButtonClick}/>
                 <Divider width='8px' height='auto' color='#CFCFCF'/>
                 <ProfileButton imageUrl={currentUser.imageUrl} onClick={onProfileButtonClick}/>
                 <LogoutButton onClick={onLogout}/>
@@ -56,7 +69,7 @@ const ModeratorNavbarButtons = ({currentUser, onModeratorPanelButtonClick, onPro
     return (
         <>
             <div className='navbar__buttons__wrapper'>
-                <InterfaceButton label='Moderator Panel' onClick={onModeratorPanelButtonClick}/>
+                <CustomButton label='Moderator Panel' onClick={onModeratorPanelButtonClick}/>
                 <Divider width='8px' height='auto' color='#CFCFCF'/>
                 <ProfileButton imageUrl={currentUser.imageUrl} onClick={onProfileButtonClick}/>
                 <LogoutButton onClick={onLogout}/>
@@ -65,26 +78,33 @@ const ModeratorNavbarButtons = ({currentUser, onModeratorPanelButtonClick, onPro
     )
 }
 
-const AnonymousNavbarButtons = ({onOpenOrderCartButtonClick, onLoginButtonClick} : AnonymousNavbarProps) => {
+const AnonymousNavbarButtons = ({onLoginButtonClick} : AnonymousNavbarProps) => {
+    const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        dispatch(fetchOrderCartItemsFromLocalStorage())
+    }, [])
+    
     return (
         <>
             <div className='navbar__buttons__wrapper'>
-                <OpenOrderCartButton onClick={onOpenOrderCartButtonClick}/>
+                <ModalWindow button={OpenOrderCartButton({})}>
+                    <OrderCart/>
+                </ModalWindow>
                 <Divider width='8px' height='auto' color='#CFCFCF'/>
                 <LoginButton onClick={onLoginButtonClick}/>
                 <DropdownMenu title='Sign up' items={[
                     {
                         label: 'Customer',
-                        path: '/profile'
+                        path: '/register?role=customer'
                     },
                     {
                         label: 'Courier',
-                        path: '/profile'
+                        path: '/register?role=courier'
                     },
                     {
                         label: 'Restaurant Manager',
-                        path: '/profile'
+                        path: '/register?role=restaurant_manager'
                     }
                 ]}/>
             </div>
@@ -94,10 +114,7 @@ const AnonymousNavbarButtons = ({onOpenOrderCartButtonClick, onLoginButtonClick}
 
 const Navbar = ({currentUser} : NavbarProps) => {
     const navigate = useNavigate();
-
-    const handleOpenOrderCart = () => {
-        console.log('Click!');
-    }
+    const dispatch = useAppDispatch()
 
     const handleOpenProfile = () => {
         navigate('/profile');
@@ -108,7 +125,7 @@ const Navbar = ({currentUser} : NavbarProps) => {
     }
 
     const handleLogout = async () => {
-        console.log('Click!');
+        dispatch(logout())
     }
 
     const handleOpenAvailableOrders = () => {
@@ -116,7 +133,7 @@ const Navbar = ({currentUser} : NavbarProps) => {
     }
 
     const handleOpenRestaurantPanel = () => {
-        navigate('restaurants/panel');
+        navigate('/restaurants/panel');
     }
 
     const handleOpenRestaurantOrders = () => {
@@ -129,12 +146,12 @@ const Navbar = ({currentUser} : NavbarProps) => {
 
     const renderContent = useCallback(() => {
         if (!currentUser) {
-            return <AnonymousNavbarButtons onLoginButtonClick={handleLogin} onOpenOrderCartButtonClick={handleOpenOrderCart}/>
+            return <AnonymousNavbarButtons onLoginButtonClick={handleLogin}/>
         }
 
         switch(currentUser.role) {
             case 'customer': 
-                return <CustomerNavbarButtons currentUser={currentUser} onOpenOrderCartButtonClick={handleOpenOrderCart} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
+                return <CustomerNavbarButtons currentUser={currentUser} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>
             
             case 'courier': 
                 return <CourierNavbarButtons currentUser={currentUser} onAvailableOrdersButtonClick={handleOpenAvailableOrders} onProfileButtonClick={handleOpenProfile} onLogout={handleLogout}/>

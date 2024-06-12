@@ -41,7 +41,7 @@
     gap: 20px;
     padding: 20px 25px 30px 45px;
     border: 2px solid #FFA500;
-    width: 850px;
+    min-width: 850px;
     min-height: 600px;
 }
 

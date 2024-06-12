@@ -1,31 +1,30 @@
-import ICustomerAddress from "src/redux/models/ICustomerAddress";
-import IOrder from "src/redux/models/IOrder";
-import IOrderItem from "src/redux/models/IOrderItem";
-import IPriceInformation from "src/redux/models/IPriceInformation";
+import { CustomerAddress } from "src/models/customerAddress.interfaces"
+import { Order } from "src/models/order.interfaces"
+import { OrderItem } from "src/models/orderItem.interfaces"
 
 export type OrderItemProps = {
-    item: IOrderItem
+    item: OrderItem
     onQuantityChanged: (id: string, quantity: number) => Promise<void>
 }
 
 export type OrderItemsListProps = {
-    items: IOrderItem[]
+    items: OrderItem[]
     onQuantityChanged: (id: string, quantity: number) => Promise<void>
 }
 
 export type SelectAddressProps = {
-    order: IOrder
-    addresses: ICustomerAddress[]
+    order: Order
+    addresses: CustomerAddress[]
     onAddressSelected: (addressId: string) => Promise<void>
 }
 
 export type PromocodeInputProps = {
-    order: IOrder
+    order: Order
     onPromocodeApplied: (promocodeName: string) => Promise<boolean>
 }
 
 export type OrderPriceProps = {
-    order: IOrder
+    order: Order
     onOrderPlaced: (orderId: string) => Promise<void>
 }
 
@@ -35,6 +34,6 @@ export type ApplyPromocodeButtonProps = {
 }
 
 export type PlaceOrderButtonProps = {
-    order: IOrder
+    order: Order
     onOrderPlaced: (orderId: string) => Promise<void>
 }

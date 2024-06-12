@@ -2,12 +2,10 @@ import React from 'react'
 import { RestaurantApplicationProps, RestaurantApplicationsProps } from '../moderator_panel.types'
 import OpenShowApplicationDetailsButton from '../ui/buttons/open-show-application-details-button/OpenShowApplicationDetailsButton'
 import './restaurant_applications.css'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import RestaurantApplicationModal from '../ui/modals/restaurant-application-modal/RestaurantApplicationModal'
 
-const RestaurantApplication = ({application, onOpenShowDetailsApplication} : RestaurantApplicationProps) => {
-
-    const handleOpenApplicationDetails = async () => {
-        await onOpenShowDetailsApplication(application)
-    }
+const RestaurantApplication = ({application, onRestaurantApplicationApproved, onRestaurantApplicationRejected, onRestaurantApplicationUpdated} : RestaurantApplicationProps) => {
 
     return (
         <tr className='restaurant__application__row'>
@@ -43,14 +41,19 @@ const RestaurantApplication = ({application, onOpenShowDetailsApplication} : Res
             </td>
             <td className='restaurant__application__column'>
                 <div className="restuarant__application__buttons__wrapper restaurant__application__margin__left">
-                    <OpenShowApplicationDetailsButton onOpen={handleOpenApplicationDetails}/>
+                    <ModalWindow button={OpenShowApplicationDetailsButton({})}>
+                        <RestaurantApplicationModal application={application}
+                                                    onRestaurantApplicationApproved={onRestaurantApplicationApproved}
+                                                    onRestaurantApplicationRejected={onRestaurantApplicationRejected}
+                                                    onRestaurantApplicationUpdated={onRestaurantApplicationUpdated}/>
+                    </ModalWindow>
                 </div>
             </td>
         </tr>
     )
 }
 
-const RestaurantApplications = ({applications, onOpenShowDetailsApplication} : RestaurantApplicationsProps) => {
+const RestaurantApplications = ({applications, onRestaurantApplicationApproved, onRestaurantApplicationRejected, onRestaurantApplicationUpdated} : RestaurantApplicationsProps) => {
     return (
         <div className="restaurant__applications__container">
             <table className='restaurant__applications__table'>
@@ -94,7 +97,9 @@ const RestaurantApplications = ({applications, onOpenShowDetailsApplication} : R
                     <React.Fragment key={application.id}>
                         <RestaurantApplication
                             application={application}
-                            onOpenShowDetailsApplication={onOpenShowDetailsApplication}
+                            onRestaurantApplicationApproved={onRestaurantApplicationApproved}
+                            onRestaurantApplicationRejected={onRestaurantApplicationRejected}
+                            onRestaurantApplicationUpdated={onRestaurantApplicationUpdated}
                         />
                         <tr style={{height: '10px'}}/>
                     </React.Fragment>

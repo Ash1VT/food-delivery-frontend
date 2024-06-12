@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react'
-import IUser from 'src/redux/models/IUser';
 import PersonalInformation from '../personal-information/PersonalInformation';
 import { addSuccessNotification } from 'src/utils/notifications';
-import { CustomerProfileProps, ProfileCategoryClicksContextProps } from '../profile.types';
+import { CustomerProfileProps, ModeratorProfileProps, ProfileCategoryClicksContextProps } from '../profile.types';
 import ProfileCategoryClicksContext from '../contexts/ProfileCategoryClicksContext';
 import ProfileCategory from '../profile-category/ProfileCategory';
+import { User } from 'src/models/user.interfaces';
 
-const ModeratorProfile = ({currentUser, onPersonalInformationUpdated} : CustomerProfileProps) => {
+const ModeratorProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : ModeratorProfileProps) => {
 
     const [activeCategoryId, setActiveCategoryId] = useState<number>(0)
 
@@ -16,12 +16,6 @@ const ModeratorProfile = ({currentUser, onPersonalInformationUpdated} : Customer
         setActiveCategoryId
     }
     
-    const handleUserImageUploaded = async (userId: string, image: File) => {
-        alert('User image uploaded')
-        addSuccessNotification('User image successfully uploaded')
-    }
-
-
     const profileCategories = [
         {
             id: 0,
@@ -29,9 +23,9 @@ const ModeratorProfile = ({currentUser, onPersonalInformationUpdated} : Customer
         }
     ]
 
-    const renderContent = useCallback((currentUser: IUser) => {
+    const renderContent = useCallback((currentUser: User) => {
         if (activeCategoryId === 0) {
-            return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onUserImageUploaded={handleUserImageUploaded}/>
+            return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onVerificationEmailSent={onVerificationEmailSent} onUserImageUploaded={onUserImageUploaded}/>
         }
     }, [activeCategoryId]);
 

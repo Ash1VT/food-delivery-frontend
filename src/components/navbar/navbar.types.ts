@@ -1,34 +1,32 @@
-import IUser from "src/redux/models/IUser"
+import { User } from "src/models/user.interfaces"
 
 export type NavbarProps = {
-    currentUser?: IUser | undefined | null
+    currentUser?: User | undefined | null
 }
 
 export type NavbarRightComponentProps = {
-    currentUser?: IUser | undefined | null
+    currentUser?: User | undefined | null
 }
 
 export type AnonymousNavbarProps = {
-    onOpenOrderCartButtonClick: () => void
     onLoginButtonClick: () => void
 }
 
 export type CustomerNavbarButtonsProps = {
-    currentUser: IUser
-    onOpenOrderCartButtonClick: () => void
+    currentUser: User
     onProfileButtonClick: () => void
     onLogout: () => Promise<void>
 }
 
 export type CourierNavbarButtonsProps = {
-    currentUser: IUser
+    currentUser: User
     onProfileButtonClick: () => void
     onLogout: () => Promise<void>
     onAvailableOrdersButtonClick: () => void
 }
 
 export type RestaurantManagerNavbarButtonsProps = {
-    currentUser: IUser
+    currentUser: User
     onRestaurantPanelButtonClick: () => void
     onRestaurantOrdersButtonClick: () => void
     onProfileButtonClick: () => void
@@ -36,26 +34,21 @@ export type RestaurantManagerNavbarButtonsProps = {
 }
 
 export type ModeratorNavbarButtonsProps = {
-    currentUser: IUser
+    currentUser: User
     onModeratorPanelButtonClick: () => void
     onProfileButtonClick: () => void
     onLogout: () => Promise<void>
 }
 
 export type OpenOrderCartButtonProps = {
-    onClick: () => void
+    onClick?: () => void
 }
 
 export type ProfileButtonProps = {
     imageUrl: string
-    onClick: () => void
-}
-
-export type InterfaceButtonProps = {
-    label: string
-    onClick: () => void
+    onClick?: () => void
 }
 
 export type LogoutButtonProps = {
-    onClick: () => Promise<void>
+    onClick?: () => Promise<void>
 }

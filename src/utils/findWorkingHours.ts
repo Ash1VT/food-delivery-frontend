@@ -1,7 +1,7 @@
-import IWorkingHours from "src/redux/models/IWorkingHours"
+import { WorkingHours } from "src/models/workingHours.interfaces"
 
-const findWorkingHours = (workingHours: IWorkingHours[], dayOfWeek: string) => {
-    return workingHours.find(workingHour => workingHour.dayOfWeek === dayOfWeek)
+const findWorkingHours = (workingHours: WorkingHours[], dayOfWeek: string) => {
+    return workingHours.find(workingHour => workingHour.dayOfWeek.toLowerCase() === dayOfWeek.toLowerCase())
 }
 
 export default findWorkingHours

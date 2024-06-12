@@ -1,14 +1,14 @@
 import { SearchComponentProps } from "src/components/ui/search-component/search_component.types"
 import { SelectComponentProps } from "src/components/ui/select-component/select_component.types"
-import IRestaurant from "src/redux/models/IRestaurant"
+import { Restaurant } from "src/models/restaurant.interfaces"
 
 export type RestaurantProps = {
-    restaurant: IRestaurant
+    restaurant: Restaurant
     onRestaurantClick: (restaurantId: string) => void
 }
 
 export type RestaurantsListProps = {
-    restaurants: IRestaurant[]
+    restaurants: Restaurant[]
     onRestaurantClick: (restaurantId: string) => void
 }
 

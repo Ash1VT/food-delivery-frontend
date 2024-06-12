@@ -1,7 +1,7 @@
-import IRestaurant from "src/redux/models/IRestaurant"
+import { Restaurant } from "src/models/restaurant.interfaces"
 
 export type RestaurantReferenceProps = {
-    restaurant: IRestaurant
+    restaurant: Restaurant
     isRestaurantOpen: boolean
 }
 

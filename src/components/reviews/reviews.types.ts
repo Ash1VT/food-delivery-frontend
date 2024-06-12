@@ -1,12 +1,12 @@
-import IUser from "src/redux/models/IUser"
+import { User } from "src/models/user.interfaces"
 
 
 export type ReviewCreateType = {
-    userFullName: string
-    userImageUrl?: string
-    userId: string
-    ratingValue: number
-    text?: string
+    customerFullName: string
+    customerImageUrl?: string
+    customerId: string
+    rating: number
+    comment?: string
 }
 
 export type ReviewType = {
@@ -15,8 +15,8 @@ export type ReviewType = {
 
 export type ReviewUpdateType = {
     id: string
-    ratingValue: number
-    text?: string
+    rating: number
+    comment?: string
 }
 
 export type ReviewProps = ReviewType
@@ -27,7 +27,7 @@ export type ReviewsListProps = {
 
 export type ReviewCreateFormProps = {
     title: string
-    currentUser: IUser
+    currentUser: User
     onReviewAdded: (review: ReviewCreateType) => Promise<void>
 }
 

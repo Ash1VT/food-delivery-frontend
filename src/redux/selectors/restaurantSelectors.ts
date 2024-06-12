@@ -1,16 +1,13 @@
 import { createSelector } from "@reduxjs/toolkit"
-import IRestaurant from "../models/IRestaurant"
 import { RootState } from "../store";
 import moment from "moment";
 
 const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-export const getRestaurants = (state: RootState) => state.restaurantsReducer.restaurants;
-
 export const getRestaurant = createSelector(
-    [getRestaurants, (_, restaurantId?: string) => restaurantId],
+    [(state: RootState) => state.restaurantsReducer.restaurants, (_, restaurantId?: string) => restaurantId],
     (restaurants, restaurantId) => {
-      return restaurants.find((restaurant) => restaurant.id === restaurantId)
+        return restaurants.find((restaurant) => restaurant.id === restaurantId)
     }
 )
 

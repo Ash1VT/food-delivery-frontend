@@ -1,31 +1,68 @@
 import { useCallback } from "react"
 import Navbar from "src/components/navbar"
-import { UserUpdateProps } from "./profile.types"
 import Footer from "src/components/footer"
-import { getCurrentUser } from "src/redux/selectors/currentUserSelectors"
 import { useAppSelector } from "src/hooks/redux/useAppSelector"
-import { addSuccessNotification } from "src/utils/notifications"
+import { addErrorNotification, addSuccessNotification } from "src/utils/notifications"
 import CustomerProfile from "./customer/CustomerProfile"
 import CourierProfile from "./courier/CourierProfile"
 import ModeratorProfile from "./moderator/ModeratorProfile"
 import RestaurantManagerProfile from "./restaurant-manager/RestaurantManagerProfile"
 import './profile_page.css'
+import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
+import { resendVerificationEmail, updateCurrentUser, uploadCurrentUserImage } from "src/redux/actions/user.actions"
+import { UserUpdate, UserUploadImage } from "src/models/user.interfaces"
 
 
 const ProfilePage = () => {
-    const currentUser = useAppSelector(getCurrentUser)
+    const dispatch = useAppDispatch()
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
-    const handlePersonalInformationUpdated = async (user: UserUpdateProps) => {
-        alert(JSON.stringify(user))
-        addSuccessNotification('Personal information successfully updated')
+    const handlePersonalInformationUpdated = async (user: UserUpdate) => {
+        dispatch(updateCurrentUser(user)).then((result) => {
+            if (result.type === 'currentUser/updateCurrentUser/fulfilled') {
+                addSuccessNotification('Personal information successfully updated')
+                return
+            }
+
+            if (result.type === 'currentUser/updateCurrentUser/rejected') {
+                addErrorNotification(result.payload as string)
+                return
+            }
+        })
+    }
+
+    const handleUserImageUploaded = async (user: UserUploadImage) => {
+        dispatch(uploadCurrentUserImage(user)).then((result) => {
+            if (result.type === 'currentUser/uploadCurrentUserImage/fulfilled') {
+                addSuccessNotification('User image successfully uploaded')
+                return
+            }
+            if (result.type === 'currentUser/uploadCurrentUserImage/rejected') {
+                addErrorNotification(result.payload as string)
+                return
+            }
+        })
+    }
+
+    const handleVerificationEmailSent = async () => {
+        dispatch(resendVerificationEmail()).then((result) => {
+            if (result.type === 'currentUser/resendVerificationEmail/fulfilled') {
+                addSuccessNotification('Verification email successfully sent')
+                return
+            }
+            if (result.type === 'currentUser/resendVerificationEmail/rejected') {
+                addErrorNotification(result.payload as string)
+                return
+            }
+        })
     }
 
     const renderProfile = useCallback(() => {
         if (!currentUser) return null
-        if (currentUser.role === 'customer') return <CustomerProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
-        if (currentUser.role === 'courier') return <CourierProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
-        if (currentUser.role === 'restaurant_manager') return <RestaurantManagerProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
-        if (currentUser.role === 'moderator') return <ModeratorProfile currentUser={currentUser} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'customer') return <CustomerProfile currentUser={currentUser} onUserImageUploaded={handleUserImageUploaded} onVerificationEmailSent={handleVerificationEmailSent} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'courier') return <CourierProfile currentUser={currentUser} onUserImageUploaded={handleUserImageUploaded} onVerificationEmailSent={handleVerificationEmailSent} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'restaurant_manager') return <RestaurantManagerProfile currentUser={currentUser} onUserImageUploaded={handleUserImageUploaded} onVerificationEmailSent={handleVerificationEmailSent} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
+        if (currentUser.role === 'moderator') return <ModeratorProfile currentUser={currentUser} onUserImageUploaded={handleUserImageUploaded} onVerificationEmailSent={handleVerificationEmailSent} onPersonalInformationUpdated={handlePersonalInformationUpdated}/>
     }, [currentUser])
 
     if (!currentUser) return null

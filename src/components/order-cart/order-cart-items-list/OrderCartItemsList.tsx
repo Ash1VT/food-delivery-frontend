@@ -2,6 +2,7 @@ import React from 'react'
 import OrderCartItem from '../order-cart-item/OrderCartItem'
 import { OrderCartItemsListProps } from '../order_cart.types'
 import './order_cart_items_list.css'
+import { Scrollbar } from 'react-scrollbars-custom'
 
 const OrderCartItemsList = ({items} : OrderCartItemsListProps) => {
     

@@ -19,7 +19,7 @@ const DropdownMenu = ({ title, items } : DropdownMenuProps) => {
         </button>
         <div className={`dropdown__menu__content ${dropdownOpen ? 'dropdown__menu__content__show' : ''}`}>
           {items.map((item, index) => (
-            <label key={index}>{item.label}</label>
+            <Link key={index} to={item.path}>{item.label}</Link>
           ))}
         </div>
       </div>

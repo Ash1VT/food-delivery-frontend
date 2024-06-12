@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderDetails from '../../order-details/OrderDetails'
+import OrderDetails from '../../../../components/order-details/OrderDetails'
 import { CustomerPlacingOrdersCategoryProps } from '../../profile.types'
 import './placing_orders_category.css'
 

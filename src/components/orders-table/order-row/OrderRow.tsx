@@ -4,17 +4,15 @@ import moment from 'moment'
 import OrderActionButton from '../ui/buttons/order-action-button/OrderActionButton'
 import OpenDetailedInformationButton from '../ui/buttons/open-detailed-information-button/OpenDetailedInformationButton'
 import './order_row.css'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import OrderDetailedInformationModal from '../ui/modals/order-detailed-information-modal/OrderDetailedInformationModal'
 
-const OrderRow = ({order, buttonLabel, onOpenDetailedInformation, onOrderButtonClick} : OrderRowProps) => {
+const OrderRow = ({order, currentUser, buttonLabel, onOrderButtonClick} : OrderRowProps) => {
 
     const handleOrderButtonClick = async () => {
         if (!onOrderButtonClick) return
 
         await onOrderButtonClick(order)
-    }
-
-    const handleOpenDetailedInformation = async () => {
-        await onOpenDetailedInformation(order)
     }
 
     return (
@@ -36,7 +34,9 @@ const OrderRow = ({order, buttonLabel, onOpenDetailedInformation, onOrderButtonC
             </td>
             <td>
                 <div className='order__buttons__wrapper'>
-                    <OpenDetailedInformationButton onClick={handleOpenDetailedInformation}/>
+                    <ModalWindow button={OpenDetailedInformationButton({})}>
+                        <OrderDetailedInformationModal currentUser={currentUser} order={order}/>
+                    </ModalWindow>
                 </div>
             </td>
             {buttonLabel && onOrderButtonClick && (

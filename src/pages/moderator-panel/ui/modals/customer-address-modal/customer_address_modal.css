@@ -1,0 +1,30 @@
+.customer__address__modal__container {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.customer__address__modal__title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 33px;
+}
+
+.customer__address__modal__form__wrapper {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+}
+
+.customer__address__modal__buttons__wrapper {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.customer__address__modal__buttons__wrapper > * {
+    width: 50%;
+}

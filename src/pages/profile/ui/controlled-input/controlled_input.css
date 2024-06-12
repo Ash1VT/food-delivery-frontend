@@ -71,3 +71,17 @@
 .controlled__input__action, .controlled__input > * {
     background: #eadcdc;
 }
+
+.controlled__input__margin__left {
+    margin-left: 15px;
+}
+
+.controlled__input__edit__button__disabled:hover {
+    background: #eadcdc !important;
+    cursor: not-allowed;
+    filter: none !important;
+}
+
+.controlled__input__edit__button__disabled:active {
+    background: #eadcdc !important;
+}

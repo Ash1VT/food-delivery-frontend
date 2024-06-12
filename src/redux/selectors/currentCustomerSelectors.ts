@@ -1,76 +1,72 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-
-export const getCurrentCustomerAddresses = (state: RootState) => state.currentCustomerReducer.currentCustomerAddresses
-
-export const getCurrentCustomerOrders = (state: RootState) => state.currentCustomerReducer.currentCustomerOrders
+import { createSelector } from "@reduxjs/toolkit"
+import { RootState } from "../store"
 
 export const getCurrentCustomerApprovedAddresses = createSelector(
-    [getCurrentCustomerAddresses],
-    (currentCustomerAddresses) => {
-        return currentCustomerAddresses.filter((customerAddress) => customerAddress.approvalStatus.toLowerCase() === 'approved')
+    [(state: RootState) => state.currentCustomerAddressesReducer.addresses],
+    (addresses) => {
+        return addresses.filter((address) => address.approvalStatus.toLowerCase() === 'approved')
     }
 )
 
 export const getCurrentCustomerPendingAddresses = createSelector(
-    [getCurrentCustomerAddresses],
-    (currentCustomerAddresses) => {
-        return currentCustomerAddresses.filter((customerAddress) => customerAddress.approvalStatus.toLowerCase() === 'pending')
+    [(state: RootState) => state.currentCustomerAddressesReducer.addresses],
+    (addresses) => {
+        return addresses.filter((address) => address.approvalStatus.toLowerCase() === 'pending')
     }
 )
 
 export const getCurrentCustomerRejectedAddresses = createSelector(
-    [getCurrentCustomerAddresses],
-    (currentCustomerAddresses) => {
-        return currentCustomerAddresses.filter((customerAddress) => customerAddress.approvalStatus.toLowerCase() === 'rejected')
+    [(state: RootState) => state.currentCustomerAddressesReducer.addresses],
+    (addresses) => {
+        return addresses.filter((address) => address.approvalStatus.toLowerCase() === 'rejected')
     }
 )
 
 export const getCurrentCustomerOrder = createSelector(
-    [getCurrentCustomerOrders, (_, orderId?: string) => orderId],
-    (currentCustomerOrders, orderId) => {
-        return currentCustomerOrders.find((order) => order.id === orderId)
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders, (_, orderId?: string) => orderId],
+    (orders, orderId) => {
+        return orders.find((order) => order.id === orderId)
     }
 )
 
 export const getCurrentCustomerPlacingOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'placing')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'placing')
     }
 )
 
 export const getCurrentCustomerPendingOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'pending')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'pending')
     }
 )
 
 export const getCurrentCustomerPreparingOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'preparing')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'preparing')
     }
 )
 
 export const getCurrentCustomerReadyOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'ready')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'ready')
     }
 )
 
 export const getCurrentCustomerDeliveringOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'delivering')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'delivering')
     }
 )
 
 export const getCurrentCustomerDeliveredOrders = createSelector(
-    [getCurrentCustomerOrders],
-    (currentCustomerOrders) => {
-        return currentCustomerOrders.filter((order) => order.status.toLowerCase() === 'delivered')
+    [(state: RootState) => state.currentCustomerOrdersReducer.orders],
+    (orders) => {
+        return orders.filter((order) => order.status.toLowerCase() === 'delivered')
     }
 )

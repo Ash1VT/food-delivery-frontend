@@ -1,14 +1,10 @@
-import React from 'react'
 import { RestaurantInformationProps } from '../manager_panel.types'
+import OpenEditingRestaurantInformationButton from '../ui/buttons/open-editing-restaurant-information-button/OpenEditingRestaurantInformationButton'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import EditRestaurantInformationModal from '../ui/modals/edit-restaurant-information-modal/EditRestaurantInformationModal'
 import './restaurant_information.css'
-import EditRestaurantInformationButton from '../ui/buttons/edit-restaurant-information-button/EditRestaurantInformationButton'
-import UploadRestaurantImageForm from '../ui/forms/upload_restraurant_image_form/UploadRestaurantImageForm'
 
-const RestaurantInformation = ({restaurant, onOpenEditingRestaurantInformation} : RestaurantInformationProps) => {
-
-    const handleOpenEditingRestaurantClick = async () => {
-        await onOpenEditingRestaurantInformation(restaurant)
-    }
+const RestaurantInformation = ({restaurant, onRestaurantUpdated} : RestaurantInformationProps) => {
 
     return (
         <div className="restaurant__information__container">
@@ -80,7 +76,9 @@ const RestaurantInformation = ({restaurant, onOpenEditingRestaurantInformation} 
                     </tr>
                 </table>
             </div>
-            <EditRestaurantInformationButton onEdit={handleOpenEditingRestaurantClick}/>
+            <ModalWindow button={OpenEditingRestaurantInformationButton({})}>
+                <EditRestaurantInformationModal restaurant={restaurant} onRestaurantUpdated={onRestaurantUpdated} />
+            </ModalWindow>
         </div>
     )
 }

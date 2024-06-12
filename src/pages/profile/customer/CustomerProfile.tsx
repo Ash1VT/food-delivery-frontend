@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import IUser from 'src/redux/models/IUser';
 import PersonalInformation from '../personal-information/PersonalInformation';
 import DeliveryAddressesCategory from './delivery-addresses-category/DeliveryAddressesCategory';
 import { addSuccessNotification } from 'src/utils/notifications';
@@ -15,8 +14,11 @@ import ReadyOrdersCategory from './ready-orders-category/ReadyOrdersCategory';
 import DeliveringOrdersCategory from './delivering-orders-category/DeliveringOrdersCategory';
 import DeliveredOrdersCategory from './delivered-orders-category/DeliveredOrdersCategory';
 import { useNavigate } from 'react-router-dom';
+import { CustomerAddressCreate } from 'src/models/customerAddress.interfaces';
+import { ReviewCreate } from 'src/models/review.interfaces';
+import { User } from 'src/models/user.interfaces';
 
-const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerProfileProps) => {
+const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : CustomerProfileProps) => {
     const navigate = useNavigate()
     const approvedAddresses = useAppSelector(getCurrentCustomerApprovedAddresses)
     const pendingAddresses = useAppSelector(getCurrentCustomerPendingAddresses)
@@ -37,21 +39,18 @@ const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerP
         setActiveCategoryId
     }
     
-    const handleUserImageUploaded = async (userId: string, image: File) => {
-        alert('User image uploaded')
-        addSuccessNotification('User image successfully uploaded')
-    }
+    const handleCustomerAddressCreated = async (customerAddress: CustomerAddressCreate) => {
+        alert(JSON.stringify(customerAddress, null, 2))
+        addSuccessNotification('Customer address successfully created')
+    }   
 
-    const handleOpenAddingAddress = () => {
-        alert('Open adding address')
+    const handleCourierReviewCreated = async (courierReview: ReviewCreate) => {
+        alert(JSON.stringify(courierReview, null, 2))
+        addSuccessNotification('Courier review successfully created')
     }
 
     const handleOrderPlaced = async (orderId: string) => {
         navigate(`/orders/${orderId}`)
-    }
-
-    const handleOpenAddingOrderReview = () => {
-        alert('Open adding order review')
     }
 
     const profileCategories = [
@@ -89,14 +88,12 @@ const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerP
         },
     ]
 
-    const renderContent = useCallback((currentUser: IUser) => {
-        if (activeCategoryId === 0) {
-            return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onUserImageUploaded={handleUserImageUploaded}/>
-        }
+    const renderContent = useCallback((currentUser: User) => {
+        if (activeCategoryId === 0)
+            return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onVerificationEmailSent={onVerificationEmailSent} onUserImageUploaded={onUserImageUploaded}/>
             
-        if (activeCategoryId === 1) {
-            return <DeliveryAddressesCategory approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onOpenAddingAddress={handleOpenAddingAddress}/>
-        }
+        if (activeCategoryId === 1) 
+            return <DeliveryAddressesCategory approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onCustomerAddressCreated={handleCustomerAddressCreated}/>
         
         if (activeCategoryId === 2)
             return <PlacingOrdersCategory currentUser={currentUser} orders={placingOrders} onOrderPlaced={handleOrderPlaced}/>
@@ -114,7 +111,7 @@ const CustomerProfile = ({currentUser, onPersonalInformationUpdated} : CustomerP
             return <DeliveringOrdersCategory currentUser={currentUser} orders={deliveringOrders}/>
 
         if (activeCategoryId === 7)
-            return <DeliveredOrdersCategory currentUser={currentUser} orders={deliveredOrders} onOpenAddingOrderReview={handleOpenAddingOrderReview}/>
+            return <DeliveredOrdersCategory currentUser={currentUser} orders={deliveredOrders} onCourierReviewCreated={handleCourierReviewCreated}/>
         
 
     }, [activeCategoryId]);

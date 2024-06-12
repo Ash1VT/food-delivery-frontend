@@ -1,0 +1,14 @@
+.edit__restaurant__promocode__modal__container {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.edit__restaurant__promocode__modal__title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 33px;
+}

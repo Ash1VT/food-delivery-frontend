@@ -8,6 +8,9 @@ import OpenAddingModeratorButton from '../ui/buttons/open-adding-moderator-butto
 import SearchComponent from 'src/components/ui/search-component/SearchComponent'
 import SelectComponent from 'src/components/ui/select-component/SelectComponent'
 import './users.css'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import EditUserModal from '../ui/modals/edit-user-modal/EditUserModal'
+import AddModeratorModal from '../ui/modals/add-moderator-modal/AddModeratorModal'
 
 interface IsEmailVerifiedFormValues {
     isEmailVerified: boolean
@@ -17,7 +20,7 @@ interface IsACtiveFormValues {
     isActive: boolean
 }
 
-const User = ({user, onEmailVerifiedChanged, onActivityChanged, onOpenEditingUser} : UserProps) => {
+const User = ({user, onEmailVerifiedChanged, onActivityChanged, onUserUpdated, onUserImageUploaded} : UserProps) => {
 
     const isActiveInitialValues = {
         isActive: user.isActive
@@ -46,9 +49,6 @@ const User = ({user, onEmailVerifiedChanged, onActivityChanged, onOpenEditingUse
         setSubmitting(false)
     }
 
-    const handleOpenEditingUser = async () => {
-        onOpenEditingUser(user)
-    }
 
     return (
         <tr>
@@ -139,14 +139,18 @@ const User = ({user, onEmailVerifiedChanged, onActivityChanged, onOpenEditingUse
             </td>
             <th>
                 <div className='user__margin__left'>
-                    <EditIconButton onEdit={handleOpenEditingUser}/>
+                    <ModalWindow button={EditIconButton({})}>
+                        <EditUserModal user={user} 
+                                    onUserUpdated={onUserUpdated} 
+                                    onUserImageUploaded={onUserImageUploaded}/>
+                    </ModalWindow>
                 </div>
             </th>
         </tr>
     )
 }
 
-const Users = ({users, filterRoles, filterIsActive, filterIsEmailVerified, onSearchUsers, onFilteredRoles, onFilteredIsActive, onFilteredEmailVerified, onEmailVerifiedChanged, onActivityChanged, onOpenAddingModerator, onOpenEditingUser} : UsersProps) => {
+const Users = ({users, filterRoles, filterIsActive, filterIsEmailVerified, onSearchUsers, onFilteredRoles, onFilteredIsActive, onFilteredEmailVerified, onEmailVerifiedChanged, onActivityChanged, onModeratorCreated, onUserImageUploaded, onUserUpdated} : UsersProps) => {
     return (
         <div className="users__container">
             <div className='users__filters__wrapper'>
@@ -231,13 +235,16 @@ const Users = ({users, filterRoles, filterIsActive, filterIsEmailVerified, onSea
                             user={user}
                             onEmailVerifiedChanged={onEmailVerifiedChanged}
                             onActivityChanged={onActivityChanged}
-                            onOpenEditingUser={onOpenEditingUser}
+                            onUserImageUploaded={onUserImageUploaded}
+                            onUserUpdated={onUserUpdated}
                         />
                         <tr style={{height: '10px'}}/>
                     </React.Fragment>
                 ))}
             </table>
-            <OpenAddingModeratorButton onOpen={onOpenAddingModerator}/>
+            <ModalWindow button={OpenAddingModeratorButton({})}>
+                <AddModeratorModal onModeratorCreated={onModeratorCreated}/>
+            </ModalWindow>
         </div>
     )
 }

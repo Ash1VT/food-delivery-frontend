@@ -9,12 +9,10 @@ import MenuCategoriesRefsContext from './contexts/MenuCategoriesRefsContext'
 import { useState } from 'react'
 import OrderCart from 'src/components/order-cart/OrderCart'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import IMenuCategory from '../../redux/models/IMenuCategory'
 import RestaurantReference from 'src/components/restaurant-reference/RestaurantReference'
 import { getRestaurant, getRestaurantIsOpen } from '../../redux/selectors/restaurantSelectors'
 import MenuCategoriesActiveContext from './contexts/MenuCategoriesActiveContext'
 import { getMenu } from 'src/redux/selectors/menuSelectors'
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 import { useNavigate, useParams } from 'react-router-dom'
 import NotFoundPage from '../not-found-page/NotFoundPage'
 import './menu_page.css'
@@ -22,7 +20,7 @@ import './menu_page.css'
 const MenuPage = () => {
     const { restaurantId } = useParams()
     const navigate = useNavigate()
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
     const menu = useAppSelector(state => getMenu(state, restaurantId))
     const restaurant = useAppSelector(state => getRestaurant(state, restaurantId))

@@ -5,14 +5,11 @@ import { getRestaurant, getRestaurantIsOpen } from "../../redux/selectors/restau
 import RestaurantReference from "src/components/restaurant-reference/RestaurantReference"
 import ReviewsList from "src/components/reviews/reviews-list/ReviewsList"
 import ReviewCreateForm from "src/components/reviews/forms/review-create-form/ReviewCreateForm"
-import { getRestaurantCurrentUserReview, getRestaurantReviews } from "../../redux/selectors/restaurantReviewSelectors"
 import ReviewEditForm from "src/components/reviews/forms/review-edit-form/ReviewEditForm"
 import { ReviewCreateType, ReviewType, ReviewUpdateType } from "src/components/reviews/reviews.types"
 import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
-import { addReview, deleteReview, updateReview } from "../../redux/reducers/restaurantReviewsReducer"
 import MenuItemReference from "src/components/menu-item-reference/MenuItemReference"
 import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
-import { getCurrentUser } from "src/redux/selectors/currentUserSelectors"
 import './restaurant_reviews.css'
 import { useParams } from "react-router-dom"
 import NotFoundPage from "../not-found-page/NotFoundPage"
@@ -22,29 +19,28 @@ const RestaurantReviewsPage = () => {
 
     const { restaurantId } = useParams()
 
-    const currentUser = useAppSelector((state) => getCurrentUser(state))
-    const currentUserRestaurantReview = useAppSelector((state) => getRestaurantCurrentUserReview(state))
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
+
+    const { isLoading: isCurrentCustomerRestaurantReviewLoading, review: currentCustomerRestaurantReview, error: currentCustomerRestaurantReviewError } = useAppSelector((state) => state.currentCustomerRestaurantReviewReducer)
+
+    const { isLoading: isRestaurantReviewsLoading, reviews, error: restaurantReviewsError} = useAppSelector((state) => state.restaurantReviewsReducer)
+
+    const { isLoading: isRestaurantsLoading, error: restaurantsError } = useAppSelector((state) => state.restaurantsReducer)
 
     const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
     const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
-    const reviews = useAppSelector((state) => getRestaurantReviews(state))
-
-    const dispatch = useAppDispatch()
 
     if (!restaurant) 
         return <NotFoundPage/>
 
     const handleReviewAdded = async (review: ReviewCreateType) => {
-        dispatch(addReview(review))
     }
 
     const handleReviewUpdated = async (review: ReviewUpdateType) => {
-        dispatch(updateReview(review))
     }
 
     const handleReviewDeleted = async (review: ReviewType) => {
         console.log(review)
-        dispatch(deleteReview(review))
     }
 
     return (
@@ -56,7 +52,7 @@ const RestaurantReviewsPage = () => {
                     {currentUser &&
                         <div className="restaurant__reviews__current__user">
                             <CurrentUserReview currentUser={currentUser} 
-                                               currentUserReview={currentUserRestaurantReview}
+                                               currentUserReview={currentCustomerRestaurantReview}
                                                createTitle={`Leave your review about ${restaurant.name}`}
                                                updateTitle={`Your review about ${restaurant.name}`}
                                                onReviewAdded={handleReviewAdded}

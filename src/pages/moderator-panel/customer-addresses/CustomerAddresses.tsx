@@ -3,13 +3,11 @@ import './customer_addresses.css'
 import { CustomerAddressProps, CustomerAddressesProps } from '../moderator_panel.types'
 import OpenShowAddressDetailsButton from '../ui/buttons/open-show-address-details-button/OpenShowAddressDetailsButton'
 import SearchComponent from 'src/components/ui/search-component/SearchComponent'
+import ModalWindow from 'src/components/modal-window/ModalWindow'
+import CustomerAddressModal from '../ui/modals/customer-address-modal/CustomerAddressModal'
 
-const CustomerAddress = ({ address, onOpenShowDetailsAddress }: CustomerAddressProps) => {
+const CustomerAddress = ({ address, onAddressUpdated, onAddressApproved, onAddressRejected }: CustomerAddressProps) => {
   
-    const handleOpenAddressDetails = async () => {
-        await onOpenShowDetailsAddress(address)
-    }
-
     return (
         <tr className='customer__address__row'>
             <td className='customer__address__column'>
@@ -44,7 +42,12 @@ const CustomerAddress = ({ address, onOpenShowDetailsAddress }: CustomerAddressP
             </td>
             <td className='customer__address__column'>
                 <div className="customer__address__buttons__wrapper customer__address__margin__left">
-                    <OpenShowAddressDetailsButton onOpen={handleOpenAddressDetails}/>
+                    <ModalWindow button={OpenShowAddressDetailsButton({})}>
+                        <CustomerAddressModal address={address} 
+                                              onCustomerAddressUpdated={onAddressUpdated} 
+                                              onCustomerAddressApproved={onAddressApproved} 
+                                              onCustomerAddressRejected={onAddressRejected}/>
+                    </ModalWindow>
                 </div>
             </td>
         </tr>
@@ -52,7 +55,7 @@ const CustomerAddress = ({ address, onOpenShowDetailsAddress }: CustomerAddressP
 
 }
 
-const CustomerAddresses = ({addresses, onSearchAddressesByCustomer, onSearchAddressesByRegion, onSearchAddressesByCountry, onSearchAddressesByDetails, onOpenShowDetailsAddress} : CustomerAddressesProps) => {
+const CustomerAddresses = ({addresses, onSearchAddressesByCustomer, onSearchAddressesByRegion, onSearchAddressesByCountry, onSearchAddressesByDetails, onCustomerAddressApproved, onCustomerAddressRejected, onCustomerAddressUpdated} : CustomerAddressesProps) => {
     return (
         <div className="customer__addresses__container">
             <div className='customer__addresses__filters__wrapper'>
@@ -102,7 +105,9 @@ const CustomerAddresses = ({addresses, onSearchAddressesByCustomer, onSearchAddr
                     <React.Fragment key={address.id}>
                         <CustomerAddress
                             address={address}
-                            onOpenShowDetailsAddress={onOpenShowDetailsAddress}
+                            onAddressUpdated={onCustomerAddressUpdated}
+                            onAddressApproved={onCustomerAddressApproved}
+                            onAddressRejected={onCustomerAddressRejected}
                         />
                         <tr style={{height: '10px'}}/>
                     </React.Fragment>

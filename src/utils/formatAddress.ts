@@ -1,5 +1,5 @@
-import ICustomerAddress from "src/redux/models/ICustomerAddress";
+import { CustomerAddress } from "src/models/customerAddress.interfaces"
 
-export const formatAddress = (customerAddress: ICustomerAddress) => {
+export const formatAddress = (customerAddress: CustomerAddress) => {
     return `${customerAddress.country}, ${customerAddress.region}, ${customerAddress.details}`
 }

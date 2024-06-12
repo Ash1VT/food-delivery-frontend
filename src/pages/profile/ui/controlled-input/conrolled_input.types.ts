@@ -5,6 +5,7 @@ export type ControlledInputProps<T> = {
     children: ReactElement<HTMLInputElement>
     value: T
     error: string | undefined | null
+    disableEdit: boolean
     parseValue: (value: string) => T
     convertToString: (value: T) => string
     setValue: (value: T) => void

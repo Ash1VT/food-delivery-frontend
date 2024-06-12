@@ -3,7 +3,7 @@ import { OrdersTableProps } from './orders_table.types'
 import OrderRow from './order-row/OrderRow'
 import './orders_table.css'
 
-const OrdersTable = ({orders, buttonLabel, onOpenDetailedInformation, onOrderButtonClick} : OrdersTableProps) => {
+const OrdersTable = ({orders, currentUser, buttonLabel, onOrderButtonClick} : OrdersTableProps) => {
 
     if (orders.length === 0) {
         return (
@@ -53,9 +53,9 @@ const OrdersTable = ({orders, buttonLabel, onOpenDetailedInformation, onOrderBut
                     <React.Fragment key={order.id}>
                         <OrderRow
                             order={order}
+                            currentUser={currentUser}
                             buttonLabel={buttonLabel}
-                            onOrderButtonClick={onOrderButtonClick}
-                            onOpenDetailedInformation={onOpenDetailedInformation}/>
+                            onOrderButtonClick={onOrderButtonClick}/>
                         <tr style={{height: '10px'}}/>
                     </React.Fragment>
                 ))}

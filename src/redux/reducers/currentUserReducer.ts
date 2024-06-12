@@ -1,32 +1,139 @@
-import { createSlice } from "@reduxjs/toolkit";
-import IUser from "../models/IUser";
-import ICustomerAddress from "../models/ICustomerAddress";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { authenticate, fetchCurrentUser, logout, register, resendVerificationEmail, updateCurrentUser, uploadCurrentUserImage } from "../actions/user.actions";
+import { User } from "src/models/user.interfaces";
 
 interface CurrentUserState {
-    currentUser: IUser | undefined | null
+    isLoading: boolean
+    currentUser?: User | undefined | null
+    error?: string | undefined | null
 }
 
 const initialState: CurrentUserState = {
-    currentUser: {
-        id: '1',
-        imageUrl: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D',
-        firstName: 'John',
-        lastName: 'Doe',
-        fullName: 'John Doe',
-        phone: '1234567890',
-        birthDate: new Date("1990-01-01"),
-        isActive: true,
-        isEmailVerified: true,
-        email: 'john@gmail.com',
-        role: 'customer',
-    }
+    isLoading: false,
+    currentUser: null,
+    error: null
 }
 
 const currentUserSlice = createSlice({
     name: 'currentUser',
     initialState,
     reducers: {
-       
+    },
+    extraReducers: (builder) => {
+        // Authenticate
+        
+        builder.addCase(authenticate.pending, (state, action) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(authenticate.fulfilled, (state) => {
+            state.isLoading = false
+        })
+
+        builder.addCase(authenticate.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Register
+
+        builder.addCase(register.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(register.fulfilled, (state, action: PayloadAction<User>) => {
+            state.isLoading = false
+            state.currentUser = action.payload
+            state.error = null
+        })
+
+        builder.addCase(register.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Update
+
+        builder.addCase(updateCurrentUser.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(updateCurrentUser.fulfilled, (state, action: PayloadAction<User>) => {
+            state.isLoading = false
+            state.currentUser = action.payload
+            state.error = null
+        })
+
+        builder.addCase(updateCurrentUser.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Upload Image
+
+        builder.addCase(uploadCurrentUserImage.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(uploadCurrentUserImage.fulfilled, (state, action: PayloadAction<User>) => {
+            state.isLoading = false
+            state.currentUser = action.payload
+            state.error = null
+        })
+
+        builder.addCase(uploadCurrentUserImage.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Resend Verification Email
+
+        builder.addCase(resendVerificationEmail.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(resendVerificationEmail.fulfilled, (state) => {
+            state.isLoading = false
+        })
+
+        builder.addCase(resendVerificationEmail.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Fetch Current User
+        
+        builder.addCase(fetchCurrentUser.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(fetchCurrentUser.fulfilled, (state, action: PayloadAction<User>) => {
+            state.isLoading = false
+            state.currentUser = action.payload
+            state.error = null
+        })
+
+        builder.addCase(fetchCurrentUser.rejected, (state, action: PayloadAction<string | null | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
+
+        // Logout
+
+        builder.addCase(logout.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(logout.fulfilled, (state) => {
+            state.isLoading = false
+            state.currentUser = null
+            state.error = null
+        })
+
+        builder.addCase(logout.rejected, (state, action: PayloadAction<string | undefined>) => {
+            state.isLoading = false
+            state.error = action.payload
+        })
     }
 })
 
