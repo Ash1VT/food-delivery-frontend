@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { useAppSelector } from './hooks/redux/useAppSelector';
 import { courierRoutes, customerRoutes, guestRoutes, moderatorRoutes, restaurantManagerRoutes } from './routes';
-import { fetchCurrentUser } from './redux/actions/user.actions';
+import { fetchCurrentUser } from './redux/actions/currentUser.actions';
 import { useAppDispatch } from './hooks/redux/useAppDispatch';
 import { addErrorNotification } from './utils/notifications';
 import { User } from './models/user.interfaces';

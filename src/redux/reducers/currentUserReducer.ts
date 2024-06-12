@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { authenticate, fetchCurrentUser, logout, register, resendVerificationEmail, updateCurrentUser, uploadCurrentUserImage } from "../actions/user.actions";
+import { authenticate, fetchCurrentUser, logout, register, resendVerificationEmail, updateCurrentUser, uploadCurrentUserImage } from "../actions/currentUser.actions";
 import { User } from "src/models/user.interfaces";
 
 interface CurrentUserState {
