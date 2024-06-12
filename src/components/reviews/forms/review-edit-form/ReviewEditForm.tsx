@@ -11,27 +11,27 @@ import './review_edit_form.css'
 
 interface FormValues {
     id: string
-    ratingValue: number
-    text?: string
+    rating: number
+    comment?: string
 }
 
 const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDeleted} : ReviewUpdateFormProps) => {
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [cachedReviewText, setCachedReviewText] = useState<string | undefined>(currentUserReview.text)
-    const [cachedRatingValue, setCachedRatingValue] = useState<number>(currentUserReview.ratingValue)
+    const [cachedReviewComment, setCachedReviewComment] = useState<string | undefined>(currentUserReview.comment)
+    const [cachedRating, setCachedRating] = useState<number>(currentUserReview.rating)
 
     const inputRef = useRef<HTMLTextAreaElement>(null)
     
     const initialValues: FormValues = {
         id: currentUserReview.id,
-        ratingValue: currentUserReview.ratingValue,
-        text: currentUserReview.text
+        rating: currentUserReview.rating,
+        comment: currentUserReview.comment
     }
 
     const validationSchema: Yup.Schema<FormValues> = Yup.object().shape({
         id: Yup.string().required(),
-        ratingValue: Yup.number().min(1).max(5).required('Provide a rating'),
-        text: Yup.string().optional(),
+        rating: Yup.number().min(1).max(5).required('Provide a rating'),
+        comment: Yup.string().optional(),
     })
 
     const closeEditMode = () => {
@@ -60,8 +60,8 @@ const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDele
     const handleSave = async (values: FormValues, { setSubmitting } : FormikHelpers<FormValues>) => {
         await onReviewUpdated(values)
 
-        setCachedReviewText(cachedReviewText)
-        setCachedRatingValue(cachedRatingValue)
+        setCachedReviewComment(cachedReviewComment)
+        setCachedRating(cachedRating)
         setEditMode(false)
     }
 
@@ -82,13 +82,13 @@ const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDele
                             <div className="review__edit__form__header">
                                 <div className="review__user__details__wrapper">
                                     <div className="review__user__image__wrapper">
-                                        <img src={currentUserReview.userImageUrl} alt="user" onError={handleNotFoundImage}/>
+                                        <img src={currentUserReview.customerImageUrl} alt="user" onError={handleNotFoundImage}/>
                                     </div>
                                     <div className="review__user__name">
-                                        {currentUserReview.userFullName}
+                                        {currentUserReview.customerFullName}
                                     </div>
                                 </div>
-                                <CustomRating className="review__edit__form__rating" readOnly={!editMode} style={{ maxWidth: 200 }} isRequired value={values.ratingValue} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
+                                <CustomRating className="review__edit__form__rating" readOnly={!editMode} style={{ maxWidth: 200 }} isRequired value={values.rating} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
                                 { editMode ? (
                                     <div className="review__edit__form__header__actions">
                                         <button className="button__wrapper review__edit__form__header__action" onClick={() => handleCancelClick(resetForm)}>
@@ -113,8 +113,8 @@ const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDele
                             </div>
                             <Form className="review__edit__form">
                                 <input type="hidden" name="id" value={values.id} />
-                                <input type="hidden" name="ratingValue" value={values.ratingValue} />
-                                <textarea name="text" readOnly={!editMode} ref={inputRef} className="review__edit__form__input review__edit__form__text" placeholder="Write your review..." value={values.text} onChange={handleChange} />
+                                <input type="hidden" name="ratingValue" value={values.rating} />
+                                <textarea name="text" readOnly={!editMode} ref={inputRef} className="review__edit__form__input review__edit__form__text" placeholder="Write your review..." value={values.comment} onChange={handleChange} />
                             </Form>
                         </div>
                     </div>

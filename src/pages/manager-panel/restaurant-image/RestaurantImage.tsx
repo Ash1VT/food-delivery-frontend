@@ -1,6 +1,7 @@
 import React from 'react'
 import UploadRestaurantImageForm from '../ui/forms/upload_restraurant_image_form/UploadRestaurantImageForm'
 import { RestaurantImageProps } from '../manager_panel.types'
+import UploadImageForm from 'src/components/upload-image-form/UploadImageForm'
 import './restaurant_image.css'
 
 const RestaurantImage = ({restaurant, onRestaurantImageUploaded} : RestaurantImageProps) => {
@@ -9,12 +10,7 @@ const RestaurantImage = ({restaurant, onRestaurantImageUploaded} : RestaurantIma
     }
     
     return (
-        <div className='restaurant__image__container'>
-            <div className="restaurant__image__wrapper">
-                <img className="restaurant__image" src={restaurant.imageUrl} alt="image"></img>
-            </div>
-            <UploadRestaurantImageForm onRestaurantImageUploaded={handleUploadRestaurantImageClick}/>
-        </div>
+        <UploadImageForm imageContainerClassName='restaurant__image__container' imageWrapperClassName='restaurant__image__wrapper' imageClassName='restaurant__image' imageUrl={restaurant.imageUrl} onImageUploaded={handleUploadRestaurantImageClick} />
     )
 }
 

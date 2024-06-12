@@ -1,8 +1,9 @@
 import { ReactElement, ReactNode } from "react"
 import UploadIcon from '@mui/icons-material/Upload';
-import IUser from "src/redux/models/IUser"
-import ICustomerAddress from "src/redux/models/ICustomerAddress";
-import IOrder from "src/redux/models/IOrder";
+import { CustomerAddress, CustomerAddressCreate } from "src/models/customerAddress.interfaces";
+import { ReviewCreate } from "src/models/review.interfaces";
+import { User, UserUpdate, UserUploadImage } from "src/models/user.interfaces";
+import { Order } from "src/models/order.interfaces";
 
 export type ProfileCategoryProps = {
     id: number
@@ -24,107 +25,132 @@ export type UploadUserImageFormProps = {
     onUserImageUpload: (image: File) => Promise<void>
 }
 
-export type UserUpdateProps = {
-    id: string
-    firstName: string
-    lastName: string
-    birthDate: Date
-    phone: string
-}
-
 export type PersonalInformationProps = {
-    user: IUser
-    onPersonalInformationUpdated: (user: UserUpdateProps) => Promise<void>
-    onUserImageUploaded: (userId: string, image: File) => Promise<void>
+    user: User
+    onPersonalInformationUpdated: (user: UserUpdate) => Promise<void>
+    onVerificationEmailSent: () => Promise<void>
+    onUserImageUploaded: (user: UserUploadImage) => Promise<void>
 }
 
 export type OrderDetailsProps = {
-    currentUser: IUser
-    order: IOrder
+    currentUser: User
+    order: Order
     onOrderPlaced?: (orderId: string) => Promise<void>
     onOrderDeliveryFinished?: (orderId: string) => Promise<void>
-    onOpenAddingOrderReview?: () => void
+    onOrderReviewCreated?: (review: ReviewCreate) => Promise<void>
 }
 
 export type DeliveryAddressesTableProps = {
-    addresses: ICustomerAddress[]
+    addresses: CustomerAddress[]
 }
 
 // CUSTOMER
 
 export type CustomerProfileProps = {
-    currentUser: IUser
-    onPersonalInformationUpdated: (user: UserUpdateProps) => Promise<void>
+    currentUser: User
+    onUserImageUploaded: (user: UserUploadImage) => Promise<void>
+    onVerificationEmailSent: () => Promise<void>
+    onPersonalInformationUpdated: (user: UserUpdate) => Promise<void>
 }
 
 export type DeliveryAddressesCategoryProps = {
-    approvedAddresses: ICustomerAddress[]
-    pendingAddresses: ICustomerAddress[]
-    rejectedAddresses: ICustomerAddress[]
-    onOpenAddingAddress: () => void
+    approvedAddresses: CustomerAddress[]
+    pendingAddresses: CustomerAddress[]
+    rejectedAddresses: CustomerAddress[]
+    onCustomerAddressCreated: (address: CustomerAddressCreate) => Promise<void>
 }
 
 export type CustomerPlacingOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
     onOrderPlaced: (orderId: string) => Promise<void>
 }
 
 export type CustomerPendingOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
 }
 
 export type CustomerPreparingOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
 }
 
 export type CustomerReadyOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
 }
 
 
 export type CustomerDeliveringOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
 }
 
 export type CustomerDeliveredOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
-    onOpenAddingOrderReview: () => void
+    currentUser: User
+    orders: Order[]
+    onCourierReviewCreated: (review: ReviewCreate) => Promise<void>
+}
+
+export type AddCustomerAddressModalProps = {
+    onCustomerAddressCreated: (address: CustomerAddressCreate) => Promise<void>
+}
+
+export type AddCourierReviewModalProps = {
+    courier: User
+    orderId: string
+    onCourierReviewCreated: (review: ReviewCreate) => Promise<void>
 }
 
 // Courier
 
 export type CourierProfileProps = {
-    currentUser: IUser
-    onPersonalInformationUpdated: (user: UserUpdateProps) => Promise<void>
+    currentUser: User
+    onUserImageUploaded: (user: UserUploadImage) => Promise<void>
+    onVerificationEmailSent: () => Promise<void>
+    onPersonalInformationUpdated: (user: UserUpdate) => Promise<void>
 }
 
 export type CourierDeliveringOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
     onOrderDeliveryFinished: (orderId: string) => Promise<void>
 }
 
 export type CourierDeliveredOrdersCategoryProps = {
-    currentUser: IUser
-    orders: IOrder[]
+    currentUser: User
+    orders: Order[]
 }
 
+// Restaurant Manager
+
+export type RestaurantManagerProfileProps = {
+    currentUser: User
+    onUserImageUploaded: (user: UserUploadImage) => Promise<void>
+    onVerificationEmailSent: () => Promise<void>
+    onPersonalInformationUpdated: (user: UserUpdate) => Promise<void>
+}
+
+
+// Moderator
+
+export type ModeratorProfileProps = {
+    currentUser: User
+    onUserImageUploaded: (user: UserUploadImage) => Promise<void>
+    onVerificationEmailSent: () => Promise<void>
+    onPersonalInformationUpdated: (user: UserUpdate) => Promise<void>
+}
 
 // UI
 
 export type OpenAddingAddressButtonProps = {
-    onOpen: () => void
+    onOpen?: () => void
 }
 
 export type OpenAddingReviewButtonProps = {
     isReviewAdded: boolean
-    onOpen: () => void
+    onOpen?: () => void
 }
 
 export type FinishOrderDeliveryButtonProps = {

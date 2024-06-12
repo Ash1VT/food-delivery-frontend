@@ -1,8 +1,8 @@
-import IUser from "src/redux/models/IUser"
+import { User } from "src/models/user.interfaces"
 import { ReviewCreateType, ReviewUpdateType, ReviewType } from "../reviews.types"
 
 export type CurrentUserReviewProps = {
-    currentUser: IUser
+    currentUser: User
     currentUserReview?: ReviewType | undefined | null
     createTitle: string
     updateTitle: string

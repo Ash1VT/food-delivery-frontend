@@ -7,17 +7,16 @@ import SearchComponent from 'src/components/ui/search-component/SearchComponent'
 import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getRestaurants } from '../../redux/selectors/restaurantSelectors';
 import SelectComponent from 'src/components/ui/select-component/SelectComponent';
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors';
 import { useNavigate } from 'react-router-dom';
 import './restaurants_page.css'
 
 const RestaurantsPage = () => {
     const navigate = useNavigate()
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
-    const restaurants = useAppSelector(getRestaurants)
+    const { isLoading: isRestaurantsLoading, restaurants, error: restaurantsError } = useAppSelector((state) => state.restaurantsReducer)
+
 
     const mb = useMediaQuery('(max-width: 450px)');
     const vs = useMediaQuery('(max-width: 360px)');

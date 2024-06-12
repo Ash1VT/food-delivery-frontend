@@ -3,7 +3,7 @@ import { ReviewProps } from '../reviews.types'
 import CustomRating from 'src/components/custom-rating/CustomRating'
 import './review.css'
 
-const Review = ({id, userFullName, userImageUrl, ratingValue, text} : ReviewProps) => {
+const Review = ({id, customerFullName, customerImageUrl, rating, comment} : ReviewProps) => {
 
     const handleNotFoundImage = (event: React.SyntheticEvent<HTMLImageElement>) => {
         event.currentTarget.onerror = null
@@ -14,18 +14,18 @@ const Review = ({id, userFullName, userImageUrl, ratingValue, text} : ReviewProp
         <div className="review__container">
             <div className="review__user__details__wrapper">
                 <div className="review__user__image__wrapper">
-                    <img src={userImageUrl} alt="user" onError={handleNotFoundImage}/>
+                    <img src={customerImageUrl} alt="user" onError={handleNotFoundImage}/>
                 </div>
                 <div className="review__user__name">
-                    {userFullName}
+                    {customerFullName}
                 </div>
             </div>
             <div className="review__rating__wrapper">
-                <CustomRating style={{ maxWidth: 100 }} value={ratingValue} readOnly />
+                <CustomRating style={{ maxWidth: 100 }} value={rating} readOnly />
             </div>
-            {text &&
+            {comment &&
                 <div className="review__text__wrapper">
-                    <p className="review__text">{text}</p>
+                    <p className="review__text">{comment}</p>
                 </div>
             }
         </div>

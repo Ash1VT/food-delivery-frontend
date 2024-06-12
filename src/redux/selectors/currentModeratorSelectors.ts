@@ -1,14 +1,10 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-
-export const getUsers = (state: RootState) => state.currentModeratorReducer.users
-
-export const getRestaurantApplications = (state: RootState) => state.currentModeratorReducer.restaurantApplications
+import { createSelector } from "@reduxjs/toolkit"
+import { RootState } from "../store"
 
 export const getCustomerAddresses = createSelector(
-    [(state: RootState) => state.currentModeratorReducer.customerAddresses, getUsers],
-    (customerAddresses, users) => {
-        return customerAddresses.map((address) => {
+    [(state: RootState) => state.customerAddressesReducer.addresses, (state: RootState) => state.usersReducer.users],
+    (addresses, users) => {
+        return addresses.map((address) => {
             const user = users.find((user) => user.id === address.customerId)
             return {
                 ...address,

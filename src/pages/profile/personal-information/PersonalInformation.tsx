@@ -3,9 +3,12 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import ControlledInput from 'src/pages/profile/ui/controlled-input/ControlledInput';
 import formatDate from 'src/utils/formatDate';
 import FormErrorNotification from 'src/components/form-error-notification/FormErrorNotification';
-import UploadUserImageForm from '../ui/forms/upload-user-image-form/UploadUserImageForm';
+import UploadImageForm from '../../../components/upload-image-form/UploadImageForm';
 import { PersonalInformationProps } from '../profile.types';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import './personal_information.css'
+import CustomButton from 'src/components/ui/buttons/custom-button/CustomButton';
 
 interface FormValues {
     firstName: string;
@@ -14,12 +17,12 @@ interface FormValues {
     phone: string;
 }
 
-const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUpdated} : PersonalInformationProps) => {
+const PersonalInformation = ({user, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : PersonalInformationProps) => {
 
     const initialValues: FormValues = {
         firstName: user.firstName,
         lastName: user.lastName,
-        birthDate: user.birthDate,
+        birthDate: new Date(user.birthDate),
         phone: user.phone
     }
 
@@ -42,7 +45,14 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
     }
 
     const handleUploadUserImageClick = async (image: File) => {
-        await onUserImageUploaded(user.id, image)
+        await onUserImageUploaded({
+            id: user.id,
+            image
+        })
+    }
+
+    const handleVerificationEmailSent = async () => {
+        await onVerificationEmailSent()
     }
 
     return (
@@ -54,12 +64,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
         {({ errors, values, setFieldValue, submitForm }) => {
             return (
                 <div className='personal__information__container'>
-                    <div className='user__image__container'>
-                        <div className="user__image__wrapper">
-                            <img className="user__image" src={user.imageUrl} alt="image"></img>
-                        </div>
-                        <UploadUserImageForm onUserImageUpload={handleUploadUserImageClick}/>
-                    </div>
+                    <UploadImageForm imageUrl={user.imageUrl} onImageUploaded={handleUploadUserImageClick} />
                     <Form>
                         <FormErrorNotification/>
                         <div className='personal__information__form__wrapper'>
@@ -67,6 +72,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                 <ControlledInput label='First Name' 
                                                 value={values.firstName}
                                                 error={errors.firstName}
+                                                disableEdit={false}
                                                 setValue={firstName => { setFieldValue('firstName', firstName) }}
                                                 parseValue={value => value}
                                                 convertToString={value => value}
@@ -77,6 +83,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                 <ControlledInput label='Last Name' 
                                                 value={values.lastName}
                                                 error={errors.lastName}
+                                                disableEdit={false}
                                                 setValue={lastName => { setFieldValue('lastName', lastName) }}
                                                 parseValue={value => value}
                                                 convertToString={value => value}
@@ -91,7 +98,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                         </div>
                                     </td>
                                     <td>
-                                        <div className='value'>
+                                        <div className='value controlled__input__margin__left'>
                                             {user.email}
                                         </div>
                                     </td>
@@ -99,6 +106,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                 <ControlledInput label='Birth Date' 
                                                 value={values.birthDate}
                                                 error={errors.birthDate ? String(errors.birthDate) : undefined}
+                                                disableEdit={false}
                                                 setValue={birthDate => { console.log(birthDate); setFieldValue('birthDate', birthDate) }}
                                                 parseValue={value => new Date(value)}
                                                 convertToString={value => formatDate(value)}
@@ -110,6 +118,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                 <ControlledInput label='Phone' 
                                                 value={values.phone}
                                                 error={errors.phone}
+                                                disableEdit={false}
                                                 setValue={phone => { setFieldValue('phone', phone) }}
                                                 parseValue={value => value}
                                                 convertToString={value => value}
@@ -117,6 +126,27 @@ const PersonalInformation = ({user, onUserImageUploaded, onPersonalInformationUp
                                     <input type='tel'/>   
                                 </ControlledInput>
                                 <ErrorMessage name='phone' component='div' />
+                                <tr className='controlled__input__row'>
+                                    <td>
+                                        <div className='controlled__input__label__wrapper'>
+                                            <label className='label'>Is Email Verified</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='value controlled__input__margin__left'>
+                                            {user.isEmailVerified ?
+                                                    <div>
+                                                        <CheckCircleIcon className='personal__information__check__icon'/>
+                                                    </div>
+                                                : 
+                                                <div className='personal__information__cancel__wrapper'>
+                                                    <CancelIcon className='personal__information__cancel__icon'/>
+                                                    <CustomButton label='Resend verification email' onClick={handleVerificationEmailSent}/>
+                                                </div>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </Form>

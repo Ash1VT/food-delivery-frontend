@@ -1,6 +1,5 @@
 import OrderCartItemsList from './order-cart-items-list/OrderCartItemsList';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getOrderCartItems } from '../../redux/selectors/orderCartSelectors';
 import OrderCartButton from './ui/buttons/order-cart-button/OrderCartButton';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
@@ -33,13 +32,8 @@ const OrderCartEmpty = () => {
 
 
 const OrderCart = () => {
-    const orderCartItems = useAppSelector(state => getOrderCartItems(state))
+    const orderCartItems = useAppSelector(state => state.orderCartReducer.orderCartItems)
     const itemsCount = orderCartItems.length
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(fetchOrderCartItemsFromLocalStorage())
-    }, [])
 
     return (
         <div className="order__cart__container">

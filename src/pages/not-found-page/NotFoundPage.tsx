@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import Footer from 'src/components/footer'
 import Navbar from 'src/components/navbar'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 import { useNavigate } from "react-router-dom";
 import './not_found_page.css'
 
 const NotFoundPage = () => {
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
+
     const navigate = useNavigate()
 
     const handlePreviousPage = () => {

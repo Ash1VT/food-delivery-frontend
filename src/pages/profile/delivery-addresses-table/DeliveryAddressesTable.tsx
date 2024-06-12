@@ -4,13 +4,13 @@ import { formatAddress } from 'src/utils/formatAddress'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
-import ICustomerAddress from 'src/redux/models/ICustomerAddress';
-import './delivery_addresses_table.css'
 import { Scrollbar } from 'react-scrollbars-custom';
+import { CustomerAddress } from 'src/models/customerAddress.interfaces';
+import './delivery_addresses_table.css'
 
 const DeliveryAddressesTable = ({addresses} : DeliveryAddressesTableProps) => {
 
-    const renderAddressIcon = useCallback((address: ICustomerAddress) => {
+    const renderAddressIcon = useCallback((address: CustomerAddress) => {
         if (address.approvalStatus === 'approved') {
             return <CheckCircleRoundedIcon className='delivery__address__approved__icon'/>
         }

@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderDetails from '../../order-details/OrderDetails'
+import OrderDetails from '../../../../components/order-details/OrderDetails'
 import { CustomerPendingOrdersCategoryProps } from '../../profile.types'
 import './pending_orders_category.css'
 

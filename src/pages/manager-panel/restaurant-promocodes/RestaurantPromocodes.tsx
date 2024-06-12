@@ -5,16 +5,19 @@ import { RestaurantPromocodeProps, RestaurantPromocodesProps } from '../manager_
 import { Form, Formik, FormikHelpers } from 'formik'
 import { addSuccessNotification } from 'src/utils/notifications'
 import moment from 'moment'
-import './restaurant_promocodes.css'
-import IPromocode from 'src/redux/models/IPromocode';
 import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton';
 import OpenAddingPromocodeButton from '../ui/buttons/open-adding-promocode-button/OpenAddingPromocodeButton';
+import { PromocodeCreate, PromocodeUpdate } from 'src/models/promocode.interfaces';
+import ModalWindow from 'src/components/modal-window/ModalWindow';
+import EditRestaurantPromocodeModal from '../ui/modals/edit-restaurant-promocode-modal/EditRestaurantPromocodeModal';
+import AddRestaurantPromocodeModal from '../ui/modals/add-restaurant-promocode-modal/AddRestaurantPromocodeModal';
+import './restaurant_promocodes.css'
 
 interface FormValues {
     isActive: boolean
 }
 
-const RestaurantPromocode = ({promocode, onPromocodeActivityChanged, onOpenEditingPromocode} : RestaurantPromocodeProps) => {
+const RestaurantPromocode = ({promocode, onPromocodeActivityChanged, onPromocodeUpdated} : RestaurantPromocodeProps) => {
 
     const initialValues = {
         isActive: promocode.isActive
@@ -30,8 +33,8 @@ const RestaurantPromocode = ({promocode, onPromocodeActivityChanged, onOpenEditi
         await onPromocodeActivityChanged(promocode.id, values.isActive)
     }
 
-    const handleEditClick = async () => {
-        await onOpenEditingPromocode(promocode)
+    const handlePromocodeUpdated = async (promocode: PromocodeUpdate) => {
+        await onPromocodeUpdated(promocode)
     }
 
     return (
@@ -96,14 +99,20 @@ const RestaurantPromocode = ({promocode, onPromocodeActivityChanged, onOpenEditi
             </th>
             <th>
                 <div className='restaurant__promocode__margin__left'>
-                    <EditIconButton onEdit={handleEditClick}/>
+                    <ModalWindow button={EditIconButton({})}>
+                        <EditRestaurantPromocodeModal promocode={promocode} onPromocodeUpdated={handlePromocodeUpdated} />
+                    </ModalWindow>
                 </div>
             </th>
         </tr>
     )
 }
 
-const RestaurantPromocodes = ({promocodes, onPromocodeActivityChanged, onOpenAddingPromocode, onOpenEditingPromocode} : RestaurantPromocodesProps) => {
+const RestaurantPromocodes = ({promocodes, restaurantId, onPromocodeActivityChanged, onPromocodeCreated, onPromocodeUpdated} : RestaurantPromocodesProps) => {
+    
+    const handlePromocodeCreated = async (promocode: PromocodeCreate) => {
+        await onPromocodeCreated(promocode)
+    }
 
     return (
         <div>
@@ -157,13 +166,15 @@ const RestaurantPromocodes = ({promocodes, onPromocodeActivityChanged, onOpenAdd
                 {promocodes.map((promocode) => (
                     <RestaurantPromocode
                         key={promocode.id}
-                        onOpenEditingPromocode={onOpenEditingPromocode}
+                        onPromocodeUpdated={onPromocodeUpdated}
                         onPromocodeActivityChanged={onPromocodeActivityChanged}
                         promocode={promocode}
                     />
                 ))}
             </table>
-            <OpenAddingPromocodeButton onOpen={onOpenAddingPromocode}/>
+            <ModalWindow button={OpenAddingPromocodeButton({})}>
+                <AddRestaurantPromocodeModal restaurantId={restaurantId} onPromocodeCreated={handlePromocodeCreated} />
+            </ModalWindow>
         </div>
     )
 }

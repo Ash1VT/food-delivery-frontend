@@ -1,16 +1,13 @@
 import { createSelector } from "@reduxjs/toolkit"
-import IMenuCategory from "../models/IMenuCategory"
-import IMenuItem from "../models/IMenuItem"
 import { RootState } from "../store";
-
-
-export const getMenus = (state: RootState) => state.menuReducer.currentRestaurantsMenus;
+import { MenuCategory } from "src/models/menuCategory.interfaces";
+import { MenuItem } from "src/models/menuItem.interfaces";
 
 
 export const getMenu = createSelector(
-    [getMenus, (_: RootState, restaurantId: string | undefined) => restaurantId],
-    (currentRestaurantsMenus, restaurantId) => {
-        return currentRestaurantsMenus.find((menu) => menu.restaurantId === restaurantId)
+    [(state: RootState) => state.restaurantMenusReducer.menus, (_: RootState, restaurantId: string | undefined) => restaurantId],
+    (menus, restaurantId) => {
+        return menus.find((menu) => menu.restaurantId === restaurantId)
     }
 )
 
@@ -21,11 +18,10 @@ export const getMenuCategories = createSelector(
     }
 )
 
-
 export const getMenuItems = createSelector(
     [getMenuCategories],
     (menuCategories) => {
-        return menuCategories?.reduce((acc: IMenuItem[], category: IMenuCategory) => {
+        return menuCategories?.reduce((acc: MenuItem[], category: MenuCategory) => {
             return [...acc, ...category.items];
         }, []);
     }
@@ -44,22 +40,3 @@ export const getMenuItem = createSelector(
         return menuItems?.find((menuItem) => menuItem.id === id)
     }
 )
-
-// export const getCurrentRestaurantMenuCategory = createSelector(
-    
-// )
-
-
-// export const getMenuCategory = createSelector(
-//     [getMenuCategories, (_, id: string) => id],
-//     (menuCategories, id) => {
-//         return menuCategories.find((menuCategory) => menuCategory.id === id) as IMenuCategory
-//     }
-// )
-
-// export const getMenuItem = createSelector(
-//     [getMenuItems, (_, id: string) => id],
-//     (menuItems, id) => {
-//         return menuItems.find((menuItem) => menuItem.id === id) as IMenuItem
-//     }
-// )

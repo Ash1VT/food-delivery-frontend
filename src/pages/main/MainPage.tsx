@@ -14,14 +14,13 @@ import Footer from 'src/components/footer';
 import { FooterMenuColumnProps } from 'src/components/footer/footer.types';
 import Navbar from 'src/components/navbar';
 import HeaderSection from './header';
-import "./main_page.css"
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors';
+import "./main_page.css"
 
 
 const MainPage = () => {
 
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
     const restaurant_promotions: PromotionRestaurantProps[] = [
         {

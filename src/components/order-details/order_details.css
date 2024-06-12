@@ -1,0 +1,145 @@
+.order__details__container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.order__details__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+.order__details__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px
+}
+
+.order__details__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-bottom: 20px;
+}
+
+.order__details__courier__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.order__details__customer__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.order__details__user__image__wrapper {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.order__details__user__image {
+    width: 100%;
+}
+
+.order__details__courier__rating__wrapper {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.order__details__star__icon {
+    width: 30px !important;
+    height: 30px !important;
+    color: #f3c52f;
+}
+
+.order__details__id__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.order__details__restaurant__rating__wrapper {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.order__details__restaurant__rating {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+}
+
+.order__details__tr {
+    height: 30px;
+}
+
+.order__details__table {
+    width: 100%;
+}
+
+.order__details__item__container {
+    display: flex;
+}
+
+.order__details__item__image__wrapper {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+}
+
+.order__details__item__image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: 100%;
+    min-height: 100%;
+}
+
+.order__item__margin__left {
+    margin-left: 30px;
+}
+
+.order__details__items__text {
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.order__details__total__text {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 21px
+}
+
+.order__item__label {
+    font-family: Poppins;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 21px
+}
+
+.order__details__delivery__time__failed {
+    color: red;
+}
+
+.order__details__review__wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { SelectAddressProps } from '../order_placing_page.types'
 import { formatAddress } from 'src/utils/formatAddress';
-import ICustomerAddress from 'src/redux/models/ICustomerAddress';
 import './address_selector.css'
 
 const AddressSelector = ({order, addresses, onAddressSelected} : SelectAddressProps) => {

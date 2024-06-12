@@ -1,5 +1,5 @@
-import IMenuItem from "src/redux/models/IMenuItem"
+import { MenuItem } from "src/models/menuItem.interfaces"
 
 export type MenuItemReferenceProps = {
-    menuItem: IMenuItem
+    menuItem: MenuItem
 }

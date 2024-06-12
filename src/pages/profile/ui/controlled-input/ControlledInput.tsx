@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import './controlled_input.css'
 
-const ControlledInput = <T,>({label, value, error, setValue, parseValue, convertToString, onSave, children} : ControlledInputProps<T>) => {
+const ControlledInput = <T,>({label, value, error, disableEdit, setValue, parseValue, convertToString, onSave, children} : ControlledInputProps<T>) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [cachedValue, setCachedValue] = useState<T>(value)
 
@@ -65,7 +65,7 @@ const ControlledInput = <T,>({label, value, error, setValue, parseValue, convert
                 </div>
             </td>
             <td>
-                <div className="controlled__input" onBlur={handleBlur}>
+                <div className="controlled__input controlled__input__margin__left" onBlur={handleBlur}>
                     {React.cloneElement(children as ReactElement, {
                         ...children.props,
                         ref: inputRef,
@@ -91,7 +91,7 @@ const ControlledInput = <T,>({label, value, error, setValue, parseValue, convert
                         : 
                         (
                         <div className="controlled__input__actions">
-                            <button type="button" className="controlled__input__action button__wrapper" onClick={handleEditClick}>
+                            <button type="button" className={`controlled__input__action button__wrapper ${disableEdit ? 'controlled__input__edit__button__disabled' : ''}`} disabled={disableEdit} onClick={handleEditClick}>
                                 <EditIcon fontSize='medium' onMouseDown = {(e) => e.preventDefault()}/>
                             </button>
                         </div>

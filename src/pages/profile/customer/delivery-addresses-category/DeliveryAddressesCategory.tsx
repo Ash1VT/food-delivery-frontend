@@ -3,8 +3,10 @@ import { DeliveryAddressesCategoryProps } from '../../profile.types';
 import DeliveryAddressesTable from '../../delivery-addresses-table/DeliveryAddressesTable';
 import OpenAddingAddressButton from '../../ui/buttons/open-adding-address-button/OpenAddingAddressButton';
 import './delivery_addresses_category.css'
+import ModalWindow from 'src/components/modal-window/ModalWindow';
+import AddCustomerAddressModal from '../../ui/modals/add-customer-address-modal/AddCustomerAddressModal';
 
-const DeliveryAddressesCategory = ({approvedAddresses, pendingAddresses, rejectedAddresses, onOpenAddingAddress} : DeliveryAddressesCategoryProps) => {
+const DeliveryAddressesCategory = ({approvedAddresses, pendingAddresses, rejectedAddresses, onCustomerAddressCreated} : DeliveryAddressesCategoryProps) => {
     return (
         <div className='delivery__addresses__category__container'>
             <div className='delivery__addresses__category__section'>
@@ -32,7 +34,9 @@ const DeliveryAddressesCategory = ({approvedAddresses, pendingAddresses, rejecte
                 }
             </div>
             <div>
-                <OpenAddingAddressButton onOpen={onOpenAddingAddress}/>
+                <ModalWindow button={OpenAddingAddressButton({})}>
+                    <AddCustomerAddressModal onCustomerAddressCreated={onCustomerAddressCreated} />
+                </ModalWindow>
             </div>
         </div>
     )

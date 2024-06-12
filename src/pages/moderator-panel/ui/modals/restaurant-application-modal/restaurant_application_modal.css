@@ -1,0 +1,30 @@
+.restaurant__application__modal__container {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.restaurant__application__modal__title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 33px;
+}
+
+.restaurant__application__modal__form__wrapper {
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+}
+
+.restaurant__application__modal__buttons__wrapper {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.restaurant__application__modal__buttons__wrapper > * {
+    width: 50%;
+}

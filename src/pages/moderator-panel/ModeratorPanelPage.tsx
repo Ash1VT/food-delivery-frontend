@@ -1,22 +1,22 @@
 import Footer from 'src/components/footer'
 import Navbar from 'src/components/navbar'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import IUser from 'src/redux/models/IUser'
 import { addSuccessNotification } from 'src/utils/notifications'
 import Users from './users/Users'
-import { getCustomerAddresses, getRestaurantApplications, getUsers } from 'src/redux/selectors/currentModeratorSelectors'
+import { getCustomerAddresses } from 'src/redux/selectors/currentModeratorSelectors'
 import RestaurantApplications from './restaurant-applications/RestaurantApplications'
-import IRestaurantApplication from 'src/redux/models/IRestaurantApplication'
 import CustomerAddresses from './customer-addresses/CustomerAddresses'
-import ICustomerAddress from 'src/redux/models/ICustomerAddress'
+import { UserCreate, UserUpdate } from 'src/models/user.interfaces'
+import { RestaurantApplicationUpdate } from 'src/models/restaurantApplication.interfaces'
+import { CustomerAddressUpdate } from 'src/models/customerAddress.interfaces'
 import './moderator_panel_page.css'
-import { getCurrentUser } from 'src/redux/selectors/currentUserSelectors'
 
 const ModeratorPanelPage = () => {
-    const currentUser = useAppSelector(getCurrentUser)
+    const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
-    const users = useAppSelector(getUsers)
-    const restaurantApplications = useAppSelector(getRestaurantApplications)
+
+    const { isLoading: isUsersLoading, users, error: usersError } = useAppSelector((state) => state.usersReducer)
+    const { isLoading: isRestaurantApplicationsLoading, applications: restaurantApplications, error: restaurantApplicationsError} = useAppSelector((state) => state.restaurantApplicationsReducer)
     const customerAddresses = useAppSelector(getCustomerAddresses)
 
     const filterRoles = [
@@ -60,6 +60,9 @@ const ModeratorPanelPage = () => {
         },
     ]
 
+
+    // USERS
+
     const handleEmailVerifiedChanged = async (userId: string, isEmailVerified: boolean) => {
         alert('User email verified changed')
         addSuccessNotification(`Successfully ${isEmailVerified ? 'activated' : 'deactivated'} user email verification`)
@@ -70,12 +73,19 @@ const ModeratorPanelPage = () => {
         addSuccessNotification(`Successfully ${isActive ? 'activated' : 'deactivated'} user`)
     }
 
-    const handleOpenEditingUser = async (user: IUser) => {
-        alert(`Open editing user: ${JSON.stringify(user)}`)
+    const handleUserUpdated = async (user: UserUpdate) => {
+        alert(JSON.stringify(user, null, 2))
+        addSuccessNotification('User successfully updated')
     }
 
-    const handleOpenAddingModerator = async () => {
-        alert('Open adding moderator')
+    const handleUserImageUploaded = async (userId: string, image: File) => {
+        alert('User image uploaded')
+        addSuccessNotification('User image successfully uploaded')
+    }
+
+    const handleModeratorCreated = async (user: UserCreate) => {
+        alert(JSON.stringify(user, null, 2))
+        addSuccessNotification('Moderator successfully created')
     }
 
     const handleSearchUsers = async (query: string) => {
@@ -94,12 +104,38 @@ const ModeratorPanelPage = () => {
         alert(`Filtered is active: ${value}`)
     }
 
-    const handleOpenShowDetailsApplication = async (application: IRestaurantApplication) => {
-        alert(`Open show details application: ${JSON.stringify(application)}`)
+    // RESTAURANT APPLICATIONS
+
+    const handleRestaurantApplicationApproved = async (applicationId: string) => {
+        alert(`Restaurant application approved: ${applicationId}`)
+        addSuccessNotification('Restaurant application approved')
     }
 
-    const handleOpenShowDetailsAddress = async (address: ICustomerAddress) => {
-        alert(`Open show details address: ${JSON.stringify(address)}`)
+    const handleRestaurantApplicationRejected = async (applicationId: string) => {
+        alert(`Restaurant application rejected: ${applicationId}`)
+        addSuccessNotification('Restaurant application rejected')
+    }
+
+    const handleRestaurantApplicationUpdated = async (application: RestaurantApplicationUpdate) => {
+        alert(`Restaurant application updated: ${JSON.stringify(application)}`)
+        addSuccessNotification('Restaurant application updated')
+    }
+
+    // CUSTOMER ADDRESSES
+
+    const handleCustomerAddressUpdated = async (address: CustomerAddressUpdate) => {
+        alert(`Customer address updated: ${JSON.stringify(address)}`)
+        addSuccessNotification('Customer address updated')
+    }
+
+    const handleCustomerAddressApproved = async (addressId: string) => {
+        alert(`Customer address approved: ${addressId}`)
+        addSuccessNotification('Customer address approved')    
+    }
+
+    const handleCustomerAddressRejected = async (addressId: string) => {
+        alert(`Customer address rejected: ${addressId}`)
+        addSuccessNotification('Customer address rejected')
     }
 
     const handleSearchAddressesByCustomer = async (query: string) => {
@@ -136,21 +172,26 @@ const ModeratorPanelPage = () => {
                             onSearchUsers={handleSearchUsers}
                             onEmailVerifiedChanged={handleEmailVerifiedChanged}
                             onActivityChanged={handleActivityChanged}
-                            onOpenEditingUser={handleOpenEditingUser}
-                            onOpenAddingModerator={handleOpenAddingModerator}/>
+                            onModeratorCreated={handleModeratorCreated}
+                            onUserUpdated={handleUserUpdated}
+                            onUserImageUploaded={handleUserImageUploaded}/>
                     </div>
                     <div className="moderator__panel__section moderator__panel__applications">
                         <div className='moderator__panel__section__title'>Restaurant Applications</div>
 
                         <RestaurantApplications
                             applications={restaurantApplications}
-                            onOpenShowDetailsApplication={handleOpenShowDetailsApplication}/>
+                            onRestaurantApplicationApproved={handleRestaurantApplicationApproved}
+                            onRestaurantApplicationRejected={handleRestaurantApplicationRejected}
+                            onRestaurantApplicationUpdated={handleRestaurantApplicationUpdated}/>
                     </div>
                     <div className="moderator__panel__section moderator__panel__addresses">
                         <div className='moderator__panel__section__title'>Customer Addresses</div>
                         <CustomerAddresses
                             addresses={customerAddresses}
-                            onOpenShowDetailsAddress={handleOpenShowDetailsAddress}
+                            onCustomerAddressApproved={handleCustomerAddressApproved}
+                            onCustomerAddressRejected={handleCustomerAddressRejected}
+                            onCustomerAddressUpdated={handleCustomerAddressUpdated}
                             onSearchAddressesByCustomer={handleSearchAddressesByCustomer}
                             onSearchAddressesByCountry={handleSearchAddressesByCountry}
                             onSearchAddressesByRegion={handleSearchAddressesByRegion}

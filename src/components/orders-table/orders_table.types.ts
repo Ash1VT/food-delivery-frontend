@@ -1,27 +1,32 @@
-import IOrder from "src/redux/models/IOrder"
-
+import { Order } from "src/models/order.interfaces"
+import { User } from "src/models/user.interfaces"
 
 
 export type OrderRowProps = {
-    order: IOrder
+    order: Order
+    currentUser: User
     buttonLabel?: string
-    onOpenDetailedInformation: (order: IOrder) => Promise<void>
-    onOrderButtonClick?: (order: IOrder) => Promise<void>
+    onOrderButtonClick?: (order: Order) => Promise<void>
 }
 
 export type OrdersTableProps = {
-    orders: IOrder[]
+    orders: Order[]
+    currentUser: User
     buttonLabel?: string
-    onOpenDetailedInformation: (order: IOrder) => Promise<void>
-    onOrderButtonClick?: (order: IOrder) => Promise<void>
+    onOrderButtonClick?: (order: Order) => Promise<void>
 }
 
 
 export type OrderActionButtonProps = {
     buttonLabel: string
-    onClick: () => Promise<void>
+    onClick?: () => Promise<void>
 }
 
 export type OpenDetailedInformationProps = {
-    onClick: () => Promise<void>
+    onClick?: () => Promise<void>
+}
+
+export type OrderDetailedInformationModalProps = {
+    order: Order
+    currentUser: User
 }

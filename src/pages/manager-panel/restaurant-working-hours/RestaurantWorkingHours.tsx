@@ -1,36 +1,35 @@
 import React from 'react'
 import { RestaurantDayWorkingHoursProps, RestaurantWorkingHoursProps } from '../manager_panel.types'
 import findWorkingHours from 'src/utils/findWorkingHours'
-import EditIcon from '@mui/icons-material/Edit';
-import CloseIcon from '@mui/icons-material/Close';
-import CheckIcon from '@mui/icons-material/Check';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IWorkingHours from 'src/redux/models/IWorkingHours'
 import DeleteIconButton from '../../../components/ui/buttons/delete-icon-button/DeleteIconButton';
 import EditIconButton from '../../../components/ui/buttons/edit-icon-button/EditIconButton';
+import ModalWindow from 'src/components/modal-window/ModalWindow';
+import EditRestaurantWorkingHoursModal from '../ui/modals/edit-restaurant-working-hours-modal/EditRestaurantWorkingHoursModal';
+import AddRestaurantWorkingHoursModal from '../ui/modals/add-restaurant-working-hours-modal/AddRestaurantWorkingHoursModal';
+import { WorkingHours } from 'src/models/workingHours.interfaces';
 import './restaurant_working_hours.css'
 
-const getStringWorkingHours = (workingHours?: IWorkingHours) => {
+const getStringWorkingHours = (workingHours?: WorkingHours) => {
     return workingHours ? `${workingHours.openingTime} - ${workingHours.closingTime}` : 'Day off'
 }
 
-const RestaurantDayWorkingHours = ({dayOfWeek, workingHours, onOpenEditingWorkingHours, onDeleteWorkingHours} : RestaurantDayWorkingHoursProps) => {
+const RestaurantDayWorkingHours = ({dayOfWeek, restaurantId, workingHours, onWorkingHoursCreated, onWorkingHoursUpdated, onWorkingHoursDeleted} : RestaurantDayWorkingHoursProps) => {
 
-    const handleOpenEditingWorkingHours = async (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        await onOpenEditingWorkingHours(workingHours)
-    }
+    // const handleOpenEditingWorkingHours = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    //     event.preventDefault()
+    //     await onOpenEditingWorkingHours(workingHours)
+    // }
 
-    const handleDeleteWorkingHours = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleWorkingHoursDeleted = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
-        await onDeleteWorkingHours((workingHours as IWorkingHours).id)
+        await onWorkingHoursDeleted((workingHours as WorkingHours).id)
     }
 
     return (
         <tr className="restaurant__working__hours__row">
             <th className='restaurant__working__hours__column'>
                 <div className="restaurant__working__hours__label">
-                    {workingHours ? workingHours.dayOfWeek : dayOfWeek}
+                    {dayOfWeek}
                 </div>
             </th>
             <th className='restaurant__working__hours__column'>
@@ -40,9 +39,21 @@ const RestaurantDayWorkingHours = ({dayOfWeek, workingHours, onOpenEditingWorkin
             </th>
             <th className='restaurant__working__hours__column'>
                 <div className='restaurant__working__hours__buttons'>
-                    <EditIconButton onEdit={handleOpenEditingWorkingHours}/>
+                    {workingHours ? 
+                        (
+                        <ModalWindow button={EditIconButton({})}>
+                            <EditRestaurantWorkingHoursModal workingHours={workingHours} onWorkingHoursUpdated={onWorkingHoursUpdated} />
+                        </ModalWindow>
+                        )
+                        : 
+                        (
+                        <ModalWindow button={EditIconButton({})}>
+                            <AddRestaurantWorkingHoursModal dayOfWeek={dayOfWeek} restaurantId={restaurantId} onWorkingHoursCreated={onWorkingHoursCreated}/>
+                        </ModalWindow>
+                        )
+                    }
                     {workingHours &&
-                    <DeleteIconButton onDelete={handleDeleteWorkingHours}/>
+                    <DeleteIconButton onDelete={handleWorkingHoursDeleted}/>
                     }
                 </div>
             </th>
@@ -52,7 +63,7 @@ const RestaurantDayWorkingHours = ({dayOfWeek, workingHours, onOpenEditingWorkin
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-const RestaurantWorkingHours = ({workingHours, onOpenEditingWorkingHours, onDeleteWorkingHours} : RestaurantWorkingHoursProps) => {
+const RestaurantWorkingHours = ({workingHours, restaurantId, onWorkingHoursCreated, onWorkingHoursUpdated, onWorkingHoursDeleted} : RestaurantWorkingHoursProps) => {
     return (
         <div>
             <table>
@@ -62,9 +73,11 @@ const RestaurantWorkingHours = ({workingHours, onOpenEditingWorkingHours, onDele
                         <RestaurantDayWorkingHours
                             key={dayOfWeek}
                             dayOfWeek={dayOfWeek}
+                            restaurantId={restaurantId}
                             workingHours={dayWorkingHours}
-                            onOpenEditingWorkingHours={onOpenEditingWorkingHours}
-                            onDeleteWorkingHours={onDeleteWorkingHours}
+                            onWorkingHoursCreated={onWorkingHoursCreated}
+                            onWorkingHoursUpdated={onWorkingHoursUpdated}
+                            onWorkingHoursDeleted={onWorkingHoursDeleted}
                         />
                     )
                 })}
