@@ -32,13 +32,7 @@ export type PersonalInformationProps = {
     onUserImageUploaded: (user: UserUploadImage) => Promise<void>
 }
 
-export type OrderDetailsProps = {
-    currentUser: User
-    order: Order
-    onOrderPlaced?: (orderId: string) => Promise<void>
-    onOrderDeliveryFinished?: (orderId: string) => Promise<void>
-    onOrderReviewCreated?: (review: ReviewCreate) => Promise<void>
-}
+
 
 export type DeliveryAddressesTableProps = {
     addresses: CustomerAddress[]

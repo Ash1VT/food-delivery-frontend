@@ -1,22 +1,29 @@
 import Footer from 'src/components/footer'
 import Navbar from 'src/components/navbar'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { addSuccessNotification } from 'src/utils/notifications'
+import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications'
 import Users from './users/Users'
 import { getCustomerAddresses } from 'src/redux/selectors/currentModeratorSelectors'
 import RestaurantApplications from './restaurant-applications/RestaurantApplications'
 import CustomerAddresses from './customer-addresses/CustomerAddresses'
-import { UserCreate, UserUpdate } from 'src/models/user.interfaces'
+import { ModeratorCreate, UserCreate, UserUpdate } from 'src/models/user.interfaces'
 import { RestaurantApplicationUpdate } from 'src/models/restaurantApplication.interfaces'
 import { CustomerAddressUpdate } from 'src/models/customerAddress.interfaces'
+import { useEffect } from 'react'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { changeUserActiveStatus, changeUserEmailVerififiedStatus, createModerator, fetchUsers, updateUser, uploadUserImage } from 'src/redux/actions/users.actions'
+import { confirmRestaurantApplication, declineRestaurantApplication, fetchRestaurantsApplications, updateRestaurantApplication } from 'src/redux/actions/restaurantApplications.actions'
 import './moderator_panel_page.css'
 
 const ModeratorPanelPage = () => {
+    const dispatch = useAppDispatch()
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
 
     const { isLoading: isUsersLoading, users, error: usersError } = useAppSelector((state) => state.usersReducer)
     const { isLoading: isRestaurantApplicationsLoading, applications: restaurantApplications, error: restaurantApplicationsError} = useAppSelector((state) => state.restaurantApplicationsReducer)
+    const { isLoading: isCustomerAddressesLoading, error: customerAddressesError } = useAppSelector((state) => state.customerAddressesReducer)
+
     const customerAddresses = useAppSelector(getCustomerAddresses)
 
     const filterRoles = [
@@ -60,32 +67,80 @@ const ModeratorPanelPage = () => {
         },
     ]
 
+    useEffect(() => {
+        dispatch(fetchUsers()).then((response) => {
+            console.log(response)
+            if (response.meta.requestStatus === 'fulfilled') {
+                // FETCH ADDRESSES
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
+
+        dispatch(fetchRestaurantsApplications()).then((response) => {
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
+    }, [dispatch])
+
 
     // USERS
 
     const handleEmailVerifiedChanged = async (userId: string, isEmailVerified: boolean) => {
-        alert('User email verified changed')
-        addSuccessNotification(`Successfully ${isEmailVerified ? 'activated' : 'deactivated'} user email verification`)
+        dispatch(changeUserEmailVerififiedStatus({id: userId, isEmailVerified})).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification(`Successfully ${isEmailVerified ? 'activated' : 'deactivated'} user email verification`)
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleActivityChanged = async (userId: string, isActive: boolean) => {
-        alert('User activity changed')
-        addSuccessNotification(`Successfully ${isActive ? 'activated' : 'deactivated'} user`)
+        dispatch(changeUserActiveStatus({id: userId, isActive})).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification(`Successfully ${isActive ? 'activated' : 'deactivated'} user`)
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleUserUpdated = async (user: UserUpdate) => {
-        alert(JSON.stringify(user, null, 2))
-        addSuccessNotification('User successfully updated')
+        dispatch(updateUser(user)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('User successfully updated')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleUserImageUploaded = async (userId: string, image: File) => {
-        alert('User image uploaded')
-        addSuccessNotification('User image successfully uploaded')
+        dispatch(uploadUserImage({id: userId, image})).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('User image successfully uploaded')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
-    const handleModeratorCreated = async (user: UserCreate) => {
-        alert(JSON.stringify(user, null, 2))
-        addSuccessNotification('Moderator successfully created')
+    const handleModeratorCreated = async (user: ModeratorCreate) => {
+        dispatch(createModerator(user)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Moderator successfully created')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleSearchUsers = async (query: string) => {
@@ -107,18 +162,36 @@ const ModeratorPanelPage = () => {
     // RESTAURANT APPLICATIONS
 
     const handleRestaurantApplicationApproved = async (applicationId: string) => {
-        alert(`Restaurant application approved: ${applicationId}`)
-        addSuccessNotification('Restaurant application approved')
+        dispatch(confirmRestaurantApplication(applicationId)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Restaurant application approved')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleRestaurantApplicationRejected = async (applicationId: string) => {
-        alert(`Restaurant application rejected: ${applicationId}`)
-        addSuccessNotification('Restaurant application rejected')
+        dispatch(declineRestaurantApplication(applicationId)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Restaurant application rejected')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleRestaurantApplicationUpdated = async (application: RestaurantApplicationUpdate) => {
-        alert(`Restaurant application updated: ${JSON.stringify(application)}`)
-        addSuccessNotification('Restaurant application updated')
+        dispatch(updateRestaurantApplication(application)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Restaurant application updated')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     // CUSTOMER ADDRESSES

@@ -34,6 +34,7 @@ const FormTable = <T extends FormikValues>({ fields, initialValues, validationSc
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            validateOnChange={false}
         >
             {({ values, errors, handleSubmit, setFieldValue }) => (
                 <Form className="form" onSubmit={handleSubmit}>

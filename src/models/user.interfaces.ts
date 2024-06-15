@@ -26,6 +26,7 @@ export interface UserCreate {
     birthDate: Date
     email: string
     role: string
+    isRemember: boolean
 }
 
 export interface UserUpdate {
@@ -39,4 +40,24 @@ export interface UserUpdate {
 export interface UserUploadImage {
     id: string
     image: File
+}
+
+export interface UserUpdateActivity {
+    id: string
+    isActive: boolean
+}
+
+export interface UserUpdateEmailVerified {
+    id: string
+    isEmailVerified: boolean
+}
+
+export interface ModeratorCreate {
+    firstName: string
+    lastName: string
+    password: string
+    phone: string
+    birthDate: Date
+    email: string
+    role: string
 }

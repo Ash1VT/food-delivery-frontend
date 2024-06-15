@@ -39,10 +39,12 @@ const Restaurant = ({restaurant, onRestaurantClick} : RestaurantProps) => {
                         </div>
                     </Popup>
                 </div>
-                <div className="restaurant__rating__wrapper">
-                    <StarIcon className="restaurant__rating__icon" viewBox='8 2 8 20'/>
-                    <p className="restaurant__rating__value">{restaurant.ratingValue.toFixed(2)}</p>
-                </div>
+                {restaurant.ratingValue &&
+                    <div className="restaurant__rating__wrapper">
+                        <StarIcon className="restaurant__rating__icon" viewBox='8 2 8 20'/>
+                        <p className="restaurant__rating__value">{restaurant.ratingValue.toFixed(2)}</p>
+                    </div>
+                }
             </div>
         </div>
     )

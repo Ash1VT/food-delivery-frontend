@@ -24,7 +24,7 @@ const MenuCategory = ({ menuCategory, onMenuItemClick }: MenuCategoryProps) => {
             <div className="menu__category__name">
                 {menuCategory.name}
             </div>
-            <MenuItemsList menuItems={menuCategory.items} onMenuItemClick={onMenuItemClick} />
+            <MenuItemsList menuItems={menuCategory.items} categoryName={menuCategory.name} onMenuItemClick={onMenuItemClick} />
         </div>
     )
 }

@@ -15,8 +15,8 @@ import CustomPhoneInput from 'src/components/ui/custom-inputs/custom-phone-input
 import { phoneRegExp } from 'src/constants/phone';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
-import { fetchCurrentUser, register } from 'src/redux/actions/user.actions';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
+import { fetchCurrentUser, register } from 'src/redux/actions/currentUser.actions';
 import './registration_page.css'
 
 interface FormValues {
@@ -63,7 +63,8 @@ const RegistrationPage = () => {
         const userCreateData = {
             ...values,
             role: queryParams.get('role') as string,
-            birthDate: values.birthDate as Date
+            birthDate: values.birthDate as Date,
+            isRemember: isRememberMe
         }
 
         dispatch(register(userCreateData)).then((result) => {

@@ -19,3 +19,9 @@ export interface MenuUpdate {
     name: string
     description?: string
 }
+
+
+export interface MenuRestaurant {
+    menuId: string
+    restaurantId: string
+}

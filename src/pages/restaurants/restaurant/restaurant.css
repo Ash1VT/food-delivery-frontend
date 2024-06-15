@@ -43,7 +43,7 @@
     row-gap: 20px;
     align-items: flex-start;
     max-width: 400px;
-    background-color: rgba(197, 192, 192, 0.98);
+    /* background-color: rgba(197, 192, 192, 0.98); */
     border-radius: 20px;
     padding: 32px;
 }

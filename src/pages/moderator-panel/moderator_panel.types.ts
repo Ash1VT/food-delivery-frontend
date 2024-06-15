@@ -1,7 +1,7 @@
 import { SelectOption } from "src/components/ui/select-component/select_component.types"
 import { CustomerAddress, CustomerAddressUpdate } from "src/models/customerAddress.interfaces"
 import { RestaurantApplication, RestaurantApplicationUpdate } from "src/models/restaurantApplication.interfaces"
-import { User, UserCreate, UserUpdate } from "src/models/user.interfaces"
+import { ModeratorCreate, User, UserCreate, UserUpdate } from "src/models/user.interfaces"
 
 // USERS
 
@@ -29,11 +29,11 @@ export type UsersProps = {
 
     onUserUpdated: (user: UserUpdate) => Promise<void>
     onUserImageUploaded: (id: string, image: File) => Promise<void>
-    onModeratorCreated: (user: UserCreate) => Promise<void>
+    onModeratorCreated: (user: ModeratorCreate) => Promise<void>
 }
 
 export type AddModeratorModalProps = {
-    onModeratorCreated: (user: UserCreate) => Promise<void>
+    onModeratorCreated: (user: ModeratorCreate) => Promise<void>
 }
 
 export type EditUserModalProps = {

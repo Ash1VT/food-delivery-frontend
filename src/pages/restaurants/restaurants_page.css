@@ -81,6 +81,16 @@
     padding: 5px 6px;
 }
 
+.restaurants__no__restaurants__text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+    color: #424242;
+}
+
 .restaurants__pagination__page:hover:not(.restaurants__pagination__active), .restaurants__pagination__next:hover:not(.restaurants__pagination__disabled), .restaurants__pagination__previous:hover:not(.restaurants__pagination__disabled), .restaurants__pagination__break:hover {
     background: linear-gradient(to bottom, #FFD700, #a59435);
 }

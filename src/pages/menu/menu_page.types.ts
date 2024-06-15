@@ -3,11 +3,13 @@ import { MenuItem } from "src/models/menuItem.interfaces"
 
 export type MenuItemProps = {
     menuItem: MenuItem
+    categoryName: string
     onMenuItemClick: (menuItemId: string) => void
 }
 
 export type MenuItemsListProps = {
     menuItems: MenuItem[]
+    categoryName: string
     onMenuItemClick: (menuItemId: string) => void
 }
 
@@ -53,12 +55,19 @@ export type MenuCategoriesActiveContextProps = {
     setActiveCategoryId: (id: string) => void
 }
 
+
+// UI
+
 export type AddToCartButtonProps = {
     onAddedToCart: () => void
 }
 
 export type RemoveFromCartButtonProps = {
     onRemovedFromCart: () => void
+}
+
+export type BackToRestaurantsButtonProps = {
+    onBackToRestaurants: () => void
 }
 
 // export type MenuCategoryClickProps = {

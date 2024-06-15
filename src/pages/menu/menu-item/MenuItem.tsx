@@ -7,10 +7,10 @@ import RemoveFromCartButton from '../ui/buttons/remove-from-cart-button/RemoveFr
 import CustomRating from 'src/components/custom-rating/CustomRating'
 import { addOrderCartItem, removeOrderCartItem } from 'src/redux/reducers/orderCartReducer'
 import { getIfOrderItemInCart } from 'src/redux/selectors/orderCartSelectors'
-import './menu_item.css'
 import { useState } from 'react'
+import './menu_item.css'
 
-const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
+const MenuItem = ({menuItem, categoryName, onMenuItemClick}: MenuItemProps) => {
     const dispatch = useAppDispatch()
     const inCart = useSelector(state => getIfOrderItemInCart(state, menuItem.id))
     const [isMenuItemHovered, setIsMenuItemHovered] = useState(false)
@@ -26,7 +26,7 @@ const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
                 menuItemName: menuItem.name, 
                 menuItemImageUrl: menuItem.imageUrl, 
                 menuItemPrice: menuItem.price, 
-                menuItemCategoryName: menuItem.categoryName, 
+                menuItemCategoryName: categoryName, 
                 quantity: 1
             }
         ))

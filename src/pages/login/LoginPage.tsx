@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import CustomTextInput from 'src/components/ui/custom-inputs/custom-text-input/CustomTextInput'
 import RememberMe from '../../components/ui/remember_me/RememberMe'
 import AuthenticateButton from './ui/buttons/authenticate-button/AuthenticateButton'
-import CopyrightRounded from '@mui/icons-material/CopyrightRounded'
 import { Formik, FormikHelpers } from 'formik';
 import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications';
 import FormErrorNotification from 'src/components/form-error-notification/FormErrorNotification';
@@ -11,8 +10,7 @@ import Copyright from 'src/components/ui/copyright/Copyright';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
-import { authenticate, fetchCurrentUser } from 'src/redux/actions/user.actions';
-import { error } from 'console';
+import { authenticate, fetchCurrentUser } from 'src/redux/actions/currentUser.actions';
 import './login_page.css'
 
 interface FormValues {

@@ -33,3 +33,8 @@ export const parseUserErrors = (errors: any) => {
     return errorMessages.join('; ');
 
 }
+
+
+export const parseRestaurantErrors = (errors: any) => {
+    return "test";
+}

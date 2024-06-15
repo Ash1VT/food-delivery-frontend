@@ -14,7 +14,7 @@ import ModalWindow from '../modal-window/ModalWindow';
 import OrderCart from '../order-cart/OrderCart';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
 import { fetchOrderCartItemsFromLocalStorage } from 'src/redux/reducers/orderCartReducer';
-import { logout } from 'src/redux/actions/user.actions';
+import { logout } from 'src/redux/actions/currentUser.actions';
 import "./navbar.css";
 
 const CustomerNavbarButtons = ({currentUser, onProfileButtonClick, onLogout} : CustomerNavbarButtonsProps) => {

@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import { OrderDetailsProps } from '../../pages/profile/profile.types';
 import DropdownSection from 'src/components/dropdown-section/DropdownSection';
 import moment from 'moment';
 import Divider from 'src/components/ui/divider/Divider';
@@ -13,6 +12,7 @@ import ModalWindow from 'src/components/modal-window/ModalWindow';
 import AddCourierReviewModal from '../../pages/profile/ui/modals/add-courier-review-modal/AddCourierReviewModal';
 import { Order } from 'src/models/order.interfaces';
 import { User } from 'src/models/user.interfaces';
+import { OrderDetailsProps } from './order_details.types';
 import './order_details.css'
 
 const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, onOrderDeliveryFinished} : OrderDetailsProps) => {
@@ -295,48 +295,50 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                     {renderReview(order)}
                 </table>
             </DropdownSection>
-            <DropdownSection title="Restaurant Details">
-                <table className='order__details__table'>
-                    <tr className='order__details__tr'>
-                        <td style={{width: '50%'}}>
-                            <div className="order__details__label">Name</div>
-                        </td>
-                        <td>
-                            <div className="order__details__text">{order.restaurant.name}</div>
-                        </td>
-                    </tr>
-                    <tr className='order__details__tr'>
-                        <td>
-                            <div className="order__details__label">Rating</div>
-                        </td>
-                        <td>
-                            <div className='order__details__restaurant__rating__wrapper'>
-                                <div className='order__details__restaurant__rating'>
-                                    <div className="order__details__text">{order.restaurant.ratingValue}</div>
-                                    <StarIcon className='order__details__star__icon' viewBox='8 2 8 20'/>
+            {order.restaurant && (
+                <DropdownSection title="Restaurant Details">
+                    <table className='order__details__table'>
+                        <tr className='order__details__tr'>
+                            <td style={{width: '50%'}}>
+                                <div className="order__details__label">Name</div>
+                            </td>
+                            <td>
+                                <div className="order__details__text">{order.restaurant.name}</div>
+                            </td>
+                        </tr>
+                        <tr className='order__details__tr'>
+                            <td>
+                                <div className="order__details__label">Rating</div>
+                            </td>
+                            <td>
+                                <div className='order__details__restaurant__rating__wrapper'>
+                                    <div className='order__details__restaurant__rating'>
+                                        <div className="order__details__text">{order.restaurant.ratingValue}</div>
+                                        <StarIcon className='order__details__star__icon' viewBox='8 2 8 20'/>
+                                    </div>
+                                    <div className="order__details__text">({order.restaurant.reviewsCount} reviews)</div>
                                 </div>
-                                <div className="order__details__text">({order.restaurant.reviewsCount} reviews)</div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr className='order__details__tr'>
-                        <td>
-                            <div className="order__details__label">Address</div>
-                        </td>
-                        <td>
-                            <div className="order__details__text">{order.restaurant.address}</div>
-                        </td>
-                    </tr>
-                    <tr className='order__details__tr'>
-                        <td>
-                            <div className="order__details__label">Phone</div>
-                        </td>
-                        <td>
-                            <div className="order__details__text">{order.restaurant.phone}</div>
-                        </td>
-                    </tr>
-                </table>
-            </DropdownSection>
+                            </td>
+                        </tr>
+                        <tr className='order__details__tr'>
+                            <td>
+                                <div className="order__details__label">Address</div>
+                            </td>
+                            <td>
+                                <div className="order__details__text">{order.restaurant.address}</div>
+                            </td>
+                        </tr>
+                        <tr className='order__details__tr'>
+                            <td>
+                                <div className="order__details__label">Phone</div>
+                            </td>
+                            <td>
+                                <div className="order__details__text">{order.restaurant.phone}</div>
+                            </td>
+                        </tr>
+                    </table>
+                </DropdownSection>
+            )}
 
             <DropdownSection title="Items Details">
                 <table className='order__details__table'>

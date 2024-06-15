@@ -3,7 +3,6 @@ export interface WorkingHours {
     dayOfWeek: string
     openingTime: string
     closingTime: string
-    restaurantId: string
 }
 
 export interface WorkingHoursCreate {

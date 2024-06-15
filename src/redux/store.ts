@@ -7,7 +7,6 @@ import availableOrdersReducer from "./reducers/availableOrdersReducer";
 import currentCourierOrdersReducer from "./reducers/currentCourierOrdersReducer";
 import currentCourierRatingReducer from "./reducers/currentCourierRatingReducer";
 import currentCourierReviewsReducer from "./reducers/currentCourierReviewsReducer";
-import restaurantMenusReducer from "./reducers/restaurantMenusReducer";
 import menuItemReviewsReducer from "src/redux/reducers/menuItemReviewsReducer";
 import currentCustomerAddressesReducer from "./reducers/currentCustomerAddressesReducer";
 import currentCustomerOrdersReducer from "./reducers/currentCustomerOrdersReducer";
@@ -20,10 +19,13 @@ import usersReducer from "./reducers/usersReducer";
 import restaurantApplicationsReducer from "./reducers/restaurantApplicationsReducer";
 import currentCustomerRestaurantReviewReducer from "./reducers/currentCustomerRestaurantReviewReducer";
 import currentCustomerMenuItemReviewReducer from "./reducers/currentCustomerMenuItemReviewReducer";
+import currentManagerRestaurantApplicationsReducer from "./reducers/currentManagerRestaurantApplicationsReducer";
+import restaurantMenuReducer from "./reducers/restaurantMenuReducer";
+import currentManagerRestaurantMenuItemsReducer from "./reducers/currentManagerRestaurantMenuItemsReducer";
 
 const rootReducer = combineReducers({
     orderCartReducer,
-    restaurantMenusReducer,
+    restaurantMenuReducer,
     restaurantsReducer,
     restaurantReviewsReducer,
     menuItemReviewsReducer,
@@ -44,9 +46,11 @@ const rootReducer = combineReducers({
 
     // RESTAURANT MANAGER
     currentManagerRestaurantMenusReducer,
+    currentManagerRestaurantMenuItemsReducer,
     currentManagerRestaurantOrdersReducer,
     currentManagerRestaurantPromocodesReducer,
     currentManagerRestaurantReducer,
+    currentManagerRestaurantApplicationsReducer,
 
     // MODERATOR
     restaurantApplicationsReducer,

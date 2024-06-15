@@ -6,38 +6,75 @@ import MenuCategoriesNames from './menu-categories-names/MenuCategoriesNames'
 import Divider from 'src/components/ui/divider/Divider'
 import MenuCategoriesList from './menu-categories-list/MenuCategoriesList'
 import MenuCategoriesRefsContext from './contexts/MenuCategoriesRefsContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import OrderCart from 'src/components/order-cart/OrderCart'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import RestaurantReference from 'src/components/restaurant-reference/RestaurantReference'
-import { getRestaurant, getRestaurantIsOpen } from '../../redux/selectors/restaurantSelectors'
 import MenuCategoriesActiveContext from './contexts/MenuCategoriesActiveContext'
-import { getMenu } from 'src/redux/selectors/menuSelectors'
 import { useNavigate, useParams } from 'react-router-dom'
 import NotFoundPage from '../not-found-page/NotFoundPage'
 import './menu_page.css'
+import isRestaurantOpen from 'src/utils/isRestaurantOpen'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { fetchRestaurant, fetchRestaurantMenu } from 'src/redux/actions/restaurantMenu.actions'
+import { addErrorNotification } from 'src/utils/notifications'
+import BackToRestaurantsButton from './ui/buttons/back-to-restaurants-button/BackToRestaurantsButton'
 
 const MenuPage = () => {
     const { restaurantId } = useParams()
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
-    const menu = useAppSelector(state => getMenu(state, restaurantId))
-    const restaurant = useAppSelector(state => getRestaurant(state, restaurantId))
-    const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
+    const { isLoading: isMenuLoading, restaurant, menu, error: menuError } = useAppSelector((state) => state.restaurantMenuReducer)
+
+    // const menu = useAppSelector(state => getMenu(state, restaurantId))
+    // const restaurant = useAppSelector(state => getRestaurant(state, restaurantId))
+    // const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
 
     const [categoriesRefs, setCategoriesRefs] = useState<MenuCategoryRef[]>([])
     const [activeCategoryId, setActiveCategoryId] = useState<string>('1')
     
-    if (!menu || !restaurant) {
+    useEffect(() => {
+        if (restaurantId) {
+            dispatch(fetchRestaurant(restaurantId)).then((response) => {
+
+                if (response.type === 'restaurantMenu/fetchRestaurant/fulfilled') {
+                    return
+                }
+
+                if (response.type === 'restaurantMenu/fetchRestaurant/rejected') {
+                    addErrorNotification(response.payload as string)
+                }
+
+            }) 
+
+            dispatch(fetchRestaurantMenu(restaurantId)).then((response) => {
+                if (response.type === 'restaurantMenu/fetchRestaurantMenu/fulfilled') {
+                    return
+                }
+
+                if (response.type === 'restaurantMenu/fetchRestaurantMenu/rejected') {
+                    addErrorNotification(response.payload as string)
+                }
+            })
+            
+        }
+    }, [dispatch])
+
+    if (!restaurant) {
         return <NotFoundPage/>
     }
+
+    const isOpen = isRestaurantOpen(restaurant)
 
     const handleMenuItemClick = (menuItemId: string) => {
         navigate(`/restaurants/${restaurantId}/items/${menuItemId}`)
     }
 
-    const menuCategories = menu.menuCategories
+    const handleBackToRestaurantsClick = () => {
+        navigate(`/restaurants`)
+    }
 
     const menuCategoriesRefsContext: MenuCategoriesRefsContextProps = {
         categoriesRefs: categoriesRefs,
@@ -56,23 +93,27 @@ const MenuPage = () => {
                     <MenuCategoriesRefsContext.Provider value={menuCategoriesRefsContext}>
                         <MenuCategoriesActiveContext.Provider value={menuCategoriesActiveContext}>
                             <div className="menu__left__wrapper">
-                                {/* <div className="menu__back__to__restaurants__wrapper">
-
-                                </div> */}
-                                <MenuCategoriesNames categoryNames={menuCategories}/>
+                                <div className="menu__back__to__restaurants__wrapper">
+                                    <BackToRestaurantsButton onBackToRestaurants={handleBackToRestaurantsClick} />
+                                </div>
+                                {menu &&
+                                    <MenuCategoriesNames categoryNames={menu.menuCategories}/>
+                                }
                             </div>
-                            {/* <Divider width='2px' height='auto' color='#CFCFCF' className='menu__divider'/> */}
                             <div className="menu__content__wrapper">
-
-                                {/* <div className="menu__restaurant__wrapper">
-
-                                </div> */}
-                                <RestaurantReference isRestaurantOpen={isRestaurantOpen} restaurant={restaurant}/>
-                                <MenuCategoriesList menuCategories={menuCategories} onMenuItemClick={handleMenuItemClick}/>
+                                <RestaurantReference isRestaurantOpen={isOpen} restaurant={restaurant}/>
+                                {menu ? 
+                                    (
+                                        <MenuCategoriesList menuCategories={menu.menuCategories} onMenuItemClick={handleMenuItemClick}/>
+                                    )
+                                    : 
+                                    (
+                                        <div className='menu__not__available'>
+                                            Restaurant menu is not available
+                                        </div>
+                                    )
+                                }
                             </div>
-                            {/* <div className="menu__order__cart">
-                                <OrderCart/>
-                            </div> */}
                         </MenuCategoriesActiveContext.Provider>
                     </MenuCategoriesRefsContext.Provider>
             </div>

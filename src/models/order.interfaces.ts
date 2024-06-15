@@ -17,7 +17,7 @@ export interface Order {
     priceInformation: PriceInformation;
     customer?: User
     courier?: User
-    restaurant: Restaurant
+    restaurant?: Restaurant
     review?: Review
     courierRating?: number
 }
