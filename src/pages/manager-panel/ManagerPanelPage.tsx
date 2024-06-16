@@ -27,6 +27,7 @@ import { activateRestaurant, createRestaurantWorkingHours, deactivateRestaurant,
 import { createRestaurant, fetchCurrentManagerRestaurantApplications, updateRestaurant } from 'src/redux/actions/currentManagerRestaurantApplications.actions'
 import { createRestaurantMenuItem, deleteRestaurantMenuItem, fetchRestaurantMenuItems, updateRestaurantMenuItem, uploadRestaurantMenuItemImage } from 'src/redux/actions/currentManagerRestaurantMenuItems.actions'
 import { addMenuItemToCategory, createRestaurantMenu, createRestaurantMenuCategory, deleteRestaurantMenuCategory, fetchCurrentManagerRestaurantCurrentMenu, fetchCurrentManagerRestaurantMenus, removeMenuItemFromCategory, setCurrentRestaurantMenu, unsetCurrentRestaurantMenu, updateRestaurantMenuCategory, uploadRestaurantMenuCategoryImage } from 'src/redux/actions/currentManagerRestaurantMenus.actions'
+import { activatePromocode, createPromocode, deactivatePromocode, fetchCurrentManagerRestaurantPromocodes, updatePromocode } from 'src/redux/actions/currentManagerRestaurantPromocodes.actions'
 
 
 const ManagerPanelPage = () => {
@@ -67,6 +68,12 @@ const ManagerPanelPage = () => {
                         })
 
                         dispatch(fetchCurrentManagerRestaurantMenus(restaurant.id)).then((response) => {
+                            if (response.meta.requestStatus === 'rejected') {
+                                addErrorNotification(response.payload as string)
+                            }
+                        })
+
+                        dispatch(fetchCurrentManagerRestaurantPromocodes(restaurant.id)).then((response) => {
                             if (response.meta.requestStatus === 'rejected') {
                                 addErrorNotification(response.payload as string)
                             }
@@ -279,18 +286,47 @@ const ManagerPanelPage = () => {
     // RESTAURANT PROMOCODES
 
     const handlePromocodeActivityChanged = async (id: string, isActive: boolean) => {
-        alert('Promocode activity changed')
-        addSuccessNotification(`Successfully ${isActive ? 'activated' : 'deactivated'} promocode`)
+        if (isActive) {
+            dispatch(activatePromocode(id)).then((response) => {
+                if (response.meta.requestStatus === 'fulfilled') {
+                    addSuccessNotification('Successfully activated promocode')
+                }
+                if (response.meta.requestStatus === 'rejected') {
+                    addErrorNotification(response.payload as string)
+                }
+            })
+        } else {
+            dispatch(deactivatePromocode(id)).then((response) => {
+                if (response.meta.requestStatus === 'fulfilled') {
+                    addSuccessNotification('Successfully deactivated promocode')
+                }
+                if (response.meta.requestStatus === 'rejected') {
+                    addErrorNotification(response.payload as string)
+                }
+            })
+        }
     }
 
     const handlePromocodeCreated = async (promocode: PromocodeCreate) => {
-        alert(JSON.stringify(promocode))
-        addSuccessNotification('Successfully created promocode')
+        dispatch(createPromocode(promocode)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Successfully created promocode')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handlePromocodeUpdated = async (promocode: PromocodeUpdate) => {
-        alert(JSON.stringify(promocode))
-        addSuccessNotification('Successfully updated promocode')
+        dispatch(updatePromocode(promocode)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Successfully updated promocode')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     // RESTAURANT MENU ITEMS

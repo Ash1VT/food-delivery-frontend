@@ -108,6 +108,11 @@ export class UserService {
         })
     }
 
+    public static async getUser(id: string): Promise<User> {
+        const response = await userMicroservice.get(`/users/${id}/`)
+        return this.parseUserFromResponseData(response.data)
+    }
+
     public static async updateUser(data: UserUpdate): Promise<User> {
         const userUpdateData = this.parseUserUpdateDataToRequestData(data)
         return await sendPrivateRequest<User>(async () => {

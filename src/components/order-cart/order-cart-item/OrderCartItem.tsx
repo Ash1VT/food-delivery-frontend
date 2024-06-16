@@ -9,38 +9,30 @@ import './order_cart_item.css'
 
 
 const OrderCartItem = ({item} : OrderCartItemProps) => {
-    const {
-        id,
-        imageUrl,
-        categoryName,
-        name,
-        quantity
-    } = item
-
     const orderCartItemPrice = calculateOrderCartItemPrice(item)
 
     const dispatch = useAppDispatch()
 
     const handleQuantityChange = (newQuantity: number) => {
-        dispatch(setOrderCartItemQuantity({id, quantity: newQuantity}))        
+        dispatch(setOrderCartItemQuantity({id: item.id, quantity: newQuantity}))        
     }
 
     const handleRemove = () => {
-        dispatch(removeOrderCartItem(id))
+        dispatch(removeOrderCartItem(item.id))
     }
 
     return (
         <div className="order__cart__item__container">
             <div className="order__cart__item__content">
                 <div className="order__cart__item__image__wrapper">
-                    <img src={imageUrl} alt="image" width={150} height={150}/>
+                    <img src={item.menuItemImageUrl} alt="image" width={150} height={150}/>
                 </div>
                 <div className="order__cart__item__details"> 
                     <div className="order__cart__item__name__wrapper">
-                        <div className="order__cart__item__category__name">{categoryName}</div>
-                        <div className="order__cart__item__name">{name}</div>
+                        {/* <div className="order__cart__item__category__name">{categoryName}</div> */}
+                        <div className="order__cart__item__name">{item.menuItemName}</div>
                     </div>
-                    <OrderItemCounter quantity={quantity} onQuantityChanged={handleQuantityChange}/>
+                    <OrderItemCounter quantity={item.quantity} onQuantityChanged={handleQuantityChange}/>
                     <div className="order__cart__item__price">{orderCartItemPrice}$</div>
                 </div>
             </div>

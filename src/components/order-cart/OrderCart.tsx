@@ -9,14 +9,14 @@ import { fetchOrderCartItemsFromLocalStorage } from 'src/redux/reducers/orderCar
 import './order_cart.css'
 
 
-const OrderCartWithItems = ({items} : OrderCartWithItemsProps) => {
+const OrderCartWithItems = ({items, onOrderCreated} : OrderCartWithItemsProps) => {
     const totalPrice = calculateOrderCartTotalPrice(items)
 
     return (
         <>
             <OrderCartItemsList items={items}/>
             <div className="order__cart__button">
-                <OrderCartButton totalPrice={totalPrice} onOrdered={() => {}}/>
+                <OrderCartButton totalPrice={totalPrice} onOrdered={onOrderCreated}/>
             </div>
         </>
     )
@@ -35,6 +35,10 @@ const OrderCart = () => {
     const orderCartItems = useAppSelector(state => state.orderCartReducer.orderCartItems)
     const itemsCount = orderCartItems.length
 
+    const handleOrderCreated = () => {
+        // fetchOrderCartItemsFromLocalStorage()
+    }
+
     return (
         <div className="order__cart__container">
             <div className="order__cart__wrapper">
@@ -43,16 +47,7 @@ const OrderCart = () => {
                 </div>
                 <div className="order__cart__content">
                     {itemsCount ? 
-                        <OrderCartWithItems items={orderCartItems.map(item => {
-                            return {
-                                id: item.id,
-                                name: item.menuItemName,
-                                categoryName: item.menuItemCategoryName,
-                                price: item.menuItemPrice,
-                                imageUrl: item.menuItemImageUrl,
-                                quantity: item.quantity
-                            }
-                        })}/> 
+                        <OrderCartWithItems items={orderCartItems} onOrderCreated={async () => {}}/> 
                         : 
                         <OrderCartEmpty/>}
                 </div>

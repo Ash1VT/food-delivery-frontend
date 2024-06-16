@@ -9,16 +9,10 @@ const PromocodeInput = ({order, onPromocodeApplied} : PromocodeInputProps) => {
     const promocodeName = order.priceInformation.promocodeName ? order.priceInformation.promocodeName : '';
 
     const [promocode, setPromocode] = useState(promocodeName);
-    const [isApplied, setIsApplied] = useState(promocodeName !== '');
-  
+    const isApplied = promocodeName !== '';
+
     const handleApplyClick = async () => {
-      if (await onPromocodeApplied(promocode)) {
-        setIsApplied(true);
-        addSuccessNotification('Promocode successfully applied!');
-      } else {
-        setIsApplied(false);
-        addErrorNotification('Invalid promocode');
-      }
+        await onPromocodeApplied(promocode)
     };
   
     return (

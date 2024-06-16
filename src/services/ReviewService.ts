@@ -57,6 +57,11 @@ export class ReviewService {
         })
     }
 
+    public static async getOrderReview(orderId: string): Promise<Review | undefined | null> {
+        const response = await reviewMicroservice.get(`/orders/${orderId}/review/`)
+        return this.parseReviewFromResponseData(response.data)
+    }
+
     public static async getCurrentCustomerMenuItemReview(menuItemId: string): Promise<Review> {
         return await sendPrivateRequest<Review>(async () => {
             const response = await reviewMicroservice.get(`/menu_items/${menuItemId}/reviews/current/`)

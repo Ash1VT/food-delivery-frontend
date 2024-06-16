@@ -1,19 +1,57 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Navbar from 'src/components/navbar'
 import Footer from 'src/components/footer'
 import OrdersTable from 'src/components/orders-table/OrdersTable'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
-import { addSuccessNotification } from 'src/utils/notifications'
+import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications'
 import { getCurrentManagerCreateApplication, getCurrentRestaurantDeliveredOrders, getCurrentRestaurantPendingOrders, getCurrentRestaurantPreparingOrders } from 'src/redux/selectors/currentManagerSelectors'
 import { Order } from 'src/models/order.interfaces'
-import './restaurant_orders_page.css'
 import { User } from 'src/models/user.interfaces'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { confirmOrder, fetchCurrentManagerRestaurantOrders, prepareOrder } from 'src/redux/actions/currentManagerRestaurantOrders.actions'
+import { fetchCurrentManagerRestaurantApplications } from 'src/redux/actions/currentManagerRestaurantApplications.actions'
+import { fetchCurrentManagerRestaurant } from 'src/redux/actions/currentManagerRestaurant.actions'
+import { Restaurant } from 'src/models/restaurant.interfaces'
+import './restaurant_orders_page.css'
 
 const RestaurantOrdersPage = () => {
+    const dispatch = useAppDispatch()
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
     const { isLoading: isCurrentManagerRestaurantOrdersLoading, error: currentManagerRestaurantOrdersError } = useAppSelector((state) => state.currentManagerRestaurantOrdersReducer)
     const { isLoading: isCurrentManagerRestaurantApplicationsLoading, applications: restaurantApplications, error: currentManagerRestaurantApplicationsError } = useAppSelector((state) => state.currentManagerRestaurantApplicationsReducer)
     const { isLoading: isCurrentManagerRestaurantLoading, restaurant, error: currentManagerRestaurantError } = useAppSelector((state) => state.currentManagerRestaurantReducer)
+
+    useEffect(() => {
+        dispatch(fetchCurrentManagerRestaurantApplications()).then((response) => {
+            if (response.type === 'currentManagerRestaurantApplications/fetchCurrentManagerRestaurantApplications/fulfilled') {
+                dispatch(fetchCurrentManagerRestaurant()).then((response) => {
+                    if (response.type === 'currentManagerRestaurant/fetchCurrentManagerRestaurant/fulfilled') {
+                        const restaurant = response.payload as Restaurant
+                        dispatch(fetchCurrentManagerRestaurantOrders(restaurant.id)).then((response) => {
+                            if (response.type === 'currentManagerRestaurantOrders/fetchCurrentManagerRestaurantOrders/rejected') {
+                                if (response.payload) {
+                                    addErrorNotification(response.payload as string)
+                                }
+                            }
+                        })
+                    }
+
+                    if (response.type === 'currentManagerRestaurant/fetchCurrentManagerRestaurant/rejected') {
+                        if (response.payload) {
+                            addErrorNotification(response.payload as string)
+                        }
+                    }
+                    
+                })
+            }
+
+            if (response.type === 'currentManagerRestaurant/fetchCurrentManagerRestaurant/rejected') {
+                if (response.payload) {
+                    addErrorNotification(response.payload as string)
+                }
+            }
+        })
+    }, [dispatch])
 
     const pendingOrders = useAppSelector(getCurrentRestaurantPendingOrders)
     const preparingOrders = useAppSelector(getCurrentRestaurantPreparingOrders)
@@ -60,13 +98,31 @@ const RestaurantOrdersPage = () => {
     }
     
     const handleOrderConfirmed = async (order: Order) => {
-        alert(`Order ${order.id} is confirmed`)
-        addSuccessNotification(`Order ${order.id} is confirmed`)
+        dispatch(confirmOrder(order.id)).then((response) => {
+            if (response.type === 'currentManagerRestaurantOrders/confirmOrder/fulfilled') {
+                addSuccessNotification(`Order ${order.id} is confirmed`)
+            }
+
+            if (response.type === 'currentManagerRestaurantOrders/confirmOrder/rejected') {
+                if (response.payload) {
+                    addErrorNotification(response.payload as string)
+                }
+            }
+        })
     }
 
     const handleOrderPrepared = async (order: Order) => {
-        alert(`Order ${order.id} is prepared`)
-        addSuccessNotification(`Order ${order.id} is prepared`)
+        dispatch(prepareOrder(order.id)).then((response) => {
+            if (response.type === 'currentManagerRestaurantOrders/prepareOrder/fulfilled') {
+                addSuccessNotification(`Order ${order.id} is prepared`)
+            }
+
+            if (response.type === 'currentManagerRestaurantOrders/prepareOrder/rejected') {
+                if (response.payload) {
+                    addErrorNotification(response.payload as string)
+                }
+            }
+        })
     }
 
     return (

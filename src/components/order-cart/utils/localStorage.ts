@@ -1,6 +1,7 @@
+import { OrderCartItem } from "src/models/orderCartItem.interfaces"
 import { OrderItem } from "src/models/orderItem.interfaces"
 
-export const addOrderCartItemToLocalStorage = (orderCartItem: OrderItem) => {
+export const addOrderCartItemToLocalStorage = (orderCartItem: OrderCartItem) => {
     const orderCartItems = getOrderCartItemsFromLocalStorage()
     console.log(orderCartItems)
 
@@ -33,7 +34,7 @@ export const setOrderCartItemQuantityInLocalStorage = (id: string, quantity: num
 }
 
 
-export const getOrderCartItemsFromLocalStorage = (): OrderItem[] => {
+export const getOrderCartItemsFromLocalStorage = (): OrderCartItem[] => {
     const orderCartItems = localStorage.getItem('orderCartItems')
     if (orderCartItems) {
         return JSON.parse(orderCartItems)

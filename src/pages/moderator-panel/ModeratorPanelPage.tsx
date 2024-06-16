@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
 import { changeUserActiveStatus, changeUserEmailVerififiedStatus, createModerator, fetchUsers, updateUser, uploadUserImage } from 'src/redux/actions/users.actions'
 import { confirmRestaurantApplication, declineRestaurantApplication, fetchRestaurantsApplications, updateRestaurantApplication } from 'src/redux/actions/restaurantApplications.actions'
+import { approveCustomerAddress, fetchCustomersAddresses, rejectCustomerAddress, updateCustomerAddress } from 'src/redux/actions/customerAddresses.actions'
 import './moderator_panel_page.css'
 
 const ModeratorPanelPage = () => {
@@ -71,7 +72,11 @@ const ModeratorPanelPage = () => {
         dispatch(fetchUsers()).then((response) => {
             console.log(response)
             if (response.meta.requestStatus === 'fulfilled') {
-                // FETCH ADDRESSES
+                dispatch(fetchCustomersAddresses()).then((response) => {
+                    if (response.meta.requestStatus === 'rejected') {
+                        addErrorNotification(response.payload as string)
+                    }
+                })
             }
             if (response.meta.requestStatus === 'rejected') {
                 addErrorNotification(response.payload as string)
@@ -197,18 +202,36 @@ const ModeratorPanelPage = () => {
     // CUSTOMER ADDRESSES
 
     const handleCustomerAddressUpdated = async (address: CustomerAddressUpdate) => {
-        alert(`Customer address updated: ${JSON.stringify(address)}`)
-        addSuccessNotification('Customer address updated')
+        dispatch(updateCustomerAddress(address)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Customer address updated')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleCustomerAddressApproved = async (addressId: string) => {
-        alert(`Customer address approved: ${addressId}`)
-        addSuccessNotification('Customer address approved')    
+        dispatch(approveCustomerAddress(addressId)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Customer address approved')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })  
     }
 
     const handleCustomerAddressRejected = async (addressId: string) => {
-        alert(`Customer address rejected: ${addressId}`)
-        addSuccessNotification('Customer address rejected')
+        dispatch(rejectCustomerAddress(addressId)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Customer address rejected')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleSearchAddressesByCustomer = async (query: string) => {

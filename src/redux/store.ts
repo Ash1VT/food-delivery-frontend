@@ -22,6 +22,7 @@ import currentCustomerMenuItemReviewReducer from "./reducers/currentCustomerMenu
 import currentManagerRestaurantApplicationsReducer from "./reducers/currentManagerRestaurantApplicationsReducer";
 import restaurantMenuReducer from "./reducers/restaurantMenuReducer";
 import currentManagerRestaurantMenuItemsReducer from "./reducers/currentManagerRestaurantMenuItemsReducer";
+import orderPlacingReducer from "./reducers/orderPlacingReducer";
 
 const rootReducer = combineReducers({
     orderCartReducer,
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
     currentCustomerOrdersReducer,
     currentCustomerRestaurantReviewReducer,
     currentCustomerMenuItemReviewReducer,
+    orderPlacingReducer,
 
     // RESTAURANT MANAGER
     currentManagerRestaurantMenusReducer,

@@ -27,6 +27,7 @@ const MenuItem = ({menuItem, categoryName, onMenuItemClick}: MenuItemProps) => {
                 menuItemImageUrl: menuItem.imageUrl, 
                 menuItemPrice: menuItem.price, 
                 menuItemCategoryName: categoryName, 
+                restaurantId: menuItem.restaurantId,
                 quantity: 1
             }
         ))
