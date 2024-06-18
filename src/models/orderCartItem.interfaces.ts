@@ -3,6 +3,7 @@ export interface OrderCartItem {
     menuItemImageUrl: string
     menuItemName: string
     menuItemPrice: number
+    menuItemId: string
     quantity: number
     restaurantId: string
 }

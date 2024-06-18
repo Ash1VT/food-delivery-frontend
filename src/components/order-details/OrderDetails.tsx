@@ -14,6 +14,8 @@ import { Order } from 'src/models/order.interfaces';
 import { User } from 'src/models/user.interfaces';
 import { OrderDetailsProps } from './order_details.types';
 import './order_details.css'
+import YandexMapsButton from './ui/buttons/yandex-maps-button/YandexMapsButton';
+import GoogleMapsButton from './ui/buttons/google-maps-button/GoogleMapsButton';
 
 const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, onOrderDeliveryFinished} : OrderDetailsProps) => {
 
@@ -160,16 +162,26 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
     }, [order.status])
 
     const renderDeliveringInformation = useCallback((order: Order) => {
-        if (order.status === 'delivering') {
+        if (order.status === 'delivering' && order.deliveryInformation.destinationAddress && order.deliveryInformation.deliveryType) {
             return (
-                <tr className='order__details__tr'>
-                    <td>
-                        <div className="order__details__label">Delivery Time Left</div>
-                    </td>
-                    <td>
-                        <Timer initialSeconds={moment(order.deliveryInformation.deliveryAcceptedAt).add(order.deliveryInformation.supposedDeliveryTime, 'minutes').diff(moment(), 'seconds')}/>
-                    </td>
-                </tr>
+                <>
+                    <tr className='order__details__tr'>
+                        <td>
+                            <div className="order__details__label">Delivery Time Left</div>
+                        </td>
+                        <td>
+                            <Timer initialSeconds={moment(order.deliveryInformation.deliveryAcceptedAt).add(order.deliveryInformation.supposedDeliveryTime, 'seconds').diff(moment(), 'seconds')}/>
+                        </td>
+                    </tr>
+                    <tr style={{height: '120px'}}>
+                        <td colSpan={2}>
+                            <div className='order__details__maps__wrapper'>
+                                <YandexMapsButton originAddress={order.deliveryInformation.originAddress} destinationAddress={order.deliveryInformation.destinationAddress} travelMode={order.deliveryInformation.deliveryType}/>
+                                <GoogleMapsButton originAddress={order.deliveryInformation.originAddress} destinationAddress={order.deliveryInformation.destinationAddress} travelMode={order.deliveryInformation.deliveryType}/>
+                            </div>
+                        </td>
+                    </tr>
+                </>
             )
         }
         return null
@@ -179,9 +191,9 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
     const renderDeliveredInformation = useCallback((order: Order) => {
         if (order.status === 'delivered' && order.deliveryInformation.supposedDeliveryTime && order.deliveryInformation.deliveryFinishedAt && order.deliveryInformation.actualDeliveryTime) {
             const isSupposedDeliveryTimeFailed = order.deliveryInformation.actualDeliveryTime > order.deliveryInformation.supposedDeliveryTime
-            const deliveryTime = moment.utc(order.deliveryInformation.actualDeliveryTime*60*1000).format('HH:mm:ss')
+            const deliveryTime = moment.utc(order.deliveryInformation.actualDeliveryTime*1000).format('HH:mm:ss')
             const deliveryFinishedAt = moment(order.deliveryInformation.deliveryFinishedAt).format('DD.MM.YYYY HH:mm')
-            const supposedDeliveryTime = moment.utc(order.deliveryInformation.supposedDeliveryTime*60*1000).format('HH:mm:ss')
+            const supposedDeliveryTime = moment.utc(order.deliveryInformation.supposedDeliveryTime*1000).format('HH:mm:ss')
 
             return (
                 <>
@@ -313,7 +325,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                             <td>
                                 <div className='order__details__restaurant__rating__wrapper'>
                                     <div className='order__details__restaurant__rating'>
-                                        <div className="order__details__text">{order.restaurant.ratingValue}</div>
+                                        <div className="order__details__text">{order.restaurant.ratingValue ? order.restaurant.ratingValue.toFixed(2) : Number(0).toFixed(2)}</div>
                                         <StarIcon className='order__details__star__icon' viewBox='8 2 8 20'/>
                                     </div>
                                     <div className="order__details__text">({order.restaurant.reviewsCount} reviews)</div>
@@ -395,7 +407,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                             <div className="order__details__label">Items Price</div>
                         </td>
                         <td>
-                            <div className="order__details__text">${order.priceInformation.orderItemsPrice.toFixed(2)}</div>
+                            <div className="order__details__text">${order.priceInformation.orderItemsPrice}</div>
                         </td>
                     </tr>
                     {order.priceInformation.promocodeName && (
@@ -405,7 +417,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                                     <div className="order__details__label">Promocode</div>
                                 </td>
                                 <td>
-                                    <div className="order__details__text">{order.priceInformation.promocodeName} (-${order.priceInformation.promocodeDiscount?.toFixed(2)})</div>
+                                    <div className="order__details__text">{order.priceInformation.promocodeName} (-${(Number(order.priceInformation.orderItemsPrice) - Number(order.priceInformation.decountedItemsPrice)).toFixed(2)})</div>
                                 </td>
                             </tr>
                             <tr className='order__details__tr'>
@@ -413,7 +425,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                                     <div className="order__details__label">Discounted Price</div>
                                 </td>
                                 <td>
-                                    <div className="order__details__text">${order.priceInformation.decountedItemsPrice.toFixed(2)}</div>
+                                    <div className="order__details__text">${order.priceInformation.decountedItemsPrice}</div>
                                 </td>
                             </tr>
                         </>
@@ -424,7 +436,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                         </td>
                         <td>
                             {order.priceInformation.deliveryPrice ? (
-                                <div className="order__details__text">${order.priceInformation.deliveryPrice.toFixed(2)}</div>
+                                <div className="order__details__text">${order.priceInformation.deliveryPrice}</div>
                             )
                             : (
                                 <div className="order__details__text">N/A</div>
@@ -441,7 +453,7 @@ const OrderDetails = ({currentUser, order, onOrderReviewCreated, onOrderPlaced, 
                             <div className="order__details__label">Total Price</div>
                         </td>
                         <td>
-                            <div className="order__details__text order__details__total__text">${order.priceInformation.totalPrice.toFixed(2)}</div>
+                            <div className="order__details__text order__details__total__text">${order.priceInformation.totalPrice}</div>
                         </td>
                     </tr>
                 </table>

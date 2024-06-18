@@ -11,6 +11,7 @@ import ProfileCategory from '../profile-category/ProfileCategory'
 import { User } from 'src/models/user.interfaces'
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
 import { fetchCurrentCourierOrders, finishOrderDelivery } from 'src/redux/actions/currentCourierOrders.actions'
+import LoadingPage from 'src/pages/loading-page/LoadingPage'
 
 const CourierProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : CourierProfileProps) => {
     const dispatch = useAppDispatch()
@@ -80,7 +81,9 @@ const CourierProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSe
 
     }, [activeCategoryId]);
 
-
+    if (isCourierOrdersLoading)
+        return <LoadingPage/>
+        
     return (
         <div className="profile__card">
             <div className="profile__category__list">

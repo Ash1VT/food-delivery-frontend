@@ -1,5 +1,8 @@
 .preparing__orders__category__container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
 }
 
 .preparing__orders__category__text {

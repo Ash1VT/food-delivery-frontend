@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CourierRating } from "src/models/courierRating,interfaces";
+import { CourierRating } from "src/models/courierRating.interfaces";
 import { fetchCourierRating } from "../actions/currentCourierRating.actions";
 
 

@@ -26,7 +26,7 @@ export class MenuService {
             description: data.description,
             name: data.name,
             restaurantId: data.restaurant_id,
-            menuCategories: MenuCategoryService.parseMenuCategoriesListFromResponseData(data.menu_categories)
+            menuCategories: data.categories ? MenuCategoryService.parseMenuCategoriesListFromResponseData(data.categories) : []
         }
     }
 
@@ -35,14 +35,16 @@ export class MenuService {
     }
 
 
-    public static async getRestaurantCurrentMenu(restaurantId: string): Promise<Menu> {
+    public static async getRestaurantCurrentMenu(restaurantId: string): Promise<Menu | undefined | null> {
         const response = await menuMicroservice.get(`/restaurants/${restaurantId}/menu/`)
-        return this.parseMenuFromResponseData(response.data)
+        if (response.data)
+            return this.parseMenuFromResponseData(response.data)
     }
 
     public static async getRestaurantMenus(restaurantId: string): Promise<Menu[]> {
         return await sendPrivateRequest<Menu[]>(async () => {
             const response = await menuMicroservice.get(`/restaurants/${restaurantId}/menus/`)
+            console.log(response.data)
             return this.parseMenusListFromResponseData(response.data)
         })
     }

@@ -10,7 +10,7 @@ const RestaurantImage = ({restaurant, onRestaurantImageUploaded} : RestaurantIma
     }
     
     return (
-        <UploadImageForm imageContainerClassName='restaurant__image__container' imageWrapperClassName='restaurant__image__wrapper' imageClassName='restaurant__image' imageUrl={restaurant.imageUrl} onImageUploaded={handleUploadRestaurantImageClick} />
+        <UploadImageForm inputId='restaurantImage' imageContainerClassName='restaurant__image__container' imageWrapperClassName='restaurant__image__wrapper' imageClassName='restaurant__image' imageUrl={restaurant.imageUrl} onImageUploaded={handleUploadRestaurantImageClick} />
     )
 }
 

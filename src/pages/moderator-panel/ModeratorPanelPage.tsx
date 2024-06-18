@@ -3,7 +3,6 @@ import Navbar from 'src/components/navbar'
 import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications'
 import Users from './users/Users'
-import { getCustomerAddresses } from 'src/redux/selectors/currentModeratorSelectors'
 import RestaurantApplications from './restaurant-applications/RestaurantApplications'
 import CustomerAddresses from './customer-addresses/CustomerAddresses'
 import { ModeratorCreate, UserCreate, UserUpdate } from 'src/models/user.interfaces'
@@ -15,6 +14,7 @@ import { changeUserActiveStatus, changeUserEmailVerififiedStatus, createModerato
 import { confirmRestaurantApplication, declineRestaurantApplication, fetchRestaurantsApplications, updateRestaurantApplication } from 'src/redux/actions/restaurantApplications.actions'
 import { approveCustomerAddress, fetchCustomersAddresses, rejectCustomerAddress, updateCustomerAddress } from 'src/redux/actions/customerAddresses.actions'
 import './moderator_panel_page.css'
+import LoadingPage from '../loading-page/LoadingPage'
 
 const ModeratorPanelPage = () => {
     const dispatch = useAppDispatch()
@@ -23,9 +23,7 @@ const ModeratorPanelPage = () => {
 
     const { isLoading: isUsersLoading, users, error: usersError } = useAppSelector((state) => state.usersReducer)
     const { isLoading: isRestaurantApplicationsLoading, applications: restaurantApplications, error: restaurantApplicationsError} = useAppSelector((state) => state.restaurantApplicationsReducer)
-    const { isLoading: isCustomerAddressesLoading, error: customerAddressesError } = useAppSelector((state) => state.customerAddressesReducer)
-
-    const customerAddresses = useAppSelector(getCustomerAddresses)
+    const { isLoading: isCustomerAddressesLoading, addresses: customersAddresses, error: customerAddressesError } = useAppSelector((state) => state.customerAddressesReducer)
 
     const filterRoles = [
         {
@@ -70,7 +68,6 @@ const ModeratorPanelPage = () => {
 
     useEffect(() => {
         dispatch(fetchUsers()).then((response) => {
-            console.log(response)
             if (response.meta.requestStatus === 'fulfilled') {
                 dispatch(fetchCustomersAddresses()).then((response) => {
                     if (response.meta.requestStatus === 'rejected') {
@@ -250,6 +247,9 @@ const ModeratorPanelPage = () => {
         alert(`Search addresses by details: ${query}`)
     }
 
+    if (isCurrentUserLoading || isCustomerAddressesLoading || isRestaurantApplicationsLoading || isUsersLoading)
+        return <LoadingPage/>
+
     return (
         <div className="container moderator__panel__container">
             <Navbar currentUser={currentUser}/>
@@ -284,7 +284,7 @@ const ModeratorPanelPage = () => {
                     <div className="moderator__panel__section moderator__panel__addresses">
                         <div className='moderator__panel__section__title'>Customer Addresses</div>
                         <CustomerAddresses
-                            addresses={customerAddresses}
+                            addresses={customersAddresses}
                             onCustomerAddressApproved={handleCustomerAddressApproved}
                             onCustomerAddressRejected={handleCustomerAddressRejected}
                             onCustomerAddressUpdated={handleCustomerAddressUpdated}

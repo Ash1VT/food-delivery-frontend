@@ -1,5 +1,6 @@
 import { DeliveryInformation } from "./deliveryInformation.interfaces";
 import { OrderItem, OrderItemCreate } from "./orderItem.interfaces";
+import { PaymentInformation } from "./paymentInformation.interfaces";
 import { PriceInformation } from "./priceInformation.interfaces";
 import { Restaurant } from "./restaurant.interfaces";
 import { Review } from "./reviews.interfaces";
@@ -15,6 +16,7 @@ export interface Order {
     items: OrderItem[]
     deliveryInformation: DeliveryInformation;
     priceInformation: PriceInformation;
+    paymentInformation?: PaymentInformation
     customer?: User | undefined | null
     courier?: User | undefined | null
     restaurant?: Restaurant

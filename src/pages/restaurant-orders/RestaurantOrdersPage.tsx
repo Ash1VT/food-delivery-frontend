@@ -13,11 +13,12 @@ import { fetchCurrentManagerRestaurantApplications } from 'src/redux/actions/cur
 import { fetchCurrentManagerRestaurant } from 'src/redux/actions/currentManagerRestaurant.actions'
 import { Restaurant } from 'src/models/restaurant.interfaces'
 import './restaurant_orders_page.css'
+import LoadingPage from '../loading-page/LoadingPage'
 
 const RestaurantOrdersPage = () => {
     const dispatch = useAppDispatch()
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
-    const { isLoading: isCurrentManagerRestaurantOrdersLoading, error: currentManagerRestaurantOrdersError } = useAppSelector((state) => state.currentManagerRestaurantOrdersReducer)
+    const { isLoading: isCurrentManagerRestaurantOrdersLoading, orders, error: currentManagerRestaurantOrdersError } = useAppSelector((state) => state.currentManagerRestaurantOrdersReducer)
     const { isLoading: isCurrentManagerRestaurantApplicationsLoading, applications: restaurantApplications, error: currentManagerRestaurantApplicationsError } = useAppSelector((state) => state.currentManagerRestaurantApplicationsReducer)
     const { isLoading: isCurrentManagerRestaurantLoading, restaurant, error: currentManagerRestaurantError } = useAppSelector((state) => state.currentManagerRestaurantReducer)
 
@@ -27,13 +28,15 @@ const RestaurantOrdersPage = () => {
                 dispatch(fetchCurrentManagerRestaurant()).then((response) => {
                     if (response.type === 'currentManagerRestaurant/fetchCurrentManagerRestaurant/fulfilled') {
                         const restaurant = response.payload as Restaurant
-                        dispatch(fetchCurrentManagerRestaurantOrders(restaurant.id)).then((response) => {
-                            if (response.type === 'currentManagerRestaurantOrders/fetchCurrentManagerRestaurantOrders/rejected') {
-                                if (response.payload) {
-                                    addErrorNotification(response.payload as string)
+                        if (restaurant) {
+                            dispatch(fetchCurrentManagerRestaurantOrders(restaurant.id)).then((response) => {
+                                if (response.type === 'currentManagerRestaurantOrders/fetchCurrentManagerRestaurantOrders/rejected') {
+                                    if (response.payload) {
+                                        addErrorNotification(response.payload as string)
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
 
                     if (response.type === 'currentManagerRestaurant/fetchCurrentManagerRestaurant/rejected') {
@@ -91,7 +94,7 @@ const RestaurantOrdersPage = () => {
                 You should create your restaurant first to see orders
             </div>
         )
-    }, [])
+    }, [restaurant, orders])
 
     if (!currentUser) {
         return <></>
@@ -124,6 +127,9 @@ const RestaurantOrdersPage = () => {
             }
         })
     }
+
+    if (isCurrentManagerRestaurantApplicationsLoading || isCurrentManagerRestaurantLoading || isCurrentManagerRestaurantOrdersLoading || isCurrentUserLoading)
+        return <LoadingPage/>
 
     return (
         <div className="container restaurant__orders__container">

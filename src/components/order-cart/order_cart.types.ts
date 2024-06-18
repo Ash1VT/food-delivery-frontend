@@ -1,5 +1,10 @@
 import { OrderCartItem } from "src/models/orderCartItem.interfaces"
+import { User } from "src/models/user.interfaces"
 
+
+export type OrderCartProps = {
+    currentUser?: User | undefined | null
+}
 export type OrderCartItemProps = {
     item: OrderCartItem
 }

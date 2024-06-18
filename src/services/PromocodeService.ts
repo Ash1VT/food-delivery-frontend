@@ -62,7 +62,7 @@ export class PromocodeService {
         const promocodeUpdateData = this.parsePromocodeUpdateToRequestData(data)
 
         return await sendPrivateRequest<Promocode>(async () => {
-            const response = await orderMicroservice.patch(`/promocodes/${data.id}/`, promocodeUpdateData)
+            const response = await orderMicroservice.put(`/promocodes/${data.id}/`, promocodeUpdateData)
             return this.parsePromocodeFromResponseData(response.data)
         })
     }

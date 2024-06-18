@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Restaurant, RestaurantCreate, RestaurantsList, RestaurantsListRequestData } from "src/models/restaurant.interfaces"
 import { RestaurantApplication } from "src/models/restaurantApplication.interfaces"
 import { RestaurantService } from "src/services/RestaurantService"
-import { parseRestaurantErrors } from "../utils/parseErrors"
 
 export const fetchRestaurantsPage = createAsyncThunk<RestaurantsList, RestaurantsListRequestData, { rejectValue: string }>(
     'restaurants/fetchRestaurantsPage',

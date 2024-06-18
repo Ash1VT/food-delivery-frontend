@@ -13,9 +13,11 @@ import isRestaurantOpen from 'src/utils/isRestaurantOpen'
 import { useEffect } from 'react'
 import { fetchMenuItem, fetchMenuItemReviews, fetchRestaurant } from 'src/redux/actions/menuItemReviews.actions'
 import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications'
-import { createMenuItemReview, deleteMenuItemReview, updateMenuItemReview } from 'src/redux/actions/currentCustomerMenuItemReview.actions'
+import { createMenuItemReview, deleteMenuItemReview, fetchCurrentCustomerMenuItemReview, updateMenuItemReview } from 'src/redux/actions/currentCustomerMenuItemReview.actions'
 import './menu_item_reviews.css'
 import { MenuItem } from 'src/models/menuItem.interfaces'
+import LoadingPage from '../loading-page/LoadingPage'
+import useComponentWillMount from 'src/hooks/useComponentWillMount'
 
 const MenuItemReviewsPage = () => {
     const dispatch = useAppDispatch()
@@ -27,40 +29,33 @@ const MenuItemReviewsPage = () => {
 
     const { isRestaurantLoading, isMenuItemLoading, isReviewsLoading, restaurant, menuItem, reviews, restaurantError, menuItemError, reviewsError: menuItemReviewsError} = useAppSelector((state) => state.menuItemReviewsReducer)
 
-    useEffect(() => {
+    useComponentWillMount(() => {
         if (restaurantId && menuItemId) {
             dispatch(fetchRestaurant(restaurantId)).then((response) => {
                 if (response.meta.requestStatus === 'fulfilled') {
                     dispatch(fetchMenuItem(menuItemId)).then((response) => {
                         if (response.meta.requestStatus === 'fulfilled') {
                             dispatch(fetchMenuItemReviews(menuItemId)).then((response) => {
-                                if (response.meta.requestStatus === 'rejected') {
-                                    addErrorNotification(response.payload as string)
-                                }
+                                // if (response.meta.requestStatus === 'rejected') {
+                                //     addErrorNotification(response.payload as string)
+                                // }
                             })
+
+                            dispatch(fetchCurrentCustomerMenuItemReview(menuItemId))
                         }
 
-                        if (response.meta.requestStatus === 'rejected') {
-                            addErrorNotification(response.payload as string)
-                        }
                     })
 
                 }
-                if (response.meta.requestStatus === 'rejected') {
-                    addErrorNotification(response.payload as string)
-                }
             })
         }
-    }, [dispatch])
-
-    if(!menuItem || !restaurant) {
-        return <NotFoundPage/>
-    }
-
-    const isOpen = isRestaurantOpen(restaurant)
+    })
     
     const handleReviewAdded = async (review: ReviewCreateType) => {
-        dispatch(createMenuItemReview(review)).then((response) => {
+        dispatch(createMenuItemReview({
+            ...review,
+            itemId: menuItemId
+        })).then((response) => {
             if (response.meta.requestStatus === 'fulfilled') {
                 addSuccessNotification('Successfully created review')
             }
@@ -92,6 +87,15 @@ const MenuItemReviewsPage = () => {
         })
     }
 
+    if (isCurrentCustomerMenuItemReviewLoading || isCurrentUserLoading || isMenuItemLoading || isRestaurantLoading || isReviewsLoading)
+        return <LoadingPage/>
+
+    if(!menuItem || !restaurant) {
+        return <NotFoundPage/>
+    }
+
+    const isOpen = isRestaurantOpen(restaurant)
+
     return (
         <div className="container menu__item__reviews__container">
             <Navbar currentUser={currentUser}/>
@@ -102,7 +106,7 @@ const MenuItemReviewsPage = () => {
                         <MenuItemReference menuItem={menuItem}/>
                     </div>
                     <div className="menu__item__reviews__content">
-                        {currentUser && currentCustomerMenuItemReview &&
+                        {currentUser && currentUser.role === 'customer' &&
                             <div className="menu__item__reviews__current__user">
                                 <CurrentUserReview currentUser={currentUser} 
                                                 currentUserReview={currentCustomerMenuItemReview}

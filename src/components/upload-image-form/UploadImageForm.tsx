@@ -10,7 +10,7 @@ import './upload_image_form.css'
 interface FormValues {
     image?: File | undefined | null
 }
-const UploadImageForm = ({imageUrl, imageContainerClassName, imageClassName, imageWrapperClassName, onImageUploaded} : UploadImageFormProps) => {
+const UploadImageForm = ({imageUrl, inputId, imageContainerClassName, imageClassName, imageWrapperClassName, onImageUploaded} : UploadImageFormProps) => {
     const initialValues: FormValues = {
     }
 
@@ -49,13 +49,13 @@ const UploadImageForm = ({imageUrl, imageContainerClassName, imageClassName, ima
                                 <input
                                     type="file"
                                     accept='image/*'
-                                    name="image" id="image"
+                                    name={inputId} id={inputId}
                                     className="upload__image__input"
                                     onChange={async (event: React.SyntheticEvent<HTMLInputElement>) => {
                                         await setFieldValue('image', event.currentTarget.files?.[0])
                                         await submitForm()
                                     }} />
-                                <label htmlFor="image" className={`button__wrapper upload__image__input__label ${values.image ? 'upload__image__chosen' : ''}`}>
+                                <label htmlFor={inputId} className={`button__wrapper upload__image__input__label ${values.image ? 'upload__image__chosen' : ''}`}>
                                     <UploadIcon/>
                                     Upload
                                 </label>

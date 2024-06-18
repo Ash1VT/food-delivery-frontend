@@ -24,7 +24,7 @@ export class MenuCategoryService {
             name: data.name,
             imageUrl: data.image_url,
             menuId: data.menu_id,
-            items: MenuItemService.parseMenuItemsListFromResponseData(data.items)
+            items: data.items ? MenuItemService.parseMenuItemsListFromResponseData(data.items) : []
         }
     }
 
@@ -37,7 +37,8 @@ export class MenuCategoryService {
 
         return await sendPrivateRequest<MenuCategory>(async () => {
             const response = await menuMicroservice.post('/categories/', menuCategoryCreateData)
-            return this.parseMenuCategoryFromResponseData(response.data)
+            const t = this.parseMenuCategoryFromResponseData(response.data)
+            return t
         })
     }
 

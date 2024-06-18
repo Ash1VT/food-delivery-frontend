@@ -22,7 +22,7 @@ export const fetchCurrentManagerRestaurantMenus = createAsyncThunk<Menu[], strin
     }
 )
 
-export const fetchCurrentManagerRestaurantCurrentMenu = createAsyncThunk<Menu, string, { rejectValue: string | undefined | null }>(
+export const fetchCurrentManagerRestaurantCurrentMenu = createAsyncThunk<Menu | null | undefined, string, { rejectValue: string | undefined | null }>(
     'currentManagerRestaurantMenus/fetchCurrentManagerRestaurantCurrentMenu',
     async (restaurantId: string, { rejectWithValue }) => {
         try {
@@ -193,11 +193,16 @@ export const deleteRestaurantMenuCategory = createAsyncThunk<string, string, { r
 
 // Adding/Removing Menu Items to Menu Categories
 
-export const addMenuItemToCategory = createAsyncThunk<MenuItemCategory, MenuItemCategory, { rejectValue: string | undefined | null }>(
+export interface MenuItemCategoryActionData {
+    categoryId: string
+    menuItem: MenuItem
+}
+
+export const addMenuItemToCategory = createAsyncThunk<MenuItemCategoryActionData, MenuItemCategoryActionData, { rejectValue: string | undefined | null }>(
     'currentManagerRestaurantMenus/addMenuItemToCategory',
-    async (data: MenuItemCategory, { rejectWithValue }) => {
+    async (data: MenuItemCategoryActionData, { rejectWithValue }) => {
         try {
-            await MenuItemService.addMenuItemToCategory(data)
+            await MenuItemService.addMenuItemToCategory({categoryId: data.categoryId, itemId: data.menuItem.id})
             return data
         }
         catch (error: any) {

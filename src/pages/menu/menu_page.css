@@ -11,9 +11,12 @@
 .menu__left__wrapper {
     position: sticky;
     top: 150px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
     /* overflow-y: hidden; */
     /* min-width: 450px; */
-    /* flex: 0 1 25%; */
+    flex: 0 1 15%;
 }
 
 .menu__divider {

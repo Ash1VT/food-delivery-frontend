@@ -28,6 +28,7 @@ import { createRestaurant, fetchCurrentManagerRestaurantApplications, updateRest
 import { createRestaurantMenuItem, deleteRestaurantMenuItem, fetchRestaurantMenuItems, updateRestaurantMenuItem, uploadRestaurantMenuItemImage } from 'src/redux/actions/currentManagerRestaurantMenuItems.actions'
 import { addMenuItemToCategory, createRestaurantMenu, createRestaurantMenuCategory, deleteRestaurantMenuCategory, fetchCurrentManagerRestaurantCurrentMenu, fetchCurrentManagerRestaurantMenus, removeMenuItemFromCategory, setCurrentRestaurantMenu, unsetCurrentRestaurantMenu, updateRestaurantMenuCategory, uploadRestaurantMenuCategoryImage } from 'src/redux/actions/currentManagerRestaurantMenus.actions'
 import { activatePromocode, createPromocode, deactivatePromocode, fetchCurrentManagerRestaurantPromocodes, updatePromocode } from 'src/redux/actions/currentManagerRestaurantPromocodes.actions'
+import LoadingPage from '../loading-page/LoadingPage'
 
 
 const ManagerPanelPage = () => {
@@ -36,14 +37,12 @@ const ManagerPanelPage = () => {
 
     const { isLoading: isCurrentManagerRestaurantLoading, restaurant, error: currentManagerRestaurantError } = useAppSelector((state) => state.currentManagerRestaurantReducer)
     const { isLoading: isCurrentManagerRestaurantPromocodesLoading, promocodes: restaurantPromocodes, error: currentManagerRestaurantPromocodesError } = useAppSelector((state) => state.currentManagerRestaurantPromocodesReducer)
-    const { isLoading: isCurrentManagerRestaurantMenusLoading, menus: restaurantMenus, error: currentManagerRestaurantMenusError } = useAppSelector((state) => state.currentManagerRestaurantMenusReducer)
+    const { isMenusLoading: isCurrentManagerRestaurantMenusLoading, isCurrentMenuLoading: isCurrentManagerRestaurantCurrentMenuLoading, currentMenuId, menus: restaurantMenus, currentMenuError: currentManagerRestaurantCurrentMenuError, menusError: currentManagerRestaurantMenusError } = useAppSelector((state) => state.currentManagerRestaurantMenusReducer)
     const { isLoading: isCurrentManagerRestaurantApplicationsLoading, applications: restaurantApplications, error: currentManagerRestaurantApplicationsError } = useAppSelector((state) => state.currentManagerRestaurantApplicationsReducer)
     const { isLoading: isCurrentManagerRestaurantMenuItemsLoading, menuItems: restaurantMenuItems, error: currentManagerRestaurantMenuItemsError } = useAppSelector((state) => state.currentManagerRestaurantMenuItemsReducer)
     
     const restaurantCreateApplication = useAppSelector((state) => getCurrentManagerCreateApplication(state))
     const restaurantCurrentMenu = useAppSelector((state) => getCurrentRestaurantMenu(state))
-
-    const [activeMenuId, setActiveMenuId] = useState<string | undefined | null>(restaurantCurrentMenu?.id)
     const [draggableMenuItemId, setDraggableMenuItemId] = useState<string | null>(null);
 
 
@@ -53,41 +52,42 @@ const ManagerPanelPage = () => {
                 dispatch(fetchCurrentManagerRestaurant()).then((response) => {
                     if (response.meta.requestStatus === 'fulfilled') {
                         const restaurant = response.payload as Restaurant
-                        
-                        dispatch(fetchCurrentManagerRestaurantCurrentMenu(restaurant.id)).then((response) => {
-                            if (response.meta.requestStatus === 'fulfilled') {
-                                const currentMenu = response.payload as Menu
-                                setActiveMenuId(currentMenu.id)
-                            }
-                        })
-
-                        dispatch(fetchRestaurantMenuItems(restaurant.id)).then((response) => {
-                            if (response.meta.requestStatus === 'rejected') {
-                                addErrorNotification(response.payload as string)
-                            }
-                        })
-
-                        dispatch(fetchCurrentManagerRestaurantMenus(restaurant.id)).then((response) => {
-                            if (response.meta.requestStatus === 'rejected') {
-                                addErrorNotification(response.payload as string)
-                            }
-                        })
-
-                        dispatch(fetchCurrentManagerRestaurantPromocodes(restaurant.id)).then((response) => {
-                            if (response.meta.requestStatus === 'rejected') {
-                                addErrorNotification(response.payload as string)
-                            }
-                        })
+                        if (restaurant) {
+    
+                            dispatch(fetchRestaurantMenuItems(restaurant.id)).then((response) => {
+                                if (response.meta.requestStatus === 'rejected') {
+                                    addErrorNotification(response.payload as string)
+                                }
+                            })
+    
+                            dispatch(fetchCurrentManagerRestaurantMenus(restaurant.id)).then((response) => {
+                                if (response.meta.requestStatus === 'fulfilled') {
+                                    dispatch(fetchCurrentManagerRestaurantCurrentMenu(restaurant.id)).then((response) => {
+                                        // if (response.meta.requestStatus === 'fulfilled') {
+                                        //     const currentMenu = response.payload as Menu
+                                        //     if (currentMenu)
+                                        //         setActiveMenuId(currentMenu.id)
+                                        // }
+                                    })
+                                }
+                                
+                                if (response.meta.requestStatus === 'rejected') {
+                                    addErrorNotification(response.payload as string)
+                                }
+                            })
+    
+                            dispatch(fetchCurrentManagerRestaurantPromocodes(restaurant.id)).then((response) => {
+                                if (response.meta.requestStatus === 'rejected') {
+                                    addErrorNotification(response.payload as string)
+                                }
+                            })   
+                        }
                     }
 
                     if (response.meta.requestStatus === 'rejected') {
                         addErrorNotification(response.payload as string)
                     }
                 })
-            }
-
-            if (response.meta.requestStatus === 'rejected') {
-                addErrorNotification(response.payload as string)
             }
         })
 
@@ -119,6 +119,7 @@ const ManagerPanelPage = () => {
     }
 
     const handleRestaurantImageUploaded = async (id: string, image: File) => {
+        console.log('dolvoeb')
         dispatch(uploadRestaurantImage({id, image})).then((response) => {
             if (response.meta.requestStatus === 'fulfilled') {
                 addSuccessNotification('Restaurant image uploaded')
@@ -354,6 +355,7 @@ const ManagerPanelPage = () => {
     }
 
     const handleMenuItemImageUploaded = async (id: string, image: File) => {
+        console.log('eblanishe')
         dispatch(uploadRestaurantMenuItemImage({id, image})).then((response) => {
             if (response.meta.requestStatus === 'fulfilled') {
                 addSuccessNotification('Menu item image uploaded')
@@ -378,7 +380,7 @@ const ManagerPanelPage = () => {
     const handleDragStart = (event: DragStartEvent) => {
         setDraggableMenuItemId(event.active.id.toString());
     }
-    
+
     const handleDragEnd = async (event: DragEndEvent) => {
         setDraggableMenuItemId(null);
 
@@ -387,7 +389,7 @@ const ManagerPanelPage = () => {
 
         if(!over || !active.data.current ||!over.data.current) return
 
-        dispatch(addMenuItemToCategory({categoryId: over.data.current.menuCategoryId, itemId: active.data.current.menuItemId})).then((response) => {
+        dispatch(addMenuItemToCategory({categoryId: over.data.current.menuCategoryId, menuItem: active.data.current.menuItem})).then((response) => {
             if (response.meta.requestStatus === 'fulfilled') {
                 addSuccessNotification(`Successfully added menu item ${active.data.current?.menuItemName} to menu category ${over.data.current?.menuCategoryName}`)
             }
@@ -396,7 +398,6 @@ const ManagerPanelPage = () => {
             }
         })
     }
-
 
     const renderPanel = useCallback(() => {
         if (restaurant) {
@@ -440,41 +441,32 @@ const ManagerPanelPage = () => {
                             onPromocodeUpdated={handlePromocodeUpdated}
                             onPromocodeActivityChanged={handlePromocodeActivityChanged}/>
                     </div>
-                    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-                        <div className="manager__panel__section__wrapper manager__panel__menus__wrapper">
-                            <div className='manager__panel__section__title'>Restaurant Menus</div>
-                                <CurrentRestaurantMenuSelector 
-                                    activeMenuId={activeMenuId} 
-                                    setActiveMenuId={setActiveMenuId} 
-                                    menus={restaurantMenus} 
-                                    onCurrentMenuSelected={handleCurrentMenuSelected}/>
-                                <RestaurantMenus 
-                                    menus={restaurantMenus}
-                                    restaurantId={restaurant.id}
-                                    onMenuCategoryCreated={handleMenuCategoryCreated}
-                                    onMenuCategoryUpdated={handleMenuCategoryUpdated}
-                                    onMenuCategoryImageUploaded={handleMenuCategoryImageUploaded}
-                                    onMenuCategoryDeleted={handleMenuCategoryDeleted}
-                                    onMenuCreated={handleMenuCreated}
-                                    onMenuItemRemoved={handleMenuItemRemoved}/>
-                        </div>
-                        <div className="manager__panel__section__wrapper manager__panel__menu__items__wrapper">
-                            <div className='manager__panel__section__title'>Menu Items</div>
-                            <RestaurantMenuItems 
-                                menuItems={restaurantMenuItems}
+                    <div className="manager__panel__section__wrapper manager__panel__menus__wrapper">
+                        <div className='manager__panel__section__title'>Restaurant Menus</div>
+                            <CurrentRestaurantMenuSelector 
+                                activeMenuId={currentMenuId} 
+                                menus={restaurantMenus} 
+                                onCurrentMenuSelected={handleCurrentMenuSelected}/>
+                            <RestaurantMenus 
+                                menus={restaurantMenus}
                                 restaurantId={restaurant.id}
-                                onMenuItemCreated={handleMenuItemCreated}
-                                onMenuItemUpdated={handleMenuItemUpdated}
-                                onMenuItemImageUploaded={handleMenuItemImageUploaded}
-                                onMenuItemDeleted={handleMenuItemDeleted}/>
-                        </div>
-                        <DragOverlay>
-                            {draggableMenuItemId ? (
-                                <DraggableMenuItem menuItem={restaurantMenuItems.find(menuItem => menuItem.id === draggableMenuItemId) as MenuItem}/>
-                            ) : null
-                            }
-                        </DragOverlay>
-                    </DndContext>
+                                onMenuCategoryCreated={handleMenuCategoryCreated}
+                                onMenuCategoryUpdated={handleMenuCategoryUpdated}
+                                onMenuCategoryImageUploaded={handleMenuCategoryImageUploaded}
+                                onMenuCategoryDeleted={handleMenuCategoryDeleted}
+                                onMenuCreated={handleMenuCreated}
+                                onMenuItemRemoved={handleMenuItemRemoved}/>
+                    </div>
+                    <div className="manager__panel__section__wrapper manager__panel__menu__items__wrapper">
+                        <div className='manager__panel__section__title'>Menu Items</div>
+                        <RestaurantMenuItems 
+                            menuItems={restaurantMenuItems}
+                            restaurantId={restaurant.id}
+                            onMenuItemCreated={handleMenuItemCreated}
+                            onMenuItemUpdated={handleMenuItemUpdated}
+                            onMenuItemImageUploaded={handleMenuItemImageUploaded}
+                            onMenuItemDeleted={handleMenuItemDeleted}/>
+                    </div>
                 </div>
             )
         }
@@ -494,13 +486,26 @@ const ManagerPanelPage = () => {
                 <RestaurantCreateApplication onRestaurantCreated={handleRestaurantCreated}/>
             </div>
         )
-    }, [restaurant, restaurantCreateApplication])
+    }, [restaurant, restaurantCreateApplication, currentMenuId, restaurantMenuItems, restaurantMenus, restaurantPromocodes])
+
+
+    if (isCurrentManagerRestaurantApplicationsLoading || isCurrentUserLoading || isCurrentManagerRestaurantPromocodesLoading || isCurrentManagerRestaurantMenusLoading ||  isCurrentManagerRestaurantMenuItemsLoading ||isCurrentManagerRestaurantLoading) {
+        return <LoadingPage/>
+    }
+
 
     return (
         <div className="container manager__panel__container">
             <Navbar currentUser={currentUser}/>
             <div className="manager__panel__wrapper">
-                {renderPanel()}
+                <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+                    {renderPanel()}
+                    <DragOverlay>
+                        {draggableMenuItemId ? (
+                            <DraggableMenuItem menuItem={restaurantMenuItems.find(menuItem => menuItem.id.toString() === draggableMenuItemId) as MenuItem}/>
+                        ) : null}
+                    </DragOverlay>
+                </DndContext>
             </div>
             <Footer/>
         </div>

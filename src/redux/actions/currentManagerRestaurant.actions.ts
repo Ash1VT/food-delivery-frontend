@@ -4,6 +4,7 @@ import { RestaurantApplication } from "src/models/restaurantApplication.interfac
 import { WorkingHours, WorkingHoursCreate, WorkingHoursUpdate } from "src/models/workingHours.interfaces"
 import { RestaurantService } from "src/services/RestaurantService"
 import { WorkingHoursService } from "src/services/WorkingHoursService"
+import { parseFastApiErrors } from "../utils/parseErrors"
 
 export const fetchCurrentManagerRestaurant = createAsyncThunk<Restaurant | null, void, { rejectValue: string | undefined | null }>(
     'currentManagerRestaurant/fetchCurrentManagerRestaurant',
@@ -77,6 +78,11 @@ export const createRestaurantWorkingHours = createAsyncThunk<WorkingHours, Worki
             if (error.code === "ERR_NETWORK") {
                 return rejectWithValue('Host is not available')
             }
+
+            if (error.response.status === 422) {
+                return rejectWithValue(parseFastApiErrors(error.response.data.detail))
+            }
+
             return rejectWithValue(error.response.data.detail)
         }
     }

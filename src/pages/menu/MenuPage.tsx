@@ -19,6 +19,9 @@ import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
 import { fetchRestaurant, fetchRestaurantMenu } from 'src/redux/actions/restaurantMenu.actions'
 import { addErrorNotification } from 'src/utils/notifications'
 import BackToRestaurantsButton from './ui/buttons/back-to-restaurants-button/BackToRestaurantsButton'
+import LoadingPage from '../loading-page/LoadingPage'
+import { Restaurant } from 'src/models/restaurant.interfaces'
+import useComponentWillMount from 'src/hooks/useComponentWillMount'
 
 const MenuPage = () => {
     const { restaurantId } = useParams()
@@ -35,7 +38,7 @@ const MenuPage = () => {
     const [categoriesRefs, setCategoriesRefs] = useState<MenuCategoryRef[]>([])
     const [activeCategoryId, setActiveCategoryId] = useState<string>('1')
     
-    useEffect(() => {
+    useComponentWillMount(() => {
         if (restaurantId) {
             dispatch(fetchRestaurant(restaurantId)).then((response) => {
 
@@ -60,13 +63,8 @@ const MenuPage = () => {
             })
             
         }
-    }, [dispatch])
+    })
 
-    if (!restaurant) {
-        return <NotFoundPage/>
-    }
-
-    const isOpen = isRestaurantOpen(restaurant)
 
     const handleMenuItemClick = (menuItemId: string) => {
         navigate(`/restaurants/${restaurantId}/items/${menuItemId}`)
@@ -86,6 +84,16 @@ const MenuPage = () => {
         setActiveCategoryId: setActiveCategoryId
     }
 
+    if (isCurrentUserLoading || isMenuLoading)
+        return <LoadingPage/>
+
+    if (!restaurant) {
+        return <NotFoundPage/>
+    }
+
+
+    const isOpen = isRestaurantOpen(restaurant as Restaurant)
+
     return (
         <div className="container menu__container">
             <Navbar currentUser={currentUser}/>
@@ -101,10 +109,10 @@ const MenuPage = () => {
                                 }
                             </div>
                             <div className="menu__content__wrapper">
-                                <RestaurantReference isRestaurantOpen={isOpen} restaurant={restaurant}/>
+                                <RestaurantReference isRestaurantOpen={isOpen} restaurant={restaurant as Restaurant}/>
                                 {menu ? 
                                     (
-                                        <MenuCategoriesList menuCategories={menu.menuCategories} onMenuItemClick={handleMenuItemClick}/>
+                                        <MenuCategoriesList currentUser={currentUser} menuCategories={menu.menuCategories} onMenuItemClick={handleMenuItemClick}/>
                                     )
                                     : 
                                     (

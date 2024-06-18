@@ -73,7 +73,7 @@ const EditUserModal = ({user, onUserUpdated, onUserImageUploaded} : EditUserModa
         <div className='edit__user__modal__container'>
             <div className='edit__user__modal__title'>Edit User</div>
             <div className='edit__user__modal__form__wrapper'>
-                <UploadImageForm imageUrl={user.imageUrl} onImageUploaded={handleUserImageUploaded}/>
+                <UploadImageForm imageUrl={user.imageUrl} inputId='userAvatar' onImageUploaded={handleUserImageUploaded}/>
                 <FormTable fields={fields} 
                         initialValues={initialValues} 
                         validationSchema={validationSchema} 

@@ -48,7 +48,10 @@ const customerAddressesSlice = createSlice({
         builder.addCase(updateCustomerAddress.fulfilled, (state, action) => {
             state.isLoading = false
             state.error = null
-            state.addresses = state.addresses.map(address => address.id === action.payload.id ? action.payload : address)
+            state.addresses = state.addresses.map(address => address.id === action.payload.id ? {
+                ...address,
+                ...action.payload
+            } : address)
         })
 
         builder.addCase(updateCustomerAddress.rejected, (state, action) => {

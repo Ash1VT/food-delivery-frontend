@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { DeliveryAddressesTableProps } from '../profile.types'
-import { formatAddress } from 'src/utils/formatAddress'
+import { formatCustomerAddress } from 'src/utils/formatCustomerAddress'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
@@ -27,24 +27,22 @@ const DeliveryAddressesTable = ({addresses} : DeliveryAddressesTableProps) => {
     }, [addresses])
 
     return (
-        <Scrollbar className='delivery__address__scrollbar'>
-            <table className='delivery__addresses__table'>
-                {addresses.map((address) => (
-                    <tr className='delivery__addresses__row'>
-                        <td>
-                            <div className='delivery__address__text'>
-                                {formatAddress(address)}
-                            </div>
-                        </td>
-                        <td>
-                            <div className='delivery__address__icon__wrapper delivery__address__margin__left'>
-                                {renderAddressIcon(address)}
-                            </div>
-                        </td>
-                    </tr>
-                ))}
-            </table>
-        </Scrollbar>
+        <table className='delivery__addresses__table'>
+            {addresses.map((address) => (
+                <tr className='delivery__addresses__row'>
+                    <td>
+                        <div className='delivery__address__text'>
+                            {formatCustomerAddress(address)}
+                        </div>
+                    </td>
+                    <td>
+                        <div className='delivery__address__icon__wrapper delivery__address__margin__left'>
+                            {renderAddressIcon(address)}
+                        </div>
+                    </td>
+                </tr>
+            ))}
+        </table>
     )
 }
 

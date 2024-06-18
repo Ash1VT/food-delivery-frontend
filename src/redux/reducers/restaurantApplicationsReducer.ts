@@ -64,7 +64,7 @@ const restaurantApplicationsSlice = createSlice({
         builder.addCase(confirmRestaurantApplication.fulfilled, (state, action) => {
             state.isLoading = false
             state.error = null
-            state.applications.filter((application) => application.id !== action.payload)
+            state.applications = state.applications.filter((application) => application.id !== action.payload)
         })
 
         builder.addCase(confirmRestaurantApplication.rejected, (state, action) => {
@@ -81,7 +81,7 @@ const restaurantApplicationsSlice = createSlice({
         builder.addCase(declineRestaurantApplication.fulfilled, (state, action) => {
             state.isLoading = false
             state.error = null
-            state.applications.filter((application) => application.id !== action.payload)
+            state.applications = state.applications.filter((application) => application.id !== action.payload)
         })
 
         builder.addCase(declineRestaurantApplication.rejected, (state, action) => {

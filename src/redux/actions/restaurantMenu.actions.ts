@@ -22,7 +22,7 @@ export const fetchRestaurant = createAsyncThunk<Restaurant, string, { rejectValu
     }
 )
 
-export const fetchRestaurantMenu = createAsyncThunk<Menu, string, { rejectValue: string }>(
+export const fetchRestaurantMenu = createAsyncThunk<Menu | undefined | null, string, { rejectValue: string }>(
     'restaurantMenu/fetchRestaurantMenu',
     async (restaurantId: string, { rejectWithValue }) => {
         try {

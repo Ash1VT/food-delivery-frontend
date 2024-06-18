@@ -11,6 +11,7 @@ import { fetchCurrentUser } from './redux/actions/currentUser.actions';
 import { useAppDispatch } from './hooks/redux/useAppDispatch';
 import { addErrorNotification } from './utils/notifications';
 import { User } from './models/user.interfaces';
+import LoadingPage from './pages/loading-page/LoadingPage';
 
 const getUserRoutes = (currentUser?: User | undefined | null) => {
     if (!currentUser) return guestRoutes
@@ -43,8 +44,12 @@ const AppRouter = () => {
                     addErrorNotification(response.payload as string)
             }
         })
-    }, [])
-    
+    }, [dispatch])
+
+
+    if (isCurrentUserLoading)
+        return <LoadingPage/>
+
     return (
         <Router>
             <Routes>

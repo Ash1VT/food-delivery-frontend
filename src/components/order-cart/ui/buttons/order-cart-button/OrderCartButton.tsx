@@ -4,7 +4,7 @@ import './order_cart_button.css'
 
 const OrderCartButton = ({totalPrice, onOrdered} : OrderCartButtonProps) => {
     return (
-        <button className="button__wrapper order__cart__button__wrapper">
+        <button className="button__wrapper order__cart__button__wrapper" onClick={onOrdered}>
             <div className="order__cart__total">
                 {totalPrice}$
             </div>

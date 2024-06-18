@@ -15,7 +15,7 @@ export class RestaurantService {
             imageUrl: data.image_url,
             email: data.email,
             address: data.address,
-            ratingValue: data.rating_value,
+            ratingValue: data.rating,
             reviewsCount: data.reviews_count,
             phone: data.phone,
             isActive: data.is_active,
@@ -68,7 +68,7 @@ export class RestaurantService {
     }
 
     public static async getRestaurantsPage(data: RestaurantsListRequestData): Promise<RestaurantsList> {
-        const response = await restaurantMicroservice.get(`/restaurants/?limit=${data.limit}&offset=${data.offset}`)
+        const response = await restaurantMicroservice.get(`/restaurants/?limit=${data.limit}&offset=${data.offset}${data.address ? `&address=${data.address}` : ''}${data.orderByRating ? '&order_by_rating=true' : ''}${data.name ? `&name=${data.name}` : ''}`)
         return this.parseRestaurantsListFromResponseData(response.data)
     }
 
@@ -115,14 +115,14 @@ export class RestaurantService {
 
     public static async activateRestaurant(id: string): Promise<RestaurantUpdateResponse> {
         return await sendPrivateRequest<RestaurantUpdateResponse>(async () => {
-            const response = await restaurantMicroservice.post(`/restaurants/${id}/activate/`)
+            const response = await restaurantMicroservice.patch(`/restaurants/${id}/activate/`)
             return this.parseRestaurantUpdateFromResponseData(response.data)
         })
     }
 
     public static async deactivateRestaurant(id: string): Promise<RestaurantUpdateResponse> {
         return await sendPrivateRequest<RestaurantUpdateResponse>(async () => {
-            const response = await restaurantMicroservice.post(`/restaurants/${id}/deactivate/`)
+            const response = await restaurantMicroservice.patch(`/restaurants/${id}/deactivate/`)
             return this.parseRestaurantUpdateFromResponseData(response.data)
         })
     }

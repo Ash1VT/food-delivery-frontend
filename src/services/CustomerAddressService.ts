@@ -1,6 +1,7 @@
 import { CustomerAddress, CustomerAddressCreate, CustomerAddressUpdate } from "src/models/customerAddress.interfaces";
 import sendPrivateRequest from "src/redux/utils/sendPrivateRequest";
 import { orderMicroservice } from "./axios";
+import { UserService } from "./UserService";
 
 export class CustomerAddressService {
 
@@ -27,7 +28,7 @@ export class CustomerAddressService {
             region: data.region,
             details: data.details,
             customerId: data.customerId,
-            approvalStatus: data.approvalStatus
+            approvalStatus: data.approvalStatus.toLowerCase()
         }
     }
 
@@ -61,7 +62,12 @@ export class CustomerAddressService {
     public static async getCustomersAddresses(status?: string): Promise<CustomerAddress[]> {
         return await sendPrivateRequest<CustomerAddress[]>(async () => {
             const response = await orderMicroservice.get(`/customers/addresses/${status ? `?status=${status}/` : ''}`);
-            return this.parseCustomerAddressListToResponseData(response.data);
+            const addresses = this.parseCustomerAddressListToResponseData(response.data);
+        
+            return await Promise.all(addresses.map(async (address) => {
+                const customer = await UserService.getUser(address.customerId);
+                return {...address, customer: customer};
+            }));
         });
     }
 
@@ -83,13 +89,13 @@ export class CustomerAddressService {
 
     public static async approveCustomerAddress(customerAddressId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.patch(`/addresses/${customerAddressId}/approve/`);
+            await orderMicroservice.patch(`customers/addresses/${customerAddressId}/approve/`);
         });
     }
 
     public static async rejectCustomerAddress(customerAddressId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.patch(`/addresses/${customerAddressId}/reject/`);
+            await orderMicroservice.patch(`customers/addresses/${customerAddressId}/reject/`);
         });
     }
     

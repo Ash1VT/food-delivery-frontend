@@ -33,9 +33,7 @@ const ReviewForm = ({ title, currentUser, onReviewAdded } : ReviewCreateFormProp
     })
 
     const handleSubmit = async (values: FormValues, { setSubmitting } : FormikHelpers<FormValues>)  => {
-        alert(JSON.stringify(values, null, 2))
         await onReviewAdded(values)
-        // setSubmitting(false)
     };
 
     const handleNotFoundImage = (event: React.SyntheticEvent<HTMLImageElement>) => {
@@ -61,14 +59,14 @@ const ReviewForm = ({ title, currentUser, onReviewAdded } : ReviewCreateFormProp
                                         {currentUser.fullName}
                                     </div>
                                 </div>
-                                <CustomRating className="review__create__form__rating" style={{ maxWidth: 200 }} value={values.rating} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
+                                <CustomRating className="review__create__form__rating" style={{ maxWidth: 200 }} value={values.rating} onChange={(rating: number) => { setFieldValue('rating', rating) }} />
                             </div>
                             <Form className="review__create__form">
                                 <input type="hidden" name="customerId" value={values.customerId} />
                                 <input type="hidden" name="customerFullName" value={values.customerFullName} />
                                 <input type="hidden" name="customerImageUrl" value={values.customerImageUrl} />
                                 <input type="hidden" name="ratingValue" value={values.rating} />
-                                <textarea name="text" className="review__create__form__input review__create__form__text" placeholder="Write your review..." value={values.comment} onChange={handleChange} />
+                                <textarea name="text" className="review__create__form__input review__create__form__text" placeholder="Write your review..." value={values.comment} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => { setFieldValue('comment', event.target.value) }} />
                                 <button type="submit" className="button__wrapper button__text review__create__form__button">Submit Your Review</button>
                             </Form>
                         </div>

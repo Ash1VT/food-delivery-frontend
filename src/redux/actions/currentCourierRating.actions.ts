@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { CourierRating } from "src/models/courierRating,interfaces";
+import { CourierRating } from "src/models/courierRating.interfaces";
 import { ReviewService } from "src/services/ReviewService";
 
 export const fetchCourierRating = createAsyncThunk<CourierRating, string, { rejectValue: string }>(

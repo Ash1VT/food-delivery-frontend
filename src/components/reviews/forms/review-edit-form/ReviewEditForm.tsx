@@ -88,7 +88,7 @@ const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDele
                                         {currentUserReview.customerFullName}
                                     </div>
                                 </div>
-                                <CustomRating className="review__edit__form__rating" readOnly={!editMode} style={{ maxWidth: 200 }} isRequired value={values.rating} onChange={(ratingValue: number) => { setFieldValue('ratingValue', ratingValue) }} />
+                                <CustomRating className="review__edit__form__rating" readOnly={!editMode} style={{ maxWidth: 200 }} isRequired value={values.rating} onChange={(rating: number) => { setFieldValue('rating', rating) }} />
                                 { editMode ? (
                                     <div className="review__edit__form__header__actions">
                                         <button className="button__wrapper review__edit__form__header__action" onClick={() => handleCancelClick(resetForm)}>
@@ -114,7 +114,7 @@ const ReviewEditForm = ({title, currentUserReview, onReviewUpdated, onReviewDele
                             <Form className="review__edit__form">
                                 <input type="hidden" name="id" value={values.id} />
                                 <input type="hidden" name="ratingValue" value={values.rating} />
-                                <textarea name="text" readOnly={!editMode} ref={inputRef} className="review__edit__form__input review__edit__form__text" placeholder="Write your review..." value={values.comment} onChange={handleChange} />
+                                <textarea name="text" readOnly={!editMode} ref={inputRef} className="review__edit__form__input review__edit__form__text" placeholder="Write your review..." value={values.comment} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {setFieldValue('comment', event.target.value)}} />
                             </Form>
                         </div>
                     </div>

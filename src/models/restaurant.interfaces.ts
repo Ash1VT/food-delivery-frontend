@@ -15,6 +15,9 @@ export interface Restaurant {
 }
 
 export interface RestaurantsListRequestData {
+    address?: string
+    orderByRating?: boolean
+    name?: string
     limit: number
     offset: number
 }

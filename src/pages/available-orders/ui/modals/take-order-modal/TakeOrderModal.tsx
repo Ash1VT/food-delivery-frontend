@@ -49,7 +49,7 @@ const TakeOrderModal = ({onOrderTaken} : TakeOrderModalProps) => {
                 </label>
             </div>
 
-            <button className='take__order__modal__button' onClick={handleOrderTaken}>Take Order</button>
+            <button className='button__wrapper take__order__modal__button' onClick={handleOrderTaken}>Take Order</button>
         </div>
     )
 }

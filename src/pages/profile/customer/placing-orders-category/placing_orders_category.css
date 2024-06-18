@@ -1,5 +1,8 @@
 .placing__orders__category__container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
 }
 
 .placing__orders__category__text {

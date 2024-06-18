@@ -25,7 +25,11 @@ const PromocodeInput = ({order, onPromocodeApplied} : PromocodeInputProps) => {
               onChange={(e) => setPromocode(e.target.value)}
               placeholder="Enter promocode"
             />
-            {isApplied && <CheckCircleIcon className="promocode__success" />}
+            {isApplied && 
+              <>
+                <CheckCircleIcon className="promocode__success" />
+                <div className='promocode__text'>-{order.priceInformation.promocodeDiscount}%</div>
+              </>}
             <ApplyPromocodeButton isApplied={isApplied} onPromocodeApplied={handleApplyClick} />
           </div>
         </div>

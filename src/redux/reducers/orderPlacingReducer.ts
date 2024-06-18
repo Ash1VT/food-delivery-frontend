@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Order } from "src/models/order.interfaces"
-import { fetchOrder, placeOrder, updateOrder, updateOrderItem } from "../actions/orderPlacing.actions"
+import { fetchOrder, payOrder, placeOrder, updateOrder, updateOrderItem } from "../actions/orderPlacing.actions"
 
 interface OrderPlacingState {
     isLoading: boolean
@@ -63,7 +63,7 @@ export const orderPlacingSlice = createSlice({
         builder.addCase(updateOrderItem.fulfilled, (state, action) => {
             state.isLoading = false
             state.error = null
-            if (state.order) state.order.items = state.order.items.map(item => item.id === action.payload.id ? action.payload : item)
+            state.order = action.payload
         })
 
         builder.addCase(updateOrderItem.rejected, (state, action) => {
@@ -84,6 +84,19 @@ export const orderPlacingSlice = createSlice({
 
         builder.addCase(placeOrder.rejected, (state, action) => {
             state.isLoading = false
+            state.error = action.error.message
+        })
+
+        // Pay Order
+
+        builder.addCase(payOrder.pending, (state) => {
+        })
+
+        builder.addCase(payOrder.fulfilled, (state, action) => {
+            state.error = null
+        })
+
+        builder.addCase(payOrder.rejected, (state, action) => {
             state.error = action.error.message
         })
 

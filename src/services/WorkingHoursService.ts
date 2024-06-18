@@ -19,15 +19,16 @@ export class WorkingHoursService {
 
     public static parseWorkingHoursCreateDataToRequestData(workingHours: WorkingHoursCreate): any {
         return {
-            day_of_week: workingHours.dayOfWeek,
+            day_of_week: workingHours.dayOfWeek.toLowerCase(),
             opening_time: workingHours.openingTime,
-            closing_time: workingHours.closingTime
+            closing_time: workingHours.closingTime,
+            restaurant_id: workingHours.restaurantId
         }
     }
 
     public static parseWorkingHoursUpdateDataToRequestData(workingHours: WorkingHoursUpdate): any {
         return {
-            day_of_week: workingHours.dayOfWeek,
+            day_of_week: workingHours.dayOfWeek.toLowerCase(),
             opening_time: workingHours.openingTime,
             closing_time: workingHours.closingTime
         }

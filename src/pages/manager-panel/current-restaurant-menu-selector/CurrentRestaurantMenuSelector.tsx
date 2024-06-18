@@ -2,11 +2,9 @@ import React from 'react'
 import { CurrentRestaurantMenuSelectorProps } from '../manager_panel.types'
 import './current_restaurant_menu_selector.css'
 
-const CurrentRestaurantMenuSelector = ({activeMenuId, setActiveMenuId, menus, onCurrentMenuSelected} : CurrentRestaurantMenuSelectorProps) => {
-
+const CurrentRestaurantMenuSelector = ({activeMenuId, menus, onCurrentMenuSelected} : CurrentRestaurantMenuSelectorProps) => {
     const handleSelect = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const menuId = event.target.value
-        setActiveMenuId(menuId);
         await onCurrentMenuSelected(menuId)
     }
 

@@ -23,9 +23,13 @@ export type PromocodeInputProps = {
     onPromocodeApplied: (promocodeName: string) => Promise<void>
 }
 
-export type OrderPriceProps = {
+export type PaymentCardProps = {
     order: Order
     onOrderPlaced: (orderId: string) => Promise<void>
+}
+
+export type OrderPriceProps = {
+    order: Order
 }
 
 export type ApplyPromocodeButtonProps = {

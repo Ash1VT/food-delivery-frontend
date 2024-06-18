@@ -1,6 +1,8 @@
 import { OrderItem, OrderItemUpdate } from "src/models/orderItem.interfaces";
 import sendPrivateRequest from "src/redux/utils/sendPrivateRequest";
 import { orderMicroservice } from "./axios";
+import { Order } from "src/models/order.interfaces";
+import { OrderService } from "./OrderService";
 
 export class OrderItemService {
     
@@ -25,12 +27,12 @@ export class OrderItemService {
         return data.map((item: any) => this.parseOrderItemFromResponseData(item));
     }
 
-    public static async updateOrderItem(data: OrderItemUpdate): Promise<OrderItem> {
+    public static async updateOrderItem(data: OrderItemUpdate): Promise<Order> {
         const orderItemUpdateData = this.parseOrderItemUpdateToRequestData(data)
 
-        return await sendPrivateRequest<OrderItem>(async () => {
+        return await sendPrivateRequest<Order>(async () => {
             const response = await orderMicroservice.patch(`orders/${data.orderId}/items/${data.itemId}/`, orderItemUpdateData)
-            return this.parseOrderItemFromResponseData(response.data)
+            return OrderService.parseOrderFromResponseData(response.data)
         })
     }
 }

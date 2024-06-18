@@ -27,7 +27,7 @@ const CustomerAddress = ({ address, onAddressUpdated, onAddressApproved, onAddre
             </td>
             <td className='customer__address__column'>
                 <div className="customer__address__text customer__address__margin__left">
-                    {address.country}
+                    {address.region}
                 </div>
             </td>
             <td className='customer__address__column'>

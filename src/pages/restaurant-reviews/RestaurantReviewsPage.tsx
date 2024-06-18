@@ -9,14 +9,16 @@ import { ReviewCreateType, ReviewType, ReviewUpdateType } from "src/components/r
 import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
 import MenuItemReference from "src/components/menu-item-reference/MenuItemReference"
 import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import NotFoundPage from "../not-found-page/NotFoundPage"
 import isRestaurantOpen from "src/utils/isRestaurantOpen"
 import './restaurant_reviews.css'
 import { useEffect } from "react"
 import { fetchRestaurant, fetchRestaurantReviews } from "src/redux/actions/restaurantReviews.actions"
 import { addErrorNotification, addSuccessNotification } from "src/utils/notifications"
-import { createRestaurantReview, deleteRestaurantReview, updateRestaurantReview } from "src/redux/actions/currentCustomerRestaurantReview.actions"
+import { createRestaurantReview, deleteRestaurantReview, fetchCurrentCustomerRestaurantReview, updateRestaurantReview } from "src/redux/actions/currentCustomerRestaurantReview.actions"
+import LoadingPage from "../loading-page/LoadingPage"
+import useComponentWillMount from "src/hooks/useComponentWillMount"
 
 
 const RestaurantReviewsPage = () => {
@@ -30,15 +32,13 @@ const RestaurantReviewsPage = () => {
     const { isRestaurantLoading: isRestaurantLoading, isReviewsLoading: isRestaurantReviewsLoading, restaurant, reviews, restaurantError: restaurantError, reviewsError: restaurantReviewsError} = useAppSelector((state) => state.restaurantReviewsReducer)
 
 
-    useEffect(() => {
+    useComponentWillMount(() => {
         if (restaurantId) {
             dispatch(fetchRestaurant(restaurantId)).then((response) => {
                 if (response.meta.requestStatus === 'fulfilled') {
-                    dispatch(fetchRestaurantReviews(restaurantId)).then((response) => {
-                        if (response.meta.requestStatus === 'rejected') {
-                            addErrorNotification(response.payload as string)
-                        }
-                    })
+                    dispatch(fetchRestaurantReviews(restaurantId))
+                    
+                    dispatch(fetchCurrentCustomerRestaurantReview(restaurantId))
                 }
 
                 if (response.meta.requestStatus === 'rejected') {
@@ -46,16 +46,14 @@ const RestaurantReviewsPage = () => {
                 }
             })
         }
-    }, [dispatch])
+    })
 
-
-    if (!restaurant) 
-        return <NotFoundPage/>
-
-    const isOpen = isRestaurantOpen(restaurant)
 
     const handleReviewAdded = async (review: ReviewCreateType) => {
-        dispatch(createRestaurantReview(review)).then((response) => {
+        dispatch(createRestaurantReview({
+            ...review,
+            restaurantId: restaurantId
+        })).then((response) => {
             if (response.meta.requestStatus === 'fulfilled') {
                 addSuccessNotification('Successfully added review')
             }
@@ -87,13 +85,21 @@ const RestaurantReviewsPage = () => {
         })
     }
 
+    if (isCurrentCustomerRestaurantReviewLoading || isCurrentUserLoading || isRestaurantLoading || isRestaurantReviewsLoading)
+        return <LoadingPage/>
+        
+    if (!restaurant) 
+        return <NotFoundPage/>
+
+    const isOpen = isRestaurantOpen(restaurant)
+
     return (
         <div className="container restaurant__reviews__container">
             <Navbar currentUser={currentUser}/>
             <div className="restaurant__reviews__wrapper">
                 <div className="restaurant__reviews__content">
                     <RestaurantReference isRestaurantOpen={isOpen} restaurant={restaurant}/>
-                    {currentUser &&
+                    {currentUser && currentUser.role === 'customer' &&
                         <div className="restaurant__reviews__current__user">
                             <CurrentUserReview currentUser={currentUser} 
                                                currentUserReview={currentCustomerRestaurantReview}

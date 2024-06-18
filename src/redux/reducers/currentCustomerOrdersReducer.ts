@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Order } from "src/models/order.interfaces"
-import { addOrderReview, fetchCurrentCustomerOrders } from "../actions/currentCustomerOrders.actions"
+import { addOrderReview, createOrder, fetchCurrentCustomerOrders } from "../actions/currentCustomerOrders.actions"
 
 interface CurrentCustomerOrdersState {
     isLoading: boolean
@@ -53,6 +53,22 @@ const currentCustomerOrdersSlice = createSlice({
         })
 
         builder.addCase(addOrderReview.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.error.message
+        })
+
+        // Create Order
+
+        builder.addCase(createOrder.pending, (state) => {
+            state.isLoading = true
+        })
+
+        builder.addCase(createOrder.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.error = null
+        })
+
+        builder.addCase(createOrder.rejected, (state, action) => {
             state.isLoading = false
             state.error = action.error.message
         })

@@ -8,18 +8,20 @@ import ReactPaginate from 'react-paginate';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
 import SelectComponent from 'src/components/ui/select-component/SelectComponent';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
 import { addErrorNotification } from 'src/utils/notifications';
 import { fetchRestaurantsPage } from 'src/redux/actions/restaurants.actions';
 import { getRestaurantsPage } from 'src/redux/selectors/restaurantsSelectors';
 import './restaurants_page.css'
+import LoadingPage from '../loading-page/LoadingPage';
 
 const RestaurantsPage = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [pageNumber, setPageNumber] = useState(0)
+    const [searchParams] = useSearchParams()
 
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
@@ -27,7 +29,7 @@ const RestaurantsPage = () => {
 
     const restaurantsPage = useAppSelector((state) => getRestaurantsPage(state, pageNumber))
 
-    const itemsOnPageCount = 1
+    const itemsOnPageCount = 6
     const limit = itemsOnPageCount
     const offset = pageNumber * limit
 
@@ -36,8 +38,10 @@ const RestaurantsPage = () => {
     
 
     useEffect(() => {
+        const address = searchParams.get('address')
         dispatch(fetchRestaurantsPage(
             {
+                address: address || undefined,
                 limit,
                 offset
             }
@@ -51,18 +55,49 @@ const RestaurantsPage = () => {
     
     const options = [
         {
-            label: 'Popularity',
-            value: 'popularity'
+            label: 'Default',
+            value: 'default'
         },
         {
-            label: 'Popularit',
-            value: 'popularit'
-        }
+            label: 'Rating',
+            value: 'rating'
+        },
     ]
+
+    const handleSortApplied = async (query: string) => {
+        if (query === 'rating') {
+            dispatch(fetchRestaurantsPage(
+                {
+                    orderByRating: true,
+                    limit,
+                    offset
+                }
+            ))
+        }
+
+        if (query === 'default') {
+            dispatch(fetchRestaurantsPage(
+                {
+                    limit,
+                    offset
+                }
+            ))
+        }
+    }
+
+    const handleSearchApplied = async (query: string) => {
+        dispatch(fetchRestaurantsPage(
+            {
+                name: query,
+                limit,
+                offset
+            }
+        ))
+    }
 
     const searchProps: SearchComponentProps = {
         searchPlaceholder: 'Search restaurant',
-        onSearch: async (query) => {console.log(query)}
+        onSearch: handleSearchApplied
     }
 
     const selectProps: SelectComponentProps = {
@@ -70,7 +105,7 @@ const RestaurantsPage = () => {
         openSelectButtonLabel: 'Sort by',
         selectLabel: 'Sort by',
         selectButtonLabel: 'Apply sort',
-        onSelect: async (sortOption) => {console.log(sortOption)}
+        onSelect: handleSortApplied
     }
     
     const handlePageClick = ({selected} : {selected: number}) => {
@@ -94,6 +129,9 @@ const RestaurantsPage = () => {
 
         return 1
     }
+
+    if (isCurrentUserLoading || isRestaurantsLoading)
+        return <LoadingPage/>
 
     return (
         <div className="container restaurants__container">

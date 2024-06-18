@@ -208,7 +208,7 @@ export type EditRestaurantMenuCategoryModalProps = {
 
 export type CurrentRestaurantMenuSelectorProps = {
     activeMenuId?: string | null
-    setActiveMenuId: (activeMenuId: string) => void
+    // setActiveMenuId: (activeMenuId: string) => void
     menus: Menu[]
     onCurrentMenuSelected: (menuId: string | undefined) => Promise<void>
 }

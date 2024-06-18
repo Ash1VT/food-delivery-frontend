@@ -35,6 +35,14 @@ export const parseUserErrors = (errors: any) => {
 }
 
 
-export const parseRestaurantErrors = (errors: any) => {
-    return "test";
+export const parseFastApiErrors = (errors: any) => {
+    let errorString = '';
+
+    if (errors) {
+        errors.forEach((error: any) => {
+            errorString += `${error.msg}\n`;
+        });
+    }
+
+    return errorString
 }

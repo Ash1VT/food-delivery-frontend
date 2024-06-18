@@ -6,7 +6,6 @@ export interface DeliveryInformation {
 
     originAddress: string;
     destinationAddress?: string;
-    destinationAddressId?: string;
 
     deliveryAcceptedAt?: Date;
     actualDeliveryTime?: number;

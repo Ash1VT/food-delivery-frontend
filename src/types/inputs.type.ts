@@ -7,4 +7,6 @@ export type EmailInputProps = {
 } & BaseInputProps
 
 export type AddressInputProps = {
+    value: string
+    setValue: (value: string) => void
 } & BaseInputProps

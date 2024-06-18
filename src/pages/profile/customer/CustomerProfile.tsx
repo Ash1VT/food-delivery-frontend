@@ -20,6 +20,8 @@ import { User } from 'src/models/user.interfaces';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
 import { addOrderReview, fetchCurrentCustomerOrders } from 'src/redux/actions/currentCustomerOrders.actions';
 import { createCustomerAddress, fetchCurrentCustomerAddresses } from 'src/redux/actions/currentCustomerAddresses.actions';
+import { closeModalWindow } from 'src/utils/closeModalWindow';
+import LoadingPage from 'src/pages/loading-page/LoadingPage';
 
 const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : CustomerProfileProps) => {
     const dispatch = useAppDispatch()
@@ -67,6 +69,7 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
         dispatch(createCustomerAddress(customerAddress)).then((response) => {
             if (response.type === 'currentCustomerAddresses/createCustomerAddress/fulfilled') {
                 addSuccessNotification('Customer address successfully created')
+                closeModalWindow()
             }
             
             if (response.type === 'currentCustomerAddresses/createCustomerAddress/rejected') {
@@ -133,7 +136,7 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
             return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onVerificationEmailSent={onVerificationEmailSent} onUserImageUploaded={onUserImageUploaded}/>
             
         if (activeCategoryId === 1) 
-            return <DeliveryAddressesCategory approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onCustomerAddressCreated={handleCustomerAddressCreated}/>
+            return <DeliveryAddressesCategory currentUser={currentUser} approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onCustomerAddressCreated={handleCustomerAddressCreated}/>
         
         if (activeCategoryId === 2)
             return <PlacingOrdersCategory currentUser={currentUser} orders={placingOrders} onOrderPlaced={handleOrderPlaced}/>
@@ -156,6 +159,10 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
 
     }, [activeCategoryId]);
 
+
+    if (isCustomerAddressesLoading || isCustomerOrdersLoading)
+        return <LoadingPage/>
+        
     return (
         <div className="profile__card">
             <div className="profile__category__list">

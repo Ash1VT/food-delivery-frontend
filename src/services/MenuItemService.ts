@@ -29,9 +29,9 @@ export class MenuItemService {
             description: data.description,
             price: data.price,
             imageUrl: data.image_url,
-            ratingValue: data.ratingValue,
-            reviewsCount: data.reviewsCount,
-            restaurantId: data.restaurantId
+            ratingValue: data.rating,
+            reviewsCount: data.reviews_count,
+            restaurantId: data.restaurant_id
         }
     }
 

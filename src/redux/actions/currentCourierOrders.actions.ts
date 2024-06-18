@@ -34,3 +34,4 @@ export const finishOrderDelivery = createAsyncThunk<string, string, { rejectValu
         }
     }
 )
+

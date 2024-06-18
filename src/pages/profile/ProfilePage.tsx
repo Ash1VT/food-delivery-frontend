@@ -11,6 +11,7 @@ import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
 import { UserUpdate, UserUploadImage } from "src/models/user.interfaces"
 import { updateCurrentUser, uploadCurrentUserImage, resendVerificationEmail } from "src/redux/actions/currentUser.actions"
 import './profile_page.css'
+import LoadingPage from "../loading-page/LoadingPage"
 
 
 const ProfilePage = () => {
@@ -66,6 +67,9 @@ const ProfilePage = () => {
     }, [currentUser])
 
     if (!currentUser) return null
+
+    if (isCurrentUserLoading)
+        return <LoadingPage/>
 
     return (
         <div className="container profile__container">

@@ -1,13 +1,12 @@
 import { Review, ReviewCreate, ReviewUpdate } from "src/models/reviews.interfaces";
 import sendPrivateRequest from "src/redux/utils/sendPrivateRequest";
 import { reviewMicroservice } from "./axios";
-import { CourierRating } from "src/models/courierRating,interfaces";
+import { CourierRating } from "src/models/courierRating.interfaces";
 
 export class ReviewService {
     public static parseOrderReviewCreateToRequestData(data: ReviewCreate): any {
         return {
-            rating: data.rating,
-            comment: data.comment
+            rating: data.rating
         }
     }
 
@@ -50,6 +49,13 @@ export class ReviewService {
         return data.map((review: any) => this.parseReviewFromResponseData(review))
     }
 
+    public static parseCourierRatingFromResponseData(data: any): CourierRating {
+        return {
+            ratingValue: data.rating,
+            reviewsCount: data.reviews_count
+        }
+    }
+
     public static async getCourierReviews(courierId: string): Promise<Review[]> {
         return await sendPrivateRequest<Review[]>(async () => {
             const response = await reviewMicroservice.get(`/couriers/${courierId}/reviews/`)
@@ -59,12 +65,13 @@ export class ReviewService {
 
     public static async getOrderReview(orderId: string): Promise<Review | undefined | null> {
         const response = await reviewMicroservice.get(`/orders/${orderId}/review/`)
+        if (!response.data) return null
         return this.parseReviewFromResponseData(response.data)
     }
 
     public static async getCurrentCustomerMenuItemReview(menuItemId: string): Promise<Review> {
         return await sendPrivateRequest<Review>(async () => {
-            const response = await reviewMicroservice.get(`/menu_items/${menuItemId}/reviews/current/`)
+            const response = await reviewMicroservice.get(`/items/${menuItemId}/reviews/current/`)
             return this.parseReviewFromResponseData(response.data)
         })
     }
@@ -88,14 +95,13 @@ export class ReviewService {
 
     public static async getCourierRating(courierId: string): Promise<CourierRating> {
         const response = await reviewMicroservice.get(`/couriers/${courierId}/rating/`)
-        return response.data
+        return this.parseCourierRatingFromResponseData(response.data)
     }
 
     public static async addOrderReview(review: ReviewCreate): Promise<Review> {
         const reviewCreateData = this.parseOrderReviewCreateToRequestData(review)
-
         return await sendPrivateRequest<Review>(async () => {
-            const response = await reviewMicroservice.post(`/orders/${review.orderId}/reviews/}`, reviewCreateData)
+            const response = await reviewMicroservice.post(`/orders/${review.orderId}/reviews/`, reviewCreateData)
             return this.parseReviewFromResponseData(response.data)
         })
     }
@@ -104,7 +110,7 @@ export class ReviewService {
         const reviewCreateData = this.parseMenuItemReviewCreateToRequestData(review)
 
         return await sendPrivateRequest<Review>(async () => {
-            const response = await reviewMicroservice.post(`/items/${review.itemId}/reviews/}`, reviewCreateData)
+            const response = await reviewMicroservice.post(`/items/${review.itemId}/reviews/`, reviewCreateData)
             return this.parseReviewFromResponseData(response.data)
         })
     }
@@ -113,7 +119,7 @@ export class ReviewService {
         const reviewCreateData = this.parseRestaurantReviewCreateToRequestData(review)
 
         return await sendPrivateRequest<Review>(async () => {
-            const response = await reviewMicroservice.post(`/restaurants/${review.restaurantId}/reviews/}`, reviewCreateData)
+            const response = await reviewMicroservice.post(`/restaurants/${review.restaurantId}/reviews/`, reviewCreateData)
             return this.parseReviewFromResponseData(response.data)
         })
     }
@@ -122,7 +128,7 @@ export class ReviewService {
         const reviewUpdateData = this.parseReviewUpdateToRequestData(review)
 
         return await sendPrivateRequest<Review>(async () => {
-            const response = await reviewMicroservice.patch(`/reviews/${review.id}/`, reviewUpdateData)
+            const response = await reviewMicroservice.put(`/reviews/${review.id}/`, reviewUpdateData)
             return this.parseReviewFromResponseData(response.data)
         })
     }

@@ -20,6 +20,48 @@
     min-height: 106px;
 }
 
+.navbar__courier__profile__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.navbar__courier__rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+}
+
+.navbar__courier__rating__value {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: #000;
+}
+
+.navbar__courier__rating__image {
+    color: var(--theme-primary, #FFB30E);
+    font-family: Font Awesome 5 Free;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 140%;
+    margin-right: 8px;
+}
+
+.navbar__logo__wrapper:hover {
+    cursor: pointer;
+}
+
+.navbar__left__wrapper {
+    display: flex;
+    column-gap: 50px;
+    align-items: center;
+}
+
 .navbar__logo {
     max-width: 100%;
 }

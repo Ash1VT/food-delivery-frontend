@@ -17,6 +17,10 @@ const RestaurantReference = ({restaurant, isRestaurantOpen} : RestaurantReferenc
         navigate(`/restaurants/${restaurant.id}/reviews`)
     }
 
+    const handleRestaurantClick = () => {
+        navigate(`/restaurants/${restaurant.id}/menu`)
+    }
+
     return (
         <div className="restaurant__reference__container">
             <div className="restaurant__reference__image__wrapper" style={{backgroundImage: `url(${restaurant.imageUrl})`}}>

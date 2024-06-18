@@ -48,6 +48,7 @@ export type CustomerProfileProps = {
 }
 
 export type DeliveryAddressesCategoryProps = {
+    currentUser: User
     approvedAddresses: CustomerAddress[]
     pendingAddresses: CustomerAddress[]
     rejectedAddresses: CustomerAddress[]

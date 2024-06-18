@@ -7,6 +7,7 @@ import { orderMicroservice } from "./axios";
 import { ReviewService } from "./ReviewService";
 import { UserService } from "./UserService";
 import { RestaurantService } from "./RestaurantService";
+import { PaymentInformation } from "src/models/paymentInformation.interfaces";
 
 export class OrderService {
 
@@ -46,26 +47,35 @@ export class OrderService {
     public static parsePriceInformationFromResponseData(data: any): PriceInformation {
         return {
             id: data.id,
-            orderItemsPrice: data.orderItemsPrice,
+            orderItemsPrice: data.orderItemsPrice.toFixed(2),
             promocodeName: data.promocodeName,
             promocodeDiscount: data.promocodeDiscount,
-            decountedItemsPrice: data.decountedPrice,
-            deliveryPrice: data.deliveryPrice,
-            totalPrice: data.totalPrice
+            decountedItemsPrice: data.decountedPrice.toFixed(2),
+            deliveryPrice: data.deliveryPrice !== undefined ? data.deliveryPrice.toFixed(2) : undefined,
+            totalPrice: data.totalPrice.toFixed(2)
+        }
+    }
+
+    public static parsePaymentInformationFromResponseData(data: any): PaymentInformation {
+        return {
+            id: data.id,
+            paymentIntentId: data.paymentIntentId,
+            clientSecretKey: data.clientSecretKey
         }
     }
 
     public static parseOrderFromResponseData(data: any): Order {
         return {
             id: data.id,
-            status: data.status,
+            status: data.status.toLowerCase(),
             customerId: data.customerId,
             courierId: data.courierId,
             restaurantId: data.restaurantId,
             createdAt: new Date(data.createdAt),
             items: OrderItemService.parseOrderItemsListFromResponseData(data.items),
-            deliveryInformation: this.parseDeliveryInformationFromResponseData(data.deliveryInformation),
-            priceInformation: this.parsePriceInformationFromResponseData(data.priceInformation)
+            deliveryInformation: OrderService.parseDeliveryInformationFromResponseData(data.deliveryInformation),
+            priceInformation: OrderService.parsePriceInformationFromResponseData(data.priceInformation),
+            paymentInformation: data.paymentInformation ? OrderService.parsePaymentInformationFromResponseData(data.paymentInformation) : undefined
         }
     }
 
@@ -74,12 +84,45 @@ export class OrderService {
     }
 
     public static async getOrderFullData(order: Order): Promise<Order> {
-        const review = await ReviewService.getOrderReview(order.id)
-        const courier = order.courierId ? await UserService.getUser(order.courierId) : undefined
-        const customer = await UserService.getUser(order.customerId)
-        const restaurant = await RestaurantService.getRestaurant(order.restaurantId)
-        const courierRating = order.courierId ? await ReviewService.getCourierRating(order.courierId) : undefined
+        let review
+        let courier
+        let customer 
+        let restaurant
+        let courierRating
+        try {
+            review = order.status === 'delivered' ? await ReviewService.getOrderReview(order.id) : undefined
+        }
+        catch (error) {
+            review = undefined
+        }
 
+        try {
+            courier = order.courierId ? await UserService.getUser(order.courierId) : undefined
+        }
+        catch (error) {
+            courier = undefined
+        }
+
+        try {
+            customer = await UserService.getUser(order.customerId)
+        } 
+        catch (error) {
+            customer = undefined
+        }
+
+        try {
+            restaurant = await RestaurantService.getRestaurant(order.restaurantId)
+        }
+        catch (error) {
+            restaurant = undefined
+        }
+
+        try {
+            courierRating = order.courierId ? await ReviewService.getCourierRating(order.courierId) : undefined
+        }
+        catch (error) {
+            courierRating = undefined
+        }
         return {
             ...order,
             review: review,
@@ -115,11 +158,13 @@ export class OrderService {
     public static async getCurrentCustomerOrders(): Promise<Order[]> {
         return await sendPrivateRequest<Order[]>(async () => {
             const response = await orderMicroservice.get('/orders/customer/')
-            const orders = this.parseOrderListFromResponseData(response.data)
+            const orders = OrderService.parseOrderListFromResponseData(response.data)
 
             const ordersWithFullData = await Promise.all(orders.map(async (order) => {
-                return await this.getOrderFullData(order)
+                return await OrderService.getOrderFullData(order)
             }))
+
+
 
             return ordersWithFullData
         })
@@ -179,38 +224,38 @@ export class OrderService {
         const orderUpdateData = this.parseOrderUpdateToRequestData(data)
 
         return await sendPrivateRequest<Order>(async () => {
-            const response = await orderMicroservice.put(`/orders/${data.id}/`, orderUpdateData)
+            const response = await orderMicroservice.patch(`/orders/${data.id}/`, orderUpdateData)
             return this.parseOrderFromResponseData(response.data)
         })
     }
 
     public static async placeOrder(orderId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.post(`/orders/${orderId}/place/`)
+            await orderMicroservice.patch(`/orders/${orderId}/place/`)
         })
     }
 
     public static async confirmOrder(orderId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.post(`/orders/${orderId}/confirm/`)
+            await orderMicroservice.patch(`/orders/${orderId}/confirm/`)
         })
     }
 
     public static async prepareOrder(orderId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.post(`/orders/${orderId}/prepare/`)
+            await orderMicroservice.patch(`/orders/${orderId}/prepare/`)
         })
     }
 
     public static async takeOrder(data: OrderTake): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.post(`/orders/${data.id}/take/?deliveryType=${data.deliveryType}`)
+            await orderMicroservice.patch(`/orders/${data.id}/take/?deliveryType=${data.deliveryType}`)
         })
     }
 
     public static async finishOrderDelivery(orderId: string): Promise<void> {
         return await sendPrivateRequest<void>(async () => {
-            await orderMicroservice.post(`/orders/${orderId}/finish/`)
+            await orderMicroservice.patch(`/orders/${orderId}/finish/`)
         })
     }
 }

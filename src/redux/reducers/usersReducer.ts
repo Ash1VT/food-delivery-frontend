@@ -28,7 +28,6 @@ export const usersSlice = createSlice({
         })
 
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.isLoading = false
             state.error = null
             state.users = action.payload

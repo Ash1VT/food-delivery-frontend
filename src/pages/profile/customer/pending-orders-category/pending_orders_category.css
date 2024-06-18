@@ -1,5 +1,8 @@
 .pending__orders__category__container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
 }
 
 .pending__orders__category__text {

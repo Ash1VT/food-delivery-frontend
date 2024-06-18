@@ -3,3 +3,12 @@
     flex-direction: column;
     row-gap: 60px;
 }
+
+.reviews__no__reviews {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 120%;
+    color: #000000;
+}

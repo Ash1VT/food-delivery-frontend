@@ -11,12 +11,20 @@ import 'react-notifications-component/dist/theme.css'
 import 'reactjs-popup/dist/index.css';
 import 'animate.css/animate.compat.css'
 import 'react-phone-input-2/lib/style.css'
+import LoadingPage from './pages/loading-page/LoadingPage';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import stripePublicKey from './constants/stripePublicKey';
+
+const stripe = loadStripe(stripePublicKey)
 
 const App = () => {
     return (
         <>
             <ReactNotifications/>
-            <AppRouter/>
+            <Elements stripe={stripe}>
+                <AppRouter/>
+            </Elements>
         </>
     )
 }

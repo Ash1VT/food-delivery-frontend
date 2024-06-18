@@ -9,3 +9,18 @@ export type OrderDetailsProps = {
     onOrderDeliveryFinished?: (orderId: string) => Promise<void>
     onOrderReviewCreated?: (review: ReviewCreate) => Promise<void>
 }
+
+
+// UI
+
+export type GoogleMapsButtonProps = {
+    originAddress: string
+    destinationAddress: string
+    travelMode: string
+}
+
+export type YandexMapsButtonProps = {
+    originAddress: string
+    destinationAddress: string
+    travelMode: string
+}

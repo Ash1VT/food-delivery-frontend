@@ -2,11 +2,11 @@ import React from 'react'
 import { DeliveryAddressesCategoryProps } from '../../profile.types';
 import DeliveryAddressesTable from '../../delivery-addresses-table/DeliveryAddressesTable';
 import OpenAddingAddressButton from '../../ui/buttons/open-adding-address-button/OpenAddingAddressButton';
-import './delivery_addresses_category.css'
 import ModalWindow from 'src/components/modal-window/ModalWindow';
 import AddCustomerAddressModal from '../../ui/modals/add-customer-address-modal/AddCustomerAddressModal';
+import './delivery_addresses_category.css'
 
-const DeliveryAddressesCategory = ({approvedAddresses, pendingAddresses, rejectedAddresses, onCustomerAddressCreated} : DeliveryAddressesCategoryProps) => {
+const DeliveryAddressesCategory = ({currentUser, approvedAddresses, pendingAddresses, rejectedAddresses, onCustomerAddressCreated} : DeliveryAddressesCategoryProps) => {
     return (
         <div className='delivery__addresses__category__container'>
             <div className='delivery__addresses__category__section'>
@@ -34,9 +34,11 @@ const DeliveryAddressesCategory = ({approvedAddresses, pendingAddresses, rejecte
                 }
             </div>
             <div>
-                <ModalWindow button={OpenAddingAddressButton({})}>
-                    <AddCustomerAddressModal onCustomerAddressCreated={onCustomerAddressCreated} />
-                </ModalWindow>
+                {currentUser.isEmailVerified && 
+                    <ModalWindow button={OpenAddingAddressButton({})}>
+                        <AddCustomerAddressModal onCustomerAddressCreated={onCustomerAddressCreated} />
+                    </ModalWindow>
+                }
             </div>
         </div>
     )
