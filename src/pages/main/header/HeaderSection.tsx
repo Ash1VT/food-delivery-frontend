@@ -14,7 +14,7 @@ const HeaderSection = ({onRestaurantsSearched} : HeaderSectionProps) => {
 
     return (
         <div className="header__container" style={
-            {backgroundImage: `url(/images/background.png)`}
+            {backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/fooddelivery-21854.appspot.com/o/Images%2Fbackground.png?alt=media&token=87b654d5-b077-48c8-a189-3c33a65ae19b)`}
             }>
             <div className="header__wrapper section__wrapper">
                 <div className="header__details__wrapper">
@@ -31,7 +31,7 @@ const HeaderSection = ({onRestaurantsSearched} : HeaderSectionProps) => {
                     </div>
                 </div>
                 <div className="header__image__wrapper">
-                    <img src='/images/food.png' className="header__image"></img>
+                    <img src='https://firebasestorage.googleapis.com/v0/b/fooddelivery-21854.appspot.com/o/Images%2Ffood.png?alt=media&token=ae56818e-f96f-4c01-99eb-1e0b639075f6' className="header__image"></img>
                 </div>
             </div>
         </div>

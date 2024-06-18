@@ -196,7 +196,7 @@ const Navbar = ({currentUser} : NavbarProps) => {
         <div className="navbar__container">
             <div className="navbar__wrapper">
                 <picture onClick={handleHomeButtonClick} className='navbar__logo__wrapper'>
-                    <img src="/images/logo.svg" className="navbar__logo" alt="Logo"/> 
+                    <img src="https://firebasestorage.googleapis.com/v0/b/fooddelivery-21854.appspot.com/o/Images%2Flogo.svg?alt=media&token=6af3df09-305a-43e5-9e3f-198863e21e92" className="navbar__logo" alt="Logo"/> 
                 </picture>
                 {renderContent()}
             </div>
