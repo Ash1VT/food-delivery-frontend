@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/food-delivery-frontend/static/css/main.86d5b3cc.css",
-    "main.js": "/food-delivery-frontend/static/js/main.9947ffcc.js",
-    "static/media/SourceSansPro-Bold.otf": "/food-delivery-frontend/static/media/SourceSansPro-Bold.c29ac85595e7dfdec62a.otf",
-    "static/media/SourceSansPro-Semibold.otf": "/food-delivery-frontend/static/media/SourceSansPro-Semibold.e0743229b06b84f5ac5a.otf",
-    "static/media/SourceSansPro-Regular.otf": "/food-delivery-frontend/static/media/SourceSansPro-Regular.8adb1d0c21d13a90f613.otf",
-    "static/media/SourceSansPro-Light.otf": "/food-delivery-frontend/static/media/SourceSansPro-Light.ce040985654a04efb169.otf",
-    "static/media/fa-solid-900.ttf": "/food-delivery-frontend/static/media/fa-solid-900.be9ee23c0c6390141475.ttf",
-    "static/media/OpenSans-Bold.ttf": "/food-delivery-frontend/static/media/OpenSans-Bold.45847e90261782dc01a6.ttf",
-    "static/media/OpenSans-Regular.ttf": "/food-delivery-frontend/static/media/OpenSans-Regular.9a6cfa5890d7f3eef585.ttf",
-    "static/media/OpenSans-Light.ttf": "/food-delivery-frontend/static/media/OpenSans-Light.ba19b360bc99b580b45b.ttf",
-    "static/media/OpenSans-SemiBold.ttf": "/food-delivery-frontend/static/media/OpenSans-SemiBold.dcf2e322dbaa037ca821.ttf",
-    "static/media/fa-regular-400.ttf": "/food-delivery-frontend/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
-    "index.html": "/food-delivery-frontend/index.html",
-    "main.86d5b3cc.css.map": "/food-delivery-frontend/static/css/main.86d5b3cc.css.map",
-    "main.9947ffcc.js.map": "/food-delivery-frontend/static/js/main.9947ffcc.js.map"
+    "main.css": "/food-delivery-backend/static/css/main.ffd32af9.css",
+    "main.js": "/food-delivery-backend/static/js/main.1434b738.js",
+    "static/media/SourceSansPro-Bold.otf": "/food-delivery-backend/static/media/SourceSansPro-Bold.c29ac85595e7dfdec62a.otf",
+    "static/media/SourceSansPro-Semibold.otf": "/food-delivery-backend/static/media/SourceSansPro-Semibold.e0743229b06b84f5ac5a.otf",
+    "static/media/SourceSansPro-Regular.otf": "/food-delivery-backend/static/media/SourceSansPro-Regular.8adb1d0c21d13a90f613.otf",
+    "static/media/SourceSansPro-Light.otf": "/food-delivery-backend/static/media/SourceSansPro-Light.ce040985654a04efb169.otf",
+    "static/media/fa-solid-900.ttf": "/food-delivery-backend/static/media/fa-solid-900.be9ee23c0c6390141475.ttf",
+    "static/media/OpenSans-Bold.ttf": "/food-delivery-backend/static/media/OpenSans-Bold.45847e90261782dc01a6.ttf",
+    "static/media/OpenSans-Regular.ttf": "/food-delivery-backend/static/media/OpenSans-Regular.9a6cfa5890d7f3eef585.ttf",
+    "static/media/OpenSans-Light.ttf": "/food-delivery-backend/static/media/OpenSans-Light.ba19b360bc99b580b45b.ttf",
+    "static/media/OpenSans-SemiBold.ttf": "/food-delivery-backend/static/media/OpenSans-SemiBold.dcf2e322dbaa037ca821.ttf",
+    "static/media/fa-regular-400.ttf": "/food-delivery-backend/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
+    "index.html": "/food-delivery-backend/index.html",
+    "main.ffd32af9.css.map": "/food-delivery-backend/static/css/main.ffd32af9.css.map",
+    "main.1434b738.js.map": "/food-delivery-backend/static/js/main.1434b738.js.map"
   },
   "entrypoints": [
-    "static/css/main.86d5b3cc.css",
-    "static/js/main.9947ffcc.js"
+    "static/css/main.ffd32af9.css",
+    "static/js/main.1434b738.js"
   ]
 }
