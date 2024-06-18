@@ -1,0 +1,30 @@
+.take__order__modal__container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.take__order__modal__title {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.take__order__modal__delivery__methods {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px; 
+}
+
+.take__order__modal__button {
+    background-color: #FFA500;
+    border: none;
+
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffff;
+}

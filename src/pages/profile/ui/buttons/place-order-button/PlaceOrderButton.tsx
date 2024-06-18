@@ -4,7 +4,7 @@ import './place_order_button.css'
 
 const PlaceOrderButton = ({onClick} : PlaceOrderButtonProps) => {
     return (
-        <button className="button__wrapper place__order__button" onClick={onClick}>
+        <button className="button__wrapper profile__place__order__button" onClick={onClick}>
             Place Order
         </button>
     )

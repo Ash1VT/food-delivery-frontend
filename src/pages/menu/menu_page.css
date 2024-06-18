@@ -11,9 +11,12 @@
 .menu__left__wrapper {
     position: sticky;
     top: 150px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
     /* overflow-y: hidden; */
-    min-width: 450px;
-    /* flex: 0 1 25%; */
+    /* min-width: 450px; */
+    flex: 0 1 15%;
 }
 
 .menu__divider {
@@ -36,6 +39,15 @@
     position: sticky;
     top: 150px;
     display: flex;
+}
+
+.menu__not__available {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
 }
 
 /* @media (max-width: 856px) {

@@ -6,6 +6,7 @@
     background-color: rgb(227, 225, 225);
     height: calc(100vh - 180px);
     max-height: calc(100vh - 180px);
+    min-width: 600px;
 }
 
 .order__cart__wrapper {

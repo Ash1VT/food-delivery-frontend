@@ -33,3 +33,16 @@ export const parseUserErrors = (errors: any) => {
     return errorMessages.join('; ');
 
 }
+
+
+export const parseFastApiErrors = (errors: any) => {
+    let errorString = '';
+
+    if (errors) {
+        errors.forEach((error: any) => {
+            errorString += `${error.msg}\n`;
+        });
+    }
+
+    return errorString
+}

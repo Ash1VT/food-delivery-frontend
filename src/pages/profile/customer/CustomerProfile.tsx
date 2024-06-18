@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PersonalInformation from '../personal-information/PersonalInformation';
 import DeliveryAddressesCategory from './delivery-addresses-category/DeliveryAddressesCategory';
-import { addSuccessNotification } from 'src/utils/notifications';
+import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications';
 import { CustomerProfileProps, ProfileCategoryClicksContextProps } from '../profile.types';
 import { useAppSelector } from 'src/hooks/redux/useAppSelector';
 import { getCurrentCustomerApprovedAddresses, getCurrentCustomerDeliveredOrders, getCurrentCustomerDeliveringOrders, getCurrentCustomerPendingAddresses, getCurrentCustomerPendingOrders, getCurrentCustomerPlacingOrders, getCurrentCustomerPreparingOrders, getCurrentCustomerReadyOrders, getCurrentCustomerRejectedAddresses } from 'src/redux/selectors/currentCustomerSelectors';
@@ -17,9 +17,19 @@ import { useNavigate } from 'react-router-dom';
 import { CustomerAddressCreate } from 'src/models/customerAddress.interfaces';
 import { ReviewCreate } from 'src/models/review.interfaces';
 import { User } from 'src/models/user.interfaces';
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
+import { addOrderReview, fetchCurrentCustomerOrders } from 'src/redux/actions/currentCustomerOrders.actions';
+import { createCustomerAddress, fetchCurrentCustomerAddresses } from 'src/redux/actions/currentCustomerAddresses.actions';
+import { closeModalWindow } from 'src/utils/closeModalWindow';
+import LoadingPage from 'src/pages/loading-page/LoadingPage';
 
 const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : CustomerProfileProps) => {
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
+
+    const { isLoading: isCustomerAddressesLoading, error: customerAddressesError } = useAppSelector(state => state.currentCustomerAddressesReducer)
+    const { isLoading: isCustomerOrdersLoading, error: customerOrdersError } = useAppSelector(state => state.currentCustomerOrdersReducer)
+
     const approvedAddresses = useAppSelector(getCurrentCustomerApprovedAddresses)
     const pendingAddresses = useAppSelector(getCurrentCustomerPendingAddresses)
     const rejectedAddresses = useAppSelector(getCurrentCustomerRejectedAddresses)
@@ -32,21 +42,54 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
     const deliveredOrders = useAppSelector(getCurrentCustomerDeliveredOrders)
 
     const [activeCategoryId, setActiveCategoryId] = useState<number>(0)
-
+    
     const profileCategoryClicksContext: ProfileCategoryClicksContextProps = {
         profileCategoryClicks: [],
         activeCategoryId,
         setActiveCategoryId
     }
+
+    useEffect(() => {
+        dispatch(fetchCurrentCustomerOrders()).then((response) => {
+            if (response.type === 'currentCustomerOrders/fetchCurrentCustomerOrders/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
+
+        dispatch(fetchCurrentCustomerAddresses()).then((response) => {
+            if (response.type === 'currentCustomerAddresses/fetchCurrentCustomerAddresses/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
+    }, [dispatch])
     
     const handleCustomerAddressCreated = async (customerAddress: CustomerAddressCreate) => {
-        alert(JSON.stringify(customerAddress, null, 2))
-        addSuccessNotification('Customer address successfully created')
+        dispatch(createCustomerAddress(customerAddress)).then((response) => {
+            if (response.type === 'currentCustomerAddresses/createCustomerAddress/fulfilled') {
+                addSuccessNotification('Customer address successfully created')
+                closeModalWindow()
+            }
+            
+            if (response.type === 'currentCustomerAddresses/createCustomerAddress/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
     }   
 
     const handleCourierReviewCreated = async (courierReview: ReviewCreate) => {
-        alert(JSON.stringify(courierReview, null, 2))
-        addSuccessNotification('Courier review successfully created')
+        dispatch(addOrderReview(courierReview)).then((response) => {
+            if (response.type === 'currentCustomerOrders/addOrderReview/fulfilled') {
+                addSuccessNotification('Courier review successfully created')
+            }
+            
+            if (response.type === 'currentCustomerOrders/addOrderReview/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleOrderPlaced = async (orderId: string) => {
@@ -93,7 +136,7 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
             return <PersonalInformation user={currentUser} onPersonalInformationUpdated={onPersonalInformationUpdated} onVerificationEmailSent={onVerificationEmailSent} onUserImageUploaded={onUserImageUploaded}/>
             
         if (activeCategoryId === 1) 
-            return <DeliveryAddressesCategory approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onCustomerAddressCreated={handleCustomerAddressCreated}/>
+            return <DeliveryAddressesCategory currentUser={currentUser} approvedAddresses={approvedAddresses} pendingAddresses={pendingAddresses} rejectedAddresses={rejectedAddresses} onCustomerAddressCreated={handleCustomerAddressCreated}/>
         
         if (activeCategoryId === 2)
             return <PlacingOrdersCategory currentUser={currentUser} orders={placingOrders} onOrderPlaced={handleOrderPlaced}/>
@@ -116,6 +159,10 @@ const CustomerProfile = ({currentUser, onUserImageUploaded, onVerificationEmailS
 
     }, [activeCategoryId]);
 
+
+    if (isCustomerAddressesLoading || isCustomerOrdersLoading)
+        return <LoadingPage/>
+        
     return (
         <div className="profile__card">
             <div className="profile__category__list">

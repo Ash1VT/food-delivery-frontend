@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { addSuccessNotification } from 'src/utils/notifications'
+import React, { useCallback, useEffect, useState } from 'react'
+import { addErrorNotification, addSuccessNotification } from 'src/utils/notifications'
 import { CourierProfileProps, ProfileCategoryClicksContextProps } from '../profile.types'
 import PersonalInformation from '../personal-information/PersonalInformation'
 import DeliveredOrdersCategory from './delivered-orders-category/DeliveredOrdersCategory'
@@ -9,8 +9,24 @@ import { getCurrentCourierDeliveringOrders, getCurrentCourierDeliveredOrders } f
 import ProfileCategoryClicksContext from '../contexts/ProfileCategoryClicksContext'
 import ProfileCategory from '../profile-category/ProfileCategory'
 import { User } from 'src/models/user.interfaces'
+import { useAppDispatch } from 'src/hooks/redux/useAppDispatch'
+import { fetchCurrentCourierOrders, finishOrderDelivery } from 'src/redux/actions/currentCourierOrders.actions'
+import LoadingPage from 'src/pages/loading-page/LoadingPage'
 
 const CourierProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSent, onPersonalInformationUpdated} : CourierProfileProps) => {
+    const dispatch = useAppDispatch()
+    const { isLoading: isCourierOrdersLoading, error: courierOrdersError } = useAppSelector(state => state.currentCourierOrdersReducer)
+
+
+    useEffect(() => {
+        dispatch(fetchCurrentCourierOrders()).then((response) => {
+            if (response.type === 'currentCourierOrders/fetchCurrentCourierOrders/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
+    }, [dispatch])
+
     const deliveringOrders = useAppSelector(getCurrentCourierDeliveringOrders)
     const deliveredOrders = useAppSelector(getCurrentCourierDeliveredOrders)
 
@@ -23,8 +39,16 @@ const CourierProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSe
     }
     
     const handleOrderDeliveryFinished = async (orderId: string) => {
-        alert('Order delivery finished')
-        addSuccessNotification('Order delivery finished')
+        dispatch(finishOrderDelivery(orderId)).then((response) => {
+            if (response.type === 'currentCourierOrders/finishOrderDelivery/fulfilled') {
+                addSuccessNotification('Order successfully delivered')
+            }
+            
+            if (response.type === 'currentCourierOrders/finishOrderDelivery/rejected') {
+                if (response.payload)
+                    addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const profileCategories = [
@@ -57,7 +81,9 @@ const CourierProfile = ({currentUser, onUserImageUploaded, onVerificationEmailSe
 
     }, [activeCategoryId]);
 
-
+    if (isCourierOrdersLoading)
+        return <LoadingPage/>
+        
     return (
         <div className="profile__card">
             <div className="profile__category__list">

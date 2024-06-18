@@ -1,7 +1,7 @@
-import { OrderCartItem, OrderCartItemProps } from "../order_cart.types"
+import { OrderCartItem } from "src/models/orderCartItem.interfaces"
 
 const calculateOrderCartItemPrice = (item: OrderCartItem) => {
-    return item.price * item.quantity
+    return item.menuItemPrice * item.quantity
 }
 
 const calculateOrderCartTotalPrice = (items: OrderCartItem[]) => {

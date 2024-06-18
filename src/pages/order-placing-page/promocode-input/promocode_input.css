@@ -25,3 +25,10 @@
     /* margin-left: 10px; */
 }
   
+
+.promocode__text {
+    font-family: Poppins;
+    font-size: 18px;
+    line-height: 21px;
+    margin-left: 5px;
+}

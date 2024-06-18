@@ -7,11 +7,14 @@ import RemoveFromCartButton from '../ui/buttons/remove-from-cart-button/RemoveFr
 import CustomRating from 'src/components/custom-rating/CustomRating'
 import { addOrderCartItem, removeOrderCartItem } from 'src/redux/reducers/orderCartReducer'
 import { getIfOrderItemInCart } from 'src/redux/selectors/orderCartSelectors'
+import { useCallback, useState } from 'react'
+import { User } from 'src/models/user.interfaces'
+import { useAppSelector } from 'src/hooks/redux/useAppSelector'
 import './menu_item.css'
-import { useState } from 'react'
 
-const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
+const MenuItem = ({currentUser, menuItem, categoryName, onMenuItemClick}: MenuItemProps) => {
     const dispatch = useAppDispatch()
+    const { restaurantId } = useAppSelector((state) => state.orderCartReducer)
     const inCart = useSelector(state => getIfOrderItemInCart(state, menuItem.id))
     const [isMenuItemHovered, setIsMenuItemHovered] = useState(false)
 
@@ -26,7 +29,8 @@ const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
                 menuItemName: menuItem.name, 
                 menuItemImageUrl: menuItem.imageUrl, 
                 menuItemPrice: menuItem.price, 
-                menuItemCategoryName: menuItem.categoryName, 
+                menuItemId: menuItem.id,
+                restaurantId: menuItem.restaurantId,
                 quantity: 1
             }
         ))
@@ -36,9 +40,23 @@ const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
         dispatch(removeOrderCartItem(menuItem.id))
     }
 
+    const renderCartButton = useCallback((inCart: boolean, currentUser?: User | undefined | null) => {
+        if (!currentUser || currentUser.role === 'customer') {
+            if (!restaurantId || menuItem.restaurantId === restaurantId) {
+                if (inCart) {
+                    return <RemoveFromCartButton onRemovedFromCart={handleRemoveFromCart}/> 
+                }
+                return <AddToCartButton onAddedToCart={handleAddToCart}/>
+            }
+        }
+        return null
+    }, [currentUser, inCart])
+
+    const ratingValue = menuItem.ratingValue ? menuItem.ratingValue : 0
+    const noButtonClassName = (currentUser && currentUser.role !== 'customer') || (restaurantId && menuItem.restaurantId !== restaurantId) ? 'menu__category__item__no__button' : ''
 
     return (
-        <div className="menu__category__item__container">
+        <div className={`menu__category__item__container ${noButtonClassName}`}>
             <div className={`menu__category__item__image__wrapper ${isMenuItemHovered ? 'menu__category__item__image__hovered' : ''}`}
                  onMouseOver={() => setIsMenuItemHovered(true)} 
                  onMouseOut={() => setIsMenuItemHovered(false)} 
@@ -54,8 +72,8 @@ const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
                 <div className="menu__category__item__rating__reviews__wrapper">
 
                     <div className="menu__category__item__rating__wrapper">
-                        <div className="menu__category__item__rating__value">{menuItem.ratingValue}</div>
-                        <CustomRating className="menu__category__item__rating__stars" style={{ maxWidth: 80 }} readOnly={true} value={menuItem.ratingValue}/>
+                        <div className="menu__category__item__rating__value">{ratingValue}</div>
+                        <CustomRating className="menu__category__item__rating__stars" style={{ maxWidth: 80 }} readOnly={true} value={ratingValue}/>
                     </div>
                     <div className="menu__category__item__reviews__wrapper">
                         <div className="menu__category__item__reviews__text">({menuItem.reviewsCount} reviews)</div>
@@ -63,11 +81,7 @@ const MenuItem = ({menuItem, onMenuItemClick}: MenuItemProps) => {
                 </div>
                 <div className="menu__category__item__price">{menuItem.price}$</div>
             </div>
-            {inCart ? 
-                <RemoveFromCartButton onRemovedFromCart={handleRemoveFromCart}/> 
-                : 
-                <AddToCartButton onAddedToCart={handleAddToCart}/>
-            }
+            {renderCartButton(inCart, currentUser)}
         </div>
     )
 }

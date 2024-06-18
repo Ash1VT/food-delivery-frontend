@@ -3,9 +3,15 @@ import { Menu, MenuCreate } from 'src/models/menu.interfaces';
 import { MenuCategory, MenuCategoryCreate, MenuCategoryUpdate } from 'src/models/menuCategory.interfaces';
 import { MenuItem, MenuItemCreate, MenuItemUpdate } from 'src/models/menuItem.interfaces';
 import { Promocode, PromocodeCreate, PromocodeUpdate } from 'src/models/promocode.interfaces';
-import { Restaurant, RestaurantUpdate } from 'src/models/restaurant.interfaces';
+import { Restaurant, RestaurantCreate, RestaurantUpdate } from 'src/models/restaurant.interfaces';
 import { WorkingHours, WorkingHoursCreate, WorkingHoursUpdate } from 'src/models/workingHours.interfaces';
 
+
+// RESTAURANT CREATE APPLICATION
+
+export type RestaurantCreateApplicationProps = {
+    onRestaurantCreated: (restaurant: RestaurantCreate) => Promise<void>
+}
 
 // RESTAURANT INFORMATION
 
@@ -202,7 +208,7 @@ export type EditRestaurantMenuCategoryModalProps = {
 
 export type CurrentRestaurantMenuSelectorProps = {
     activeMenuId?: string | null
-    setActiveMenuId: (activeMenuId: string) => void
+    // setActiveMenuId: (activeMenuId: string) => void
     menus: Menu[]
     onCurrentMenuSelected: (menuId: string | undefined) => Promise<void>
 }

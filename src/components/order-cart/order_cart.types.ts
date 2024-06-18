@@ -1,12 +1,10 @@
-export type OrderCartItem = {
-    id: string
-    imageUrl: string
-    categoryName: string
-    name: string
-    price: number
-    quantity: number
-}
+import { OrderCartItem } from "src/models/orderCartItem.interfaces"
+import { User } from "src/models/user.interfaces"
 
+
+export type OrderCartProps = {
+    currentUser?: User | undefined | null
+}
 export type OrderCartItemProps = {
     item: OrderCartItem
 }
@@ -17,6 +15,7 @@ export type OrderCartItemsListProps = {
 
 export type OrderCartWithItemsProps = {
     items: OrderCartItem[]
+    onOrderCreated: () => Promise<void>
 }
 
 export type OrderItemCounterProps = {

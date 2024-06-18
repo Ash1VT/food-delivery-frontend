@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit"
 import { RootState } from "../store"
 
-export const getCurrentRestaurantMenuItems = createSelector(
-    [(state: RootState) => state.currentManagerRestaurantMenusReducer.menus],
-    (menus) => {
-        return menus.map((menu) => menu.menuCategories.map((menuCategory) => menuCategory.items)).flat().flat()
+export const getCurrentRestaurantMenu = createSelector(
+    [(state: RootState) => state.currentManagerRestaurantMenusReducer.menus, (state: RootState) => state.currentManagerRestaurantMenusReducer.currentMenuId],
+    (menus, currentMenuId) => {
+        return currentMenuId ? menus.find((menu) => menu.id === currentMenuId) : null
     }
 )
 
@@ -26,5 +26,12 @@ export const getCurrentRestaurantDeliveredOrders = createSelector(
     [(state: RootState) => state.currentManagerRestaurantOrdersReducer.orders],
     (orders) => {
         return orders.filter((order) => order.status.toLowerCase() === 'delivered')
+    }
+)
+
+export const getCurrentManagerCreateApplication = createSelector(
+    [(state: RootState) => state.currentManagerRestaurantApplicationsReducer.applications],
+    (applications) => {
+        return applications.find((application) => application.type === 'create')
     }
 )

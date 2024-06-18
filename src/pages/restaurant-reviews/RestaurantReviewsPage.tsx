@@ -1,7 +1,6 @@
 import Footer from "src/components/footer"
 import Navbar from "src/components/navbar"
 import { useAppSelector } from "src/hooks/redux/useAppSelector"
-import { getRestaurant, getRestaurantIsOpen } from "../../redux/selectors/restaurantSelectors"
 import RestaurantReference from "src/components/restaurant-reference/RestaurantReference"
 import ReviewsList from "src/components/reviews/reviews-list/ReviewsList"
 import ReviewCreateForm from "src/components/reviews/forms/review-create-form/ReviewCreateForm"
@@ -10,46 +9,97 @@ import { ReviewCreateType, ReviewType, ReviewUpdateType } from "src/components/r
 import { useAppDispatch } from "src/hooks/redux/useAppDispatch"
 import MenuItemReference from "src/components/menu-item-reference/MenuItemReference"
 import CurrentUserReview from "src/components/reviews/current-user-review/CurrentUserReview"
-import './restaurant_reviews.css'
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import NotFoundPage from "../not-found-page/NotFoundPage"
+import isRestaurantOpen from "src/utils/isRestaurantOpen"
+import './restaurant_reviews.css'
+import { useEffect } from "react"
+import { fetchRestaurant, fetchRestaurantReviews } from "src/redux/actions/restaurantReviews.actions"
+import { addErrorNotification, addSuccessNotification } from "src/utils/notifications"
+import { createRestaurantReview, deleteRestaurantReview, fetchCurrentCustomerRestaurantReview, updateRestaurantReview } from "src/redux/actions/currentCustomerRestaurantReview.actions"
+import LoadingPage from "../loading-page/LoadingPage"
+import useComponentWillMount from "src/hooks/useComponentWillMount"
 
 
 const RestaurantReviewsPage = () => {
-
+    const dispatch = useAppDispatch()
     const { restaurantId } = useParams()
 
     const { isLoading: isCurrentUserLoading, currentUser, error: currentUserError } = useAppSelector((state) => state.currentUserReducer)
 
     const { isLoading: isCurrentCustomerRestaurantReviewLoading, review: currentCustomerRestaurantReview, error: currentCustomerRestaurantReviewError } = useAppSelector((state) => state.currentCustomerRestaurantReviewReducer)
 
-    const { isLoading: isRestaurantReviewsLoading, reviews, error: restaurantReviewsError} = useAppSelector((state) => state.restaurantReviewsReducer)
+    const { isRestaurantLoading: isRestaurantLoading, isReviewsLoading: isRestaurantReviewsLoading, restaurant, reviews, restaurantError: restaurantError, reviewsError: restaurantReviewsError} = useAppSelector((state) => state.restaurantReviewsReducer)
 
-    const { isLoading: isRestaurantsLoading, error: restaurantsError } = useAppSelector((state) => state.restaurantsReducer)
 
-    const restaurant = useAppSelector((state) => getRestaurant(state, restaurantId))
-    const isRestaurantOpen = useAppSelector((state) => getRestaurantIsOpen(state, restaurantId))
+    useComponentWillMount(() => {
+        if (restaurantId) {
+            dispatch(fetchRestaurant(restaurantId)).then((response) => {
+                if (response.meta.requestStatus === 'fulfilled') {
+                    dispatch(fetchRestaurantReviews(restaurantId))
+                    
+                    dispatch(fetchCurrentCustomerRestaurantReview(restaurantId))
+                }
 
-    if (!restaurant) 
-        return <NotFoundPage/>
+                if (response.meta.requestStatus === 'rejected') {
+                    addErrorNotification(response.payload as string)
+                }
+            })
+        }
+    })
+
 
     const handleReviewAdded = async (review: ReviewCreateType) => {
+        dispatch(createRestaurantReview({
+            ...review,
+            restaurantId: restaurantId
+        })).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Successfully added review')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleReviewUpdated = async (review: ReviewUpdateType) => {
+        dispatch(updateRestaurantReview(review)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Successfully updated review')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
 
     const handleReviewDeleted = async (review: ReviewType) => {
-        console.log(review)
+        dispatch(deleteRestaurantReview(review.id)).then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+                addSuccessNotification('Successfully deleted review')
+            }
+            if (response.meta.requestStatus === 'rejected') {
+                addErrorNotification(response.payload as string)
+            }
+        })
     }
+
+    if (isCurrentCustomerRestaurantReviewLoading || isCurrentUserLoading || isRestaurantLoading || isRestaurantReviewsLoading)
+        return <LoadingPage/>
+        
+    if (!restaurant) 
+        return <NotFoundPage/>
+
+    const isOpen = isRestaurantOpen(restaurant)
 
     return (
         <div className="container restaurant__reviews__container">
             <Navbar currentUser={currentUser}/>
             <div className="restaurant__reviews__wrapper">
                 <div className="restaurant__reviews__content">
-                    <RestaurantReference isRestaurantOpen={isRestaurantOpen} restaurant={restaurant}/>
-                    {currentUser &&
+                    <RestaurantReference isRestaurantOpen={isOpen} restaurant={restaurant}/>
+                    {currentUser && currentUser.role === 'customer' &&
                         <div className="restaurant__reviews__current__user">
                             <CurrentUserReview currentUser={currentUser} 
                                                currentUserReview={currentCustomerRestaurantReview}

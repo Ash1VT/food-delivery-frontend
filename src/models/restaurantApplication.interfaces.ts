@@ -9,14 +9,6 @@ export interface RestaurantApplication {
     restaurantManagerId: string
 }
 
-export interface RestaurantApplicationCreate {
-    name: string
-    description: string
-    address: string
-    email: string
-    phone: string
-}
-
 export interface RestaurantApplicationUpdate {
     id: string
     name: string

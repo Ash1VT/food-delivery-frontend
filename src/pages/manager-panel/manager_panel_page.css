@@ -63,3 +63,13 @@
     grid-row: 3;
     grid-column: 2;
 }
+
+.manager__panel__content__title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    color: #000000;
+}

@@ -9,16 +9,10 @@ const PromocodeInput = ({order, onPromocodeApplied} : PromocodeInputProps) => {
     const promocodeName = order.priceInformation.promocodeName ? order.priceInformation.promocodeName : '';
 
     const [promocode, setPromocode] = useState(promocodeName);
-    const [isApplied, setIsApplied] = useState(promocodeName !== '');
-  
+    const isApplied = promocodeName !== '';
+
     const handleApplyClick = async () => {
-      if (await onPromocodeApplied(promocode)) {
-        setIsApplied(true);
-        addSuccessNotification('Promocode successfully applied!');
-      } else {
-        setIsApplied(false);
-        addErrorNotification('Invalid promocode');
-      }
+        await onPromocodeApplied(promocode)
     };
   
     return (
@@ -31,7 +25,11 @@ const PromocodeInput = ({order, onPromocodeApplied} : PromocodeInputProps) => {
               onChange={(e) => setPromocode(e.target.value)}
               placeholder="Enter promocode"
             />
-            {isApplied && <CheckCircleIcon className="promocode__success" />}
+            {isApplied && 
+              <>
+                <CheckCircleIcon className="promocode__success" />
+                <div className='promocode__text'>-{order.priceInformation.promocodeDiscount}%</div>
+              </>}
             <ApplyPromocodeButton isApplied={isApplied} onPromocodeApplied={handleApplyClick} />
           </div>
         </div>

@@ -1,0 +1,16 @@
+.home__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF9800;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.home__button__icon {
+    color: #ffff;
+}

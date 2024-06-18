@@ -23,7 +23,7 @@
     column-gap: 170px;
 }
 
-.order__placing__items__wrapper, .order__placing__address__wrapper, .order__placing__promocode__wrapper, .order__placing__price__wrapper {
+.order__placing__items__wrapper, .order__placing__address__wrapper, .order__placing__payment__wrapper, .order__placing__promocode__wrapper, .order__placing__price__wrapper {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
@@ -35,6 +35,10 @@
 
 .order__placing__address__wrapper {
     grid-row: 3;
+}
+
+.order__placing__payment__wrapper {
+    grid-row: 5;
 }
 
 .order__placing__promocode__wrapper {

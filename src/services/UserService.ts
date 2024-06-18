@@ -1,11 +1,11 @@
-import { User, UserAuthenticationData, UserCreate, UserUpdate, UserUploadImage } from "../models/user.interfaces";
+import { ModeratorCreate, User, UserAuthenticationData, UserCreate, UserUpdate, UserUpdateActivity, UserUpdateEmailVerified, UserUploadImage } from "../models/user.interfaces";
 import { userMicroservice } from "./axios";
 import sendPrivateRequest from "src/redux/utils/sendPrivateRequest";
 import moment from "moment";
 
 export class UserService {
 
-    private static getUserRegistrationRoute (role: string) {
+    public static getUserRegistrationRoute(role: string) {
         if (role === 'customer') {
             return '/users/customers/'
         }
@@ -21,7 +21,7 @@ export class UserService {
         return 'unknown'
     }
 
-    private static getUserRole (role: string) {
+    public static getUserRole(role: string) {
         if (role === 'CU') {
             return 'customer'
         }
@@ -41,10 +41,10 @@ export class UserService {
         return 'unknown'
     }
 
-    private static parseUserFromResponseData(data: any): User {
+    public static parseUserFromResponseData(data: any): User {
         return {
             id: data.id,
-            role: this.getUserRole(data.role),
+            role: UserService.getUserRole(data.role),
             email: data.email,
             isActive: data.is_active,
             isEmailVerified: data.is_email_verified,
@@ -57,7 +57,20 @@ export class UserService {
         }
     }
 
-    private static parseUserCreateDataToRequestData(user: UserCreate): any {
+    public static parseUserCreateDataToRequestData(user: UserCreate): any {
+        return {
+            email: user.email,
+            password: user.password,
+            expires_session: !user.isRemember,
+            user_profile: {
+                first_name: user.firstName,
+                last_name: user.lastName,
+                phone: `+${user.phone}`,
+                birth_date: moment(user.birthDate).format('YYYY-MM-DD'),
+        }}
+    }
+
+    public static parseModeratorCreateDataToRequestData(user: ModeratorCreate): any {
         return {
             email: user.email,
             password: user.password,
@@ -69,7 +82,7 @@ export class UserService {
         }}
     }
 
-    private static parseUserUpdateDataToRequestData(user: UserUpdate): any {
+    public static parseUserUpdateDataToRequestData(user: UserUpdate): any {
         return {
             user_profile: {
                 first_name: user.firstName,
@@ -80,12 +93,73 @@ export class UserService {
     }
 
 
-    private static parseAuthenticationDataToRequestData(data: UserAuthenticationData): any {
+    public static parseAuthenticationDataToRequestData(data: UserAuthenticationData): any {
         return {
             email: data.email,
             password: data.password,
             expires_session: !data.isRemember
         }
+    }
+
+    public static async getUsers(): Promise<User[]> {
+        return await sendPrivateRequest<User[]>(async () => {
+            const response = await userMicroservice.get('/users/')
+            return response.data.map(this.parseUserFromResponseData)
+        })
+    }
+
+    public static async getUser(id: string): Promise<User> {
+        const response = await userMicroservice.get(`/users/${id}/`)
+        return this.parseUserFromResponseData(response.data)
+    }
+
+    public static async updateUser(data: UserUpdate): Promise<User> {
+        const userUpdateData = this.parseUserUpdateDataToRequestData(data)
+        return await sendPrivateRequest<User>(async () => {
+            const response = await userMicroservice.patch(`/users/${data.id}/`, userUpdateData)
+            return this.parseUserFromResponseData(response.data)
+        })
+    }
+
+    public static async changeUserActiveStatus(data: UserUpdateActivity): Promise<User> {
+        const userUpdateData = {
+            id: data.id,
+            is_active: data.isActive
+        }
+
+        return await sendPrivateRequest<User>(async () => {
+            const response = await userMicroservice.patch(`/users/${data.id}/`, userUpdateData)
+            return this.parseUserFromResponseData(response.data)
+        })
+    }
+
+    public static async changeUserEmailVerificationStatus(data: UserUpdateEmailVerified): Promise<User> {
+        const userUpdateData = {
+            id: data.id,
+            is_email_verified: data.isEmailVerified
+        }
+
+        return await sendPrivateRequest<User>(async () => {
+            const response = await userMicroservice.patch(`/users/${data.id}/`, userUpdateData)
+            return this.parseUserFromResponseData(response.data)
+        })
+    }
+
+    public static async createModerator(data: ModeratorCreate): Promise<User> {
+        const userCreateData = this.parseModeratorCreateDataToRequestData(data)
+        return await sendPrivateRequest<User>(async () => {
+            const response = await userMicroservice.post('/users/moderators/', userCreateData)
+            return this.parseUserFromResponseData(response.data)
+        })
+    }
+
+    public static async uploadUserImage(data: UserUploadImage): Promise<User> {
+        const formData = new FormData()
+        formData.append('image', data.image)
+        return await sendPrivateRequest<User>(async () => {
+            const response = await userMicroservice.put(`/users/${data.id}/image/`, formData)
+            return this.parseUserFromResponseData(response.data)
+        })
     }
 
     public static async authenticate(data: UserAuthenticationData): Promise<void> {
@@ -114,6 +188,7 @@ export class UserService {
         })
     }
 
+    
     public static async uploadCurrentUserImage(data: UserUploadImage): Promise<User> {
         const formData = new FormData()
         formData.append('image', data.image)

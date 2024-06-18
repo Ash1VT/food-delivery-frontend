@@ -20,12 +20,16 @@ export type SelectAddressProps = {
 
 export type PromocodeInputProps = {
     order: Order
-    onPromocodeApplied: (promocodeName: string) => Promise<boolean>
+    onPromocodeApplied: (promocodeName: string) => Promise<void>
+}
+
+export type PaymentCardProps = {
+    order: Order
+    onOrderPlaced: (orderId: string) => Promise<void>
 }
 
 export type OrderPriceProps = {
     order: Order
-    onOrderPlaced: (orderId: string) => Promise<void>
 }
 
 export type ApplyPromocodeButtonProps = {

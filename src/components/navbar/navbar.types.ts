@@ -52,3 +52,7 @@ export type ProfileButtonProps = {
 export type LogoutButtonProps = {
     onClick?: () => Promise<void>
 }
+
+export type HomeButtonProps = {
+    onClick?: () => void
+}

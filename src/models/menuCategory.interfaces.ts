@@ -4,6 +4,7 @@ export interface MenuCategory {
     id: string
     name: string
     imageUrl: string
+    menuId: string
     items: MenuItem[]
 }
 
@@ -15,4 +16,9 @@ export interface MenuCategoryCreate {
 export interface MenuCategoryUpdate {
     id: string
     name: string
+}
+
+export interface MenuCategoryUploadImage {
+    id: string
+    image: File
 }

@@ -4,7 +4,7 @@ import Divider from 'src/components/ui/divider/Divider'
 import PlaceOrderButton from '../ui/buttons/place-order-button/PlaceOrderButton'
 import './order_price.css'
 
-const OrderPrice = ({order, onOrderPlaced} : OrderPriceProps) => {
+const OrderPrice = ({order} : OrderPriceProps) => {
     const priceInformation = order.priceInformation
 
     return (
@@ -68,7 +68,6 @@ const OrderPrice = ({order, onOrderPlaced} : OrderPriceProps) => {
                     </th>
                 </tr>
             </table>
-            <PlaceOrderButton order={order} onOrderPlaced={onOrderPlaced}/>
         </div>
     )
 }

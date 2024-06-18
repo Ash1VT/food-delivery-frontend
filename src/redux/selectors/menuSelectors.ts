@@ -4,15 +4,8 @@ import { MenuCategory } from "src/models/menuCategory.interfaces";
 import { MenuItem } from "src/models/menuItem.interfaces";
 
 
-export const getMenu = createSelector(
-    [(state: RootState) => state.restaurantMenusReducer.menus, (_: RootState, restaurantId: string | undefined) => restaurantId],
-    (menus, restaurantId) => {
-        return menus.find((menu) => menu.restaurantId === restaurantId)
-    }
-)
-
 export const getMenuCategories = createSelector(
-    [getMenu],
+    [(state: RootState) => state.restaurantMenuReducer.menu],
     (menu) => {
         return menu?.menuCategories
     }

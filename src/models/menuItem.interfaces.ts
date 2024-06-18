@@ -2,7 +2,6 @@ export interface MenuItem {
     id: string;
     name: string;
     imageUrl: string;
-    categoryName: string
     description: string;
     ratingValue: number;
     reviewsCount: number;
@@ -15,6 +14,16 @@ export interface MenuItemCreate {
     description?: string
     price: number
     restaurantId: string
+}
+
+export interface MenuItemUploadImage {
+    id: string
+    image: File
+}
+
+export interface MenuItemCategory {
+    itemId: string
+    categoryId: string
 }
 
 export interface MenuItemUpdate {

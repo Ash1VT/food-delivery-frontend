@@ -12,6 +12,12 @@
     min-width: 420px;
 }
 
+.menu__category__item__no__button {
+    grid-template-areas: 
+        "I D D D D D"
+        "I D D D D D" !important;
+}
+
 .menu__category__item__image__wrapper {
     grid-area: I;
     max-width: 200px;

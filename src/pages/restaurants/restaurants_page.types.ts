@@ -2,6 +2,7 @@ import { SearchComponentProps } from "src/components/ui/search-component/search_
 import { SelectComponentProps } from "src/components/ui/select-component/select_component.types"
 import { Restaurant } from "src/models/restaurant.interfaces"
 
+
 export type RestaurantProps = {
     restaurant: Restaurant
     onRestaurantClick: (restaurantId: string) => void

@@ -20,8 +20,7 @@ const RestaurantMenuItem = ({menuItem, onMenuItemUpdated, onMenuItemImageUploade
     const {attributes, listeners, setNodeRef} = useDraggable({
         id: menuItem.id,
         data: {
-            menuItemId: menuItem.id,
-            menuItemName: menuItem.name
+            menuItem: menuItem
         }
     })
 
@@ -70,7 +69,7 @@ const RestaurantMenuItems = ({menuItems, restaurantId, onMenuItemCreated, onMenu
     
     return (
         <div className='restaurant__menu__items__container'>
-            <Scrollbar className='restaurant__menu__items__scrollbar' noScrollX={true} noScrollY={false}>
+            <div className='restaurant__menu__items__wrapper'>
                 <table className='restaurant__menu__items__table'>
                     {/* <tr style={{height: '10px'}}/> */}
                     {menuItems.map((menuItem) => (
@@ -83,7 +82,7 @@ const RestaurantMenuItems = ({menuItems, restaurantId, onMenuItemCreated, onMenu
                         />
                     ))}
                 </table>
-            </Scrollbar>
+            </div>
             <ModalWindow button={OpenAddingMenuItemButton({})}>
                 <AddRestaurantMenuItemModal restaurantId={restaurantId} onMenuItemCreated={handleMenuItemCreated}/>
             </ModalWindow>

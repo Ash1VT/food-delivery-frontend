@@ -30,3 +30,12 @@
     text-align: center;
     color: #000000;
 }
+
+.restaurant__orders__empty {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 24px;
+    text-align: center;
+}

@@ -11,6 +11,15 @@
     line-height: 21px
 }
 
+.order__details__maps__wrapper {
+    display: flex;
+    column-gap: 30px;
+}
+
+.order__details__maps__wrapper > * {
+    flex: 50%;
+}
+
 .order__details__text {
     font-family: Poppins;
     font-weight: 400;

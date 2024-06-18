@@ -61,7 +61,7 @@ const EditRestaurantMenuItemModal = ({menuItem, onMenuItemUpdated, onMenuItemIma
         <div className='edit__restaurant__menu__item__modal__container'>
             <div className='edit__restaurant__menu__item__modal__title'>Edit Menu Item</div>
             <div className='edit__restaurant__menu__item__modal__form__wrapper'>
-                <UploadImageForm imageUrl={menuItem.imageUrl} onImageUploaded={handleMenuItemImageUploaded}/>
+                <UploadImageForm imageUrl={menuItem.imageUrl} inputId={`$menuItemImage_${menuItem.id}`} imageContainerClassName='edit__menu__item__image__container' imageClassName='edit__menu__item__image' imageWrapperClassName='edit__menu__item__image__wrapper' onImageUploaded={handleMenuItemImageUploaded}/>
                 <FormTable fields={fields} 
                         initialValues={initialValues} 
                         validationSchema={validationSchema} 

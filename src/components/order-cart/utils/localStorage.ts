@@ -1,8 +1,9 @@
+import { OrderCartItem } from "src/models/orderCartItem.interfaces"
 import { OrderItem } from "src/models/orderItem.interfaces"
 
-export const addOrderCartItemToLocalStorage = (orderCartItem: OrderItem) => {
+export const addOrderCartItemToLocalStorage = (orderCartItem: OrderCartItem) => {
+    console.log(orderCartItem)
     const orderCartItems = getOrderCartItemsFromLocalStorage()
-    console.log(orderCartItems)
 
     if (!orderCartItems.find(item => item.id === orderCartItem.id)) {
         const newOrderCartItems = [...orderCartItems, orderCartItem]
@@ -15,6 +16,10 @@ export const removeOrderCartItemFromLocalStorage = (id: string) => {
     const orderCartItems = getOrderCartItemsFromLocalStorage()
     const newOrderCartItems = orderCartItems.filter(orderCartItem => orderCartItem.id !== id)
     localStorage.setItem('orderCartItems', JSON.stringify(newOrderCartItems))
+}
+
+export const clearOrderCartFromLocalStorage = () => {
+    localStorage.removeItem('orderCartItems')
 }
 
 export const setOrderCartItemQuantityInLocalStorage = (id: string, quantity: number) => {
@@ -33,7 +38,7 @@ export const setOrderCartItemQuantityInLocalStorage = (id: string, quantity: num
 }
 
 
-export const getOrderCartItemsFromLocalStorage = (): OrderItem[] => {
+export const getOrderCartItemsFromLocalStorage = (): OrderCartItem[] => {
     const orderCartItems = localStorage.getItem('orderCartItems')
     if (orderCartItems) {
         return JSON.parse(orderCartItems)

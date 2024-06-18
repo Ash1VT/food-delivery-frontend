@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { SelectAddressProps } from '../order_placing_page.types'
-import { formatAddress } from 'src/utils/formatAddress';
+import { formatCustomerAddress } from 'src/utils/formatCustomerAddress';
 import './address_selector.css'
 
 const AddressSelector = ({order, addresses, onAddressSelected} : SelectAddressProps) => {
-    const [selectedAddressId, setSelectedAddressId] = useState<string | undefined | null>(order.deliveryInformation.destinationAddressId);
+    const selectedAddressId = addresses.find(address => formatCustomerAddress(address) === order.deliveryInformation.destinationAddress)?.id ?? null
 
     const handleSelect = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const addressId = event.target.value
-        setSelectedAddressId(addressId);
         await onAddressSelected(addressId);
     };
 
@@ -23,7 +22,7 @@ const AddressSelector = ({order, addresses, onAddressSelected} : SelectAddressPr
           <option className="address__selector__option" value="" disabled>---</option>
           {addresses.map((address) => (
             <option className="address__selector__option" key={address.id} value={address.id}>
-              {formatAddress(address)}
+              {formatCustomerAddress(address)}
             </option>
           ))}
         </select>

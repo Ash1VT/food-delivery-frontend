@@ -42,7 +42,7 @@ const EditRestaurantMenuCategoryModal = ({menuCategory, onMenuCategoryImageUploa
         <div className='edit__restaurant__menu__category__modal__container'>
             <div className='edit__restaurant__menu__category__modal__title'>Edit Menu Category</div>
             <div className='edit__restaurant__menu__category__modal__form__wrapper'>
-                <UploadImageForm imageUrl={menuCategory.imageUrl} onImageUploaded={handleMenuCategoryImageUploaded}/>
+                <UploadImageForm imageUrl={menuCategory.imageUrl} inputId={`menuCategoryImage_${menuCategory.id}`}onImageUploaded={handleMenuCategoryImageUploaded}/>
                 <FormTable fields={fields} 
                         initialValues={initialValues} 
                         validationSchema={validationSchema} 

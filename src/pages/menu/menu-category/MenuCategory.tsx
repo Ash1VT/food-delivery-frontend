@@ -7,14 +7,13 @@ import MenuCategoriesActiveContext from '../contexts/MenuCategoriesActiveContext
 import { useContext } from 'react';
 import './menu_category.css'
 
-const MenuCategory = ({ menuCategory, onMenuItemClick }: MenuCategoryProps) => {
+const MenuCategory = ({ currentUser, menuCategory, onMenuItemClick }: MenuCategoryProps) => {
     const categoryRef = useCategoryRef(menuCategory.id, MenuCategoriesRefsContext)
     const { setActiveCategoryId } = useContext(MenuCategoriesActiveContext)
 
     const onChange = (inView: boolean) => {
         if (inView){
             setActiveCategoryId(menuCategory.id)
-            console.log('setted active category id from view: ', menuCategory.id)
         }
     }
 
@@ -24,7 +23,7 @@ const MenuCategory = ({ menuCategory, onMenuItemClick }: MenuCategoryProps) => {
             <div className="menu__category__name">
                 {menuCategory.name}
             </div>
-            <MenuItemsList menuItems={menuCategory.items} onMenuItemClick={onMenuItemClick} />
+            <MenuItemsList currentUser={currentUser} menuItems={menuCategory.items} categoryName={menuCategory.name} onMenuItemClick={onMenuItemClick} />
         </div>
     )
 }

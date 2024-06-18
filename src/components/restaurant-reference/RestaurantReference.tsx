@@ -17,6 +17,10 @@ const RestaurantReference = ({restaurant, isRestaurantOpen} : RestaurantReferenc
         navigate(`/restaurants/${restaurant.id}/reviews`)
     }
 
+    const handleRestaurantClick = () => {
+        navigate(`/restaurants/${restaurant.id}/menu`)
+    }
+
     return (
         <div className="restaurant__reference__container">
             <div className="restaurant__reference__image__wrapper" style={{backgroundImage: `url(${restaurant.imageUrl})`}}>
@@ -35,7 +39,7 @@ const RestaurantReference = ({restaurant, isRestaurantOpen} : RestaurantReferenc
                                 <p className="restaurant__reference__information__field restaurant__reference__information__address">{restaurant.address}</p>
                             </div>
                         </Popup>
-                        <ShowRestaurantRatingButton ratingValue={restaurant.ratingValue} reviewsCount={restaurant.reviewsCount} onShowRatingButtonClick={handleShowRestaurantRatingButtonClick}/>
+                        <ShowRestaurantRatingButton ratingValue={restaurant.ratingValue ? restaurant.ratingValue : 0} reviewsCount={restaurant.reviewsCount} onShowRatingButtonClick={handleShowRestaurantRatingButtonClick}/>
                         <Popup arrow={false} position={['bottom center', 'left top']} trigger={ShowRestaurantWorkingHoursButton({isOpen: isRestaurantOpen})}>
                             <div className="restaurant__reference__working__hours__wrapper">
                                 <table>

@@ -64,7 +64,7 @@ const PersonalInformation = ({user, onUserImageUploaded, onVerificationEmailSent
         {({ errors, values, setFieldValue, submitForm }) => {
             return (
                 <div className='personal__information__container'>
-                    <UploadImageForm imageUrl={user.imageUrl} onImageUploaded={handleUploadUserImageClick} />
+                    <UploadImageForm imageUrl={user.imageUrl} inputId='currentUserAvatar' onImageUploaded={handleUploadUserImageClick} />
                     <Form>
                         <FormErrorNotification/>
                         <div className='personal__information__form__wrapper'>

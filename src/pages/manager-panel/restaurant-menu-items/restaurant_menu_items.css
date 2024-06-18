@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+.restaurant__menu__items__wrapper {
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
 .restaurant__menu__items__table {
     width: 100%;
     display: block;

@@ -1,9 +1,9 @@
 export interface PriceInformation {
     id: string
-    orderItemsPrice: number;
+    orderItemsPrice: string;
     promocodeName?: string;
     promocodeDiscount?: number;
-    decountedItemsPrice: number;
-    deliveryPrice?: number;
-    totalPrice: number;
+    decountedItemsPrice: string;
+    deliveryPrice?: string;
+    totalPrice: string;
 }
