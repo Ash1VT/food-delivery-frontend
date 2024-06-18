@@ -1,0 +1,31 @@
+.show__working__hours__button__wrapper {
+    border: 0;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+    text-align: left;
+    align-items: center;
+    border-radius: 16px;
+    justify-content: center;
+    padding: 0 15px;
+}
+
+.show__working__hours__button__icon {
+
+}
+
+.show__working__hours__button__text {
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+.show__working__hours__button__open {
+    background: #65a42a;
+}
+
+.show__working__hours__button__closed {
+    background: #d0021b;
+}

@@ -1,0 +1,97 @@
+.restaurant__container {
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.restaurant__image__hovered {
+    transform: scale(1.05);  
+}
+
+.restaurant__image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.restaurant__image img {
+    width: 100%;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.restaurant__details {
+    margin-top: 5px;
+}
+
+.restaurant__details__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.restaurant__name__text {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.restaurant__description__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+    align-items: flex-start;
+    max-width: 400px;
+    /* background-color: rgba(197, 192, 192, 0.98); */
+    border-radius: 20px;
+    padding: 32px;
+}
+
+.restaurant__description__icon {
+    color: rgb(90, 90, 90);
+}
+
+.restaurant__description__title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.restaurant__description__text {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;
+    width: 100%;
+}
+
+.restaurant__rating__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    margin-top: 5px;
+}
+
+.restaurant__rating__icon {
+    color: #FFB30E;
+    font-family: Font Awesome 5;
+    font-size: 30px !important;
+    line-height: 108%;
+}
+
+.restaurant__rating__value {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+
+
+@media (max-width: 620px) {
+    .restaurant__description__wrapper {
+        max-width: 200px;
+    }
+}

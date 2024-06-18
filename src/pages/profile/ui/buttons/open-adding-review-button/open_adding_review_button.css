@@ -1,0 +1,24 @@
+.open__adding__review__button {
+    padding: 10px 20px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 18px;
+
+    width: 100%;
+    margin-top: 20px;
+}
+
+.open__adding__review__button__disabled {
+    background-color: #D9D9D9;
+    cursor: default !important;
+}
+
+.open__adding__review__button__disabled:hover {
+    filter: none !important;
+}

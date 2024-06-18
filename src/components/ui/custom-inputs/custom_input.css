@@ -1,0 +1,33 @@
+.custom__input__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.custom__input__label {
+    width: 100%;
+
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--theme-gray-800, #424242);
+}
+
+.custom__input__error {
+    border: 1px solid red !important;
+}
+
+.custom__input {
+    width: 100% !important;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    background-color: #eff5f5 !important;
+    filter: brightness(101%);
+}

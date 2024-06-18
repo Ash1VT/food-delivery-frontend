@@ -1,0 +1,16 @@
+.back__to__restaurants__button__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #FCE000;
+    cursor: pointer;
+}
+
+.back__to__restaurants__button__text {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 500;
+}

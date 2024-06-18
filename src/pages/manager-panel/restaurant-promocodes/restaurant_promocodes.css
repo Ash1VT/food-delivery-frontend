@@ -1,0 +1,46 @@
+.restaurant__promocode__text {
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.restaurant__promocode__label {
+    font-family: Poppins;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 21px
+}
+
+.restaurant__promocode__margin__left {
+    margin-left: 40px;
+}
+
+.restaurant__promocode__tr {
+    height: 40px;
+}
+
+#isPromocodeActive {
+    border: 1px solid #dbd4ca;
+    /* border-radius: 15px; */
+    background-color: #ffff;
+    width: 23px;
+    height: 23px;
+}
+
+.restaurant__promocode__activity__checkbox {
+    background-color: white;
+    border-radius: 8px;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.restaurant__promocode__activity__checkbox:checked {
+    background-color: #FFB800 !important;
+    border: 1px solid #FFB800 !important;
+}

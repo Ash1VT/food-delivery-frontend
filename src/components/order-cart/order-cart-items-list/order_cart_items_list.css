@@ -1,0 +1,7 @@
+.order__cart__items__list {
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 50px;
+    overflow-y: scroll;
+}

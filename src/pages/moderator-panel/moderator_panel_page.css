@@ -1,0 +1,38 @@
+.moderator__panel__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+
+}
+.moderator__panel__sections__wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 100px;
+}
+
+.moderator__panel__sections__wrapper > * {
+    min-width: 500px;
+}
+
+.moderator__panel__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 50px;
+
+}
+
+.moderator__panel__section__title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+    color: #000000;
+}

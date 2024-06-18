@@ -1,0 +1,28 @@
+.open__dropdown__content__button {
+    background-color: #FF9800; /* Orange color */
+    color: white;
+    padding: 14px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: Poppins;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    width: 100%;
+}
+
+.open__dropdown__content__button:hover {
+    background-color: #FFB74D; /* Lighter orange on hover */
+}
+
+.open__dropdown__content__icon {
+    transition: transform 0.3s !important;
+}
+
+.open__dropdown__content__icon__rotate {
+    transform: rotate(-180deg);
+}

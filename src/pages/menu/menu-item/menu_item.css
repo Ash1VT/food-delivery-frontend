@@ -1,0 +1,116 @@
+.menu__category__item__container {
+    display: grid;
+    grid-template-areas: 
+        "I D D D D D"
+        "I D D D D D"
+        "B B B B B B";
+    background-color: #ffff;
+    border-radius: 10px;
+    row-gap: 20px;
+    column-gap: 20px;
+    padding: 20px;
+    min-width: 420px;
+}
+
+.menu__category__item__no__button {
+    grid-template-areas: 
+        "I D D D D D"
+        "I D D D D D" !important;
+}
+
+.menu__category__item__image__wrapper {
+    grid-area: I;
+    max-width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.menu__category__item__image__hovered {
+    transform: scale(1.05);  
+}
+
+.menu__category__item__image__wrapper img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 30px;
+}
+
+.menu__category__item__wrapper {
+    grid-area: D;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0 10px 0;
+    max-width: 220px;
+    cursor: pointer;
+}
+
+.menu__category__item__name {
+    font-family: Source Sans Pro;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* .menu__category__item__description {
+    font-family: Source Sans Pro;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+
+
+/* .menu__category__item__description:hover {
+    white-space: break-spaces;
+    overflow: unset;
+} */
+
+.menu__category__item__rating__reviews__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    margin-top: 5px;
+}
+
+.menu__category__item__rating__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu__category__item__rating__value {
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.menu__category__item__reviews__text {
+    font-family: Source Sans Pro;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.menu__category__item__price {
+    font-family: Open Sans;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 112%;
+    margin-top: 30px;
+}
+
+.add__to__cart__button__wrapper {
+    grid-area: B;
+}
+
+.remove__from__cart__button__wrapper {
+    grid-area: B;
+}

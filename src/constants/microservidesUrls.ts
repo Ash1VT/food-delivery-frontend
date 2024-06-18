@@ -1,0 +1,5 @@
+export const userMicroserviceBaseUrl = 'http://159.89.85.210:8000/api/v1'
+export const menuMicroserviceBaseUrl = 'http://159.89.85.210:8001/api/v1'
+export const restaurantMicroserviceBaseUrl = 'http://159.89.85.210:8002/api/v1'
+export const orderMicroserviceBaseUrl = 'http://159.89.85.210:8003/api/v1'
+export const reviewMicroserviceBaseUrl = 'http://159.89.85.210:8004/api/v1'

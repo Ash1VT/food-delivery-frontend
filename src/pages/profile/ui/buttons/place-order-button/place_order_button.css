@@ -1,0 +1,15 @@
+.profile__place__order__button {
+    padding: 10px 20px;
+    background-color: #f7ab09;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 18px;
+
+    width: 100%;
+    margin-top: 20px;
+}

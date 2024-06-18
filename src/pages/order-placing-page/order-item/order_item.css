@@ -1,0 +1,41 @@
+.order__item__image__wrapper {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.order__item__image {
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+    /* height: 200px;
+    width: 200px; */
+}
+
+.order__item__text {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.order__item__text {
+    text-align: center;
+}
+
+.order__item__margin__left {
+    margin-left: 30px;
+}
+
+
+.order__item__name {
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.order__item__name {
+    margin-left: 20px;
+    margin-right: 40px;
+}
+/* .order__item__price, .order__item__total { */
+    /* padding-left: 40px; */
+/* } */

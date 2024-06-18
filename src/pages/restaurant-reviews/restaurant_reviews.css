@@ -1,0 +1,33 @@
+.restaurant__reviews__wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #F5F4F2;
+    padding: 40px;
+}
+
+.restaurant__reviews__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    /* max-width: 860px; */
+    max-width: 1260px;
+
+}
+
+.restaurant__reviews__current__user {
+    margin-top: 80px;
+}
+
+.restaurant__reviews__list__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.restaurant__reviews__title {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 120%;
+}
