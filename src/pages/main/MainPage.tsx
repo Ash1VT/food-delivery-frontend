@@ -19,6 +19,7 @@ import "./main_page.css"
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'src/hooks/redux/useAppDispatch';
+import { fetchRestaurantsPage } from 'src/redux/actions/restaurants.actions';
 
 
 const MainPage = () => {
@@ -31,7 +32,9 @@ const MainPage = () => {
     }
 
     useEffect(() => {
+        dispatch(fetchRestaurantsPage({limit: 4, offset: 0})).then((result) => {
 
+        })
     }, [dispatch])
 
     const restaurant_promotions: PromotionRestaurantProps[] = [
